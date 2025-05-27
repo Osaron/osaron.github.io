@@ -26,10 +26,26 @@ nav{
     flex-wrap: wrap;
 }
 
+/*Logo Settings Start*/
+
 .logo{
     width: 120px;
 
 }
+
+.logo-dark {
+  display: none;
+}
+
+.dark-mode .logo-dark {
+  display: inline;
+}
+
+.dark-mode .logo-light {
+  display: none;
+}
+
+/*Logo Settings End*/
 
 nav ul li{
     display: inline-block;
@@ -60,6 +76,64 @@ nav ul li a:hover::after{
     width: 100%;
 }
 
+/* Dropdown styles */
+.dropdown {
+  position: relative;
+  padding-bottom: 20px; /* creates vertical hover area */
+}
+
+.dropdown > a {
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+}
+
+.dropdown .arrow {
+  margin-left: 6px;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.dropdown:hover .arrow {
+  transform: rotate(90deg);
+}
+
+/* Make the dropdown content float below with space */
+.dropdown-content {
+  position: absolute;
+  top: calc(100% + 1px); /* creates a small buffer zone */
+  left: 0;
+  background-color: var(--bg-color);
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  padding: 10px 0;
+  display: none;
+  z-index: 1;
+  min-width: 180px;
+  pointer-events: auto;
+}
+
+.dropdown:hover .dropdown-content,
+.dropdown-content:hover {
+  display: block;
+}
+
+.dropdown-content li {
+  list-style: none;
+  padding: 10px 20px;
+  white-space: nowrap;
+}
+
+.dropdown-content li a {
+  color: var(--text-color);
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content li:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
 .header-text{
     margin-top: 20%;
     font-size: 30px;
@@ -72,4 +146,27 @@ nav ul li a:hover::after{
 
 .header-text h1 span{
     color: #d8d2b7;
+}
+
+/*Footer Section*/
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.icon-item {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 6px;
+  object-fit: contain;
 }
