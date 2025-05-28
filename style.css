@@ -72,7 +72,7 @@ nav ul li a::after{
     transform: 0.5s;
 }
 
-nav ul li a:hover::after{
+nav > ul > li > a:hover::after {
     width: 100%;
 }
 
@@ -118,21 +118,52 @@ nav ul li a:hover::after{
   display: block;
 }
 
+/*Dropdown content li*/
+
+.dropdown-content a::after {
+  content: none;
+  display: none;
+}
+
 .dropdown-content li {
   list-style: none;
-  padding: 10px 20px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   white-space: nowrap;
+  border-radius: 8px; /* 👈 Soft edges */
+  transition: background-color 0.2s, color 0.2s;
+  cursor: pointer;
+}
+
+.dropdown-content li:hover {
+  background-color: rgba(0, 0, 0, 0.05); /* or use a light blue tint */
 }
 
 .dropdown-content li a {
   color: var(--text-color);
-  text-decoration: none;
-  display: block;
+  text-decoration: none; /* 👈 Removes underline */
+  transition: color 0.2s ease;
 }
 
-.dropdown-content li:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+.dropdown-content li:hover a {
+  color: var(--accent); /* 👈 Your hover color (blue) */
 }
+
+/* Remove inherited underline animation from dropdown links */
+.dropdown-content li a::after {
+  content: none;
+}
+
+/*Dropdown content li Finish*/
+
+.dropdown-icon { /*Project dropdown icons*/
+  width: 20px;
+  height: 20px;
+  opacity: 0.5;
+}
+
 
 .header-text{
     margin-top: 20%;
