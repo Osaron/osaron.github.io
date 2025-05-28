@@ -141,6 +141,11 @@ nav > ul > li > a:hover::after {
   background-color: rgba(0, 0, 0, 0.05); /* or use a light blue tint */
 }
 
+.dark-mode .dropdown-content li:hover {
+  background-color: rgba(255, 255, 255, 0.05); /* Light tint for dark mode */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 .dropdown-content li a {
   color: var(--text-color);
   text-decoration: none; /* 👈 Removes underline */
@@ -154,6 +159,15 @@ nav > ul > li > a:hover::after {
 /* Remove inherited underline animation from dropdown links */
 .dropdown-content li a::after {
   content: none;
+}
+
+.dark-mode .dropdown-icon {
+  filter: invert(1) brightness(2) contrast(1.1);
+}
+
+.dark-mode .dropdown-content {
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /*Dropdown content li Finish*/
