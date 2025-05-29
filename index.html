@@ -206,47 +206,131 @@
     </div>
   </section>
 
-  <section class="skills">
-    <h2>Tools & Skills</h2>
-    <div class="skills-logos">
-      <div>Confluence</div>
-      <div>Jira</div>
-      <div>GitHub</div>
-      <div>Docusaurus</div>
-      <div>Markdown</div>
-      <div>Git</div>
-      <div>Python</div>
-      <div>Swagger</div>
-      <div>Postman</div>
-      <div>Document360</div>
-    </div>
-  </section>
+  <!--Tools and Skills Section--> 
+<section class="skills-strip">
+  <h2>Tools & Skills</h2>
+  <div class="skills-grid">
+    <div class="skill">Confluence</div>
+    <div class="skill">JIRA</div>
+    <div class="skill">GitHub</div>
+    <div class="skill">Docusaurus</div>
+    <div class="skill">Markdown</div>
+    <div class="skill">Git</div>
+    <div class="skill">Python</div>
+    <div class="skill">Swagger</div>
+    <div class="skill">Postman</div>
+    <div class="skill">Document360</div>
+  </div>
+</section>
 
-  <footer>
-  <p style="margin-bottom: 1rem;">
-    Get in touch at <a href="mailto:osaron@ucdavis.edu">osaron@ucdavis.edu</a>
-    <img src="images/icons/email.png" alt="Email Icon" style="width: 20px; vertical-align: middle; margin-right: 6px;">
-  </p>
-
-  <div class="social-icons">
-    <div class="icon-item">
-      <img src="images/icons/Github Logo Black.png" alt="GitHub" class="social-icon logo-light">
-      <img src="images/icons/Github Logo White.png" alt="GitHub" class="social-icon logo-dark">
-      <a href="https://github.com/Osaron" target="_blank">GitHub</a>
-    </div>
-    <div class="icon-item">
-      <img src="images/icons/LinkedIn Logo.png" alt="LinkedIn" class="social-icon">
-      <a href="https://www.linkedin.com/in/oscar-andres-rondon/" target="_blank">LinkedIn</a>
-    </div>
-    <div class="icon-item">
-      <img src="images/icons/Upwork Logo.png" alt="Upwork" class="social-icon">
-      <a href="https://www.upwork.com/freelancers/~019e375d8a6d276a88" target="_blank">Upwork</a>
-    </div>
+<!-- Why Me Section--> 
+<section class="why-me">
+<h2>Why Me?</h2>
+<div class="why-me-wrapper">
+  <!-- Left Column -->
+  <div class="why-me-left">
+    <p>
+      As a Technical Writer with 5+ years of experience, I specialize in translating complex software concepts into clear, accessible content.
+    </p>
+    <p>
+      If you're looking for someone who can document systems with precision, empathy, and technical fluency — I’m your writer.
+    </p>
   </div>
 
-  <hr style="width: 60%; margin: 2rem auto; border: 0; border-top: 1px solid #ccc;">
-  <p>&copy; 2025 Oscar Rondon</p>
+  <!-- Vertical Divider -->
+  <div class="why-me-divider"></div>
+
+  <!-- Right Column (Carousel) -->
+  <div class="why-me-right">
+    <div class="carousel">
+      <div class="carousel-slide active">
+        <h3>🏢 Companies</h3>
+          <div class="company-icons">
+            <a href="https://amaris.com/" target="_blank" class="company-item">
+              <img src="images/carousel/companies/Carousel_Amaris_Consulting.png" alt="Amaris Consulting">
+              <p>Amaris Consulting</p>
+            </a>
+
+            <a href="https://www.thalesgroup.com/en" target="_blank" class="company-item">
+              <img src="images/carousel/companies/Carousel_Thales_Group.png" alt="Thales Group">
+              <p>Thales Group</p>
+            </a>
+
+            <a href="https://www.upwork.com/" target="_blank" class="company-item">
+              <img src="images/carousel/companies/Carousel_Upwork.png" alt="Upwork">
+              <p>Upwork</p>
+            </a>
+          </div>
+      </div>
+      <div class="carousel-slide">
+        <h3>🎓 Education</h3>
+        <p>Chemical Engineer, Technical Communication</p>
+      </div>
+      <div class="carousel-slide">
+        <h3>🏅 Awards</h3>
+        <p>Top-rated freelancer, Best API Docs award (internal)</p>
+      </div>
+    </div>
+    <div class="carousel-dots">
+      <span class="dot active" onclick="changeSlide(0)"></span>
+      <span class="dot" onclick="changeSlide(1)"></span>
+      <span class="dot" onclick="changeSlide(2)"></span>
+    </div>
+  </div>
+</div>  
+</section>
+
+<!-- Footer Section-->
+  <footer class="footer">
+  <div class="social-icons">
+    <a href="https://github.com/Osaron" target="_blank" class="icon-item">
+      <img src="images/icons/Github Logo Black.png" alt="GitHub" class="social-icon logo-light">
+      <img src="images/icons/Github Logo White.png" alt="GitHub" class="social-icon logo-dark">
+      <span>GitHub</span>
+    </a>
+
+    <a href="https://www.linkedin.com/in/oscar-andres-rondon/" target="_blank" class="icon-item">
+      <img src="images/icons/LinkedIn Logo.png" alt="LinkedIn" class="social-icon">
+      <span>LinkedIn</span>
+    </a>
+
+    <a href="https://www.upwork.com/freelancers/~019e375d8a6d276a88" target="_blank" class="icon-item">
+      <img src="images/icons/Upwork Logo.png" alt="Upwork" class="social-icon">
+      <span>Upwork</span>
+    </a>
+  </div>
+
+  <hr style="width: 60%; margin: 1rem auto 0.5rem; border: 0; border-top: 1px solid #ccc;">
+<div class="contact-line">
+  <p>Get in touch at</p>
+  <p>
+    <a href="mailto:osaron@ucdavis.edu">osaron@ucdavis.edu</a>
+  </p>
+</div>  
+  <p class="copyright">© 2025 Oscar Rondon. All rights reserved.</p>
   </footer>
 
 </body>
+
+<!-- Carousel Section JS-->
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.carousel-slide');
+  const dots = document.querySelectorAll('.dot');
+
+  function changeSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === index);
+      dots[i].classList.toggle('active', i === index);
+    });
+    currentSlide = index;
+  }
+
+  // Auto-advance every 2 seconds
+  setInterval(() => {
+    const nextSlide = (currentSlide + 1) % slides.length;
+    changeSlide(nextSlide);
+  }, 10000); // 10000ms = 10 seconds
+</script>
+
 </html>
