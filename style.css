@@ -76,6 +76,11 @@ nav > ul > li > a:hover::after {
     width: 100%;
 }
 
+/*Hero Class (Header)*/
+.hero {
+  background-color: var(--card-bg);
+}
+
 /* Dropdown styles */
 .dropdown {
   position: relative;
