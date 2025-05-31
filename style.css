@@ -191,6 +191,78 @@ nav > ul > li > a:hover::after {
     color: #d8d2b7;
 }
 
+/*Feature Projects*/
+.project-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%; /* 👈 Make the button stretch full width */
+  padding: 0.75rem 1rem;
+  margin-top: 1.2rem;
+  border: 1px solid #ccc; /* Light mode */
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--accent);
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.projects {
+  padding: 3rem 10%;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+}
+
+.project-card p {
+  font-size: 0.80rem;     /* or try 0.9rem for even smaller */
+  color: #3a3939a6;         /* lighter shade of text */
+  line-height: 1.4;       /* optional: for better readability */
+  margin-top: 0.8rem;     /* optional: spacing from title */
+}
+
+body.dark-mode .project-card p {
+  color: #aaa;  /* a softer shade for dark mode readability */
+}
+
+.project-button:hover {
+  background-color: rgba(0, 123, 255, 0.1); /* soft blue tint */
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
+.project-button:hover img {
+  filter: brightness(1); /* Prevent icon from turning white */
+}
+
+.button-icon {
+  width: 18px;
+  height: 18px;
+  opacity: 0.8;
+}
+
+.dark-mode .button-icon {
+  filter: invert(1);
+}
+
+.project-button img {
+  transition: filter 0.3s ease;
+}
+
+body.dark-mode .project-button:hover img {
+  filter: brightness(1) invert(1);
+}
+
+/* Adjust border for dark mode */
+body.dark-mode .project-button {
+  border: 1px solid #444; /* Darker border in dark mode */
+}
+
 /*Strip Line with Skills*/
 .skills-strip {
   background-color: #1b4eff; /* Replace with your preferred blue */

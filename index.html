@@ -82,9 +82,6 @@
     .hero h1 span {
       color: var(--accent);
     }
-    .projects {
-      padding: 3rem 10%;
-    }
     .projects h2 {
       text-align: center;
       margin-bottom: 2rem;
@@ -99,7 +96,9 @@
       background: var(--card-bg);
       padding: 1.5rem;
       border-radius: 10px;
-      max-width: 300px;
+      width: 100%; 
+      flex: 1 1 360px; 
+      max-width: 360px;
       text-align: center;
       transition: transform 0.3s ease;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -186,23 +185,33 @@
     <p>I create impactful documentation for users, developers, and teams.</p>
   </div>
 
+  <!--Feature Projects Section-->   
   <section class="projects" id="projects">
     <h2>Featured Projects</h2>
     <div class="project-grid">
       <div class="project-card">
         <h3>API Documentation</h3>
         <p>Comprehensive documentation for a RESTful API, including examples and endpoints.</p>
-        <a href="/api-documentation/">View Project</a>
+        <a href="/api-documentation/" class="project-button">
+          <img src="images/feature projects/view-icon.png" alt="View Icon" class="button-icon">
+          View Project
+        </a>
       </div>
       <div class="project-card">
         <h3>User Manual</h3>
         <p>Step-by-step manual for a complex software application with troubleshooting tips.</p>
-        <a href="#">View Project</a>
+        <a href="#" class="project-button">
+          <img src="images/feature projects/view-icon.png" alt="View Icon" class="button-icon">
+          View Project
+        </a>
       </div>
       <div class="project-card">
         <h3>Technical Blog Posts</h3>
         <p>Posts explaining emerging technologies and their practical use cases.</p>
-        <a href="#">View Project</a>
+        <a href="#" class="project-button">
+          <img src="images/feature projects/view-icon.png" alt="View Icon" class="button-icon">
+          View Project
+        </a>
       </div>
     </div>
   </section>
@@ -234,7 +243,7 @@
       As a Technical Writer with 5+ years of experience, I specialize in translating complex software concepts into clear, accessible content.
     </p>
     <p>
-      If you're looking for someone who can document systems with precision, empathy, and technical fluency — I’m your writer.
+      If you're looking for someone who can document systems with accuracy, empathy, and technical fluency — I’m your writer.
     </p>
   </div>
 
