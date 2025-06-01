@@ -78,8 +78,69 @@ nav > ul > li > a:hover::after {
 
 /*Hero Class (Header)*/
 .hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem; /* ✅ tighter layout */
+  padding: 3rem 10%;
   background-color: var(--card-bg);
+  flex-wrap: wrap;
+  text-align: left;
 }
+
+.hero-text {
+  max-width: 500px;
+  margin: 0 auto; /* centers on small screens */
+}
+
+/* Target the image block */
+.hero-image {
+  flex: 1 1 400px;
+  max-width: 480px;
+  margin: 0;        /* ✅ remove default margin */
+  padding: 0;       /* ✅ remove default padding */
+}
+
+.hero-image img {
+  width: 100%;      /* ✅ responsive scaling */
+  height: auto;
+  max-width: 400px; /* adjust if needed */
+}
+
+/*Hero Animatio*/
+@keyframes appearThenHide {
+  0%, 10% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  15%, 25% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  30%, 100% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+}
+
+.typing-line {
+  opacity: 0;
+  animation: appearThenHide 6s infinite;
+  animation-timing-function: steps(1);
+}
+
+.line1 {
+  animation-delay: 0s;
+}
+
+.line2 {
+  animation-delay: 1s;
+}
+
+.line3 {
+  animation-delay: 2s;
+}
+
 
 /* Dropdown styles */
 .dropdown {
