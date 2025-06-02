@@ -5,8 +5,9 @@
     box-sizing: border-box;
 }
 body {
-    background: #080808;
-    color: #fff;
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.3s, color 0.3s;
 }
 #header{   
     width: 100%;
@@ -18,12 +19,28 @@ body {
 .container{
     padding: 10px 10%;
 }
-
-nav{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+:root {
+  --bg-color: #fff;
+  --text-color: #111;
+  --card-bg: #f9f9f9;
+  --accent: #007bff;
+}
+body.dark-mode {
+  --bg-color: #080808;
+  --text-color: #fff;
+  --card-bg: #1a1a1a;
+  --accent: #66ccff;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 10%;
+  position: sticky;
+  top: 0;
+  background: var(--bg-color);
+  z-index: 1000;
+  border-bottom: 1px solid #ccc;
 }
 
 /*Book Logo Settings Start*/
@@ -55,7 +72,7 @@ nav ul li{
 }
 
 nav ul li a{
-    color: #fff;
+    color: var(--text-color);
     text-decoration: none;
     font-size: 18px;
     position: relative;
@@ -597,8 +614,12 @@ body:not(.dark-mode) .why-me-divider {
 
 /*Footer Section*/
 .footer {
+  background-color: var(--card-bg);
   font-size: 0.85rem;
   padding: 20px 0 10px 0; /* tighten space, especially at bottom */
+  text-align: center;
+  margin-top: 3rem;
+  color: var(--text-color);
 }
 
 .social-icons {
