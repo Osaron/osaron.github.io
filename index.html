@@ -41,6 +41,28 @@
       }
     }
   });
+
+//This last part is to fetch the header in other pages
+  function setupDarkModeToggle() {
+    const icon = document.querySelector(".toggle-mode .icon");
+    const toggleBtn = document.querySelector(".toggle-mode");
+
+    if (!toggleBtn) return;
+
+    toggleBtn.addEventListener("click", function () {
+      document.body.classList.toggle("dark-mode");
+
+      // Save to localStorage
+      const isDark = document.body.classList.contains("dark-mode");
+      localStorage.setItem("dark-mode", isDark);
+
+      // Update icon
+      if (icon) {
+        icon.classList.toggle("fa-sun");
+        icon.classList.toggle("fa-moon");
+      }
+    });
+  }
   </script>
    <!--The following link loads a library for the light/dark mode icons--> 
   <link
@@ -189,7 +211,7 @@
        <ul class="dropdown-content">
         <li>
          <img src="images/drop-down/Blog icon.png" class="dropdown-icon" alt="Blog Icon">
-         <a href="#">Blogs</a>
+         <a href="/projects/blogs/blogs.html">Blogs</a>
         </li>
         <li>
          <img src="images/drop-down/User Manual icon.png" class="dropdown-icon" alt="User Manual Icon">
