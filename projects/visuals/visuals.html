@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visuals for Documentation - Oscar Rondon</title>
+  <link rel="stylesheet" href="/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .visuals-hero {
+      background: linear-gradient(to right, #1b4eff, #66ccff);
+      color: white;
+      padding: 4rem 10%;
+      text-align: left;
+    }
+    .visuals-hero h1 {
+      font-size: 2.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .visual-section {
+      padding: 3rem 10%;
+    }
+    .visual-item {
+      margin-bottom: 3rem;
+    }
+    .visual-item h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-color);
+    }
+    .visual-item p {
+      color: var(--text-color);
+      margin-bottom: 1rem;
+    }
+    .visual-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .visual-preview img {
+      max-width: 300px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    .dark-mode .visual-item h3,
+    .dark-mode .visual-item p {
+      color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div id="header-include"></div>
+
+  <div class="visuals-hero">
+    <h1><i class="fa-solid fa-image"></i> Visual Assets</h1>
+    <p>Visual tools used to enhance clarity and engagement in documentation.</p>
+  </div>
+
+  <section class="visual-section">
+    <div class="visual-item">
+      <h3><i class="fa-solid fa-diagram-project"></i> BPMN Diagrams</h3>
+      <p>Used to map complex workflows clearly for end-users or developers. Created using Camunda Modeler, Bizagi, or Lucidchart.</p>
+      <div class="visual-preview">
+        <img src="../../images/visuals/bpmn_example.png" alt="BPMN Example">
+        <img src="../../images/visuals/bpmn2.png" alt="Another BPMN Example">
+      </div>
+    </div>
+
+    <div class="visual-item">
+      <h3><i class="fa-solid fa-sitemap"></i> Microsoft Visio Diagrams</h3>
+      <p>Ideal for flowcharts, network maps, and system architecture. Common in corporate documentation.</p>
+      <div class="visual-preview">
+        <img src="../../images/visuals/visio1.png" alt="Visio Flowchart">
+        <img src="../../images/visuals/visio2.png" alt="Visio Architecture">
+      </div>
+    </div>
+
+    <div class="visual-item">
+      <h3><i class="fa-regular fa-file-powerpoint"></i> PowerPoint Presentations</h3>
+      <p>Quickly share visual summaries of procedures, policies, or roadmap planning.</p>
+      <div class="visual-preview">
+        <img src="../../images/visuals/ppt1.png" alt="Presentation Example">
+      </div>
+    </div>
+
+    <div class="visual-item">
+      <h3><i class="fa-solid fa-pen-nib"></i> Canva & Photoshop</h3>
+      <p>Custom-designed banners, thumbnails, infographics, and illustrations to increase visual engagement in user-facing content.</p>
+      <div class="visual-preview">
+        <img src="../../images/visuals/canva1.png" alt="Canva Design">
+        <img src="../../images/visuals/ps1.png" alt="Photoshop Edit">
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-include"></div>
+
+  <script>
+    fetch("/partials/header.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("header-include").innerHTML = html;
+        const script = document.createElement("script");
+        script.src = "/darkmode.js";
+        document.body.appendChild(script);
+      });
+
+    fetch("/partials/footer.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("footer-include").innerHTML = html;
+      });
+  </script>
+</body>
+</html>

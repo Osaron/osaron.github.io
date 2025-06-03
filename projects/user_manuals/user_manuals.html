@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Manuals - Oscar Rondon</title>
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/projects/user_manuals/user_manuals.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      background-color: var(--bg-color);
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 240px 1fr 220px;
+      gap: 2rem;
+      padding: 2rem 10%;
+    }
+
+    .sidebar-left, .sidebar-right {
+      position: sticky;
+      top: 100px;
+      height: fit-content;
+      background: var(--card-bg);
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+
+    .sidebar-left h3, .sidebar-right h3 {
+      margin-bottom: 0.6rem;
+      font-size: 1rem;
+      color: var(--text-color);
+    }
+
+    .sidebar-left ul, .sidebar-right ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .sidebar-left li, .sidebar-right li {
+      margin: 0.4rem 0;
+      cursor: pointer;
+    }
+
+    .sidebar-left .toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .sidebar-left .nested {
+      display: none;
+      margin-left: 1rem;
+    }
+
+    .sidebar-left .open > .nested {
+      display: block;
+    }
+
+    .sidebar-left a, .sidebar-right a {
+      text-decoration: none;
+      color: var(--text-color);
+    }
+
+    .sidebar-right a.active {
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .manual-content h1 {
+      margin-top: 0;
+      font-size: 1.6rem;
+      color: var(--text-color);
+    }
+
+    .manual-content h2 {
+      font-size: 1.2rem;
+      margin-top: 1.5rem;
+      color: var(--text-color);
+    }
+
+    .manual-content p {
+      line-height: 1.6;
+      color: var(--text-color);
+    }
+  </style>
+</head>
+<body>
+  <div id="header-include"></div>
+
+  <main>
+    <nav class="sidebar-left">
+      <h3>Manuals</h3>
+      <ul>
+        <li class="toggle" onclick="toggleSection(this)">Websites <span>&#8250;</span>
+          <ul class="nested">
+            <li><a href="#guide1">Website Launch Guide</a></li>
+            <li><a href="#guide2">SEO Basics</a></li>
+          </ul>
+        </li>
+        <li class="toggle" onclick="toggleSection(this)">QA Testing <span>&#8250;</span>
+          <ul class="nested">
+            <li><a href="#guide3">JMeter Setup</a></li>
+            <li><a href="#guide4">Postman Collections</a></li>
+          </ul>
+        </li>
+        <li class="toggle" onclick="toggleSection(this)">Cybersecurity <span>&#8250;</span>
+          <ul class="nested">
+            <li><a href="#guide5">Passport Blocking</a></li>
+            <li><a href="#guide6">OTP Verification Flow</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <article class="manual-content">
+      <h1 id="guide1">Website Launch Guide</h1>
+      <p>Steps for preparing and deploying a production-ready website.</p>
+      <h2>1. Plan your Structure</h2>
+      <p>Outline key pages, components, and layout guidelines.</p>
+      <h2>2. SEO Optimization</h2>
+      <p>Include metadata, tags, sitemap.xml, and robot.txt settings.</p>
+
+      <h1 id="guide3">JMeter Setup</h1>
+      <p>Guide to configure Apache JMeter for performance testing.</p>
+      <h2>1. Installation</h2>
+      <p>How to install and run JMeter on various platforms.</p>
+      <h2>2. Running your First Test</h2>
+      <p>Create a basic Thread Group and HTTP request sampler.</p>
+    </article>
+
+    <aside class="sidebar-right">
+      <h3>On this page</h3>
+      <ul>
+        <li><a href="#guide1">Website Launch Guide</a></li>
+        <li><a href="#guide3">JMeter Setup</a></li>
+        <li><a href="#guide4">Postman Collections</a></li>
+        <li><a href="#guide5">Passport Blocking</a></li>
+      </ul>
+    </aside>
+  </main>
+  <div id="footer-include"></div>
+
+  <script>
+    fetch("/partials/header.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("header-include").innerHTML = html;
+        const script = document.createElement("script");
+        script.src = "/darkmode.js";
+        document.body.appendChild(script);
+      });
+
+    fetch("/partials/footer.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("footer-include").innerHTML = html;
+      });
+
+    function toggleSection(el) {
+      el.classList.toggle("open");
+    }
+
+    // Optional: Highlight active right sidebar link on scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const id = entry.target.getAttribute("id");
+        const link = document.querySelector(`.sidebar-right a[href="#${id}"]`);
+        if (entry.isIntersecting && link) {
+          document.querySelectorAll(".sidebar-right a").forEach(a => a.classList.remove("active"));
+          link.classList.add("active");
+        }
+      });
+    }, { threshold: 0.4 });
+
+    document.querySelectorAll(".manual-content h1, .manual-content h2").forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content Strategy - Oscar Rondon</title>
+  <link rel="stylesheet" href="/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .blog-hero {
+      background: linear-gradient(to right, #1b4eff, #66ccff);
+      color: white;
+      padding: 4rem 10%;
+      text-align: left;
+    }
+    .blog-hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .blog-hero p {
+      font-size: 1.1rem;
+    }
+    .blog-section {
+      padding: 3rem 10%;
+    }
+    .doc-block {
+      border-bottom: 1px solid #ccc;
+      padding: 2rem 0;
+    }
+    .doc-block h2 {
+      font-size: 1.6rem;
+      color: var(--text-color);
+    }
+    .doc-block p {
+      font-size: 1rem;
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+    .doc-tools {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+    }
+    .doc-tools strong {
+      color: var(--accent);
+    }
+    .doc-image {
+      width: 100%;
+      max-width: 700px;
+      border-radius: 6px;
+      margin-top: 1rem;
+    }
+    .dark-mode .doc-block h2,
+    .dark-mode .doc-block p {
+      color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div id="header-include"></div>
+
+  <div class="blog-hero">
+    <h1><i class="fa-solid fa-diagram-project"></i> Content Strategy</h1>
+    <p>Best practices for producing different types of technical documentation.</p>
+  </div>
+
+  <section class="blog-section">
+    <div class="doc-block">
+      <h2>📘 Articles</h2>
+      <p>Articles should be clear, concise, and provide actionable insight. They often focus on trends, tutorials, or industry commentary. Use a conversational yet informative tone.</p>
+      <p class="doc-tools"><strong>Tools:</strong> Markdown, Medium, WordPress, Grammarly, Notion</p>
+      <img src="../../images/strategy/articles.png" class="doc-image" alt="Article Example" />
+    </div>
+
+    <div class="doc-block">
+      <h2>📕 User Guides</h2>
+      <p>User guides provide step-by-step instructions for software or hardware use. Prioritize structure, numbered steps, annotated visuals, and troubleshooting tips.</p>
+      <p class="doc-tools"><strong>Tools:</strong> Confluence, GitBook, MadCap Flare, Snagit, Docusaurus</p>
+      <img src="../../images/strategy/user-guides.png" class="doc-image" alt="User Guide Example" />
+    </div>
+
+    <div class="doc-block">
+      <h2>🧬 API Documentation</h2>
+      <p>API docs must be accurate, complete, and developer-friendly. Include endpoint reference, authentication, code samples, and testing tools.</p>
+      <p class="doc-tools"><strong>Tools:</strong> Swagger / OpenAPI, Redoc, Postman, Stoplight, Docusaurus</p>
+      <img src="../../images/strategy/api-docs.png" class="doc-image" alt="API Docs Example" />
+    </div>
+
+    <div class="doc-block">
+      <h2>📰 Newsletters</h2>
+      <p>Newsletters summarize important updates, feature releases, or curated insights. Keep them visually clean and emphasize call-to-action (CTA) links.</p>
+      <p class="doc-tools"><strong>Tools:</strong> Mailchimp, Substack, Canva, Figma (email mockups)</p>
+      <img src="../../images/strategy/newsletters.png" class="doc-image" alt="Newsletter Example" />
+    </div>
+
+    <div class="doc-block">
+      <h2>📄 Whitepapers</h2>
+      <p>Whitepapers are persuasive documents that dive deep into a product, concept, or methodology. Prioritize technical accuracy, data visuals, and executive summaries.</p>
+      <p class="doc-tools"><strong>Tools:</strong> Google Docs, LaTeX, Adobe InDesign, MS Word, Canva (graphics)</p>
+      <img src="../../images/strategy/whitepapers.png" class="doc-image" alt="Whitepaper Example" />
+    </div>
+
+    <div class="doc-block">
+      <h2>❓ FAQs</h2>
+      <p>FAQs resolve common user questions. Keep answers short and link to deeper resources when needed. Categorize by topic and update based on support feedback.</p>
+      <p class="doc-tools"><strong>Tools:</strong> Zendesk, Intercom, Freshdesk, Markdown, Notion</p>
+      <img src="../../images/strategy/faq.png" class="doc-image" alt="FAQ Example" />
+    </div>
+  </section>
+
+  <div id="footer-include"></div>
+
+  <script>
+    fetch("/partials/header.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("header-include").innerHTML = html;
+        const script = document.createElement("script");
+        script.src = "/darkmode.js";
+        document.body.appendChild(script);
+      });
+
+    fetch("/partials/footer.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("footer-include").innerHTML = html;
+      });
+  </script>
+</body>
+</html>
