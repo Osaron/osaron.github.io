@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>White Papers - Oscar Rondon</title>
+  <link rel="stylesheet" href="/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .wp-hero {
+      background: linear-gradient(to right, #1b4eff, #66ccff);
+      color: white;
+      padding: 4rem 10%;
+      text-align: left;
+    }
+
+    .wp-hero h1 {
+      font-size: 2.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .wp-hero p {
+      font-size: 1.1rem;
+    }
+
+    .wp-section {
+      padding: 3rem 10%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .wp-card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .wp-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .wp-card h3 {
+      color: var(--text-color);
+      font-size: 1.2rem;
+      margin: 0 0 0.5rem;
+    }
+
+    .wp-card p {
+      color: var(--text-color);
+      font-size: 0.95rem;
+      flex-grow: 1;
+    }
+
+    .wp-meta {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: #777;
+    }
+
+    .wp-btn {
+      margin-top: 1rem;
+      background: var(--accent);
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+      width: fit-content;
+    }
+
+    .dark-mode .wp-card h3,
+    .dark-mode .wp-card p,
+    .dark-mode .wp-meta {
+      color: #ddd;
+    }
+
+    .dark-mode .wp-card {
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+  </style>
+</head>
+<body>
+  <div id="header-include"></div>
+
+  <div class="wp-hero">
+    <h1><i class="fa-solid fa-file-lines"></i> White Papers</h1>
+    <p>Explore strategic documents outlining methodologies, technical solutions, and research insights.</p>
+  </div>
+
+  <section class="wp-section">
+    <div class="wp-card">
+      <h3>Identity Management in Modern Border Control</h3>
+      <p>Examines the integration of biometric systems, digital passports, and AI-based verification for national security.</p>
+      <div class="wp-meta">Published: Apr 2024 · CYBERSECURITY</div>
+      <a class="wp-btn" href="#">Download PDF</a>
+    </div>
+
+    <div class="wp-card">
+      <h3>Designing Scalable Documentation Portals</h3>
+      <p>A white paper on building modular, developer-friendly documentation using static site generators and Git workflows.</p>
+      <div class="wp-meta">Published: Jan 2024 · DOC OPS</div>
+      <a class="wp-btn" href="#">Read Online</a>
+    </div>
+
+    <div class="wp-card">
+      <h3>Cloud-Ready Authentication Models for Governments</h3>
+      <p>This paper evaluates authentication mechanisms for citizen services hosted on hybrid cloud environments.</p>
+      <div class="wp-meta">Published: Oct 2023 · GOVTECH</div>
+      <a class="wp-btn" href="#">View Summary</a>
+    </div>
+  </section>
+
+  <div id="footer-include"></div>
+
+  <script>
+    fetch("/partials/header.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("header-include").innerHTML = html;
+
+        const script = document.createElement("script");
+        script.src = "/darkmode.js";
+        document.body.appendChild(script);
+      });
+
+    fetch("/partials/footer.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("footer-include").innerHTML = html;
+      });
+  </script>
+</body>
+</html>

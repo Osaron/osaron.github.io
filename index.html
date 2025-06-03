@@ -102,26 +102,6 @@
     nav .logo {
       width: 100px;
     }
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 2rem;
-    }
-    nav ul li a {
-      text-decoration: none;
-      color: var(--text-color);
-      font-weight: 500;
-      position: relative;
-    }
-    nav ul li a:hover::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: var(--accent);
-    }
     .toggle-dark {
       cursor: pointer;
       background: none;
@@ -208,28 +188,38 @@
     <ul>
       <li class="dropdown">
        <a href="#">Projects <span class="arrow">&#8250;</span></a>
-       <ul class="dropdown-content">
-        <li>
-         <img src="images/drop-down/Blog icon.png" class="dropdown-icon" alt="Blog Icon">
-         <a href="/projects/blogs/blogs.html">Blogs</a>
-        </li>
-        <li>
-         <img src="images/drop-down/User Manual icon.png" class="dropdown-icon" alt="User Manual Icon">
-         <a href="#">User Manuals</a>
-        </li>
-        <li>
-         <img src="images/drop-down/White Paper icon.png" class="dropdown-icon" alt="White Paper Icon">
-         <a href="#">White Papers</a>
-        </li>
-        <li>
-         <img src="images/drop-down/Content Strategy icon.png" class="dropdown-icon" alt="Content Strategy Icon">
-         <a href="#">Content Strategy</a>
-        </li>
-        <li>
-         <img src="images/drop-down/Visuals icon.png" class="dropdown-icon" alt="Visuals Icon">
-         <a href="#">Visuals</a>
-        </li>
-    </ul>
+        <ul class="dropdown-content">
+          <li>
+            <a href="/projects/blogs/blogs.html" class="dropdown-link">
+              <img src="images/drop-down/Blog icon.png" class="dropdown-icon" alt="Blog Icon">
+              Blogs
+            </a>
+          </li>
+          <li>
+            <a href="/projects/user_manuals/user_manuals.html" class="dropdown-link">
+              <img src="images/drop-down/User Manual icon.png" class="dropdown-icon" alt="User Manual Icon">
+              User Manuals
+            </a>
+          </li>
+          <li>
+            <a href="/projects/white_papers/white_papers.html" class="dropdown-link">
+              <img src="images/drop-down/White Paper icon.png" class="dropdown-icon" alt="White Paper Icon">
+              White Papers
+            </a>
+          </li>
+          <li>
+            <a href="/projects/content_strategy/content_strategy.html" class="dropdown-link">
+              <img src="images/drop-down/Content Strategy icon.png" class="dropdown-icon" alt="Content Strategy Icon">
+              Content Strategy
+            </a>
+          </li>
+          <li>
+            <a href="/projects/visual/visuals.html" class="dropdown-link">
+              <img src="images/drop-down/Visuals icon.png" class="dropdown-icon" alt="Visuals Icon">
+              Visuals
+            </a>
+          </li>
+        </ul>
     </li>
       <li><a href="/api-documentation/">API Docs</a></li>
       <li><a href="/about/about.html">About</a></li>
