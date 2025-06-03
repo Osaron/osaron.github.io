@@ -43,6 +43,20 @@ nav {
   border-bottom: 1px solid #ccc;
 }
 
+nav ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+nav li {
+  margin: 0;
+  padding: 0;
+}
+
 /*Book Logo Settings Start*/
 
 .logo {
@@ -65,7 +79,8 @@ nav {
 /*Logo Settings End*/
 
 nav ul li{
-    display: inline-block;
+    display: flex;
+    align-items: center; 
     list-style: none;
     margin: 10px 20px;
 
@@ -74,23 +89,15 @@ nav ul li{
 nav ul li a{
     color: var(--text-color);
     text-decoration: none;
+    vertical-align: middle;
+    line-height: 1.6;
+    display: inline-block;
     font-size: 18px;
     position: relative;
 }
 
-nav ul li a::after{
-    content: '';
-    width: 0;
-    height: 3px;
-    background: #fff;
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    transform: 0.5s;
-}
-
-nav > ul > li > a:hover::after {
-    width: 100%;
+nav ul li a:hover {
+  color: var(--accent);
 }
 
 /*Toogle Dark Button*/
@@ -207,19 +214,23 @@ body.dark-mode .toggle-mode .icon {
 /* Dropdown styles */
 .dropdown {
   position: relative;
-  padding-bottom: 20px; /* creates vertical hover area */
+  padding: 5px;
+  top: calc(100% + 10px); /* adds vertical buffer below the text */
 }
 
 .dropdown > a {
-  display: inline-block;
+  display: flex;
+  align-items: center;
   position: relative;
+  gap: 6px;
+  line-height: 1.6;
   z-index: 2;
 }
 
 .dropdown .arrow {
   margin-left: 6px;
   transition: transform 0.3s ease;
-  display: inline-block;
+  display: flex;
 }
 
 .dropdown:hover .arrow {
@@ -254,7 +265,7 @@ body.dark-mode .toggle-mode .icon {
 
 .dropdown-content li {
   list-style: none;
-  padding: 10px 16px;
+ /* padding: 10px 16px;*/
   display: flex;
   align-items: center;
   gap: 10px;
@@ -264,6 +275,28 @@ body.dark-mode .toggle-mode .icon {
   cursor: pointer;
 }
 
+.dropdown-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  color: var(--text-color);
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.dropdown-link:hover {
+  background-color: rgba(155, 147, 147, 0.021);
+  color: var(--accent);
+}
+
+.dark-mode .dropdown-link:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
 .dropdown-content li:hover {
   background-color: rgba(0, 0, 0, 0.05); /* or use a light blue tint */
 }
@@ -271,21 +304,6 @@ body.dark-mode .toggle-mode .icon {
 .dark-mode .dropdown-content li:hover {
   background-color: rgba(255, 255, 255, 0.05); /* Light tint for dark mode */
   border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.dropdown-content li a {
-  color: var(--text-color);
-  text-decoration: none; /* 👈 Removes underline */
-  transition: color 0.2s ease;
-}
-
-.dropdown-content li:hover a {
-  color: var(--accent); /* 👈 Your hover color (blue) */
-}
-
-/* Remove inherited underline animation from dropdown links */
-.dropdown-content li a::after {
-  content: none;
 }
 
 .dark-mode .dropdown-icon {
