@@ -1,28 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me - Oscar Rondon</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - Oscar Rondon</title>
+  <link rel="stylesheet" href="/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- inside <head> -->
+  <style>
+    .section {
+      padding: 3rem 10%;
+    }
+    .section h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--text-color);
+    }
+    .section-title {
+      position: relative;
+      padding-top: 2rem;
+    }
+    .section-title::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: #ddd;
+    }
+    .intro-img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto 2rem;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .skill {
+      min-width: 280px;
+      background: var(--card-bg);
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      text-align: left;
+    }
+    .skill-icon {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      flex-shrink: 0;
+      margin-bottom: 0.5rem;
+    }
+    .skill-text {
+      color: var(--text-color); /* normal text */
+      font-size: 15px;
+    }
+    .skill-text strong {
+      color: var(--accent);     /* only title in blue */
+      font-size: 18px;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+    .timeline-modern {
+      position: relative;
+      margin: 4rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .timeline-modern::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 1.6px;
+      background: #2c2c2ce0;
+      z-index: 0;
+    }
+    .timeline-end {
+      position: absolute;
+      top: calc(50% - 2.3px);
+      width: 6px;
+      height: 6px;
+      background: #363434;
+      border-radius: 50%;
+      z-index: 1;
+    }
+    .timeline-end.left {
+      left: -6px;
+    }
+    .timeline-end.right {
+      right: -6px;
+    }
+    .timeline-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: calc(100% / 5);
+      text-align: center;
+      z-index: 1;
+      position: relative;
+    }
+    .timeline-box.bottom {
+      flex-direction: column-reverse;
+      justify-content: flex-end;
+    }
+    .timeline-circle {
+      width: 15px;
+      height: 15px;
+      margin: 0;
+      border-radius: 45%;
+      background: currentColor;
+    }
+    .timeline-year {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: currentColor;
+      margin-bottom: 0.1rem;
+    }
+    .timeline-content {
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      color: var(--text-color);
+    }
+    .timeline-line {
+      height: 60px;
+      width: 2px;
+      background-color: currentColor;
+      margin: 0 auto;
+    }
+    .dark-mode .timeline-content,
+    .dark-mode .timeline-year {
+      color: white;
+    }
+    .vertical-timeline {
+      border-left: 2px solid var(--accent);
+      padding-left: 2rem;
+    }
+    .vertical-timeline .entry {
+      margin-bottom: 2rem;
+    }
+    .vertical-timeline .entry h4 {
+      margin: 0;
+    }
+  </style>
 </head>
 <body>
-    <div id="header">
-        <div class="container">
-            <nav>
-                <img src="images/Nuevo Logo White.png" class="logo">
-                <ul>
-                    <li><a href="api-documentation.html">API Documentation</a></li>
-                    <li><a href="about.html">About Me</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </nav>
+  <div id="header-include"></div>
+
+  <!-- Section 1: Technical Writing Image -->
+  <section class="section">
+    <img src="/about/about_landscape.png" class="about-me-image" alt="Technical Writing Visual" class="intro-img">
+  </section>
+
+  <!-- Section 2: Profile -->
+  <section class="section">
+    <h2 class="section-title"><i class="fa-solid fa-id-card"></i> Profile</h2>
+    <p>I currently work at <strong>Thales Group</strong> as a Technical Writer, where I support cross-functional teams by creating, organizing, and updating documentation for a variety of software solutions delivered to customers across Latin America. My work ensures clarity, usability, and consistency across internal and external documentation.</p>
+  </section>
+
+  <!-- Section 3: Skills -->
+<section class="section">
+  <h2 class="section-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Skills</h2>
+    <div class="skills-grid">
+    <div class="skill">
+        <img src="/about/skills/adaptability.png" alt="Adaptability icon" class="skill-icon">
+        <div class="skill-text">
+        <strong>Flexibility</strong>
+        Quickly adapt to new tools and audiences.
         </div>
     </div>
-    <div class="content">
-        <h1>About Me</h1>
-        <p>Here is the content about me.</p>
+    <div class="skill">
+        <img src="/about/skills/creativity.png" alt="Creativity icon" class="skill-icon">
+        <div class="skill-text">
+        <strong>Creativity</strong>
+        Design intuitive document layouts and visuals.
+        </div>
     </div>
+    <div class="skill">
+        <img src="/about/skills/efficacy.png" alt="Efficacy icon" class="skill-icon">
+        <div class="skill-text">
+        <strong>Efficacy</strong>
+        Deliver accurate content on time.
+        </div>
+    </div>
+    </div>
+</section>
+
+  <!-- Section 4: Work Experience Timeline -->
+  <section class="section">
+    <h2 class="section-title"><i class="fa-solid fa-briefcase"></i> Work Experience</h2>
+    <div class="timeline-modern">
+     <span class="timeline-end left"></span>
+     <span class="timeline-end right"></span>
+      <div class="timeline-box" style="color: #ffca28">
+        <div class="timeline-year">2018</div>
+        <div class="timeline-circle"></div>
+        <div class="timeline-line"></div>
+        <div class="timeline-content">
+          <h4>Internship</h4>
+          <p>Documentation & QA support roles</p>
+        </div>
+      </div>
+      <div class="timeline-box bottom" style="color: #f44336">
+        <div class="timeline-year">2020</div>
+        <div class="timeline-circle"></div>
+        <div class="timeline-line"></div>
+        <div class="timeline-content">
+          <h4>Junior Writer</h4>
+          <p>Government software client</p>
+        </div>
+      </div>
+      <div class="timeline-box" style="color: #9c27b0">
+        <div class="timeline-year">2022</div>
+        <div class="timeline-circle"></div>
+        <div class="timeline-line"></div>
+        <div class="timeline-content">
+          <h4>Technical Writer</h4>
+          <p>Identity and digital security solutions</p>
+        </div>
+      </div>
+      <div class="timeline-box bottom" style="color: #3f51b5">
+        <div class="timeline-year">2023</div>
+        <div class="timeline-circle"></div>
+        <div class="timeline-line"></div>
+        <div class="timeline-content">
+          <h4>Lead Writer</h4>
+          <p>Customer delivery coordination</p>
+        </div>
+      </div>
+      <div class="timeline-box" style="color: #0d3b4d">
+        <div class="timeline-year">2024</div>
+        <div class="timeline-circle"></div>
+        <div class="timeline-line"></div>
+        <div class="timeline-content">
+          <h4>Thales Group</h4>
+          <p>LATAM Main Tech writer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Education Timeline -->
+  <section class="section">
+    <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i> Education</h2>
+    <div class="vertical-timeline">
+        <div class="entry">
+          <h4>Continuous Learning</h4>
+          <p>API documentation, automation testing, Confluence, Git, BPMN</p>
+        </div>
+        <div class="entry">
+        <h4>Technical Writing Certificate</h4>
+        <p>2020 – Google/Udemy/Datacamp combined coursework</p>
+        </div>
+        <div class="entry">
+          <h4>Chemical Engineering - UIS</h4>
+          <p>2012–2017 – Universidad Industrial de Santander</p>
+        </div>
+    </div>
+  </section>
+
+  <div id="footer-include"></div>
+
+  <script>
+    fetch("/partials/header.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("header-include").innerHTML = html;
+        const script = document.createElement("script");
+        script.src = "/darkmode.js";
+        document.body.appendChild(script);
+      });
+
+    fetch("/partials/footer.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("footer-include").innerHTML = html;
+      });
+  </script>
 </body>
 </html>

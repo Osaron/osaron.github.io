@@ -693,3 +693,11 @@ body:not(.dark-mode) .why-me-divider {
   margin-top: 1rem;
   opacity: 0.6; /* optional: makes it more subtle */
 }
+
+/*About me page*/
+.about-me-image {
+  display: block;
+  max-width: 450px;   /* Adjust width as needed */
+  margin: 0 auto -3rem auto; /* Center + reduce space below */
+  padding-top: -10rem;  /* Optional: reduce top padding if needed */
+}
