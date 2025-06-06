@@ -409,41 +409,104 @@ body.dark-mode .project-button {
   border: 1px solid #444; /* Darker border in dark mode */
 }
 
-/*Strip Line with Skills*/
+/*Tech Stack Section*/
 .skills-strip {
-  background-color: #1b4eff; /* Replace with your preferred blue */
+  padding: 3rem 10%;
   color: white;
-  padding: 3rem 1.5rem;
+  background: #1b4eff;
   text-align: center;
 }
 
 .skills-strip h2 {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 600;
   margin-bottom: 2rem;
+  text-align: center;
 }
 
-.skills-grid {
+.stack-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.stack-group {
+  background: #fafafa;
+  border-radius: 12px;
+  padding: 1.2rem 1.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.479); /* darker + blurrier */
+  transition: box-shadow 0.3s ease;
+}
+
+.stack-group h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: #222; /* or use var(--text-color) if you support theming */
+}
+
+.stack-items {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.5rem;
-  max-width: 900px;
-  margin: 0 auto;
+  gap: 0.5rem;
 }
 
-.skill {
-  background-color: white;
-  color: #1b4eff; /* lock to same blue */
-  font-weight: 500;
-  padding: 0.75rem 1.25rem;
+.stack-item:hover {
+  background-color: #d9e4ff;
+  color: #1b4eff;
+  transform: translateY(-2px);
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.stack-item {
+  padding: 0.4rem 0.8rem;
+  background-color: #eee;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  transition: transform 0.2s ease;
+  font-size: 0.9rem;
+  color: #333;
 }
 
-.skill:hover {
-  transform: translateY(-3px);
+/*Stack Icon theme*/
+.icon-skill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  background-color: #eee;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #333;
+  transition: background 0.3s ease;
+}
+
+.icon-wrapper {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid #cccccc80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s ease;
+}
+
+.icon-wrapper img {
+  width: 20px;
+  height: 20px;
+  filter: grayscale(1) brightness(1.2);
+  transition: filter 0.3s ease;
+}
+
+.icon-skill:hover .icon-wrapper {
+  border-color: #1b4cff48;
+}
+
+.icon-skill:hover .icon-wrapper img {
+  filter: none;
+}
+
+.icon-skill {
+  text-decoration: none !important; /* Stronger enforcement */
 }
 
 /*Why Me? Section*/
