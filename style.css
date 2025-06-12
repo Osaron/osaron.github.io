@@ -361,8 +361,34 @@ body.dark-mode .toggle-mode .icon {
   margin: 0 auto;
 }
 
+.project-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  padding: 1rem;
+  text-align: center;
+}
+
 .project-card:hover {
   transform: translateY(-6px);
+}
+
+.project-thumb {
+  width: 100%;
+  aspect-ratio: 7 / 4;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+}
+
+.project-thumb:hover {
+  opacity: 1; /* Full opacity on hover for clarity */
+  transform: scale(1.03);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .project-card p {
@@ -375,6 +401,7 @@ body.dark-mode .toggle-mode .icon {
 body.dark-mode .project-card p {
   color: #aaa;  /* a softer shade for dark mode readability */
 }
+
 
 .project-button:hover {
   background-color: rgba(0, 123, 255, 0.1); /* soft blue tint */
