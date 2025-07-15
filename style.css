@@ -552,62 +552,91 @@ body.dark-mode .project-button {
 
 .why-me-wrapper {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   align-items: stretch;
   gap: 2rem;
+  position: relative;  /* Important for absolute positioning */
+}
+
+.why-me-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;  /* Center of the wrapper */
+  transform: translateX(-50%);
+  width: 0.3px;
+  background-color: #c6c9cc;
+  z-index: 1;
+}
+
+body.dark-mode .why-me-wrapper::before {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.why-me-left,
+.why-me-right {
+  flex: 1 1 50%;           /* Each half takes 50% of the wrapper */
+  max-width: 50%;          /* Prevent overflow into other half */
+  box-sizing: border-box;  /* Include padding/borders in width */
 }
 
 .why-me-left {
-  flex: 1 1 400px;
-  min-width: 300px;
-  text-align: left;
+  background: #fff;     
+  max-width: 500px;  
+  border-radius: 10px;
+  padding: 1.2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.why-me-left h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1.1rem;
+  color: var(--accent); /* assuming --accent is your site's blue color */
+}
+
+body.dark-mode .why-me-left {
+  background: #1e1e1e;   /* Or a soft dark background */
+  color: #f5f5f5;        /* Light text for readability */
+  border: 1px solid #333; /* Optional: subtle border for definition */
+}
+
+.why-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.why-list li {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.85rem;
+  line-height: 1.8; 
+}
+
+.why-list li:last-child {
+  border-bottom: none;
+}
+
+.check-icon {
+  width: 20px;   /* Adjust size as needed */
+  height: 20px;
+  margin-right: 0.5rem;
+  vertical-align: middle;
 }
 
 .why-me-right {
-  flex: 1 1 400px; /* 👈 more space for carousel */
-  min-width: 300px;
-  text-align: left;
-}
-
-.why-me-left p {
-  margin-bottom: 1.5rem;
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--text-color);
-}
-
-/* Vertical Divider */
-.why-me-divider {
-  width: 1px;
-  background-color: rgba(255, 255, 255, 0.15); /* default for dark mode */
-}
-
-body:not(.dark-mode) .why-me-divider {
-  background-color: #c6c9cc; /* soft light blue for white mode */
-}
-
-/*Small Screens*/
-@media (max-width: 768px) {
-  .why-me-wrapper {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .why-me-left,
-  .why-me-right {
-    flex: 1 1 100%;
-    max-width: 100%;
-    text-align: center;
-  }
-
-  .why-me-left p {
-    text-align: center;
-  }
-
-  .why-me-divider {
-    display: none;
-  }
+  min-width: 200px;
+  text-align: center;   /* Center-align carousel content */
+  max-width: 600px;     /* ✅ Prevent overflow past divider */
+  margin: 0 auto;
+  padding-left: 4rem;
 }
 
 /* Carousel Styles */
