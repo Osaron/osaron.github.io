@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guides - API Documentation</title>
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+  <meta name="description" content="Integration guides, best practices, and troubleshooting for the API.">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="api-styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-dark.min.css" media="(prefers-color-scheme: dark)">
+</head>
+
+<body>
+  <div id="header-include"></div>
+
+  <div class="api-grid">
+    <!-- Left Sidebar Navigation -->
+    <aside class="left-sidebar">
+      <div class="sidebar-content">
+        <div class="api-title">
+          <h2><i class="fas fa-code"></i> API Documentation</h2>
+          <p>Version 1.0.0</p>
+        </div>
+        
+        <nav class="api-nav">
+          <ul>
+            <li class="nav-section">
+              <h3>Pages</h3>
+              <ul>
+                <li><a href="index.html" class="nav-link">Getting Started</a></li>
+                <li><a href="api-reference.html" class="nav-link">API Reference</a></li>
+                <li><a href="guides.html" class="nav-link active">Guides</a></li>
+                <li><a href="resources.html" class="nav-link">Resources</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="./">API Documentation</a> <span>/</span> <span>Guides</span>
+      </nav>
+
+      <!-- Integration Guide -->
+      <section id="integration-guide" class="api-section">
+        <div class="section-header">
+          <h1>Integration Guide</h1>
+          <p class="section-description">
+            Step-by-step guides to help you integrate our API into your applications quickly and efficiently.
+          </p>
+        </div>
+
+        <h2 id="web-application">Web Application Integration</h2>
+        <p>Integrating our API into a web application is straightforward. Here's a complete example using JavaScript and modern web technologies.</p>
+
+        <h3>Setting Up Authentication</h3>
+        <p>First, create a secure environment for your API key. Never expose API keys in client-side code.</p>
+        
+        <div class="code-example">
+          <pre><code class="language-javascript">// config.js - Store this securely on your server
+const API_CONFIG = {
+  baseURL: 'https://api.oscarrondon.com/v1',
+  apiKey: process.env.API_KEY, // Use environment variables
+  timeout: 10000
+};
+
+// api-client.js - Create a reusable API client
+class ApiClient {
+  constructor(config) {
+    this.baseURL = config.baseURL;
+    this.apiKey = config.apiKey;
+    this.timeout = config.timeout;
+  }
+
+  async request(endpoint, options = {}) {
+    const url = `${this.baseURL}${endpoint}`;
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${this.apiKey}`,
+        'Content-Type': 'application/json',
+        ...options.headers
+      },
+      timeout: this.timeout,
+      ...options
+    };
+
+    try {
+      const response = await fetch(url, config);
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      return await response.json();
+    } catch (error) {
+      console.error('API request failed:', error);
+      throw error;
+    }
+  }
+}</code></pre>
+        </div>
+
+        <h2 id="mobile-integration">Mobile Application Integration</h2>
+        <p>Our API is designed to work seamlessly with mobile applications. Here are best practices for iOS and Android integration.</p>
+
+        <h3>Error Handling Strategy</h3>
+        <p>Implement robust error handling to provide a smooth user experience even when network conditions are poor.</p>
+
+        <div class="code-example">
+          <pre><code class="language-swift">// iOS Swift Example
+import Foundation
+
+class APIService {
+    private let baseURL = "https://api.oscarrondon.com/v1"
+    private let apiKey: String
+    
+    init(apiKey: String) {
+        self.apiKey = apiKey
+    }
+    
+    func fetchContent(completion: @escaping (Result<[Content], APIError>) -> Void) {
+        guard let url = URL(string: "\(baseURL)/content") else {
+            completion(.failure(.invalidURL))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(.networkError(error)))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(.noData))
+                return
+            }
+            
+            do {
+                let contentResponse = try JSONDecoder().decode(ContentResponse.self, from: data)
+                completion(.success(contentResponse.data))
+            } catch {
+                completion(.failure(.decodingError(error)))
+            }
+        }.resume()
+    }
+}</code></pre>
+        </div>
+
+        <h2 id="server-integration">Server-to-Server Integration</h2>
+        <p>For backend services, implement caching and rate limiting to optimize performance and stay within API limits.</p>
+
+        <div class="code-example">
+          <pre><code class="language-python"># Python Example with caching
+import requests
+import time
+from functools import lru_cache
+from typing import Dict, List, Optional
+
+class APIClient:
+    def __init__(self, api_key: str, base_url: str = "https://api.oscarrondon.com/v1"):
+        self.api_key = api_key
+        self.base_url = base_url
+        self.session = requests.Session()
+        self.session.headers.update({
+            'Authorization': f'Bearer {api_key}',
+            'Content-Type': 'application/json'
+        })
+        self.last_request_time = 0
+        self.rate_limit_delay = 0.1  # 100ms between requests
+    
+    def _rate_limit(self):
+        """Implement simple rate limiting"""
+        elapsed = time.time() - self.last_request_time
+        if elapsed < self.rate_limit_delay:
+            time.sleep(self.rate_limit_delay - elapsed)
+        self.last_request_time = time.time()
+    
+    @lru_cache(maxsize=100)
+    def get_content(self, content_type: Optional[str] = None) -> List[Dict]:
+        """Cached content retrieval"""
+        self._rate_limit()
+        
+        params = {}
+        if content_type:
+            params['type'] = content_type
+            
+        response = self.session.get(f"{self.base_url}/content", params=params)
+        response.raise_for_status()
+        return response.json()['data']</code></pre>
+        </div>
+      </section>
+
+      <!-- Best Practices -->
+      <section id="best-practices" class="api-section">
+        <div class="section-header">
+          <h1>Best Practices</h1>
+          <p class="section-description">
+            Follow these recommendations to build robust, scalable applications with our API.
+          </p>
+        </div>
+
+        <h2 id="authentication-security">Authentication & Security</h2>
+        <p>Protect your API keys and implement proper security measures in your applications.</p>
+
+        <div class="security-tips">
+          <div class="tip-card">
+            <div class="tip-icon">
+              <i class="fas fa-key"></i>
+            </div>
+            <div class="tip-content">
+              <h4>API Key Security</h4>
+              <ul>
+                <li>Never expose API keys in client-side code</li>
+                <li>Use environment variables for server applications</li>
+                <li>Rotate API keys regularly</li>
+                <li>Implement IP whitelisting when possible</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="tip-card">
+            <div class="tip-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="tip-content">
+              <h4>Request Security</h4>
+              <ul>
+                <li>Always use HTTPS for API requests</li>
+                <li>Validate and sanitize user inputs</li>
+                <li>Implement proper error handling</li>
+                <li>Log security events for monitoring</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <h2 id="performance-optimization">Performance Optimization</h2>
+        <p>Optimize your API usage for better performance and cost efficiency.</p>
+
+        <div class="performance-tips">
+          <h4>Caching Strategies</h4>
+          <ul>
+            <li><strong>Client-side caching:</strong> Cache responses in memory or local storage</li>
+            <li><strong>HTTP caching:</strong> Respect cache headers (ETag, Cache-Control)</li>
+            <li><strong>Application caching:</strong> Use Redis or Memcached for frequently accessed data</li>
+          </ul>
+
+          <h4>Request Optimization</h4>
+          <div class="code-example">
+            <pre><code class="language-javascript">// Good: Batch multiple requests when possible
+const fetchMultipleContent = async (contentIds) => {
+  // Use bulk endpoint if available
+  return await apiClient.request('/content/bulk', {
+    method: 'POST',
+    body: JSON.stringify({ ids: contentIds })
+  });
+};
+
+// Good: Use pagination for large datasets
+const fetchAllContent = async () => {
+  let allContent = [];
+  let offset = 0;
+  const limit = 50;
+  
+  while (true) {
+    const response = await apiClient.request(`/content?limit=${limit}&offset=${offset}`);
+    allContent.push(...response.data);
+    
+    if (!response.pagination.has_more) break;
+    offset += limit;
+  }
+  
+  return allContent;
+};</code></pre>
+          </div>
+        </div>
+
+        <h2 id="error-handling-patterns">Error Handling Patterns</h2>
+        <p>Implement comprehensive error handling to create resilient applications.</p>
+
+        <div class="code-example">
+          <pre><code class="language-javascript">// Comprehensive error handling example
+class APIError extends Error {
+  constructor(message, status, code) {
+    super(message);
+    this.name = 'APIError';
+    this.status = status;
+    this.code = code;
+  }
+}
+
+class APIClient {
+  async request(endpoint, options = {}) {
+    const maxRetries = 3;
+    let attempt = 0;
+    
+    while (attempt < maxRetries) {
+      try {
+        const response = await fetch(`${this.baseURL}${endpoint}`, {
+          headers: this.getHeaders(),
+          ...options
+        });
+        
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          
+          switch (response.status) {
+            case 401:
+              throw new APIError('Authentication failed', 401, 'AUTH_FAILED');
+            case 429:
+              // Rate limited - implement exponential backoff
+              const retryAfter = response.headers.get('Retry-After') || Math.pow(2, attempt);
+              await this.sleep(retryAfter * 1000);
+              attempt++;
+              continue;
+            case 500:
+            case 502:
+            case 503:
+              // Server errors - retry with backoff
+              if (attempt < maxRetries - 1) {
+                await this.sleep(Math.pow(2, attempt) * 1000);
+                attempt++;
+                continue;
+              }
+              throw new APIError('Server error', response.status, 'SERVER_ERROR');
+            default:
+              throw new APIError(
+                errorData.message || 'Unknown error',
+                response.status,
+                errorData.code || 'UNKNOWN_ERROR'
+              );
+          }
+        }
+        
+        return await response.json();
+      } catch (error) {
+        if (error instanceof APIError) {
+          throw error;
+        }
+        
+        // Network or other errors
+        if (attempt < maxRetries - 1) {
+          await this.sleep(Math.pow(2, attempt) * 1000);
+          attempt++;
+          continue;
+        }
+        
+        throw new APIError('Network error', 0, 'NETWORK_ERROR');
+      }
+    }
+  }
+  
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Troubleshooting -->
+      <section id="troubleshooting" class="api-section">
+        <div class="section-header">
+          <h1>Troubleshooting</h1>
+          <p class="section-description">
+            Common issues and their solutions to help you resolve problems quickly.
+          </p>
+        </div>
+
+        <h2 id="common-errors">Common Errors</h2>
+        <p>Here are the most frequently encountered errors and how to resolve them.</p>
+
+        <div class="error-solutions">
+          <div class="error-solution">
+            <div class="error-header">
+              <span class="error-code">401 Unauthorized</span>
+              <span class="error-title">Authentication Failed</span>
+            </div>
+            <div class="error-content">
+              <p><strong>Cause:</strong> Invalid or missing API key</p>
+              <p><strong>Solution:</strong></p>
+              <ul>
+                <li>Verify your API key is correct and active</li>
+                <li>Check that the Authorization header is properly formatted</li>
+                <li>Ensure your API key has the necessary permissions</li>
+              </ul>
+              <div class="code-example">
+                <pre><code class="language-bash"># Correct format
+curl -H "Authorization: Bearer sk_live_4eC39HqLyjWDarjtT1zdp7dc" \
+     https://api.oscarrondon.com/v1/content</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="error-solution">
+            <div class="error-header">
+              <span class="error-code">429 Rate Limited</span>
+              <span class="error-title">Too Many Requests</span>
+            </div>
+            <div class="error-content">
+              <p><strong>Cause:</strong> Exceeded rate limits</p>
+              <p><strong>Solution:</strong></p>
+              <ul>
+                <li>Implement exponential backoff retry logic</li>
+                <li>Respect the Retry-After header</li>
+                <li>Consider upgrading your plan for higher limits</li>
+                <li>Implement request queuing and batching</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="error-solution">
+            <div class="error-header">
+              <span class="error-code">422 Validation Error</span>
+              <span class="error-title">Invalid Request Data</span>
+            </div>
+            <div class="error-content">
+              <p><strong>Cause:</strong> Request data doesn't meet validation requirements</p>
+              <p><strong>Solution:</strong></p>
+              <ul>
+                <li>Check the error response for specific field validation messages</li>
+                <li>Ensure required fields are present</li>
+                <li>Validate data types and formats</li>
+                <li>Check field length limits</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <h2 id="debugging-tips">Debugging Tips</h2>
+        <p>Use these techniques to diagnose and resolve API integration issues.</p>
+
+        <div class="debugging-tips">
+          <div class="tip-section">
+            <h4><i class="fas fa-bug"></i> Enable Debug Logging</h4>
+            <div class="code-example">
+              <pre><code class="language-javascript">// Enable detailed logging for debugging
+const debug = process.env.NODE_ENV === 'development';
+
+class APIClient {
+  async request(endpoint, options = {}) {
+    if (debug) {
+      console.log('API Request:', {
+        url: `${this.baseURL}${endpoint}`,
+        method: options.method || 'GET',
+        headers: { ...this.getHeaders(), ...options.headers },
+        body: options.body
+      });
+    }
+    
+    const response = await fetch(`${this.baseURL}${endpoint}`, {
+      headers: this.getHeaders(),
+      ...options
+    });
+    
+    if (debug) {
+      console.log('API Response:', {
+        status: response.status,
+        headers: Object.fromEntries(response.headers),
+        url: response.url
+      });
+    }
+    
+    return response;
+  }
+}</code></pre>
+            </div>
+          </div>
+
+          <div class="tip-section">
+            <h4><i class="fas fa-network-wired"></i> Test API Connectivity</h4>
+            <p>Use these commands to test basic connectivity and authentication:</p>
+            <div class="code-example">
+              <pre><code class="language-bash"># Test basic connectivity
+curl -I https://api.oscarrondon.com/v1/
+
+# Test authentication
+curl -H "Authorization: Bearer YOUR_API_KEY" \
+     https://api.oscarrondon.com/v1/content?limit=1
+
+# Test with verbose output for debugging
+curl -v -H "Authorization: Bearer YOUR_API_KEY" \
+     https://api.oscarrondon.com/v1/content</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h2 id="support-resources">Support Resources</h2>
+        <p>If you're still experiencing issues, here are additional resources to help you:</p>
+
+        <div class="support-resources">
+          <div class="resource-item">
+            <i class="fas fa-envelope"></i>
+            <h4>Email Support</h4>
+            <p>Send detailed error logs and reproduction steps to:</p>
+            <a href="mailto:osaron@ucdavis.edu">osaron@ucdavis.edu</a>
+          </div>
+          
+          <div class="resource-item">
+            <i class="fab fa-github"></i>
+            <h4>GitHub Issues</h4>
+            <p>Report bugs or request features:</p>
+            <a href="https://github.com/Osaron" target="_blank">GitHub Repository</a>
+          </div>
+          
+          <div class="resource-item">
+            <i class="fas fa-question-circle"></i>
+            <h4>FAQ</h4>
+            <p>Check our frequently asked questions:</p>
+            <a href="resources.html#faq">View FAQ</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Right Sidebar - Table of Contents -->
+    <aside class="right-sidebar">
+      <div class="toc-content">
+        <div class="toc-header">
+          <i class="fas fa-list"></i>
+          <span>On this page</span>
+        </div>
+        <nav class="toc-nav">
+          <ul>
+            <li><a href="#integration-guide" class="toc-link">Integration Guide</a>
+              <ul>
+                <li><a href="#web-application" class="toc-link">Web Application</a></li>
+                <li><a href="#mobile-integration" class="toc-link">Mobile Integration</a></li>
+                <li><a href="#server-integration" class="toc-link">Server Integration</a></li>
+              </ul>
+            </li>
+            <li><a href="#best-practices" class="toc-link">Best Practices</a>
+              <ul>
+                <li><a href="#authentication-security" class="toc-link">Authentication</a></li>
+                <li><a href="#performance-optimization" class="toc-link">Performance</a></li>
+                <li><a href="#error-handling-patterns" class="toc-link">Error Handling</a></li>
+              </ul>
+            </li>
+            <li><a href="#troubleshooting" class="toc-link">Troubleshooting</a>
+              <ul>
+                <li><a href="#common-errors" class="toc-link">Common Errors</a></li>
+                <li><a href="#debugging-tips" class="toc-link">Debugging Tips</a></li>
+                <li><a href="#support-resources" class="toc-link">Support Resources</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+  </div>
+
+  <div id="footer-include"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script>
+    // Header and footer loading script
+    fetch("/partials/header.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("header-include").innerHTML = html;
+        const script = document.createElement("script");
+        script.src = "/darkmode.js";
+        document.body.appendChild(script);
+      });
+
+    fetch("/partials/footer.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("footer-include").innerHTML = html;
+      });
+  </script>
+
+  <style>
+    /* Simple Grid Layout Override */
+    .api-grid {
+      display: grid !important;
+      grid-template-columns: 280px 1fr 250px !important;
+      grid-template-areas: "sidebar main toc" !important;
+    }
+    
+    /* Force vertical navigation stacking */
+    .api-nav ul,
+    .toc-nav ul {
+      list-style: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    
+    .nav-section,
+    .nav-section li,
+    .toc-nav li {
+      display: block !important;
+      width: 100% !important;
+    }
+    
+    .nav-link,
+    .toc-link {
+      display: block !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    .breadcrumb {
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+      color: var(--text-color);
+      opacity: 0.7;
+    }
+    
+    .breadcrumb a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    
+    .breadcrumb span {
+      margin: 0 0.5rem;
+    }
+
+    .security-tips,
+    .error-solutions,
+    .debugging-tips,
+    .support-resources {
+      margin: 2rem 0;
+    }
+
+    .tip-card,
+    .error-solution {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tip-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .tip-icon {
+      color: var(--accent);
+      font-size: 1.5rem;
+      margin-top: 0.25rem;
+    }
+
+    .tip-content h4 {
+      margin: 0 0 1rem 0;
+      color: var(--text-color);
+    }
+
+    .error-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .error-code {
+      background: var(--error-color);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .error-title {
+      font-weight: 600;
+      color: var(--text-color);
+    }
+
+    .resource-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+
+    .resource-item i {
+      color: var(--accent);
+      font-size: 1.5rem;
+      width: 2rem;
+      text-align: center;
+    }
+
+    .resource-item h4 {
+      margin: 0 0 0.25rem 0;
+    }
+
+    .resource-item p {
+      margin: 0 0 0.5rem 0;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .tip-section {
+      margin-bottom: 2rem;
+    }
+
+    .tip-section h4 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      color: var(--text-color);
+    }
+
+    .performance-tips h4 {
+      color: var(--text-color);
+      margin: 1.5rem 0 0.75rem 0;
+    }
+  </style>
+</body>
+</html>

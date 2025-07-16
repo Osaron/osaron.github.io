@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Reference - API Documentation</title>
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+  <meta name="description" content="Complete API reference documentation with endpoints, parameters, and examples.">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="api-styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-dark.min.css" media="(prefers-color-scheme: dark)">
+</head>
+
+<body>
+  <div id="header-include"></div>
+
+  <div class="api-grid">
+    <!-- Left Sidebar Navigation -->
+    <aside class="left-sidebar">
+      <div class="sidebar-content">
+        <div class="api-title">
+          <h2><i class="fas fa-code"></i> API Documentation</h2>
+          <p>Version 1.0.0</p>
+        </div>
+        
+        <nav class="api-nav">
+          <ul>
+            <li class="nav-section">
+              <h3>Pages</h3>
+              <ul>
+                <li><a href="index.html" class="nav-link">Getting Started</a></li>
+                <li><a href="api-reference.html" class="nav-link active">API Reference</a></li>
+                <li><a href="guides.html" class="nav-link">Guides</a></li>
+                <li><a href="resources.html" class="nav-link">Resources</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="./">API Documentation</a> <span>/</span> <span>API Reference</span>
+      </nav>
+
+      <!-- API Reference Overview -->
+      <section id="overview" class="api-section">
+        <div class="section-header">
+          <h1>API Reference</h1>
+          <p class="section-description">
+            Complete reference documentation for all API endpoints. All endpoints use HTTPS and require authentication.
+          </p>
+        </div>
+
+        <div class="api-overview">
+          <h3>Base URL</h3>
+          <div class="code-block">
+            <code>https://api.oscarrondon.com/v1</code>
+            <button class="copy-btn" onclick="copyToClipboard('https://api.oscarrondon.com/v1')">
+              <i class="fas fa-copy"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="info-cards">
+          <div class="info-card">
+            <div class="card-icon">
+              <i class="fas fa-file-text"></i>
+            </div>
+            <h3>Content Management</h3>
+            <p>Create, read, update, and delete content items</p>
+          </div>
+          
+          <div class="info-card">
+            <div class="card-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h3>User Management</h3>
+            <p>Manage user accounts and permissions</p>
+          </div>
+          
+          <div class="info-card">
+            <div class="card-icon">
+              <i class="fas fa-search"></i>
+            </div>
+            <h3>Search & Filter</h3>
+            <p>Advanced search and filtering capabilities</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Content Endpoints -->
+      <section id="content-endpoints" class="api-section">
+        <div class="section-header">
+          <h1>Content Endpoints</h1>
+          <p class="section-description">
+            Manage your content including blogs, documentation, user manuals, and white papers.
+          </p>
+        </div>
+
+        <h2 id="list-content">List Content</h2>
+        <div class="endpoint">
+          <div class="endpoint-header">
+            <span class="method get">GET</span>
+            <span class="path">/v1/content</span>
+            <span class="description">Retrieve a list of content items</span>
+          </div>
+          
+          <div class="endpoint-details">
+            <h4>Query Parameters</h4>
+            <table class="params-table">
+              <thead>
+                <tr>
+                  <th>Parameter</th>
+                  <th>Type</th>
+                  <th>Required</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>type</code></td>
+                  <td>string</td>
+                  <td>No</td>
+                  <td>Filter by content type: <code>blog</code>, <code>manual</code>, <code>whitepaper</code>, <code>strategy</code></td>
+                </tr>
+                <tr>
+                  <td><code>status</code></td>
+                  <td>string</td>
+                  <td>No</td>
+                  <td>Filter by status: <code>draft</code>, <code>published</code>, <code>archived</code></td>
+                </tr>
+                <tr>
+                  <td><code>limit</code></td>
+                  <td>integer</td>
+                  <td>No</td>
+                  <td>Number of items to return (default: 10, max: 100)</td>
+                </tr>
+                <tr>
+                  <td><code>offset</code></td>
+                  <td>integer</td>
+                  <td>No</td>
+                  <td>Number of items to skip for pagination</td>
+                </tr>
+              </tbody>
+            </table>
+            
+            <h4>Example Request</h4>
+            <div class="code-example">
+              <pre><code class="language-bash">curl -H "Authorization: Bearer YOUR_API_KEY" \
+     "https://api.oscarrondon.com/v1/content?type=blog&status=published&limit=5"</code></pre>
+            </div>
+            
+            <h4>Response</h4>
+            <div class="code-example">
+              <pre><code class="language-json">{
+  "data": [
+    {
+      "id": "content_abc123",
+      "title": "API Documentation Best Practices",
+      "type": "blog",
+      "status": "published",
+      "author": "Oscar Rondon",
+      "created_at": "2024-01-15T10:30:00Z",
+      "updated_at": "2024-01-15T10:30:00Z"
+    }
+  ],
+  "pagination": {
+    "total": 42,
+    "limit": 5,
+    "offset": 0,
+    "has_more": true
+  }
+}</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h2 id="create-content">Create Content</h2>
+        <div class="endpoint">
+          <div class="endpoint-header">
+            <span class="method post">POST</span>
+            <span class="path">/v1/content</span>
+            <span class="description">Create a new content item</span>
+          </div>
+          
+          <div class="endpoint-details">
+            <h4>Request Body</h4>
+            <table class="params-table">
+              <thead>
+                <tr>
+                  <th>Field</th>
+                  <th>Type</th>
+                  <th>Required</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>title</code></td>
+                  <td>string</td>
+                  <td>Yes</td>
+                  <td>Content title (max 200 characters)</td>
+                </tr>
+                <tr>
+                  <td><code>type</code></td>
+                  <td>string</td>
+                  <td>Yes</td>
+                  <td>Content type: <code>blog</code>, <code>manual</code>, <code>whitepaper</code>, <code>strategy</code></td>
+                </tr>
+                <tr>
+                  <td><code>content</code></td>
+                  <td>string</td>
+                  <td>Yes</td>
+                  <td>Content body (supports Markdown)</td>
+                </tr>
+                <tr>
+                  <td><code>status</code></td>
+                  <td>string</td>
+                  <td>No</td>
+                  <td>Publication status: <code>draft</code> (default), <code>published</code></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4>Example Request</h4>
+            <div class="code-example">
+              <pre><code class="language-bash">curl -X POST "https://api.oscarrondon.com/v1/content" \
+     -H "Authorization: Bearer YOUR_API_KEY" \
+     -H "Content-Type: application/json" \
+     -d '{
+       "title": "New Technical Guide",
+       "type": "manual",
+       "content": "# Technical Guide\n\nThis guide covers...",
+       "status": "draft"
+     }'</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h2 id="update-content">Update Content</h2>
+        <div class="endpoint">
+          <div class="endpoint-header">
+            <span class="method put">PUT</span>
+            <span class="path">/v1/content/{id}</span>
+            <span class="description">Update an existing content item</span>
+          </div>
+          
+          <div class="endpoint-details">
+            <p>Use the same request body format as the POST endpoint. All fields are optional for partial updates.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- User Management -->
+      <section id="user-endpoints" class="api-section">
+        <div class="section-header">
+          <h1>User Management</h1>
+          <p class="section-description">
+            Manage user accounts, profiles, and permissions within your organization.
+          </p>
+        </div>
+
+        <h2 id="list-users">List Users</h2>
+        <div class="endpoint">
+          <div class="endpoint-header">
+            <span class="method get">GET</span>
+            <span class="path">/v1/users</span>
+            <span class="description">Retrieve a list of users</span>
+          </div>
+          
+          <div class="endpoint-details">
+            <h4>Query Parameters</h4>
+            <table class="params-table">
+              <thead>
+                <tr>
+                  <th>Parameter</th>
+                  <th>Type</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>role</code></td>
+                  <td>string</td>
+                  <td>Filter by user role: <code>admin</code>, <code>editor</code>, <code>viewer</code></td>
+                </tr>
+                <tr>
+                  <td><code>active</code></td>
+                  <td>boolean</td>
+                  <td>Filter by account status</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <h2 id="create-user">Create User</h2>
+        <div class="endpoint">
+          <div class="endpoint-header">
+            <span class="method post">POST</span>
+            <span class="path">/v1/users</span>
+            <span class="description">Create a new user account</span>
+          </div>
+          
+          <div class="endpoint-details">
+            <h4>Required Fields</h4>
+            <ul>
+              <li><code>email</code> - User's email address</li>
+              <li><code>name</code> - Full name</li>
+              <li><code>role</code> - User role (admin, editor, viewer)</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="update-user">Update User</h2>
+        <div class="endpoint">
+          <div class="endpoint-header">
+            <span class="method put">PUT</span>
+            <span class="path">/v1/users/{id}</span>
+            <span class="description">Update user information and permissions</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Right Sidebar - Table of Contents -->
+    <aside class="right-sidebar">
+      <div class="toc-content">
+        <div class="toc-header">
+          <i class="fas fa-list"></i>
+          <span>On this page</span>
+        </div>
+        <nav class="toc-nav">
+          <ul>
+            <li><a href="#overview" class="toc-link">API Reference</a></li>
+            <li><a href="#content-endpoints" class="toc-link">Content Endpoints</a>
+              <ul>
+                <li><a href="#list-content" class="toc-link">List Content</a></li>
+                <li><a href="#create-content" class="toc-link">Create Content</a></li>
+                <li><a href="#update-content" class="toc-link">Update Content</a></li>
+              </ul>
+            </li>
+            <li><a href="#user-endpoints" class="toc-link">User Management</a>
+              <ul>
+                <li><a href="#list-users" class="toc-link">List Users</a></li>
+                <li><a href="#create-user" class="toc-link">Create User</a></li>
+                <li><a href="#update-user" class="toc-link">Update User</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+  </div>
+
+  <div id="footer-include"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script>
+    // Copy to clipboard function
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        event.target.innerHTML = '<i class="fas fa-check"></i>';
+        setTimeout(() => {
+          event.target.innerHTML = '<i class="fas fa-copy"></i>';
+        }, 2000);
+      });
+    }
+
+    // Header and footer loading script
+    fetch("/partials/header.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("header-include").innerHTML = html;
+        const script = document.createElement("script");
+        script.src = "/darkmode.js";
+        document.body.appendChild(script);
+      });
+
+    fetch("/partials/footer.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("footer-include").innerHTML = html;
+      });
+  </script>
+
+  <style>
+    /* Simple Grid Layout Override */
+    .api-grid {
+      display: grid !important;
+      grid-template-columns: 280px 1fr 250px !important;
+      grid-template-areas: "sidebar main toc" !important;
+    }
+    
+    /* Force vertical navigation stacking */
+    .api-nav ul,
+    .toc-nav ul {
+      list-style: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    
+    .nav-section,
+    .nav-section li,
+    .toc-nav li {
+      display: block !important;
+      width: 100% !important;
+    }
+    
+    .nav-link,
+    .toc-link {
+      display: block !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    
+    /* Active TOC link highlighting */
+    .toc-link.active {
+      background: var(--accent);
+      color: white;
+      font-weight: 500;
+    }
+
+    .breadcrumb {
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+      color: var(--text-color);
+      opacity: 0.7;
+    }
+    
+    .breadcrumb a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    
+    .breadcrumb span {
+      margin: 0 0.5rem;
+    }
+  </style>
+</body>
+</html>

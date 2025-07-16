@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resources - API Documentation</title>
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+  <meta name="description" content="SDKs, code examples, FAQ, and support resources for the API.">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="api-styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-dark.min.css" media="(prefers-color-scheme: dark)">
+</head>
+
+<body>
+  <div id="header-include"></div>
+
+  <div class="api-grid">
+    <!-- Left Sidebar Navigation -->
+    <aside class="left-sidebar">
+      <div class="sidebar-content">
+        <div class="api-title">
+          <h2><i class="fas fa-code"></i> API Documentation</h2>
+          <p>Version 1.0.0</p>
+        </div>
+        
+        <nav class="api-nav">
+          <ul>
+            <li class="nav-section">
+              <h3>Pages</h3>
+              <ul>
+                <li><a href="index.html" class="nav-link">Getting Started</a></li>
+                <li><a href="api-reference.html" class="nav-link">API Reference</a></li>
+                <li><a href="guides.html" class="nav-link">Guides</a></li>
+                <li><a href="resources.html" class="nav-link active">Resources</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="./">API Documentation</a> <span>/</span> <span>Resources</span>
+      </nav>
+
+      <!-- SDKs & Libraries -->
+      <section id="sdks" class="api-section">
+        <div class="section-header">
+          <h1>SDKs & Libraries</h1>
+          <p class="section-description">
+            Official and community-maintained libraries to accelerate your development process.
+          </p>
+        </div>
+
+        <h2 id="official-sdks">Official SDKs</h2>
+        <p>We maintain official SDKs for the most popular programming languages. These libraries provide type safety, error handling, and convenience methods.</p>
+
+        <div class="sdk-grid">
+          <div class="sdk-card">
+            <div class="sdk-header">
+              <i class="fab fa-js-square"></i>
+              <h3>JavaScript/TypeScript</h3>
+              <span class="version">v2.1.0</span>
+            </div>
+            <p>Full-featured SDK with TypeScript support, automatic retries, and built-in caching.</p>
+            <div class="sdk-links">
+              <a href="#" class="sdk-link"><i class="fab fa-npm"></i> npm install</a>
+              <a href="#" class="sdk-link"><i class="fab fa-github"></i> Source</a>
+              <a href="#" class="sdk-link"><i class="fas fa-book"></i> Docs</a>
+            </div>
+            <div class="code-example">
+              <pre><code class="language-bash">npm install @oscarrondon/api-client</code></pre>
+            </div>
+            <div class="code-example">
+              <pre><code class="language-javascript">import { ApiClient } from '@oscarrondon/api-client';
+
+const client = new ApiClient({
+  apiKey: 'your-api-key',
+  environment: 'production'
+});
+
+const content = await client.content.list({
+  type: 'blog',
+  limit: 10
+});</code></pre>
+            </div>
+          </div>
+
+          <div class="sdk-card">
+            <div class="sdk-header">
+              <i class="fab fa-python"></i>
+              <h3>Python</h3>
+              <span class="version">v1.8.2</span>
+            </div>
+            <p>Pythonic SDK with async support, automatic pagination, and comprehensive error handling.</p>
+            <div class="sdk-links">
+              <a href="#" class="sdk-link"><i class="fas fa-cube"></i> PyPI</a>
+              <a href="#" class="sdk-link"><i class="fab fa-github"></i> Source</a>
+              <a href="#" class="sdk-link"><i class="fas fa-book"></i> Docs</a>
+            </div>
+            <div class="code-example">
+              <pre><code class="language-bash">pip install oscarrondon-api</code></pre>
+            </div>
+            <div class="code-example">
+              <pre><code class="language-python">from oscarrondon_api import ApiClient
+
+client = ApiClient(api_key="your-api-key")
+
+# Synchronous usage
+content = client.content.list(type="blog", limit=10)
+
+# Async usage
+async with ApiClient(api_key="your-api-key") as client:
+    content = await client.content.list_async(type="blog")</code></pre>
+            </div>
+          </div>
+
+          <div class="sdk-card">
+            <div class="sdk-header">
+              <i class="fab fa-java"></i>
+              <h3>Java</h3>
+              <span class="version">v1.5.0</span>
+            </div>
+            <p>Enterprise-ready Java SDK with Spring Boot integration and reactive streams support.</p>
+            <div class="sdk-links">
+              <a href="#" class="sdk-link"><i class="fas fa-cube"></i> Maven</a>
+              <a href="#" class="sdk-link"><i class="fab fa-github"></i> Source</a>
+              <a href="#" class="sdk-link"><i class="fas fa-book"></i> Docs</a>
+            </div>
+            <div class="code-example">
+              <pre><code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;com.oscarrondon&lt;/groupId&gt;
+  &lt;artifactId&gt;api-client&lt;/artifactId&gt;
+  &lt;version&gt;1.5.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h2 id="community-libraries">Community Libraries</h2>
+        <p>Third-party libraries maintained by the community. These may not be as up-to-date as official SDKs.</p>
+
+        <div class="community-libraries">
+          <div class="library-item">
+            <div class="library-header">
+              <i class="fab fa-php"></i>
+              <span class="library-name">PHP SDK</span>
+              <span class="community-badge">Community</span>
+            </div>
+            <p>Composer package for PHP applications with PSR-7 support.</p>
+            <a href="#" class="library-link">View on Packagist</a>
+          </div>
+
+          <div class="library-item">
+            <div class="library-header">
+              <i class="fab fa-rust"></i>
+              <span class="library-name">Rust Crate</span>
+              <span class="community-badge">Community</span>
+            </div>
+            <p>Async Rust client with serde serialization support.</p>
+            <a href="#" class="library-link">View on crates.io</a>
+          </div>
+
+          <div class="library-item">
+            <div class="library-header">
+              <i class="fab fa-swift"></i>
+              <span class="library-name">Swift Package</span>
+              <span class="community-badge">Community</span>
+            </div>
+            <p>Swift Package Manager compatible library for iOS/macOS.</p>
+            <a href="#" class="library-link">View on GitHub</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Code Examples -->
+      <section id="examples" class="api-section">
+        <div class="section-header">
+          <h1>Code Examples</h1>
+          <p class="section-description">
+            Real-world examples and use cases to help you implement common scenarios.
+          </p>
+        </div>
+
+        <h2 id="basic-examples">Basic Examples</h2>
+        <p>Get started with these fundamental examples that demonstrate core API functionality.</p>
+
+        <div class="example-section">
+          <h3>Fetching and Displaying Content</h3>
+          <p>This example shows how to retrieve content and display it in a web application.</p>
+          
+          <div class="code-tabs">
+            <button class="tab-btn active" onclick="showTab('react-example')">React</button>
+            <button class="tab-btn" onclick="showTab('vue-example')">Vue.js</button>
+            <button class="tab-btn" onclick="showTab('vanilla-example')">Vanilla JS</button>
+          </div>
+
+          <div id="react-example" class="code-content active">
+            <div class="code-example">
+              <pre><code class="language-jsx">import React, { useState, useEffect } from 'react';
+import { ApiClient } from '@oscarrondon/api-client';
+
+const client = new ApiClient({ 
+  apiKey: process.env.REACT_APP_API_KEY 
+});
+
+function ContentList() {
+  const [content, setContent] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchContent() {
+      try {
+        const response = await client.content.list({
+          type: 'blog',
+          status: 'published',
+          limit: 10
+        });
+        setContent(response.data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchContent();
+  }, []);
+
+  if (loading) return &lt;div&gt;Loading...&lt;/div&gt;;
+  if (error) return &lt;div&gt;Error: {error}&lt;/div&gt;;
+
+  return (
+    &lt;div className="content-list"&gt;
+      {content.map(item =&gt; (
+        &lt;article key={item.id} className="content-item"&gt;
+          &lt;h2&gt;{item.title}&lt;/h2&gt;
+          &lt;p&gt;By {item.author} • {new Date(item.created_at).toLocaleDateString()}&lt;/p&gt;
+          &lt;div className="content-preview"&gt;
+            {item.excerpt}
+          &lt;/div&gt;
+        &lt;/article&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}
+
+export default ContentList;</code></pre>
+            </div>
+          </div>
+
+          <div id="vue-example" class="code-content">
+            <div class="code-example">
+              <pre><code class="language-vue">&lt;template&gt;
+  &lt;div class="content-list"&gt;
+    &lt;div v-if="loading"&gt;Loading...&lt;/div&gt;
+    &lt;div v-else-if="error" class="error"&gt;Error: {{ error }}&lt;/div&gt;
+    &lt;article 
+      v-else 
+      v-for="item in content" 
+      :key="item.id" 
+      class="content-item"
+    &gt;
+      &lt;h2&gt;{{ item.title }}&lt;/h2&gt;
+      &lt;p&gt;By {{ item.author }} • {{ formatDate(item.created_at) }}&lt;/p&gt;
+      &lt;div class="content-preview"&gt;
+        {{ item.excerpt }}
+      &lt;/div&gt;
+    &lt;/article&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import { ApiClient } from '@oscarrondon/api-client';
+
+const client = new ApiClient({ 
+  apiKey: process.env.VUE_APP_API_KEY 
+});
+
+export default {
+  name: 'ContentList',
+  data() {
+    return {
+      content: [],
+      loading: true,
+      error: null
+    };
+  },
+  async mounted() {
+    try {
+      const response = await client.content.list({
+        type: 'blog',
+        status: 'published',
+        limit: 10
+      });
+      this.content = response.data;
+    } catch (err) {
+      this.error = err.message;
+    } finally {
+      this.loading = false;
+    }
+  },
+  methods: {
+    formatDate(dateString) {
+      return new Date(dateString).toLocaleDateString();
+    }
+  }
+};
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+
+          <div id="vanilla-example" class="code-content">
+            <div class="code-example">
+              <pre><code class="language-javascript">class ContentManager {
+  constructor(apiKey) {
+    this.apiKey = apiKey;
+    this.baseURL = 'https://api.oscarrondon.com/v1';
+  }
+
+  async fetchContent() {
+    const container = document.getElementById('content-container');
+    
+    try {
+      container.innerHTML = '&lt;div class="loading"&gt;Loading...&lt;/div&gt;';
+      
+      const response = await fetch(`${this.baseURL}/content?type=blog&status=published&limit=10`, {
+        headers: {
+          'Authorization': `Bearer ${this.apiKey}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      this.renderContent(data.data);
+    } catch (error) {
+      container.innerHTML = `&lt;div class="error"&gt;Error: ${error.message}&lt;/div&gt;`;
+    }
+  }
+
+  renderContent(content) {
+    const container = document.getElementById('content-container');
+    
+    const html = content.map(item =&gt; `
+      &lt;article class="content-item"&gt;
+        &lt;h2&gt;${this.escapeHtml(item.title)}&lt;/h2&gt;
+        &lt;p&gt;By ${this.escapeHtml(item.author)} • ${new Date(item.created_at).toLocaleDateString()}&lt;/p&gt;
+        &lt;div class="content-preview"&gt;
+          ${this.escapeHtml(item.excerpt)}
+        &lt;/div&gt;
+      &lt;/article&gt;
+    `).join('');
+    
+    container.innerHTML = html;
+  }
+
+  escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+}
+
+// Usage
+const contentManager = new ContentManager('your-api-key');
+contentManager.fetchContent();</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h2 id="advanced-examples">Advanced Examples</h2>
+        <p>More sophisticated examples demonstrating advanced features and patterns.</p>
+
+        <div class="example-section">
+          <h3>Real-time Content Updates with WebSockets</h3>
+          <p>This example shows how to implement real-time content updates using WebSockets.</p>
+          
+          <div class="code-example">
+            <pre><code class="language-javascript">class RealTimeContentManager {
+  constructor(apiKey) {
+    this.apiKey = apiKey;
+    this.wsUrl = 'wss://api.oscarrondon.com/v1/ws';
+    this.content = new Map();
+    this.subscribers = new Set();
+  }
+
+  async connect() {
+    this.ws = new WebSocket(`${this.wsUrl}?token=${this.apiKey}`);
+    
+    this.ws.onopen = () => {
+      console.log('Connected to real-time updates');
+      this.subscribe('content.updated');
+      this.subscribe('content.created');
+      this.subscribe('content.deleted');
+    };
+
+    this.ws.onmessage = (event) => {
+      const message = JSON.parse(event.data);
+      this.handleMessage(message);
+    };
+
+    this.ws.onclose = () => {
+      console.log('Disconnected from real-time updates');
+      // Implement reconnection logic
+      setTimeout(() => this.connect(), 5000);
+    };
+  }
+
+  subscribe(eventType) {
+    this.ws.send(JSON.stringify({
+      type: 'subscribe',
+      event: eventType
+    }));
+  }
+
+  handleMessage(message) {
+    switch (message.type) {
+      case 'content.updated':
+        this.updateContent(message.data);
+        break;
+      case 'content.created':
+        this.addContent(message.data);
+        break;
+      case 'content.deleted':
+        this.removeContent(message.data.id);
+        break;
+    }
+    
+    // Notify all subscribers
+    this.subscribers.forEach(callback => callback(message));
+  }
+
+  updateContent(contentItem) {
+    this.content.set(contentItem.id, contentItem);
+  }
+
+  addContent(contentItem) {
+    this.content.set(contentItem.id, contentItem);
+  }
+
+  removeContent(contentId) {
+    this.content.delete(contentId);
+  }
+
+  onUpdate(callback) {
+    this.subscribers.add(callback);
+    return () => this.subscribers.delete(callback);
+  }
+}
+
+// Usage
+const rtManager = new RealTimeContentManager('your-api-key');
+rtManager.connect();
+
+const unsubscribe = rtManager.onUpdate((message) => {
+  console.log('Content update:', message);
+  // Update your UI here
+});</code></pre>
+          </div>
+        </div>
+
+        <h2 id="integration-patterns">Integration Patterns</h2>
+        <p>Common patterns for integrating the API into different application architectures.</p>
+
+        <div class="pattern-examples">
+          <div class="pattern-item">
+            <h4>Repository Pattern (Backend)</h4>
+            <p>Clean architecture approach for backend services.</p>
+            <a href="#" class="pattern-link">View Example</a>
+          </div>
+          
+          <div class="pattern-item">
+            <h4>Redux Integration (Frontend)</h4>
+            <p>Managing API state with Redux and RTK Query.</p>
+            <a href="#" class="pattern-link">View Example</a>
+          </div>
+          
+          <div class="pattern-item">
+            <h4>GraphQL Wrapper</h4>
+            <p>Exposing REST API through GraphQL layer.</p>
+            <a href="#" class="pattern-link">View Example</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="api-section">
+        <div class="section-header">
+          <h1>Frequently Asked Questions</h1>
+          <p class="section-description">
+            Common questions and answers about using our API.
+          </p>
+        </div>
+
+        <h2 id="general-questions">General Questions</h2>
+        
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-question">
+              <h4>What are the rate limits for the API?</h4>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Rate limits depend on your subscription plan:</p>
+              <ul>
+                <li><strong>Free:</strong> 100 requests/hour</li>
+                <li><strong>Basic:</strong> 1,000 requests/hour</li>
+                <li><strong>Pro:</strong> 10,000 requests/hour</li>
+                <li><strong>Enterprise:</strong> Custom limits</li>
+              </ul>
+              <p>Rate limit headers are included in every response to help you track usage.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h4>How do I handle authentication securely?</h4>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Follow these security best practices:</p>
+              <ul>
+                <li>Never expose API keys in client-side code</li>
+                <li>Use environment variables for storing keys</li>
+                <li>Rotate keys regularly (we recommend every 90 days)</li>
+                <li>Implement IP whitelisting when possible</li>
+                <li>Use HTTPS for all API requests</li>
+              </ul>
+              <p>For frontend applications, create a backend proxy that handles API authentication.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h4>What data formats are supported?</h4>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Our API exclusively uses JSON for both requests and responses. All endpoints:</p>
+              <ul>
+                <li>Accept <code>application/json</code> content type</li>
+                <li>Return <code>application/json</code> responses</li>
+                <li>Use UTF-8 encoding</li>
+                <li>Follow RFC 7159 JSON specification</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h4>How do I paginate through large result sets?</h4>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Use the <code>limit</code> and <code>offset</code> parameters:</p>
+              <div class="code-example">
+                <pre><code class="language-bash"># First page (10 items)
+curl "https://api.oscarrondon.com/v1/content?limit=10&offset=0"
+
+# Second page
+curl "https://api.oscarrondon.com/v1/content?limit=10&offset=10"</code></pre>
+              </div>
+              <p>The response includes pagination metadata to help with navigation.</p>
+            </div>
+          </div>
+        </div>
+
+        <h2 id="technical-questions">Technical Questions</h2>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-question">
+              <h4>Can I use webhooks for real-time notifications?</h4>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Yes! Webhooks are available for Pro and Enterprise plans. You can configure webhooks to receive notifications for:</p>
+              <ul>
+                <li>Content creation, updates, and deletion</li>
+                <li>User account changes</li>
+                <li>API key usage alerts</li>
+              </ul>
+              <p>Configure webhooks in your dashboard under "API Settings".</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h4>What happens if I exceed my rate limit?</h4>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>When you exceed your rate limit, you'll receive:</p>
+              <ul>
+                <li>HTTP 429 status code</li>
+                <li><code>Retry-After</code> header with wait time</li>
+                <li>Error response with details</li>
+              </ul>
+              <p>Implement exponential backoff in your client to handle rate limiting gracefully.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h4>Is there API versioning?</h4>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Yes, we use URL-based versioning. The current version is v1:</p>
+              <ul>
+                <li>Current: <code>https://api.oscarrondon.com/v1/</code></li>
+                <li>We maintain backwards compatibility for at least 12 months</li>
+                <li>Breaking changes are introduced in new versions</li>
+                <li>Deprecation notices are sent via email and API headers</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <h2 id="billing-questions">Billing & Plans</h2>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-question">
+              <h4>How is API usage calculated?</h4>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Usage is calculated based on successful API requests:</p>
+              <ul>
+                <li>Each successful request (2xx status) counts toward your quota</li>
+                <li>Failed requests (4xx, 5xx) don't count against your limit</li>
+                <li>Usage resets monthly on your billing cycle date</li>
+                <li>Real-time usage tracking available in your dashboard</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h4>Can I upgrade or downgrade my plan?</h4>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>Yes, you can change your plan at any time:</p>
+              <ul>
+                <li>Upgrades take effect immediately</li>
+                <li>Downgrades take effect at the next billing cycle</li>
+                <li>Pro-rated billing for mid-cycle upgrades</li>
+                <li>No penalties for plan changes</li>
+              </ul>
+              <p>Manage your plan from the billing section of your dashboard.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Right Sidebar - Table of Contents -->
+    <aside class="right-sidebar">
+      <div class="toc-content">
+        <div class="toc-header">
+          <i class="fas fa-list"></i>
+          <span>On this page</span>
+        </div>
+        <nav class="toc-nav">
+          <ul>
+            <li><a href="#sdks" class="toc-link">SDKs & Libraries</a>
+              <ul>
+                <li><a href="#official-sdks" class="toc-link">Official SDKs</a></li>
+                <li><a href="#community-libraries" class="toc-link">Community Libraries</a></li>
+              </ul>
+            </li>
+            <li><a href="#examples" class="toc-link">Code Examples</a>
+              <ul>
+                <li><a href="#basic-examples" class="toc-link">Basic Examples</a></li>
+                <li><a href="#advanced-examples" class="toc-link">Advanced Examples</a></li>
+                <li><a href="#integration-patterns" class="toc-link">Integration Patterns</a></li>
+              </ul>
+            </li>
+            <li><a href="#faq" class="toc-link">FAQ</a>
+              <ul>
+                <li><a href="#general-questions" class="toc-link">General Questions</a></li>
+                <li><a href="#technical-questions" class="toc-link">Technical Questions</a></li>
+                <li><a href="#billing-questions" class="toc-link">Billing & Plans</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+  </div>
+
+  <div id="footer-include"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script>
+    // Tab switching for code examples
+    function showTab(tabId) {
+      // Hide all tab contents
+      document.querySelectorAll('.code-content').forEach(content => {
+        content.classList.remove('active');
+      });
+      
+      // Remove active class from all tabs
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // Show selected tab and mark button as active
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    // FAQ accordion functionality
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const faqItem = question.parentElement;
+        const answer = faqItem.querySelector('.faq-answer');
+        const icon = question.querySelector('i');
+        
+        // Toggle the FAQ item
+        faqItem.classList.toggle('active');
+        
+        // Rotate the chevron icon
+        if (faqItem.classList.contains('active')) {
+          icon.style.transform = 'rotate(180deg)';
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        } else {
+          icon.style.transform = 'rotate(0deg)';
+          answer.style.maxHeight = '0';
+        }
+      });
+    });
+
+    // Header and footer loading script
+    fetch("/partials/header.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("header-include").innerHTML = html;
+        const script = document.createElement("script");
+        script.src = "/darkmode.js";
+        document.body.appendChild(script);
+      });
+
+    fetch("/partials/footer.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("footer-include").innerHTML = html;
+      });
+  </script>
+
+  <style>
+    /* Simple Grid Layout Override */
+    .api-grid {
+      display: grid !important;
+      grid-template-columns: 280px 1fr 250px !important;
+      grid-template-areas: "sidebar main toc" !important;
+    }
+    
+    /* Force vertical navigation stacking */
+    .api-nav ul,
+    .toc-nav ul {
+      list-style: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    
+    .nav-section,
+    .nav-section li,
+    .toc-nav li {
+      display: block !important;
+      width: 100% !important;
+    }
+    
+    .nav-link,
+    .toc-link {
+      display: block !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    .breadcrumb {
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+      color: var(--text-color);
+      opacity: 0.7;
+    }
+    
+    .breadcrumb a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    
+    .breadcrumb span {
+      margin: 0 0.5rem;
+    }
+
+    /* SDK Cards */
+    .sdk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .sdk-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+
+    .sdk-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .sdk-header i {
+      font-size: 2rem;
+      color: var(--accent);
+    }
+
+    .sdk-header h3 {
+      margin: 0;
+      flex: 1;
+    }
+
+    .version {
+      background: var(--accent);
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .sdk-links {
+      display: flex;
+      gap: 1rem;
+      margin: 1rem 0;
+      flex-wrap: wrap;
+    }
+
+    .sdk-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    .sdk-link:hover {
+      background: rgba(0, 123, 255, 0.1);
+    }
+
+    /* Community Libraries */
+    .community-libraries {
+      margin: 2rem 0;
+    }
+
+    .library-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .library-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .library-header i {
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+
+    .library-name {
+      font-weight: 600;
+    }
+
+    .community-badge {
+      background: var(--warning-color);
+      color: white;
+      padding: 0.2rem 0.5rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .library-link {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .library-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Code Examples */
+    .example-section {
+      margin: 2rem 0;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+
+    .code-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      padding: 0.75rem 1rem;
+      color: var(--text-color);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .tab-btn:hover {
+      background: rgba(0, 123, 255, 0.1);
+    }
+
+    .code-content {
+      display: none;
+    }
+
+    .code-content.active {
+      display: block;
+    }
+
+    /* Pattern Examples */
+    .pattern-examples {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .pattern-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .pattern-item h4 {
+      margin: 0 0 0.5rem 0;
+      color: var(--text-color);
+    }
+
+    .pattern-item p {
+      margin: 0 0 1rem 0;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .pattern-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .pattern-link:hover {
+      text-decoration: underline;
+    }
+
+    /* FAQ Styles */
+    .faq-list {
+      margin: 2rem 0;
+    }
+
+    .faq-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .faq-question:hover {
+      background: rgba(0, 123, 255, 0.05);
+    }
+
+    .faq-question h4 {
+      margin: 0;
+      color: var(--text-color);
+    }
+
+    .faq-question i {
+      color: var(--accent);
+      transition: transform 0.3s ease;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding: 0 1rem;
+    }
+
+    .faq-item.active .faq-answer {
+      padding: 0 1rem 1rem 1rem;
+    }
+
+    .faq-answer p {
+      margin: 0 0 1rem 0;
+    }
+
+    .faq-answer ul {
+      margin: 0 0 1rem 1.5rem;
+    }
+
+    .faq-answer .code-example {
+      margin: 1rem 0;
+    }
+  </style>
+</body>
+</html>

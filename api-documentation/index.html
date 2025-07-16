@@ -29,40 +29,12 @@
         <nav class="api-nav">
           <ul>
             <li class="nav-section">
-              <h3>Getting Started</h3>
+              <h3>Pages</h3>
               <ul>
-                <li><a href="#introduction" class="nav-link active">Introduction</a></li>
-                <li><a href="#authentication" class="nav-link">Authentication</a></li>
-                <li><a href="#quick-start" class="nav-link">Quick Start</a></li>
-                <li><a href="#rate-limits" class="nav-link">Rate Limits</a></li>
-              </ul>
-            </li>
-            
-            <li class="nav-section">
-              <h3>API Reference</h3>
-              <ul>
-                <li><a href="content-api.html" class="nav-link">Content API</a></li>
-                <li><a href="#user-management" class="nav-link">User Management</a></li>
-                <li><a href="#documentation" class="nav-link">Documentation</a></li>
-                <li><a href="#search" class="nav-link">Search</a></li>
-              </ul>
-            </li>
-            
-            <li class="nav-section">
-              <h3>Examples</h3>
-              <ul>
-                <li><a href="#code-examples" class="nav-link">Code Examples</a></li>
-                <li><a href="#use-cases" class="nav-link">Use Cases</a></li>
-                <li><a href="#sdks" class="nav-link">SDKs</a></li>
-              </ul>
-            </li>
-            
-            <li class="nav-section">
-              <h3>Resources</h3>
-              <ul>
-                <li><a href="#support" class="nav-link">Support</a></li>
-                <li><a href="#changelog" class="nav-link">Changelog</a></li>
-                <li><a href="#status" class="nav-link">API Status</a></li>
+                <li><a href="index.html" class="nav-link active">Getting Started</a></li>
+                <li><a href="api-reference.html" class="nav-link">API Reference</a></li>
+                <li><a href="guides.html" class="nav-link">Guides</a></li>
+                <li><a href="resources.html" class="nav-link">Resources</a></li>
               </ul>
             </li>
           </ul>
@@ -75,7 +47,7 @@
       <!-- Introduction Section -->
       <section id="introduction" class="api-section">
         <div class="section-header">
-          <h1>API Documentation</h1>
+          <h1>Getting Started</h1>
           <p class="section-description">
             Welcome to the comprehensive API documentation. This RESTful API provides powerful endpoints 
             for content management, user operations, and documentation services.
@@ -109,7 +81,7 @@
         </div>
         
         <div class="api-overview">
-          <h2>Base URL</h2>
+          <h3>Base URL</h3>
           <div class="code-block">
             <code>https://api.oscarrondon.com/v1</code>
             <button class="copy-btn" onclick="copyToClipboard('https://api.oscarrondon.com/v1')">
@@ -117,56 +89,72 @@
             </button>
           </div>
         </div>
+
+        <p>This API follows REST principles and returns JSON responses. All requests must be made over HTTPS, and include proper authentication headers.</p>
       </section>
 
       <!-- Authentication Section -->
       <section id="authentication" class="api-section">
         <div class="section-header">
-          <h2><i class="fas fa-key"></i> Authentication</h2>
+          <h1>Authentication</h1>
           <p class="section-description">
-            All API requests require authentication using API keys or OAuth 2.0 tokens.
+            All API requests require authentication. We support API key authentication for server-to-server communication.
           </p>
         </div>
+
+        <h2 id="api-keys">API Keys</h2>
+        <p>API keys are the primary method for authenticating with our API. Each key is associated with your account and provides access to your data.</p>
         
-        <div class="auth-methods">
-          <div class="auth-method">
-            <h3>API Key Authentication</h3>
-            <p>Include your API key in the request header:</p>
-            <div class="code-example">
-              <div class="code-tabs">
-                <button class="tab-btn active" onclick="showTab('curl-auth')">cURL</button>
-                <button class="tab-btn" onclick="showTab('js-auth')">JavaScript</button>
-                <button class="tab-btn" onclick="showTab('python-auth')">Python</button>
-              </div>
-              
-              <div id="curl-auth" class="code-content active">
-                <pre><code class="language-bash">curl -H "Authorization: Bearer YOUR_API_KEY" \
+        <div class="auth-method">
+          <h3>Obtaining an API Key</h3>
+          <ol>
+            <li>Sign in to your account dashboard</li>
+            <li>Navigate to the "API Keys" section</li>
+            <li>Click "Generate New Key"</li>
+            <li>Copy and securely store your API key</li>
+          </ol>
+          <div class="code-example">
+            <pre><code class="language-bash"># Your API key will look like this:
+sk_live_4eC39HqLyjWDarjtT1zdp7dc</code></pre>
+          </div>
+        </div>
+
+        <h2 id="request-headers">Request Headers</h2>
+        <p>Include your API key in the Authorization header of every request:</p>
+        
+        <div class="code-example">
+          <div class="code-tabs">
+            <button class="tab-btn active" onclick="showTab('curl-auth')">cURL</button>
+            <button class="tab-btn" onclick="showTab('js-auth')">JavaScript</button>
+            <button class="tab-btn" onclick="showTab('python-auth')">Python</button>
+          </div>
+          
+          <div id="curl-auth" class="code-content active">
+            <pre><code class="language-bash">curl -H "Authorization: Bearer sk_live_4eC39HqLyjWDarjtT1zdp7dc" \
      -H "Content-Type: application/json" \
      https://api.oscarrondon.com/v1/content</code></pre>
-              </div>
-              
-              <div id="js-auth" class="code-content">
-                <pre><code class="language-javascript">const response = await fetch('https://api.oscarrondon.com/v1/content', {
+          </div>
+          
+          <div id="js-auth" class="code-content">
+            <pre><code class="language-javascript">const response = await fetch('https://api.oscarrondon.com/v1/content', {
   headers: {
-    'Authorization': 'Bearer YOUR_API_KEY',
+    'Authorization': 'Bearer sk_live_4eC39HqLyjWDarjtT1zdp7dc',
     'Content-Type': 'application/json'
   }
 });
 const data = await response.json();</code></pre>
-              </div>
-              
-              <div id="python-auth" class="code-content">
-                <pre><code class="language-python">import requests
+          </div>
+          
+          <div id="python-auth" class="code-content">
+            <pre><code class="language-python">import requests
 
 headers = {
-    'Authorization': 'Bearer YOUR_API_KEY',
+    'Authorization': 'Bearer sk_live_4eC39HqLyjWDarjtT1zdp7dc',
     'Content-Type': 'application/json'
 }
 
 response = requests.get('https://api.oscarrondon.com/v1/content', headers=headers)
 data = response.json()</code></pre>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -174,168 +162,49 @@ data = response.json()</code></pre>
       <!-- Quick Start Section -->
       <section id="quick-start" class="api-section">
         <div class="section-header">
-          <h2><i class="fas fa-play"></i> Quick Start</h2>
+          <h1>Quick Start</h1>
           <p class="section-description">
-            Get up and running with the API in minutes.
+            Get up and running with the API in just a few minutes. This guide will walk you through making your first request.
           </p>
         </div>
+
+        <h2 id="first-request">First Request</h2>
+        <p>Let's make a simple request to retrieve a list of content items. This endpoint doesn't require any parameters and will return the most recent content.</p>
         
-        <div class="quick-start-steps">
-          <div class="step">
-            <div class="step-number">1</div>
-            <div class="step-content">
-              <h3>Get Your API Key</h3>
-              <p>Sign up for an account and generate your API key from the dashboard.</p>
-            </div>
-          </div>
-          
-          <div class="step">
-            <div class="step-number">2</div>
-            <div class="step-content">
-              <h3>Make Your First Request</h3>
-              <p>Test the API with a simple GET request to fetch content.</p>
-              <div class="code-example">
-                <pre><code class="language-bash">curl -H "Authorization: Bearer YOUR_API_KEY" \
+        <div class="code-example">
+          <pre><code class="language-bash">curl -H "Authorization: Bearer YOUR_API_KEY" \
      https://api.oscarrondon.com/v1/content</code></pre>
-              </div>
-            </div>
-          </div>
-          
-          <div class="step">
-            <div class="step-number">3</div>
-            <div class="step-content">
-              <h3>Explore the Endpoints</h3>
-              <p>Browse the API reference to discover all available endpoints and features.</p>
-            </div>
-          </div>
         </div>
-      </section>
 
-      <!-- Content API Section -->
-      <section id="content-api" class="api-section">
-        <div class="section-header">
-          <h2><i class="fas fa-file-alt"></i> Content API</h2>
-          <p class="section-description">
-            Manage and retrieve content including blogs, documentation, and user manuals.
-          </p>
-        </div>
+        <h2 id="response-format">Response Format</h2>
+        <p>All API responses follow a consistent JSON structure. Successful responses will include your requested data, while errors will include helpful error messages.</p>
         
-        <div class="info-cards">
-          <div class="info-card">
-            <div class="card-icon">
-              <i class="fas fa-book-open"></i>
-            </div>
-            <h3>Complete Documentation</h3>
-            <p>Full CRUD operations for content management</p>
-          </div>
-          
-          <div class="info-card">
-            <div class="card-icon">
-              <i class="fas fa-filter"></i>
-            </div>
-            <h3>Advanced Filtering</h3>
-            <p>Filter by type, status, tags, and more</p>
-          </div>
-          
-          <div class="info-card">
-            <div class="card-icon">
-              <i class="fas fa-code"></i>
-            </div>
-            <h3>Code Examples</h3>
-            <p>Ready-to-use examples in multiple languages</p>
-          </div>
-        </div>
-        
-        <div style="text-align: center; margin: 2rem 0;">
-          <a href="content-api.html" class="cta-button">
-            <i class="fas fa-arrow-right"></i> View Complete Content API Documentation
-          </a>
-        </div>
-      </section>
-
-      <!-- Error Handling Section -->
-      <section id="error-handling" class="api-section">
-        <div class="section-header">
-          <h2><i class="fas fa-exclamation-triangle"></i> Error Handling</h2>
-          <p class="section-description">
-            Understanding API error responses and status codes.
-          </p>
-        </div>
-        
-        <div class="error-codes">
-          <div class="error-code">
-            <div class="status-code error-400">400</div>
-            <div class="error-details">
-              <h3>Bad Request</h3>
-              <p>The request was invalid or cannot be served.</p>
-            </div>
-          </div>
-          
-          <div class="error-code">
-            <div class="status-code error-401">401</div>
-            <div class="error-details">
-              <h3>Unauthorized</h3>
-              <p>Authentication credentials were missing or incorrect.</p>
-            </div>
-          </div>
-          
-          <div class="error-code">
-            <div class="status-code error-429">429</div>
-            <div class="error-details">
-              <h3>Rate Limited</h3>
-              <p>Too many requests. Check rate limiting guidelines.</p>
-            </div>
-          </div>
-        </div>
-        
-        <h3>Error Response Format</h3>
         <div class="code-example">
           <pre><code class="language-json">{
-  "error": {
-    "code": "INVALID_REQUEST",
-    "message": "The request is missing required parameters",
-    "details": [
-      {
-        "field": "title",
-        "message": "Title is required"
-      }
-    ]
+  "data": [
+    {
+      "id": "content_abc123",
+      "title": "Getting Started with Technical Writing",
+      "type": "blog",
+      "author": "Oscar Rondon",
+      "created_at": "2024-01-15T10:30:00Z",
+      "status": "published"
+    }
+  ],
+  "pagination": {
+    "total": 42,
+    "limit": 10,
+    "offset": 0,
+    "has_more": true
+  },
+  "meta": {
+    "request_id": "req_xyz789",
+    "response_time": "45ms"
   }
 }</code></pre>
         </div>
-      </section>
 
-      <!-- Support Section -->
-      <section id="support" class="api-section">
-        <div class="section-header">
-          <h2><i class="fas fa-life-ring"></i> Support & Resources</h2>
-          <p class="section-description">
-            Need help? Here are additional resources and support options.
-          </p>
-        </div>
-        
-        <div class="support-grid">
-          <div class="support-item">
-            <i class="fas fa-envelope"></i>
-            <h3>Email Support</h3>
-            <p>Get help via email</p>
-            <a href="mailto:osaron@ucdavis.edu">osaron@ucdavis.edu</a>
-          </div>
-          
-          <div class="support-item">
-            <i class="fab fa-github"></i>
-            <h3>GitHub</h3>
-            <p>Report issues and contribute</p>
-            <a href="https://github.com/Osaron" target="_blank">View Repository</a>
-          </div>
-          
-          <div class="support-item">
-            <i class="fas fa-book"></i>
-            <h3>Documentation</h3>
-            <p>Comprehensive guides</p>
-            <a href="/projects/">Browse Projects</a>
-          </div>
-        </div>
+        <p>Now you're ready to explore the full API! Check out the <a href="api-reference.html">API Reference</a> for detailed endpoint documentation.</p>
       </section>
     </main>
 
@@ -351,24 +220,16 @@ data = response.json()</code></pre>
             <li><a href="#introduction" class="toc-link">Introduction</a></li>
             <li><a href="#authentication" class="toc-link">Authentication</a>
               <ul>
-                <li><a href="#authentication" class="toc-link">API Key Auth</a></li>
+                <li><a href="#api-keys" class="toc-link">API Keys</a></li>
+                <li><a href="#request-headers" class="toc-link">Request Headers</a></li>
               </ul>
             </li>
             <li><a href="#quick-start" class="toc-link">Quick Start</a>
               <ul>
-                <li><a href="#quick-start" class="toc-link">Get API Key</a></li>
-                <li><a href="#quick-start" class="toc-link">First Request</a></li>
-                <li><a href="#quick-start" class="toc-link">Explore Endpoints</a></li>
+                <li><a href="#first-request" class="toc-link">First Request</a></li>
+                <li><a href="#response-format" class="toc-link">Response Format</a></li>
               </ul>
             </li>
-            <li><a href="#content-api" class="toc-link">Content API</a></li>
-            <li><a href="#error-handling" class="toc-link">Error Handling</a>
-              <ul>
-                <li><a href="#error-handling" class="toc-link">Status Codes</a></li>
-                <li><a href="#error-handling" class="toc-link">Error Format</a></li>
-              </ul>
-            </li>
-            <li><a href="#support" class="toc-link">Support & Resources</a></li>
           </ul>
         </nav>
       </div>
