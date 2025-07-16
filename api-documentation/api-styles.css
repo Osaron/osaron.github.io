@@ -2,6 +2,7 @@
 
 .api-container {
   display: flex;
+  flex-direction: row;
   min-height: calc(100vh - 120px);
   background: var(--bg-color);
   color: var(--text-color);
@@ -12,6 +13,8 @@
 /* Sidebar Styles */
 .api-sidebar {
   width: 320px;
+  min-width: 320px;
+  flex-shrink: 0;
   background: var(--card-bg);
   border-right: 1px solid var(--border-color, #e1e1e1);
   position: sticky;
@@ -681,7 +684,18 @@ body.dark-mode .params-table th {
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
+@media (max-width: 1200px) and (min-width: 769px) {
+  .api-sidebar {
+    width: 280px;
+  }
+  
+  .api-content {
+    max-width: calc(100% - 280px);
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
   .api-container {
     flex-direction: column;
   }
@@ -709,7 +723,6 @@ body.dark-mode .params-table th {
   }
 }
 
-@media (max-width: 768px) {
   .api-content {
     padding: 1rem;
   }

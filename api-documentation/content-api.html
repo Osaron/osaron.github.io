@@ -387,6 +387,29 @@ const response = await fetch('https://api.oscarrondon.com/v1/content', {
     .breadcrumb span {
       margin: 0 0.5rem;
     }
+    
+    /* Ensure proper layout */
+    .api-container {
+      flex-direction: row !important;
+    }
+    
+    .api-sidebar {
+      min-width: 320px;
+      flex-shrink: 0;
+    }
+    
+    @media (max-width: 768px) {
+      .api-container {
+        flex-direction: column !important;
+      }
+      
+      .api-sidebar {
+        width: 100% !important;
+        min-width: unset !important;
+        position: static !important;
+        height: auto !important;
+      }
+    }
   </style>
 </body>
 </html>
