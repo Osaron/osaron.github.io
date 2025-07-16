@@ -17,9 +17,9 @@
 <body>
   <div id="header-include"></div>
 
-  <div class="api-container">
-    <!-- Sidebar Navigation -->
-    <aside class="api-sidebar">
+  <div class="docs-wrapper">
+    <!-- Left Sidebar Navigation -->
+    <aside class="docs-sidebar">
       <div class="sidebar-content">
         <div class="api-title">
           <h2><i class="fas fa-code"></i> API Documentation</h2>
@@ -70,8 +70,10 @@
       </div>
     </aside>
 
-    <!-- Main Content -->
-    <main class="api-content">
+    <!-- Main Content Container -->
+    <div class="docs-main">
+      <!-- Main Content -->
+      <main class="docs-content">
       <!-- Introduction Section -->
       <section id="introduction" class="api-section">
         <div class="section-header">
@@ -337,7 +339,43 @@ data = response.json()</code></pre>
           </div>
         </div>
       </section>
-    </main>
+      </main>
+
+      <!-- Right Sidebar - Table of Contents -->
+      <aside class="docs-toc">
+        <div class="toc-content">
+          <div class="toc-header">
+            <i class="fas fa-list"></i>
+            <span>On this page</span>
+          </div>
+          <nav class="toc-nav">
+            <ul>
+              <li><a href="#introduction" class="toc-link">Introduction</a></li>
+              <li><a href="#authentication" class="toc-link">Authentication</a>
+                <ul>
+                  <li><a href="#authentication" class="toc-link">API Key Auth</a></li>
+                </ul>
+              </li>
+              <li><a href="#quick-start" class="toc-link">Quick Start</a>
+                <ul>
+                  <li><a href="#quick-start" class="toc-link">Get API Key</a></li>
+                  <li><a href="#quick-start" class="toc-link">First Request</a></li>
+                  <li><a href="#quick-start" class="toc-link">Explore Endpoints</a></li>
+                </ul>
+              </li>
+              <li><a href="#content-api" class="toc-link">Content API</a></li>
+              <li><a href="#error-handling" class="toc-link">Error Handling</a>
+                <ul>
+                  <li><a href="#error-handling" class="toc-link">Status Codes</a></li>
+                  <li><a href="#error-handling" class="toc-link">Error Format</a></li>
+                </ul>
+              </li>
+              <li><a href="#support" class="toc-link">Support & Resources</a></li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+    </div>
   </div>
 
   <div id="footer-include"></div>
@@ -374,30 +412,34 @@ data = response.json()</code></pre>
       event.target.classList.add('active');
     }
 
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetId = link.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-        
-        if (targetElement) {
-          targetElement.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
+    // Smooth scrolling for navigation and TOC links
+    function setupSmoothScrolling() {
+      document.querySelectorAll('.nav-link, .toc-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
           
-          // Update active navigation
-          document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-          link.classList.add('active');
-        }
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+            
+            // Update active navigation
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.querySelectorAll('.toc-link').forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+          }
+        });
       });
-    });
+    }
 
-    // Update active navigation on scroll
-    window.addEventListener('scroll', () => {
+    // Update active navigation and TOC on scroll
+    function updateActiveLinks() {
       const sections = document.querySelectorAll('.api-section');
       const navLinks = document.querySelectorAll('.nav-link');
+      const tocLinks = document.querySelectorAll('.toc-link');
       
       let current = '';
       sections.forEach(section => {
@@ -408,13 +450,28 @@ data = response.json()</code></pre>
         }
       });
       
+      // Update navigation links
       navLinks.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href') === `#${current}`) {
           link.classList.add('active');
         }
       });
-    });
+      
+      // Update TOC links
+      tocLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    // Initialize on page load
+    window.addEventListener('scroll', updateActiveLinks);
+    
+    // Setup smooth scrolling after page loads
+    document.addEventListener('DOMContentLoaded', setupSmoothScrolling);
 
     // Header and footer loading script
     fetch("/partials/header.html")
@@ -434,50 +491,16 @@ data = response.json()</code></pre>
   </script>
   
   <style>
-    /* Force correct layout with highest specificity */
-    body .api-container {
+    /* Ensure proper three-column layout */
+    .docs-wrapper {
       display: flex !important;
-      flex-direction: row !important;
-      align-items: flex-start !important;
     }
     
-    body .api-sidebar {
-      width: 320px !important;
-      min-width: 320px !important;
-      max-width: 320px !important;
-      flex-shrink: 0 !important;
-      flex-grow: 0 !important;
-      order: 1 !important;
-      position: sticky !important;
-      top: 80px !important;
-      height: calc(100vh - 80px) !important;
-    }
-    
-    body .api-content {
-      flex: 1 !important;
-      order: 2 !important;
-      max-width: calc(100% - 320px) !important;
-    }
-    
-    /* Mobile override */
-    @media (max-width: 768px) {
-      body .api-container {
-        flex-direction: column !important;
-      }
-      
-      body .api-sidebar {
-        width: 100% !important;
-        min-width: unset !important;
-        max-width: unset !important;
-        position: static !important;
-        height: auto !important;
-        order: 2 !important;
-      }
-      
-      body .api-content {
-        max-width: 100% !important;
-        order: 1 !important;
-      }
+    /* Active TOC link highlighting */
+    .toc-link.active {
+      background: var(--accent);
+      color: white;
+      font-weight: 500;
     }
   </style>
 </body>

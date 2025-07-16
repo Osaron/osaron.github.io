@@ -17,9 +17,9 @@
 <body>
   <div id="header-include"></div>
 
-  <div class="api-container">
-    <!-- Sidebar Navigation -->
-    <aside class="api-sidebar">
+  <div class="docs-wrapper">
+    <!-- Left Sidebar Navigation -->
+    <aside class="docs-sidebar">
       <div class="sidebar-content">
         <div class="api-title">
           <h2><i class="fas fa-code"></i> API Documentation</h2>
@@ -57,8 +57,10 @@
       </div>
     </aside>
 
-    <!-- Main Content -->
-    <main class="api-content">
+    <!-- Main Content Container -->
+    <div class="docs-main">
+      <!-- Main Content -->
+      <main class="docs-content">
       <!-- Breadcrumb -->
       <nav class="breadcrumb">
         <a href="./">API Documentation</a> <span>/</span> <span>Content API</span>
@@ -313,12 +315,41 @@ const response = await fetch('https://api.oscarrondon.com/v1/content', {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-    </main>
-  </div>
+                 </div>
+       </section>
+       </main>
 
-  <div id="footer-include"></div>
+       <!-- Right Sidebar - Table of Contents -->
+       <aside class="docs-toc">
+         <div class="toc-content">
+           <div class="toc-header">
+             <i class="fas fa-list"></i>
+             <span>On this page</span>
+           </div>
+           <nav class="toc-nav">
+             <ul>
+               <li><a href="#content-overview" class="toc-link">Content API Overview</a></li>
+               <li><a href="#get-content" class="toc-link">GET /content</a>
+                 <ul>
+                   <li><a href="#get-content" class="toc-link">Query Parameters</a></li>
+                   <li><a href="#get-content" class="toc-link">Example Request</a></li>
+                   <li><a href="#get-content" class="toc-link">Response</a></li>
+                 </ul>
+               </li>
+               <li><a href="#create-content" class="toc-link">POST /content</a>
+                 <ul>
+                   <li><a href="#create-content" class="toc-link">Request Body</a></li>
+                   <li><a href="#create-content" class="toc-link">Example Request</a></li>
+                 </ul>
+               </li>
+             </ul>
+           </nav>
+         </div>
+       </aside>
+     </div>
+   </div>
+
+   <div id="footer-include"></div>
 
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
@@ -388,50 +419,16 @@ const response = await fetch('https://api.oscarrondon.com/v1/content', {
       margin: 0 0.5rem;
     }
     
-    /* Force correct layout with highest specificity */
-    body .api-container {
+    /* Ensure proper three-column layout */
+    .docs-wrapper {
       display: flex !important;
-      flex-direction: row !important;
-      align-items: flex-start !important;
     }
     
-    body .api-sidebar {
-      width: 320px !important;
-      min-width: 320px !important;
-      max-width: 320px !important;
-      flex-shrink: 0 !important;
-      flex-grow: 0 !important;
-      order: 1 !important;
-      position: sticky !important;
-      top: 80px !important;
-      height: calc(100vh - 80px) !important;
-    }
-    
-    body .api-content {
-      flex: 1 !important;
-      order: 2 !important;
-      max-width: calc(100% - 320px) !important;
-    }
-    
-    /* Mobile override */
-    @media (max-width: 768px) {
-      body .api-container {
-        flex-direction: column !important;
-      }
-      
-      body .api-sidebar {
-        width: 100% !important;
-        min-width: unset !important;
-        max-width: unset !important;
-        position: static !important;
-        height: auto !important;
-        order: 2 !important;
-      }
-      
-      body .api-content {
-        max-width: 100% !important;
-        order: 1 !important;
-      }
+    /* Active TOC link highlighting */
+    .toc-link.active {
+      background: var(--accent);
+      color: white;
+      font-weight: 500;
     }
   </style>
 </body>
