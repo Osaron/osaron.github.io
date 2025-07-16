@@ -612,6 +612,12 @@ curl -v -H "Authorization: Bearer YOUR_API_KEY" \
       width: 100% !important;
       box-sizing: border-box !important;
     }
+        /* Active TOC link highlighting */
+    .toc-link.active {
+      background: var(--accent);
+      color: white;
+      font-weight: 500;
+    }
 
     .breadcrumb {
       margin-bottom: 2rem;
@@ -732,29 +738,31 @@ curl -v -H "Authorization: Bearer YOUR_API_KEY" \
       margin: 1.5rem 0 0.75rem 0;
     }
   </style>
-<script>
-  function updateTocOnScroll() {
-    const sections = document.querySelectorAll('.api-section');
-    if (sections.length === 0) return;  // nothing to do
+  <script>
+    // Update TOC highlight based on scroll position
+    function updateActiveLinks() {
+      const sections = Array.from(document.querySelectorAll('.api-section'));
+      if (sections.length === 0) return;
 
-    const tocLinks = document.querySelectorAll('.toc-link');
-    const scrollY = window.scrollY;
+      const tocLinks = document.querySelectorAll('.toc-link');
+      const scrollPos = window.scrollY;
 
-    let current = sections[0].id;
-    for (const sec of sections) {
-      if (scrollY >= sec.offsetTop - 120) {
-        current = sec.id;
+      let currentId = sections[0].id;
+      for (const sec of sections) {
+        if (scrollPos >= sec.offsetTop - 120) {
+          currentId = sec.id;
+        }
       }
+
+      tocLinks.forEach(link => {
+        const href = link.getAttribute('href').slice(1);
+        link.classList.toggle('active', href === currentId);
+      });
     }
 
-    tocLinks.forEach(link => {
-      const href = link.getAttribute('href').substring(1);
-      link.classList.toggle('active', href === current);
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded', updateTocOnScroll);
-  window.addEventListener('scroll', updateTocOnScroll);
-</script>
+    // Run on page load AND scroll
+    document.addEventListener('DOMContentLoaded', updateActiveLinks);
+    window.addEventListener('scroll', updateActiveLinks);
+  </script>
 </body>
 </html>
