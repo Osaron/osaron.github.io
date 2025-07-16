@@ -423,6 +423,30 @@ const response = await fetch('https://api.oscarrondon.com/v1/content', {
       grid-template-areas: "sidebar main toc" !important;
     }
     
+    /* Force vertical navigation stacking */
+    .api-nav ul,
+    .toc-nav ul {
+      list-style: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    
+    .nav-section,
+    .nav-section li,
+    .toc-nav li {
+      display: block !important;
+      width: 100% !important;
+    }
+    
+    .nav-link,
+    .toc-link {
+      display: block !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    
     /* Active TOC link highlighting */
     .toc-link.active {
       background: var(--accent);
