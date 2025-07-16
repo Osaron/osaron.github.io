@@ -419,9 +419,44 @@ const response = await fetch('https://api.oscarrondon.com/v1/content', {
       margin: 0 0.5rem;
     }
     
-    /* Ensure proper three-column layout */
-    .docs-wrapper {
+    /* Force three-column layout with maximum specificity */
+    body div.docs-wrapper {
       display: flex !important;
+      flex-direction: row !important;
+      align-items: stretch !important;
+      width: 100% !important;
+    }
+    
+    body aside.docs-sidebar {
+      width: 280px !important;
+      min-width: 280px !important;
+      max-width: 280px !important;
+      flex-shrink: 0 !important;
+      flex-grow: 0 !important;
+      order: 1 !important;
+      display: block !important;
+    }
+    
+    body div.docs-main {
+      display: flex !important;
+      flex-direction: row !important;
+      flex: 1 !important;
+      order: 2 !important;
+    }
+    
+    body main.docs-content {
+      flex: 1 !important;
+      order: 1 !important;
+    }
+    
+    body aside.docs-toc {
+      width: 250px !important;
+      min-width: 250px !important;
+      max-width: 250px !important;
+      flex-shrink: 0 !important;
+      flex-grow: 0 !important;
+      order: 2 !important;
+      display: block !important;
     }
     
     /* Active TOC link highlighting */
@@ -429,6 +464,20 @@ const response = await fetch('https://api.oscarrondon.com/v1/content', {
       background: var(--accent);
       color: white;
       font-weight: 500;
+    }
+    
+    /* Debug border to see layout */
+    .docs-wrapper {
+      border: 2px solid red !important;
+    }
+    .docs-sidebar {
+      border: 2px solid blue !important;
+    }
+    .docs-main {
+      border: 2px solid green !important;
+    }
+    .docs-toc {
+      border: 2px solid orange !important;
     }
   </style>
 </body>
