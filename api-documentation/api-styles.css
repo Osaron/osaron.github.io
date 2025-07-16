@@ -955,7 +955,6 @@ body.dark-mode .params-table th {
   .params-table td {
     padding: 0.75rem 0.5rem;
   }
-}
 
 @media (max-width: 480px) {
   .section-header h1 {
