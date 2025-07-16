@@ -17,9 +17,9 @@
 <body>
   <div id="header-include"></div>
 
-  <div class="docs-wrapper">
+  <div class="api-grid">
     <!-- Left Sidebar Navigation -->
-    <aside class="docs-sidebar">
+    <aside class="left-sidebar">
       <div class="sidebar-content">
         <div class="api-title">
           <h2><i class="fas fa-code"></i> API Documentation</h2>
@@ -70,10 +70,8 @@
       </div>
     </aside>
 
-    <!-- Main Content Container -->
-    <div class="docs-main">
-      <!-- Main Content -->
-      <main class="docs-content">
+    <!-- Main Content -->
+    <main class="main-content">
       <!-- Introduction Section -->
       <section id="introduction" class="api-section">
         <div class="section-header">
@@ -339,43 +337,42 @@ data = response.json()</code></pre>
           </div>
         </div>
       </section>
-      </main>
+    </main>
 
-      <!-- Right Sidebar - Table of Contents -->
-      <aside class="docs-toc">
-        <div class="toc-content">
-          <div class="toc-header">
-            <i class="fas fa-list"></i>
-            <span>On this page</span>
-          </div>
-          <nav class="toc-nav">
-            <ul>
-              <li><a href="#introduction" class="toc-link">Introduction</a></li>
-              <li><a href="#authentication" class="toc-link">Authentication</a>
-                <ul>
-                  <li><a href="#authentication" class="toc-link">API Key Auth</a></li>
-                </ul>
-              </li>
-              <li><a href="#quick-start" class="toc-link">Quick Start</a>
-                <ul>
-                  <li><a href="#quick-start" class="toc-link">Get API Key</a></li>
-                  <li><a href="#quick-start" class="toc-link">First Request</a></li>
-                  <li><a href="#quick-start" class="toc-link">Explore Endpoints</a></li>
-                </ul>
-              </li>
-              <li><a href="#content-api" class="toc-link">Content API</a></li>
-              <li><a href="#error-handling" class="toc-link">Error Handling</a>
-                <ul>
-                  <li><a href="#error-handling" class="toc-link">Status Codes</a></li>
-                  <li><a href="#error-handling" class="toc-link">Error Format</a></li>
-                </ul>
-              </li>
-              <li><a href="#support" class="toc-link">Support & Resources</a></li>
-            </ul>
-          </nav>
+    <!-- Right Sidebar - Table of Contents -->
+    <aside class="right-sidebar">
+      <div class="toc-content">
+        <div class="toc-header">
+          <i class="fas fa-list"></i>
+          <span>On this page</span>
         </div>
-      </aside>
-    </div>
+        <nav class="toc-nav">
+          <ul>
+            <li><a href="#introduction" class="toc-link">Introduction</a></li>
+            <li><a href="#authentication" class="toc-link">Authentication</a>
+              <ul>
+                <li><a href="#authentication" class="toc-link">API Key Auth</a></li>
+              </ul>
+            </li>
+            <li><a href="#quick-start" class="toc-link">Quick Start</a>
+              <ul>
+                <li><a href="#quick-start" class="toc-link">Get API Key</a></li>
+                <li><a href="#quick-start" class="toc-link">First Request</a></li>
+                <li><a href="#quick-start" class="toc-link">Explore Endpoints</a></li>
+              </ul>
+            </li>
+            <li><a href="#content-api" class="toc-link">Content API</a></li>
+            <li><a href="#error-handling" class="toc-link">Error Handling</a>
+              <ul>
+                <li><a href="#error-handling" class="toc-link">Status Codes</a></li>
+                <li><a href="#error-handling" class="toc-link">Error Format</a></li>
+              </ul>
+            </li>
+            <li><a href="#support" class="toc-link">Support & Resources</a></li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
   </div>
 
   <div id="footer-include"></div>
@@ -491,44 +488,11 @@ data = response.json()</code></pre>
   </script>
   
   <style>
-    /* Force three-column layout with maximum specificity */
-    body div.docs-wrapper {
-      display: flex !important;
-      flex-direction: row !important;
-      align-items: stretch !important;
-      width: 100% !important;
-    }
-    
-    body aside.docs-sidebar {
-      width: 280px !important;
-      min-width: 280px !important;
-      max-width: 280px !important;
-      flex-shrink: 0 !important;
-      flex-grow: 0 !important;
-      order: 1 !important;
-      display: block !important;
-    }
-    
-    body div.docs-main {
-      display: flex !important;
-      flex-direction: row !important;
-      flex: 1 !important;
-      order: 2 !important;
-    }
-    
-    body main.docs-content {
-      flex: 1 !important;
-      order: 1 !important;
-    }
-    
-    body aside.docs-toc {
-      width: 250px !important;
-      min-width: 250px !important;
-      max-width: 250px !important;
-      flex-shrink: 0 !important;
-      flex-grow: 0 !important;
-      order: 2 !important;
-      display: block !important;
+    /* Simple Grid Layout Override */
+    .api-grid {
+      display: grid !important;
+      grid-template-columns: 280px 1fr 250px !important;
+      grid-template-areas: "sidebar main toc" !important;
     }
     
     /* Active TOC link highlighting */
@@ -536,20 +500,6 @@ data = response.json()</code></pre>
       background: var(--accent);
       color: white;
       font-weight: 500;
-    }
-    
-    /* Debug border to see layout */
-    .docs-wrapper {
-      border: 2px solid red !important;
-    }
-    .docs-sidebar {
-      border: 2px solid blue !important;
-    }
-    .docs-main {
-      border: 2px solid green !important;
-    }
-    .docs-toc {
-      border: 2px solid orange !important;
     }
   </style>
 </body>
