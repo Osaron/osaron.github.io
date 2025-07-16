@@ -453,4 +453,30 @@
     }
   </style>
 </body>
+<script>
+  // Update TOC highlight based on scroll position
+  function updateActiveLinks() {
+    const sections = Array.from(document.querySelectorAll('.api-section'));
+    if (sections.length === 0) return;
+
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const scrollPos = window.scrollY;
+
+    let currentId = sections[0].id;
+    for (const sec of sections) {
+      if (scrollPos >= sec.offsetTop - 120) {
+        currentId = sec.id;
+      }
+    }
+
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href').slice(1);
+      link.classList.toggle('active', href === currentId);
+    });
+  }
+
+  // Run on page load AND scroll
+  document.addEventListener('DOMContentLoaded', updateActiveLinks);
+  window.addEventListener('scroll', updateActiveLinks);
+</script>
 </html>

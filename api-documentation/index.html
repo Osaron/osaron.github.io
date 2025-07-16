@@ -270,9 +270,24 @@ data = response.json()</code></pre>
       event.target.classList.add('active');
     }
 
+      // Auto-highlight sidebar based on current URL
+  document.addEventListener("DOMContentLoaded", () => {
+    const navLinks = document.querySelectorAll('.api-nav .nav-link');
+    const page = window.location.pathname.split('/').pop() || 'index.html';
+
+    navLinks.forEach(link => {
+      const hrefPage = link.getAttribute('href').split('/').pop();
+      if (hrefPage === page) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  });
+
     // Smooth scrolling for navigation and TOC links
     function setupSmoothScrolling() {
-      document.querySelectorAll('.nav-link, .toc-link').forEach(link => {
+      document.querySelectorAll('.toc-link').forEach(link => {
         link.addEventListener('click', (e) => {
           e.preventDefault();
           const targetId = link.getAttribute('href');
@@ -296,27 +311,16 @@ data = response.json()</code></pre>
     // Update active navigation and TOC on scroll
     function updateActiveLinks() {
       const sections = document.querySelectorAll('.api-section');
-      const navLinks = document.querySelectorAll('.nav-link');
-      const tocLinks = document.querySelectorAll('.toc-link');
-      
+      const tocLinks = document.querySelectorAll('.toc-link');  
       let current = '';
+      
       sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (scrollY >= (sectionTop - 200)) {
+        if (scrollY >= (section.offsetTop - 200)) {
           current = section.getAttribute('id');
         }
       });
       
-      // Update navigation links
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-          link.classList.add('active');
-        }
-      });
-      
-      // Update TOC links
+      // Only update TOC links, not sidebar nav links
       tocLinks.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href') === `#${current}`) {

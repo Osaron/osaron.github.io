@@ -732,5 +732,29 @@ curl -v -H "Authorization: Bearer YOUR_API_KEY" \
       margin: 1.5rem 0 0.75rem 0;
     }
   </style>
+<script>
+  function updateTocOnScroll() {
+    const sections = document.querySelectorAll('.api-section');
+    if (sections.length === 0) return;  // nothing to do
+
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const scrollY = window.scrollY;
+
+    let current = sections[0].id;
+    for (const sec of sections) {
+      if (scrollY >= sec.offsetTop - 120) {
+        current = sec.id;
+      }
+    }
+
+    tocLinks.forEach(link => {
+      const href = link.getAttribute('href').substring(1);
+      link.classList.toggle('active', href === current);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', updateTocOnScroll);
+  window.addEventListener('scroll', updateTocOnScroll);
+</script>
 </body>
 </html>
