@@ -244,40 +244,135 @@
 
   <!--Feature Projects Section-->   
 <section class="projects" id="projects">
-  <h2>Featured Projects</h2>
-  <div class="project-grid">
+  <h2>Featured <span class="highlight">Projects</span></h2>
 
-    <div class="project-card">
-      <img src="/images/feature projects/api_doc_thumb.png" alt="API Doc Thumbnail" class="project-thumb">
-      <h3>API Documentation</h3>
-      <p>Comprehensive documentation for a RESTful API, including examples and endpoints.</p>
-      <a href="/api-documentation/" class="project-button">
-        <img src="/images/feature projects/view-icon.png" alt="View Icon" class="button-icon">
-        View Project
-      </a>
-    </div>
+  <div class="projects-container">
 
-    <div class="project-card">
-      <img src="/images/feature projects/user_manual_thumb.png" alt="User Manual Thumbnail" class="project-thumb">
-      <h3>User Manual</h3>
-      <p>Step-by-step manual for a complex software application with troubleshooting tips.</p>
-      <a href="#" class="project-button">
-        <img src="/images/feature projects/view-icon.png" alt="View Icon" class="button-icon">
-        View Project
-      </a>
-    </div>
+    <!-- LEFT: vertical tab list -->
+    <nav class="project-nav">
+      <button class="project-tab active" data-target="user-guide">
+        <img src="/images/feature projects/user-guide-icon.png" alt="" class="tab-icon">
+        User Guide
+      </button>
+      <button class="project-tab" data-target="technical-article">
+        <img src="/images/feature projects/technical-article-icon.png" alt="" class="tab-icon">
+        Technical Article
+      </button>
+      <button class="project-tab" data-target="workflow-diagrams">
+        <img src="/images/feature projects/workflow-diagrams-icon.png" alt="" class="tab-icon">
+        Workflow Diagram
+      </button>
+      <button class="project-tab" data-target="instructional-videos">
+        <img src="/images/feature projects/instructional-videos-icon.png" alt="" class="tab-icon">
+        Instructional Video
+      </button>
+      <button class="project-tab" data-target="white-papers">
+        <img src="/images/feature projects/white-papers-icon.png" alt="" class="tab-icon">
+        White Paper
+      </button>
+    </nav>
 
-    <div class="project-card">
-      <img src="/images/feature projects/blog_thumb.png" alt="Blog Thumbnail" class="project-thumb">
-      <h3>Technical Blog Posts</h3>
-      <p>Posts explaining emerging technologies and their practical use cases.</p>
-      <a href="#" class="project-button">
-        <img src="/images/feature projects/view-icon.png" alt="View Icon" class="button-icon">
-        View Project
-      </a>
-    </div>
-    
-  </div>
+    <!-- RIGHT: preview panels -->
+    <div class="project-content">
+
+      <!-- 1. User Guide (default) -->
+      <div class="project-preview" id="user-guide">
+        <div class="preview-header">
+          <div class="preview-info">
+            <h3>User Guide</h3>
+            <p>This is the description for the project, it’s not too short but also not too long. Just 2 lines are enough here! I will add more text later on.</p>
+            <div class="preview-tags">HTML, CSS, Markdown</div>
+          </div>
+          <a href="" class="preview-link">
+            <div class="link-circle">
+              <span class="arrow-symbol">→</span>
+            </div>
+          </a>
+        </div>
+        <img src="/images/feature projects/preview/user-guide.png"
+             alt="User Guide preview"
+             class="preview-image">
+      </div>
+
+      <!-- 2. Technical Article -->
+      <div class="project-preview hidden" id="technical-article">
+        <div class="preview-header">
+          <div class="preview-info">
+            <h3>Technical Article</h3>
+            <p>This is a short preview of my technical article. It highlights the key points in just two lines.</p>
+            <div class="preview-tags">Markdown, HTML, CSS</div>
+          </div>
+          <a href="" class="preview-link">
+            <div class="link-circle">
+              <span class="arrow-symbol">→</span>
+            </div>
+          </a>
+        </div>
+        <img src="/images/feature projects/preview/technical-article.png"
+             alt="Technical Article preview"
+             class="preview-image">
+      </div>
+
+      <!-- 3. Workflow Diagram -->
+      <div class="project-preview hidden" id="workflow-diagrams">
+        <div class="preview-header">
+          <div class="preview-info">
+            <h3>Workflow Diagram</h3>
+            <p>A glance at my workflow diagrams illustrating complex processes in a simple way.</p>
+            <div class="preview-tags">SVG, Mermaid</div>
+          </div>
+          <a href="" class="preview-link">
+            <div class="link-circle">
+              <span class="arrow-symbol">→</span>
+            </div>
+          </a>
+        </div>
+        <img src="/images/feature projects/preview/workflow-diagrams.png"
+             alt="Workflow Diagram preview"
+             class="preview-image">
+      </div>
+
+      <!-- 4. Instructional Video -->
+      <div class="project-preview hidden" id="instructional-videos">
+        <div class="preview-header">
+          <div class="preview-info">
+            <h3>Instructional Video</h3>
+            <p>A snippet from my instructional video series—concise and to the point.</p>
+            <div class="preview-tags">YouTube, MP4</div>
+          </div>
+          <a href="" class="preview-link">
+            <div class="link-circle">
+              <span class="arrow-symbol">→</span>
+            </div>
+          </a>
+        </div>
+        <img src="/images/feature projects/preview/instructional-videos.png"
+             alt="Instructional Video preview"
+             class="preview-image">
+      </div>
+
+      <!-- 5. White Paper -->
+      <div class="project-preview hidden" id="white-papers">
+        <div class="preview-header">
+          <div class="preview-info">
+            <h3>White Paper</h3>
+            <p>Executive summary of my white paper, giving a high-level overview in two lines.</p>
+            <div class="preview-tags">PDF, LaTeX</div>
+          </div>
+          <a href="" class="preview-link">
+            <div class="link-circle">
+              <span class="arrow-symbol">→</span>
+            </div>
+          </a>
+        </div>
+        <img src="/images/feature projects/preview/white-papers.png"
+             alt="White Paper preview"
+             class="preview-image">
+      </div>
+
+    </div><!-- /.project-content -->
+
+  </div><!-- /.projects-container -->
 </section>
 
   
@@ -518,4 +613,22 @@
     changeSlide(nextSlide);
   }, 6000); // 6000ms = 6 seconds
 </script>
+
+<!-- Featured Projects Section JS-->
+<script>
+  document.querySelectorAll('.project-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      // deactivate old
+      document.querySelector('.project-tab.active').classList.remove('active');
+      document.querySelector('.project-preview:not(.hidden)')
+              .classList.add('hidden');
+
+      // activate the one you clicked
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.target)
+              .classList.remove('hidden');
+    });
+  });
+</script>
+
 </html>
