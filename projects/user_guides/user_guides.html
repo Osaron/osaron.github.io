@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Manuals - Oscar Rondon</title>
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon"/>
+  <link rel="stylesheet" href="/style.css"/>
+  <link rel="stylesheet" href="/projects/user_guides/user_guides.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+  <div id="header-include"></div>
+
+  <main class="manuals-main">
+    <header class="page-header">
+      <h1>User Manuals Library</h1>
+      <p>A collection of technical user guides I’ve created. Select a manual to view the full guide or download the PDF.</p>
+    </header>
+
+    <!-- Vertical list -->
+    <section id="manuals-list" class="manuals-list" aria-label="User manuals list"></section>
+  </main>
+
+  <div id="footer-include"></div>
+
+  <script>
+    // Inject header + dark mode toggle
+    fetch("/partials/header.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("header-include").innerHTML = html;
+        const script = document.createElement("script");
+        script.src = "/darkmode.js";
+        document.body.appendChild(script);
+      });
+
+    // Inject footer
+    fetch("/partials/footer.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("footer-include").innerHTML = html;
+      });
+
+// Load manuals.json and render list
+fetch("/projects/user_guides/manuals.json")
+  .then(res => res.json())
+  .then(manuals => {
+    const listEl = document.getElementById("manuals-list");
+    listEl.innerHTML = manuals.map(m => {
+      const pdfUrl = `/projects/user_guides/${m.slug}/manual.pdf`;
+      return `
+        <article class="manual-row">
+          <a class="thumb-wrap" href="/projects/user_guides/${m.slug}/">
+            <img src="${m.cover}" alt="${m.title} cover"/>
+          </a>
+          <div class="manual-body">
+            <header class="manual-head">
+              <h2 class="manual-title">
+                <a href="/projects/user_guides/${m.slug}/">${m.title}</a>
+              </h2>
+              <span class="year-badge">${m.year}</span>
+            </header>
+            <ul class="tags">
+              ${m.tags.map(t => `<li>${t}</li>`).join('')}
+            </ul>
+            <p class="summary">${m.summary}</p>
+            <div class="meta-actions">
+              <span class="read-time">
+                <i class="fa-regular fa-clock"></i> ~${m.readMins} min read
+              </span>
+              <div class="actions">
+                <a class="btn-view" href="/projects/user_guides/${m.slug}/">
+                  <i class="fa-solid fa-arrow-right"></i> View details
+                </a>
+                <a class="btn-print" href="#" data-src="${pdfUrl}">
+                  <i class="fa-regular fa-file-pdf"></i> Download PDF
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+      `;
+    }).join('');
+  });
+
+      // Create one hidden iframe for printing (won't affect layout)
+    const printerFrame = document.createElement('iframe');
+    printerFrame.style.position = 'fixed';
+    printerFrame.style.right = '0';
+    printerFrame.style.bottom = '0';
+    printerFrame.style.width = '1px';
+    printerFrame.style.height = '1px';
+    printerFrame.style.border = '0';
+    printerFrame.style.opacity = '0';
+    printerFrame.style.pointerEvents = 'none';
+    printerFrame.setAttribute('aria-hidden', 'true');
+    printerFrame.tabIndex = -1;
+    document.body.appendChild(printerFrame);
+
+    // Delegate click handling to the list container (no per-item listeners)
+    document.getElementById('manuals-list').addEventListener('click', (e) => {
+      const btn = e.target.closest('.btn-print');
+      if (!btn) return;
+
+      e.preventDefault();
+      const src = btn.dataset.src;
+      if (!src) return;
+
+      // Load PDF into the hidden iframe, then trigger print
+      printerFrame.onload = () => {
+        // small delay helps PDF viewer initialize
+        setTimeout(() => {
+          try {
+            printerFrame.contentWindow?.focus();
+            printerFrame.contentWindow?.print();
+          } catch (err) {
+            // fallback if browser blocks programmatic print
+            window.open(src, '_blank', 'noopener');
+          }
+        }, 250);
+      };
+      printerFrame.src = src;
+    });
+
+  </script>
+</body>
+</html>
