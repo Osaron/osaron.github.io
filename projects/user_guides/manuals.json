@@ -1,0 +1,29 @@
+[
+{
+  "title": "Geome Biological Database User Guide",
+  "year": 2025,
+  "slug": "geome-biological-database",
+  "summary": "End-to-end guide for using Geome’s biological database, including setup, data model, and core workflows.",
+  "cover": "/projects/user_guides/geome-biological-database/cover.jpg",
+  "readMins": 20,
+  "tags": ["Database", "Research", "Onboarding"]
+},
+{
+  "title": "How to Create a New Account in Connect Smart Cloud",
+  "year": 2024,
+  "slug": "connect-smart-cloud",
+  "summary": "Step-by-step instructions for creating and configuring a new account in Connect Smart Cloud.",
+  "cover": "/projects/user_guides/connect-smart-cloud/cover.jpg",
+  "readMins": 8,
+  "tags": ["Cloud", "Onboarding", "Account"]
+},
+{
+  "title": "Emgage Web Services Quick Start Guide",
+  "year": 2023,
+  "slug": "emgage-web-services",
+  "summary": "Quick start for Emgage’s web services: authentication, first API calls, and troubleshooting basics.",
+  "cover": "/projects/user_guides/emgage-web-services/cover.jpg",
+  "readMins": 12,
+  "tags": ["Web Services", "API", "Quick Start"]
+}
+]
