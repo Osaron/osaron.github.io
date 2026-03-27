@@ -82,12 +82,23 @@
       --card-bg: #1a1a1a;
       --accent: #66ccff;
     }
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      background: var(--bg-color);
+      transition: background 0.3s;
+      pointer-events: none;
+    }
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: var(--bg-color);
+      background: transparent;
       color: var(--text-color);
-      transition: background 0.3s, color 0.3s;
+      transition: color 0.3s;
     }
     nav {
       display: flex;
@@ -114,7 +125,7 @@
     .hero {
       text-align: center;
       padding: 2rem 10%;
-      background-color: var(--card-bg);
+      background: transparent;
     }
     .hero h1 span {
       color: var(--accent);
@@ -183,6 +194,7 @@
   </style>
 </head>
 <body>
+  <canvas id="bg-canvas"></canvas>
   <nav>
     <a href="/"><img src="images/Nuevo Logo Black.png" class="logo logo-light" alt="Logo">
     <img src="images/Nuevo Logo White.png" class="logo logo-dark" alt="Logo"></a>
@@ -590,7 +602,8 @@
 </div>  
   <p class="copyright">© 2025 Oscar Rondon. All rights reserved.</p>
   </footer>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="particles.js"></script>
 </body>
 
 <!-- Carousel Section JS-->
