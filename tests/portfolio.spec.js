@@ -7,7 +7,7 @@ test.describe('Portfolio Interaction Tests', () => {
     await page.goto('/');
 
     // Check for specific text to ensure DOM is alive
-    const heroName = page.locator('.hero-name');
+    const heroName = page.locator('.hero h1 span');
     await expect(heroName).toHaveText('Oscar');
   });
 
