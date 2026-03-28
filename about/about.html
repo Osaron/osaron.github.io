@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,15 +13,18 @@
     .section {
       padding: 3rem 10%;
     }
+
     .section h2 {
       font-size: 2rem;
       margin-bottom: 1rem;
       color: var(--text-color);
     }
+
     .section-title {
       position: relative;
       padding-top: 2rem;
     }
+
     .section-title::before {
       content: "";
       position: absolute;
@@ -30,6 +34,7 @@
       height: 1px;
       background-color: #ddd;
     }
+
     .intro-img {
       width: 100%;
       max-height: 300px;
@@ -37,22 +42,25 @@
       display: block;
       margin: 0 auto 2rem;
     }
+
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
     }
+
     .skill {
       min-width: 280px;
       background: var(--card-bg);
       border-radius: 8px;
       padding: 1rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
       display: flex;
       align-items: flex-start;
       gap: 1rem;
       text-align: left;
     }
+
     .skill-icon {
       width: 120px;
       height: 120px;
@@ -60,16 +68,21 @@
       flex-shrink: 0;
       margin-bottom: 0.5rem;
     }
+
     .skill-text {
-      color: var(--text-color); /* normal text */
+      color: var(--text-color);
+      /* normal text */
       font-size: 15px;
     }
+
     .skill-text strong {
-      color: var(--accent);     /* only title in blue */
+      color: var(--accent);
+      /* only title in blue */
       font-size: 18px;
       display: block;
       margin-bottom: 0.4rem;
     }
+
     .timeline-modern {
       position: relative;
       margin: 4rem 0;
@@ -77,6 +90,7 @@
       justify-content: space-between;
       align-items: center;
     }
+
     .timeline-modern::before {
       content: "";
       position: absolute;
@@ -87,6 +101,7 @@
       background: #2c2c2ce0;
       z-index: 0;
     }
+
     .timeline-end {
       position: absolute;
       top: calc(50% - 2.3px);
@@ -96,12 +111,15 @@
       border-radius: 50%;
       z-index: 1;
     }
+
     .timeline-end.left {
       left: -6px;
     }
+
     .timeline-end.right {
       right: -6px;
     }
+
     .timeline-box {
       display: flex;
       flex-direction: column;
@@ -111,10 +129,12 @@
       z-index: 1;
       position: relative;
     }
+
     .timeline-box.bottom {
       flex-direction: column-reverse;
       justify-content: flex-end;
     }
+
     .timeline-circle {
       width: 15px;
       height: 15px;
@@ -122,37 +142,45 @@
       border-radius: 45%;
       background: currentColor;
     }
+
     .timeline-year {
       font-weight: bold;
       font-size: 1.1rem;
       color: currentColor;
       margin-bottom: 0.1rem;
     }
+
     .timeline-content {
       font-size: 0.85rem;
       margin-top: 0.5rem;
       color: var(--text-color);
     }
+
     .timeline-line {
       height: 60px;
       width: 2px;
       background-color: currentColor;
       margin: 0 auto;
     }
+
     .dark-mode .timeline-content,
     .dark-mode .timeline-year {
       color: white;
     }
+
     .vertical-timeline {
       border-left: 2px solid var(--accent);
       padding-left: 2rem;
     }
+
     .vertical-timeline .entry {
       margin-bottom: 2rem;
     }
+
     .vertical-timeline .entry h4 {
       margin: 0;
     }
+
     .edu-years {
       font-style: bold;
       font-weight: 300;
@@ -162,6 +190,7 @@
     }
   </style>
 </head>
+
 <body>
   <div id="header-include"></div>
 
@@ -173,43 +202,46 @@
   <!-- Section 2: Profile -->
   <section class="section">
     <h2 class="section-title"><i class="fa-solid fa-id-card"></i> Profile</h2>
-    <p>I currently work at <strong>Thales Group</strong> as a the main Technical Writer, where I support cross-functional teams by creating, organizing, and updating documentation and training materials for a variety of software solutions delivered to customers across Latin America. I promote usability and consistency across internal and external documentation.</p>
+    <p>I currently work at <strong>Thales Group</strong> as a the main Technical Writer, where I support
+      cross-functional teams by creating, organizing, and updating documentation and training materials for a variety of
+      software solutions delivered to customers across Latin America. I promote usability and consistency across
+      internal and external documentation.</p>
   </section>
 
   <!-- Section 3: Skills -->
-<section class="section">
-  <h2 class="section-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Skills</h2>
+  <section class="section">
+    <h2 class="section-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Skills</h2>
     <div class="skills-grid">
-    <div class="skill">
+      <div class="skill">
         <img src="/about/skills/adaptability.png" alt="Adaptability icon" class="skill-icon">
         <div class="skill-text">
-        <strong>Flexibility</strong>
-        Quickly adapt to new tools and audiences.
+          <strong>Flexibility</strong>
+          Quickly adapt to new tools and audiences.
         </div>
-    </div>
-    <div class="skill">
+      </div>
+      <div class="skill">
         <img src="/about/skills/creativity.png" alt="Creativity icon" class="skill-icon">
         <div class="skill-text">
-        <strong>Creativity</strong>
-        Design intuitive document layouts and visuals.
+          <strong>Creativity</strong>
+          Design intuitive document layouts and visuals.
         </div>
-    </div>
-    <div class="skill">
+      </div>
+      <div class="skill">
         <img src="/about/skills/efficacy.png" alt="Efficacy icon" class="skill-icon">
         <div class="skill-text">
-        <strong>Efficacy</strong>
-        Deliver accurate content on time.
+          <strong>Efficacy</strong>
+          Deliver accurate content on time.
         </div>
+      </div>
     </div>
-    </div>
-</section>
+  </section>
 
   <!-- Section 4: Work Experience Timeline -->
   <section class="section">
     <h2 class="section-title"><i class="fa-solid fa-briefcase"></i> Work Experience</h2>
     <div class="timeline-modern">
-     <span class="timeline-end left"></span>
-     <span class="timeline-end right"></span>
+      <span class="timeline-end left"></span>
+      <span class="timeline-end right"></span>
       <div class="timeline-box" style="color: #ffca28">
         <div class="timeline-year">2018</div>
         <div class="timeline-circle"></div>
@@ -263,9 +295,14 @@
     <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i> Education</h2>
     <div class="vertical-timeline">
       <div class="entry">
-        <h4>Continuous Learning</h4>
-        <p>API documentation, automation testing, Git, BPMN</p>
-        <p class="edu-years">2025 – Ongoing</p>
+        <h4>M.Sc. in Software Development</h4>
+        <p>Universidad de los Andes</p>
+        <p class="edu-years">2026 – 2028</p>
+      </div>
+      <div class="entry">
+        <h4>Google IT Automation with Python</h4>
+        <p>Google</p>
+        <p class="edu-years">2025 – 2025</p>
       </div>
       <div class="entry">
         <h4>Technical Writing Certificate</h4>
@@ -273,7 +310,7 @@
         <p class="edu-years">2021 – 2024</p>
       </div>
       <div class="entry">
-        <h4>B.S. in Chemical Engineering</h4>
+        <h4>B.Sc. in Chemical Engineering</h4>
         <p>Universidad Industrial de Santander</p>
         <p class="edu-years">2012 – 2017</p>
       </div>
@@ -299,4 +336,5 @@
       });
   </script>
 </body>
+
 </html>

@@ -1,29 +1,34 @@
-*{
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
 }
+
 body {
   background: var(--bg-color);
   color: var(--text-color);
   transition: background 0.3s, color 0.3s;
 }
-.container{
-    padding: 10px 10%;
+
+.container {
+  padding: 10px 10%;
 }
+
 :root {
   --bg-color: #fff;
   --text-color: #111;
   --card-bg: #f9f9f9;
   --accent: #007bff;
 }
+
 body.dark-mode {
   --bg-color: #080808;
   --text-color: #fff;
   --card-bg: #1a1a1a;
   --accent: #66ccff;
 }
+
 nav {
   display: flex;
   justify-content: space-between;
@@ -71,22 +76,22 @@ nav li {
 
 /*Logo Settings End*/
 
-nav ul li{
-    display: flex;
-    align-items: center; 
-    list-style: none;
-    margin: 10px 20px;
+nav ul li {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 10px 20px;
 
 }
 
-nav ul li a{
-    color: var(--text-color);
-    text-decoration: none;
-    vertical-align: middle;
-    line-height: 1.6;
-    display: inline-block;
-    font-size: 18px;
-    position: relative;
+nav ul li a {
+  color: var(--text-color);
+  text-decoration: none;
+  vertical-align: middle;
+  line-height: 1.6;
+  display: inline-block;
+  font-size: 18px;
+  position: relative;
 }
 
 nav ul li a:hover {
@@ -96,7 +101,8 @@ nav ul li a:hover {
 /*Toogle Dark Button*/
 .toggle-mode {
   background-color: var(--card-bg);
-  border: 1px solid rgba(20, 20, 20, 0.205); /* lighter border */
+  border: 1px solid rgba(20, 20, 20, 0.205);
+  /* lighter border */
   border-radius: 10px;
   width: 35px;
   height: 35px;
@@ -105,10 +111,12 @@ nav ul li a:hover {
   align-items: center;
   cursor: pointer;
   transition: background 0.3s, transform 0.3s;
-  position: absolute; /* Prevent it from affecting hero layout */
+  position: absolute;
+  /* Prevent it from affecting hero layout */
   top: 20px;
   right: 20px;
-  z-index: 999; /* Ensure it stays on top */
+  z-index: 999;
+  /* Ensure it stays on top */
 }
 
 .toggle-mode:hover {
@@ -131,7 +139,8 @@ body.dark-mode .toggle-mode .icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.2rem; /* ✅ tighter layout */
+  gap: 1.2rem;
+  /* ✅ tighter layout */
   padding: 3rem 10%;
   background-color: var(--card-bg);
   flex-wrap: wrap;
@@ -140,21 +149,26 @@ body.dark-mode .toggle-mode .icon {
 
 .hero-text {
   max-width: 500px;
-  margin: 0 auto; /* centers on small screens */
+  margin: 0 auto;
+  /* centers on small screens */
 }
 
 /* Target the image block */
 .hero-image {
   flex: 1 1 350px;
   max-width: 350px;
-  margin: 0;        /* ✅ remove default margin */
-  padding: 0;       /* ✅ remove default padding */
+  margin: 0;
+  /* ✅ remove default margin */
+  padding: 0;
+  /* ✅ remove default padding */
 }
 
 .hero-image img {
-  width: 100%;      /* ✅ responsive scaling */
+  width: 100%;
+  /* ✅ responsive scaling */
   height: auto;
-  max-width: 400px; /* adjust if needed */
+  max-width: 400px;
+  /* adjust if needed */
 }
 
 .hero-image svg {
@@ -188,17 +202,21 @@ body.dark-mode .toggle-mode .icon {
 }
 
 @keyframes showAndClear {
-  0%, 10% {
+
+  0%,
+  10% {
     opacity: 0;
     transform: translateX(-20px);
   }
 
-  20%, 60% {
+  20%,
+  60% {
     opacity: 1;
     transform: translateX(0);
   }
 
-  80%, 100% {
+  80%,
+  100% {
     opacity: 0;
     transform: translateX(-20px);
   }
@@ -208,10 +226,11 @@ body.dark-mode .toggle-mode .icon {
 .dropdown {
   position: relative;
   padding: 5px;
-  top: calc(100% + 10px); /* adds vertical buffer below the text */
+  top: calc(100% + 10px);
+  /* adds vertical buffer below the text */
 }
 
-.dropdown > a {
+.dropdown>a {
   display: flex;
   align-items: center;
   position: relative;
@@ -233,11 +252,12 @@ body.dark-mode .toggle-mode .icon {
 /* Make the dropdown content float below with space */
 .dropdown-content {
   position: absolute;
-  top: calc(100% + 1px); /* creates a small buffer zone */
+  top: calc(100% + 1px);
+  /* creates a small buffer zone */
   left: 0;
   background-color: var(--bg-color);
   border-radius: 6px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   padding: 10px 0;
   display: none;
   z-index: 1;
@@ -258,12 +278,13 @@ body.dark-mode .toggle-mode .icon {
 
 .dropdown-content li {
   list-style: none;
- /* padding: 10px 16px;*/
+  /* padding: 10px 16px;*/
   display: flex;
   align-items: center;
   gap: 10px;
   white-space: nowrap;
-  border-radius: 8px; /* 👈 Soft edges */
+  border-radius: 8px;
+  /* 👈 Soft edges */
   transition: background-color 0.2s, color 0.2s;
   cursor: pointer;
 }
@@ -291,11 +312,13 @@ body.dark-mode .toggle-mode .icon {
 }
 
 .dropdown-content li:hover {
-  background-color: rgba(0, 0, 0, 0.05); /* or use a light blue tint */
+  background-color: rgba(0, 0, 0, 0.05);
+  /* or use a light blue tint */
 }
 
 .dark-mode .dropdown-content li:hover {
-  background-color: rgba(255, 255, 255, 0.05); /* Light tint for dark mode */
+  background-color: rgba(255, 255, 255, 0.05);
+  /* Light tint for dark mode */
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -309,25 +332,26 @@ body.dark-mode .toggle-mode .icon {
 }
 
 /*Dropdown content li Finish*/
-.dropdown-icon { /*Project dropdown icons*/
+.dropdown-icon {
+  /*Project dropdown icons*/
   width: 20px;
   height: 20px;
   opacity: 0.5;
 }
 
 
-.header-text{
-    margin-top: 20%;
-    font-size: 30px;
+.header-text {
+  margin-top: 20%;
+  font-size: 30px;
 }
 
-.header-text h1{
-    margin-top: 20px;
-    font-size: 60px;
+.header-text h1 {
+  margin-top: 20px;
+  font-size: 60px;
 }
 
-.header-text h1 span{
-    color: #d8d2b7;
+.header-text h1 span {
+  color: #d8d2b7;
 }
 
 /*Feature Projects*/
@@ -347,6 +371,7 @@ body.dark-mode .toggle-mode .icon {
   font-weight: 700;
   text-align: center;
 }
+
 .projects .highlight {
   color: var(--accent);
 }
@@ -354,7 +379,8 @@ body.dark-mode .toggle-mode .icon {
 /* Two-column layout, tighter gap */
 .projects-container {
   display: flex;
-  gap: 0.5rem;              /* reduced from 2rem */
+  gap: 0.5rem;
+  /* reduced from 2rem */
   max-width: 1200px;
   margin: 2rem auto 0;
 }
@@ -362,22 +388,30 @@ body.dark-mode .toggle-mode .icon {
 /* Left nav, wider tabs, no bottom border */
 .project-nav {
   position: sticky;
-  top: 4rem;      /* ← push it down by your header’s height */
-  z-index: 1;     /* ← ensure it stays underneath your header */
+  top: 4rem;
+  /* ← push it down by your header’s height */
+  z-index: 1;
+  /* ← ensure it stays underneath your header */
   display: flex;
   flex-direction: column;
   padding: 0;
   gap: 0.75rem;
-  flex: 0 0 240px;        /* widened from 200px */
-  border-bottom: none;    /* ensure no stray line */
+  flex: 0 0 240px;
+  /* widened from 200px */
+  border-bottom: none;
+  /* ensure no stray line */
 }
-.project-nav hr { display: none; }
+
+.project-nav hr {
+  display: none;
+}
 
 /* Tabs */
 .project-tab {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* text hugs icon */
+  justify-content: flex-start;
+  /* text hugs icon */
   text-align: left;
   gap: 0.75rem;
   padding: 0.75rem 1rem;
@@ -385,35 +419,37 @@ body.dark-mode .toggle-mode .icon {
   border-radius: 8px;
   background: #fff;
   color: #666;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
   width: 86%;
 }
+
 body.dark-mode .project-tab {
   background: #2b2b2b;
   border-color: #444;
   color: #aaa;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* default white icons in dark mode */
 body.dark-mode .project-tab .tab-icon {
-  filter: invert(1) brightness(0.5) ;
+  filter: invert(1) brightness(0.5);
 }
 
 /* when hovered or active, remove the white filter so it picks up the accent color */
 body.dark-mode .project-tab:hover .tab-icon,
 body.dark-mode .project-tab.active .tab-icon {
-    filter:
-    brightness(10%)
-    invert(100%)   /* tweak this to get closer to your exact blue */
+  filter:
+    brightness(10%) invert(100%)
+    /* tweak this to get closer to your exact blue */
 }
 
 body.dark-mode .project-tab.active,
 body.dark-mode .project-tab:hover {
-  background: #111111;      /* your light-blue tint */
+  background: #111111;
+  /* your light-blue tint */
   border-color: var(--accent);
   color: var(--accent);
 }
@@ -435,6 +471,7 @@ body.dark-mode .project-tab:hover {
   filter: grayscale(100%);
   transition: filter 0.3s, opacity 0.3s;
 }
+
 .project-tab.active .tab-icon,
 .project-tab:hover .tab-icon {
   filter: none;
@@ -451,12 +488,14 @@ body.dark-mode .project-tab:hover {
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
 }
+
 body.dark-mode .project-preview {
   background: #1f1f1f;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
+
 .hidden {
   display: none;
 }
@@ -468,19 +507,23 @@ body.dark-mode .project-preview {
   align-items: flex-start;
   padding: 1rem 1.5rem;
 }
+
 .preview-info h3 {
   margin: 0 0 0.5rem;
   font-size: 1.25rem;
 }
+
 .preview-info p {
   margin: 0 0 0.5rem;
   line-height: 1;
   font-size: 0.85rem;
   color: #555;
 }
+
 body.dark-mode .preview-info p {
   color: #aaa;
 }
+
 .preview-tags {
   font-size: 0.85rem;
   color: var(--accent);
@@ -493,6 +536,7 @@ body.dark-mode .preview-info p {
   border-left: 1px solid var(--border);
   display: flex;
   align-items: center;
+  text-decoration: none; /* removes the underlying href link styling */
 }
 
 /* Circle + system arrow */
@@ -506,25 +550,33 @@ body.dark-mode .preview-info p {
   justify-content: center;
   transition: background 0.3s ease;
 }
+
 body.dark-mode .link-circle {
   background: #fff;
 }
+
 .arrow-symbol {
   display: inline-block;
   font-size: 1.25rem;
+  font-weight: 900;                /* drastically thicken the text arrow */
   line-height: 1;
   color: #fff;
-  transform: rotate(-45deg);       /* start at 45° */
+  transform: rotate(-45deg);
+  /* start at 45° */
   transition: transform 0.3s ease, color 0.3s ease;
 }
+
 body.dark-mode .arrow-symbol {
   color: #111;
 }
+
 .preview-link:hover .link-circle {
   background: var(--accent);
 }
+
 .preview-link:hover .arrow-symbol {
-  transform: rotate(0deg);        /* rotate back to 0° */
+  transform: rotate(0deg);
+  /* rotate back to 0° */
   color: #fff;
 }
 
@@ -535,6 +587,7 @@ body.dark-mode .arrow-symbol {
   border-top: 1px solid #eee;
   object-fit: cover;
 }
+
 body.dark-mode .preview-image {
   border-color: #333;
 }
@@ -544,12 +597,14 @@ body.dark-mode .preview-image {
   .projects-container {
     flex-direction: column;
   }
+
   .project-nav {
     flex-direction: row;
     overflow-x: auto;
     margin-bottom: 1rem;
     flex: none;
   }
+
   .project-tab {
     flex: 1 0 auto;
     white-space: nowrap;
@@ -582,14 +637,16 @@ body.dark-mode .preview-image {
   background: #fafafa;
   border-radius: 12px;
   padding: 1.2rem 1.5rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.479); /* darker + blurrier */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.479);
+  /* darker + blurrier */
   transition: box-shadow 0.3s ease;
 }
 
 .stack-group h3 {
   font-size: 1.1rem;
   margin-bottom: 1rem;
-  color: #222; /* or use var(--text-color) if you support theming */
+  color: #222;
+  /* or use var(--text-color) if you support theming */
 }
 
 .stack-items {
@@ -654,13 +711,15 @@ body.dark-mode .preview-image {
 }
 
 .icon-skill {
-  text-decoration: none !important; /* Stronger enforcement */
+  text-decoration: none !important;
+  /* Stronger enforcement */
 }
 
 /*Why Me? Section*/
 .why-me {
   padding: 4rem 1.5rem;
-  max-width: 1400px; /* ✅ wider container to fit content better */
+  max-width: 1400px;
+  /* ✅ wider container to fit content better */
   margin: 0 auto;
   text-align: center;
 }
@@ -676,7 +735,8 @@ body.dark-mode .preview-image {
   justify-content: space-between;
   align-items: stretch;
   gap: 2rem;
-  position: relative;  /* Important for absolute positioning */
+  position: relative;
+  /* Important for absolute positioning */
 }
 
 .why-me-wrapper::before {
@@ -684,9 +744,10 @@ body.dark-mode .preview-image {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 50%;  /* Center of the wrapper */
+  left: 50%;
+  /* Center of the wrapper */
   transform: translateX(-50%);
-  width: 0.3px;
+  width: 1px;
   background-color: #c6c9cc;
   z-index: 1;
 }
@@ -697,33 +758,37 @@ body.dark-mode .why-me-wrapper::before {
 
 .why-me-left,
 .why-me-right {
-  flex: 1 1 50%;           /* Each half takes 50% of the wrapper */
-  max-width: 50%;          /* Prevent overflow into other half */
-  box-sizing: border-box;  /* Include padding/borders in width */
+  flex: 1 1 50%;
+  max-width: 50%;
+  box-sizing: border-box;
 }
 
 .why-me-left {
-  background: #fff;     
-  max-width: 500px;  
+  background: #fff;
+  max-width: 500px;
   border-radius: 10px;
   padding: 1.2rem 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .why-me-left h3 {
   font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: 1.1rem;
-  color: var(--accent); /* assuming --accent is your site's blue color */
+  color: var(--accent);
+  /* assuming --accent is your site's blue color */
 }
 
 body.dark-mode .why-me-left {
-  background: #1e1e1e;   /* Or a soft dark background */
-  color: #f5f5f5;        /* Light text for readability */
-  border: 1px solid #333; /* Optional: subtle border for definition */
+  background: #1e1e1e;
+  /* Or a soft dark background */
+  color: #f5f5f5;
+  /* Light text for readability */
+  border: 1px solid #333;
+  /* Optional: subtle border for definition */
 }
 
 .why-list {
@@ -738,7 +803,7 @@ body.dark-mode .why-me-left {
   padding: 0.5rem 0;
   border-bottom: 1px solid #f0f0f0;
   font-size: 0.85rem;
-  line-height: 1.8; 
+  line-height: 1.8;
 }
 
 .why-list li:last-child {
@@ -746,7 +811,8 @@ body.dark-mode .why-me-left {
 }
 
 .check-icon {
-  width: 20px;   /* Adjust size as needed */
+  width: 20px;
+  /* Adjust size as needed */
   height: 20px;
   margin-right: 0.5rem;
   vertical-align: middle;
@@ -754,10 +820,9 @@ body.dark-mode .why-me-left {
 
 .why-me-right {
   min-width: 200px;
-  text-align: center;   /* Center-align carousel content */
-  max-width: 600px;     /* ✅ Prevent overflow past divider */
+  text-align: center;
   margin: 0 auto;
-  padding-left: 4rem;
+  padding-left: 2rem;
 }
 
 /* Carousel Styles */
@@ -772,7 +837,8 @@ body.dark-mode .why-me-left {
   top: 0;
   left: 0;
   width: 100%;
-  transition: opacity 0.5s ease-in-out; /* smoother fade */
+  transition: opacity 0.5s ease-in-out;
+  /* smoother fade */
   text-align: center;
   z-index: 0;
 }
@@ -817,9 +883,13 @@ body.dark-mode .why-me-left {
 .company-icons {
   display: flex;
   justify-content: center;
-  gap: 2rem;
-  flex-wrap: nowrap; /* 👈 prevents wrapping */
-  overflow-x: auto;  /* optional: horizontal scroll if still too tight */
+  align-items: flex-end;
+  /* aligns the bottoms of all containers so the text labels are perfectly level horizontally */
+  gap: 0.8rem;
+  /* highly compressed gap */
+  flex-wrap: wrap;
+  overflow-x: hidden;
+  padding-bottom: 5px;
 }
 
 .company-item {
@@ -829,52 +899,67 @@ body.dark-mode .why-me-left {
 }
 
 .company-item img {
-  height: 60px;
+  height: 48px;
+  /* adaptively shrink images directly */
   width: auto;
   object-fit: contain;
-  max-width: 100px; /* optional, prevents overly wide logos like Amazon */
+  max-width: 85px;
   display: block;
   margin: 0 auto;
 }
 
 .company-item img[alt="Thales Group"] {
-  height: 60px; /* slightly larger than default */
-  max-width: 120px; /* optional cap */
+  height: 48px;
+  /* sync height */
+  max-width: 100px;
 }
 
 .company-item p {
   font-size: 0.75rem;
   color: var(--text-color);
   margin: 0;
+  margin-top: 6px;
+  /* guarantee structural breathing room from uneven image heights */
   transition: color 0.2s ease;
 }
 
 .education-icons img {
-  width: 70px !important;    /* Adjust size as needed */
+  width: 70px !important;
+  /* Adjust size as needed */
   height: auto !important;
   max-width: unset !important;
   max-height: unset !important;
   display: block;
 }
 
+.education-icons img.uniandes-logo {
+  height: 70px !important;
+  /* Superior specificity guarantees size restraint */
+  width: auto !important;
+}
+
 .awards-icons img {
-  width: 80px !important;     /* Try increasing if needed */
+  width: 80px !important;
+  /* Try increasing if needed */
   height: auto !important;
-  max-width: unset !important; /* Prevent restrictive overrides */
+  max-width: unset !important;
+  /* Prevent restrictive overrides */
   max-height: unset !important;
   display: block;
 }
 
 /* Highlight label when hovering over link */
 .company-item:hover p {
-  color: var(--accent); /* Matches your site’s blue */
+  color: var(--accent);
+  /* Matches your site’s blue */
 }
 
 /*Footer Section*/
 .footer {
   background-color: var(--card-bg);
   font-size: 0.85rem;
-  padding: 20px 0 10px 0; /* tighten space, especially at bottom */
+  padding: 20px 0 10px 0;
+  /* tighten space, especially at bottom */
   text-align: center;
   margin-top: 3rem;
   color: var(--text-color);
@@ -900,7 +985,8 @@ body.dark-mode .why-me-left {
 }
 
 .icon-item:hover span {
-  color: var(--accent); /* Or use a custom color like #007bff */
+  color: var(--accent);
+  /* Or use a custom color like #007bff */
 }
 
 .icon-item:hover {
@@ -928,16 +1014,21 @@ body.dark-mode .why-me-left {
 
 .copyright {
   text-align: center;
-  font-size: 0.75rem; /* smaller than normal */
+  font-size: 0.75rem;
+  /* smaller than normal */
   color: var(--text-color);
   margin-top: 1rem;
-  opacity: 0.6; /* optional: makes it more subtle */
+  opacity: 0.6;
+  /* optional: makes it more subtle */
 }
 
 /*About me page*/
 .about-me-image {
   display: block;
-  max-width: 450px;   /* Adjust width as needed */
-  margin: 0 auto -3rem auto; /* Center + reduce space below */
-  padding-top: -10rem;  /* Optional: reduce top padding if needed */
+  max-width: 450px;
+  /* Adjust width as needed */
+  margin: 0 auto -3rem auto;
+  /* Center + reduce space below */
+  padding-top: -10rem;
+  /* Optional: reduce top padding if needed */
 }
