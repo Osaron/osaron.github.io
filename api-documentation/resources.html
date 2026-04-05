@@ -16,7 +16,7 @@
     media="(prefers-color-scheme: dark)">
 </head>
 
-<body>
+<body class="api-docs-page">
   <div id="header-include"></div>
 
   <div class="api-grid">
@@ -29,17 +29,50 @@
         </div>
 
         <nav class="api-nav">
-          <ul>
-            <li class="nav-section">
-              <h3>Pages</h3>
-              <ul>
-                <li><a href="index.html" class="nav-link">Getting Started</a></li>
-                <li><a href="api-reference.html" class="nav-link">API Reference</a></li>
-                <li><a href="guides.html" class="nav-link">Guides</a></li>
-                <li><a href="resources.html" class="nav-link active">Resources</a></li>
-              </ul>
-            </li>
-          </ul>
+          <div class="nav-group collapsed">
+            <div class="nav-page-header">
+              <a href="index.html" class="nav-page-link">Getting Started</a>
+              <button class="nav-toggle" aria-label="Toggle section"><i class="fas fa-chevron-down nav-chevron"></i></button>
+            </div>
+            <ul class="nav-children">
+              <li><a href="index.html#overview" class="nav-child">Overview</a></li>
+              <li><a href="index.html#authentication-summary" class="nav-child">Authentication</a></li>
+              <li><a href="index.html#first-request" class="nav-child">Authentication</a></li>
+            </ul>
+          </div>
+          <div class="nav-group collapsed">
+            <div class="nav-page-header">
+              <a href="api-reference.html" class="nav-page-link">API Reference</a>
+              <button class="nav-toggle" aria-label="Toggle section"><i class="fas fa-chevron-down nav-chevron"></i></button>
+            </div>
+            <ul class="nav-children">
+              <li><a href="api-reference.html#overview" class="nav-child">Overview</a></li>
+              <li><a href="api-reference.html#content-endpoints" class="nav-child">Content Endpoints</a></li>
+              <li><a href="api-reference.html#user-endpoints" class="nav-child">User Management</a></li>
+            </ul>
+          </div>
+          <div class="nav-group collapsed">
+            <div class="nav-page-header">
+              <a href="guides.html" class="nav-page-link">Guides</a>
+              <button class="nav-toggle" aria-label="Toggle section"><i class="fas fa-chevron-down nav-chevron"></i></button>
+            </div>
+            <ul class="nav-children">
+              <li><a href="guides.html#integration-guide" class="nav-child">Integration Guide</a></li>
+              <li><a href="guides.html#best-practices" class="nav-child">Best Practices</a></li>
+              <li><a href="guides.html#troubleshooting" class="nav-child">Troubleshooting</a></li>
+            </ul>
+          </div>
+          <div class="nav-group">
+            <div class="nav-page-header">
+              <a href="resources.html" class="nav-page-link active">Resources</a>
+              <button class="nav-toggle" aria-label="Toggle section"><i class="fas fa-chevron-down nav-chevron"></i></button>
+            </div>
+            <ul class="nav-children">
+              <li><a href="#sdks" class="nav-child">SDKs &amp; Libraries</a></li>
+              <li><a href="#examples" class="nav-child">Code Examples</a></li>
+              <li><a href="#faq" class="nav-child">FAQ</a></li>
+            </ul>
+          </div>
         </nav>
       </div>
     </aside>
@@ -750,6 +783,40 @@ curl "https://api.oscarrondon.com/v1/content?limit=10&offset=10"</code></pre>
       });
     });
 
+    // Scroll spy: tracks sections and h2 headings, updates both sidebars
+    function updateActiveLinks() {
+      const anchors = Array.from(document.querySelectorAll('.api-section, h2[id]'));
+      if (!anchors.length) return;
+
+      const scrollPos = window.scrollY + 130;
+      let currentId = anchors[0].id;
+
+      for (const el of anchors) {
+        if (el.id && scrollPos >= el.offsetTop) currentId = el.id;
+      }
+
+      document.querySelectorAll('.toc-link').forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${currentId}`);
+      });
+
+      document.querySelectorAll('.nav-child').forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${currentId}`);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', updateActiveLinks);
+    window.addEventListener('scroll', updateActiveLinks);
+
+    // Chevron toggle for collapsible nav sections
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.nav-toggle').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.preventDefault();
+          btn.closest('.nav-group').classList.toggle('collapsed');
+        });
+      });
+    });
+
     // Header and footer loading script
     fetch("/partials/header.html")
       .then(res => res.text())
@@ -768,59 +835,6 @@ curl "https://api.oscarrondon.com/v1/content?limit=10&offset=10"</code></pre>
   </script>
 
   <style>
-    /* Simple Grid Layout Override */
-    .api-grid {
-      display: grid !important;
-      grid-template-columns: 280px 1fr 250px !important;
-      grid-template-areas: "sidebar main toc" !important;
-    }
-
-    /* Force vertical navigation stacking */
-    .api-nav ul,
-    .toc-nav ul {
-      list-style: none !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      display: flex !important;
-      flex-direction: column !important;
-    }
-
-    .nav-section,
-    .nav-section li,
-    .toc-nav li {
-      display: block !important;
-      width: 100% !important;
-    }
-
-    .nav-link,
-    .toc-link {
-      display: block !important;
-      width: 100% !important;
-      box-sizing: border-box !important;
-    }
-
-    /* Active TOC link highlighting */
-    .toc-link.active {
-      background: var(--accent);
-      color: white;
-      font-weight: 500;
-    }
-
-    .breadcrumb {
-      margin-bottom: 2rem;
-      font-size: 0.9rem;
-      color: var(--text-color);
-      opacity: 0.7;
-    }
-
-    .breadcrumb a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .breadcrumb a:hover {
-      text-decoration: underline;
-    }
 
     .breadcrumb span {
       margin: 0 0.5rem;
@@ -1105,3 +1119,6 @@ curl "https://api.oscarrondon.com/v1/content?limit=10&offset=10"</code></pre>
 </script>
 
 </html>
+
+
+

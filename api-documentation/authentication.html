@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API Reference - API Documentation</title>
+  <title>Authentication - API Documentation</title>
   <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
-  <meta name="description" content="Complete API reference: endpoint overview, error codes, and links to individual API sections.">
+  <meta name="description" content="How to authenticate API requests using API keys and the Authorization header.">
   <link rel="stylesheet" href="/style.css" />
   <link rel="stylesheet" href="api-styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -39,20 +39,20 @@
               <li><a href="index.html#first-request" class="nav-child">First Request</a></li>
             </ul>
           </div>
-          <div class="nav-group collapsed">
+          <div class="nav-group">
             <div class="nav-page-header">
-              <a href="authentication.html" class="nav-page-link">Authentication</a>
+              <a href="authentication.html" class="nav-page-link active">Authentication</a>
               <button class="nav-toggle" aria-label="Toggle section"><i class="fas fa-chevron-down nav-chevron"></i></button>
             </div>
             <ul class="nav-children">
-              <li><a href="authentication.html#api-keys" class="nav-child">API Keys</a></li>
-              <li><a href="authentication.html#request-headers" class="nav-child">Request Headers</a></li>
-              <li><a href="authentication.html#security" class="nav-child">Security</a></li>
+              <li><a href="#api-keys" class="nav-child">API Keys</a></li>
+              <li><a href="#request-headers" class="nav-child">Request Headers</a></li>
+              <li><a href="#security" class="nav-child">Security</a></li>
             </ul>
           </div>
-          <div class="nav-group">
+          <div class="nav-group collapsed">
             <div class="nav-page-header">
-              <a href="api-reference.html" class="nav-page-link active">API Reference</a>
+              <a href="api-reference.html" class="nav-page-link">API Reference</a>
               <button class="nav-toggle" aria-label="Toggle section"><i class="fas fa-chevron-down nav-chevron"></i></button>
             </div>
             <ul class="nav-children">
@@ -89,131 +89,86 @@
     <!-- Main Content -->
     <main class="main-content">
       <nav class="breadcrumb">
-        <a href="index.html">API Documentation</a> <span>/</span> <span>API Reference</span>
+        <a href="index.html">API Documentation</a> <span>/</span> <span>Authentication</span>
       </nav>
 
-      <!-- Overview -->
-      <section id="overview" class="api-section">
-        <h1>API Reference</h1>
-        <p>All endpoints use HTTPS and require a valid API key in the <code>Authorization</code> header. See
-          <a href="authentication.html">Authentication</a> for details.</p>
-
-        <p>The API is split into two resource groups:</p>
-        <ul>
-          <li><a href="content-api.html">Content API</a> - list, create, update, and delete portfolio content</li>
-        </ul>
-
-        <h2 id="base-url">Base URL</h2>
-        <div class="api-overview">
-          <div class="code-block">
-            <code>https://api.oscarrondon.com/v1</code>
-            <button class="copy-btn" onclick="copyToClipboard('https://api.oscarrondon.com/v1')">
-              <i class="fas fa-copy"></i>
-            </button>
-          </div>
-        </div>
-
-        <h2 id="endpoint-overview">Endpoint Overview</h2>
-        <table class="params-table">
-          <thead>
-            <tr>
-              <th>Method</th>
-              <th>Path</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><span class="method get">GET</span></td>
-              <td><code>/v1/content</code></td>
-              <td>List content items</td>
-            </tr>
-            <tr>
-              <td><span class="method post">POST</span></td>
-              <td><code>/v1/content</code></td>
-              <td>Create content</td>
-            </tr>
-            <tr>
-              <td><span class="method put">PUT</span></td>
-              <td><code>/v1/content/{id}</code></td>
-              <td>Update content</td>
-            </tr>
-            <tr>
-              <td><span class="method delete">DELETE</span></td>
-              <td><code>/v1/content/{id}</code></td>
-              <td>Delete content</td>
-            </tr>
-            <tr>
-              <td><span class="method get">GET</span></td>
-              <td><code>/v1/users</code></td>
-              <td>List users</td>
-            </tr>
-            <tr>
-              <td><span class="method post">POST</span></td>
-              <td><code>/v1/users</code></td>
-              <td>Create user</td>
-            </tr>
-            <tr>
-              <td><span class="method put">PUT</span></td>
-              <td><code>/v1/users/{id}</code></td>
-              <td>Update user</td>
-            </tr>
-            <tr>
-              <td><span class="method delete">DELETE</span></td>
-              <td><code>/v1/users/{id}</code></td>
-              <td>Delete user</td>
-            </tr>
-          </tbody>
-        </table>
+      <section id="authentication" class="api-section">
+        <h1>Authentication</h1>
+        <p>All API requests require a valid API key passed via the <code>Authorization</code> header. Requests without
+          a valid key will receive a <code>401 Unauthorized</code> response.</p>
       </section>
 
-      <!-- Error Codes -->
-      <section id="error-codes" class="api-section">
-        <h2>Error Codes</h2>
-        <p>The API uses standard HTTP status codes. Error responses include a <code>message</code> field with a
-          human-readable description.</p>
+      <section id="api-keys" class="api-section">
+        <h2>API Keys</h2>
+        <p>API keys are associated with your account and provide access to your data. To obtain a key:</p>
+        <ol>
+          <li>Sign in to your account dashboard.</li>
+          <li>Navigate to the <strong>API Keys</strong> section.</li>
+          <li>Click <strong>Generate New Key</strong>.</li>
+          <li>Copy and store your key securely - it will not be shown again.</li>
+        </ol>
 
-        <table class="params-table">
-          <thead>
-            <tr>
-              <th>Code</th>
-              <th>Name</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>400</code></td>
-              <td>Bad Request</td>
-              <td>Invalid or malformed request parameters.</td>
-            </tr>
-            <tr>
-              <td><code>401</code></td>
-              <td>Unauthorized</td>
-              <td>Missing or invalid API key.</td>
-            </tr>
-            <tr>
-              <td><code>404</code></td>
-              <td>Not Found</td>
-              <td>The requested resource does not exist.</td>
-            </tr>
-            <tr>
-              <td><code>422</code></td>
-              <td>Unprocessable</td>
-              <td>Request body failed validation. Check the <code>errors</code> field for details.</td>
-            </tr>
-            <tr>
-              <td><code>429</code></td>
-              <td>Rate Limited</td>
-              <td>Too many requests. Respect the <code>Retry-After</code> response header.</td>
-            </tr>
-            <tr>
-              <td><code>500</code></td>
-              <td>Server Error</td>
-              <td>Internal server error. If the issue persists, contact support.</td>
-            </tr>
-          </tbody>
-        </table>
+        <p>Your API key will look like this:</p>
+        <div class="code-example">
+          <pre><code class="language-bash">sk_live_4eC39HqLyjWDarjtT1zdp7dc</code></pre>
+        </div>
+
+        <p>Keys are prefixed with <code>sk_live_</code> for production and <code>sk_test_</code> for test environments.
+          Test keys do not affect live data.</p>
+      </section>
+
+      <section id="request-headers" class="api-section">
+        <h2>Request Headers</h2>
+        <p>Pass your API key in the <code>Authorization</code> header using the <code>Bearer</code> scheme. Include
+          <code>Content-Type: application/json</code> on requests with a body.</p>
+
+        <div class="code-example">
+          <div class="code-tabs">
+            <button class="tab-btn active" onclick="showTab('curl-auth')">cURL</button>
+            <button class="tab-btn" onclick="showTab('js-auth')">JavaScript</button>
+            <button class="tab-btn" onclick="showTab('python-auth')">Python</button>
+          </div>
+
+          <div id="curl-auth" class="code-content active">
+            <pre><code class="language-bash">curl -H "Authorization: Bearer sk_live_4eC39HqLyjWDarjtT1zdp7dc" \
+     -H "Content-Type: application/json" \
+     https://api.oscarrondon.com/v1/content</code></pre>
+          </div>
+
+          <div id="js-auth" class="code-content">
+            <pre><code class="language-javascript">const response = await fetch('https://api.oscarrondon.com/v1/content', {
+  headers: {
+    'Authorization': 'Bearer sk_live_4eC39HqLyjWDarjtT1zdp7dc',
+    'Content-Type': 'application/json'
+  }
+});
+const data = await response.json();</code></pre>
+          </div>
+
+          <div id="python-auth" class="code-content">
+            <pre><code class="language-python">import requests
+
+headers = {
+    'Authorization': 'Bearer sk_live_4eC39HqLyjWDarjtT1zdp7dc',
+    'Content-Type': 'application/json'
+}
+
+response = requests.get('https://api.oscarrondon.com/v1/content', headers=headers)
+data = response.json()</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="security" class="api-section">
+        <h2>Security Best Practices</h2>
+        <p>Follow these guidelines to keep your API key secure:</p>
+        <ul>
+          <li>Never include API keys in client-side code or public repositories.</li>
+          <li>Store keys in environment variables or a secrets manager, not in source files.</li>
+          <li>Rotate keys regularly. If a key is compromised, revoke it immediately from the dashboard.</li>
+          <li>Use HTTPS for all requests - the API does not accept plain HTTP connections.</li>
+          <li>Restrict key permissions to only the operations your application requires.</li>
+        </ul>
       </section>
     </main>
 
@@ -226,13 +181,9 @@
         </div>
         <nav class="toc-nav">
           <ul>
-            <li><a href="#overview" class="toc-link">Overview</a>
-              <ul>
-                <li><a href="#base-url" class="toc-link">Base URL</a></li>
-                <li><a href="#endpoint-overview" class="toc-link">Endpoint Overview</a></li>
-              </ul>
-            </li>
-            <li><a href="#error-codes" class="toc-link">Error Codes</a></li>
+            <li><a href="#api-keys" class="toc-link">API Keys</a></li>
+            <li><a href="#request-headers" class="toc-link">Request Headers</a></li>
+            <li><a href="#security" class="toc-link">Security</a></li>
           </ul>
         </nav>
       </div>
@@ -244,11 +195,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
   <script>
-    function copyToClipboard(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        event.target.innerHTML = '<i class="fas fa-check"></i>';
-        setTimeout(() => { event.target.innerHTML = '<i class="fas fa-copy"></i>'; }, 2000);
-      });
+    function showTab(tabId) {
+      document.querySelectorAll('.code-content').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
     }
 
     function updateActiveLinks() {
