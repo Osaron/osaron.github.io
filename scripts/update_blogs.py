@@ -1,110 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+import os
+import re
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blog Articles - Oscar Rondon</title>
-  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <style>
-    .blog-hero {
-      background: linear-gradient(to right, #1b4eff, #66ccff);
-      /* Your brand gradient */
-      color: white;
-      padding: 4rem 10%;
-      text-align: left;
-    }
+p = r"C:\Github\osaron.github.io\projects\blogs\blogs.html"
+with open(p, "r", encoding="utf-8") as f:
+    c = f.read()
 
-    .blog-hero h1 {
-      font-size: 2.8rem;
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
+c = re.sub(r'<section class="blog-section">.*?</section>', '<section id="blogs-list" class="blog-section" aria-label="Blogs list"></section>', c, flags=re.DOTALL)
 
-    .blog-hero p {
-      font-size: 1.1rem;
-    }
-
-    .blog-section {
-      padding: 3rem 10%;
-    }
-
-    .blog-item {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 2rem;
-    }
-
-    .blog-item img {
-      flex: 0 0 260px;
-      height: 160px;
-      object-fit: cover;
-      border-radius: 6px;
-    }
-
-    .blog-info {
-      flex: 1;
-    }
-
-    .blog-info h3 {
-      font-size: 1.3rem;
-      margin: 0;
-      color: var(--text-color);
-    }
-
-    .blog-info p {
-      margin: 0.4rem 0 0.8rem;
-      color: var(--text-color);
-    }
-
-    .badge {
-      display: inline-block;
-      font-size: 0.75rem;
-      padding: 0.2rem 0.6rem;
-      background: #eee;
-      color: #333;
-      border-radius: 4px;
-    }
-
-    .meta {
-      font-size: 0.85rem;
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      color: #666;
-    }
-
-    .colab-button {
-      background: #1967d2;
-      color: white;
-      border: none;
-      font-size: 0.75rem;
-      padding: 0.25rem 0.6rem;
-      border-radius: 3px;
-      display: inline-block;
-      margin-left: 0.5rem;
-      text-decoration: none;
-    }
-
-    .dark-mode .blog-info h3,
-    .dark-mode .blog-info p,
-    .dark-mode .meta {
-      color: #ddd;
-    }
-
-    .dark-mode .badge {
-      background: #222;
-      color: #ccc;
-    }
-
+css_update = '''
     .meta-actions {
       display: flex;
       justify-content: space-between;
@@ -126,21 +29,10 @@
     .btn-view:hover { opacity: 0.9; }
     .btn-print:hover { background: #ddd; color: #000; }
   </style>
+'''
+c = c.replace('  </style>', css_update)
 
-
-</head>
-
-<body>
-  <div id="header-include"></div>
-  <div class="blog-hero">
-    <h1><i class="fa-solid fa-newspaper"></i> Articles</h1>
-    <p>Technical articles on APIs, tools, and developer documentation strategy.</p>
-  </div>
-
-  <section id="blogs-list" class="blog-section" aria-label="Blogs list"></section>
-  <div id="footer-include"></div>
-</body>
-<script>
+script_update = '''<script>
     fetch("/partials/header.html")
       .then(res => res.text())
       .then(html => {
@@ -163,25 +55,17 @@
         listEl.innerHTML = blogs.map(b => {
           let buttons = '';
           if (b.isExternal) {
-            buttons += `
+            buttons = `
               <a class="btn-view" href="${b.link}" target="_blank" rel="noopener noreferrer">
                 Read Article <i class="fa-solid fa-arrow-up-right-from-square"></i>
               </a>`;
-          }
-          if (b.slug) {
-            if (!b.isExternal) {
-              buttons += `<a class="btn-view" href="/projects/blogs/${b.slug}/">
+          } else {
+            buttons = `
+              <a class="btn-view" href="/projects/blogs/${b.slug}/">
                 <i class="fa-solid fa-arrow-right"></i> View details
-              </a>`;
-            } else {
-              buttons += `
-              <a class="btn-view" href="/projects/blogs/${b.slug}/" style="background:#4a5568;">
-                <i class="fa-solid fa-arrow-right"></i> View details
-              </a>`;
-            }
-            buttons += `
+              </a>
               <a class="btn-print" href="#" data-src="${b.pdfPath}">
-                <i class="fa-solid fa-download"></i> Download PDF
+                <i class="fa-regular fa-file-pdf"></i> Download PDF
               </a>`;
           }
           
@@ -242,6 +126,8 @@
       };
       printerFrame.src = src;
     });
-  </script>
+  </script>'''
 
-</html>
+c = re.sub(r'<script>.*?</script>', script_update, c, flags=re.DOTALL)
+with open(p, "w", encoding="utf-8") as f:
+    f.write(c)

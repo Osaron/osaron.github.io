@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog Article Viewer</title>
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .pdf-viewer-container {
+      width: 95%;
+      max-width: 1600px;
+      margin: 20px auto;
+      padding: 0;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      color: var(--bg-color);
+      background-color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .back-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      background-color: var(--text-color);
+      color: var(--bg-color);
+      text-decoration: none;
+    }
+
+    .pdf-embed {
+      width: 100%;
+      height: 85vh;
+      border: none;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      background: #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header-include"></div>
+  <main class="guides-main">
+    <div class="pdf-viewer-container">
+      <a href="/projects/blogs/blogs.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to
+        Blogs</a>
+      <object data="Trichloroethylene And Perchloroethylene-v1.0.pdf" type="application/pdf" class="pdf-embed">
+        <p>Your browser does not support PDFs. <a href="Trichloroethylene And Perchloroethylene-v1.0.pdf">Download the PDF</a> instead.</p>
+      </object>
+    </div>
+  </main>
+  <div id="footer-include"></div>
+  <script>
+    fetch("/partials/header.html").then(res => res.text()).then(html => {
+      document.getElementById("header-include").innerHTML = html;
+      const script = document.createElement("script");
+      script.src = "/darkmode.js";
+      document.body.appendChild(script);
+    });
+    fetch("/partials/footer.html").then(res => res.text()).then(html => {
+      document.getElementById("footer-include").innerHTML = html;
+    });
+  </script>
+</body>
+
+</html>
