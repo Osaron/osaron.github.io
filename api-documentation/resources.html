@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,7 +12,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-dark.min.css" media="(prefers-color-scheme: dark)">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-dark.min.css"
+    media="(prefers-color-scheme: dark)">
 </head>
 
 <body>
@@ -25,7 +27,7 @@
           <h2><i class="fas fa-code"></i> API Documentation</h2>
           <p>Version 1.0.0</p>
         </div>
-        
+
         <nav class="api-nav">
           <ul>
             <li class="nav-section">
@@ -59,7 +61,8 @@
         </div>
 
         <h2 id="official-sdks">Official SDKs</h2>
-        <p>We maintain official SDKs for the most popular programming languages. These libraries provide type safety, error handling, and convenience methods.</p>
+        <p>We maintain official SDKs for the most popular programming languages. These libraries provide type safety,
+          error handling, and convenience methods.</p>
 
         <div class="sdk-grid">
           <div class="sdk-card">
@@ -194,7 +197,7 @@ async with ApiClient(api_key="your-api-key") as client:
         <div class="example-section">
           <h3>Fetching and Displaying Content</h3>
           <p>This example shows how to retrieve content and display it in a web application.</p>
-          
+
           <div class="code-tabs">
             <button class="tab-btn active" onclick="showTab('react-example')">React</button>
             <button class="tab-btn" onclick="showTab('vue-example')">Vue.js</button>
@@ -385,7 +388,7 @@ contentManager.fetchContent();</code></pre>
         <div class="example-section">
           <h3>Real-time Content Updates with WebSockets</h3>
           <p>This example shows how to implement real-time content updates using WebSockets.</p>
-          
+
           <div class="code-example">
             <pre><code class="language-javascript">class RealTimeContentManager {
   constructor(apiKey) {
@@ -479,13 +482,13 @@ const unsubscribe = rtManager.onUpdate((message) => {
             <p>Clean architecture approach for backend services.</p>
             <a href="#" class="pattern-link">View Example</a>
           </div>
-          
+
           <div class="pattern-item">
             <h4>Redux Integration (Frontend)</h4>
             <p>Managing API state with Redux and RTK Query.</p>
             <a href="#" class="pattern-link">View Example</a>
           </div>
-          
+
           <div class="pattern-item">
             <h4>GraphQL Wrapper</h4>
             <p>Exposing REST API through GraphQL layer.</p>
@@ -504,7 +507,7 @@ const unsubscribe = rtManager.onUpdate((message) => {
         </div>
 
         <h2 id="general-questions">General Questions</h2>
-        
+
         <div class="faq-list">
           <div class="faq-item">
             <div class="faq-question">
@@ -585,7 +588,8 @@ curl "https://api.oscarrondon.com/v1/content?limit=10&offset=10"</code></pre>
               <i class="fas fa-chevron-down"></i>
             </div>
             <div class="faq-answer">
-              <p>Yes! Webhooks are available for Pro and Enterprise plans. You can configure webhooks to receive notifications for:</p>
+              <p>Yes! Webhooks are available for Pro and Enterprise plans. You can configure webhooks to receive
+                notifications for:</p>
               <ul>
                 <li>Content creation, updates, and deletion</li>
                 <li>User account changes</li>
@@ -714,12 +718,12 @@ curl "https://api.oscarrondon.com/v1/content?limit=10&offset=10"</code></pre>
       document.querySelectorAll('.code-content').forEach(content => {
         content.classList.remove('active');
       });
-      
+
       // Remove active class from all tabs
       document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.remove('active');
       });
-      
+
       // Show selected tab and mark button as active
       document.getElementById(tabId).classList.add('active');
       event.target.classList.add('active');
@@ -731,10 +735,10 @@ curl "https://api.oscarrondon.com/v1/content?limit=10&offset=10"</code></pre>
         const faqItem = question.parentElement;
         const answer = faqItem.querySelector('.faq-answer');
         const icon = question.querySelector('i');
-        
+
         // Toggle the FAQ item
         faqItem.classList.toggle('active');
-        
+
         // Rotate the chevron icon
         if (faqItem.classList.contains('active')) {
           icon.style.transform = 'rotate(180deg)';
@@ -770,7 +774,7 @@ curl "https://api.oscarrondon.com/v1/content?limit=10&offset=10"</code></pre>
       grid-template-columns: 280px 1fr 250px !important;
       grid-template-areas: "sidebar main toc" !important;
     }
-    
+
     /* Force vertical navigation stacking */
     .api-nav ul,
     .toc-nav ul {
@@ -780,14 +784,14 @@ curl "https://api.oscarrondon.com/v1/content?limit=10&offset=10"</code></pre>
       display: flex !important;
       flex-direction: column !important;
     }
-    
+
     .nav-section,
     .nav-section li,
     .toc-nav li {
       display: block !important;
       width: 100% !important;
     }
-    
+
     .nav-link,
     .toc-link {
       display: block !important;
@@ -795,7 +799,7 @@ curl "https://api.oscarrondon.com/v1/content?limit=10&offset=10"</code></pre>
       box-sizing: border-box !important;
     }
 
-        /* Active TOC link highlighting */
+    /* Active TOC link highlighting */
     .toc-link.active {
       background: var(--accent);
       color: white;
@@ -808,16 +812,16 @@ curl "https://api.oscarrondon.com/v1/content?limit=10&offset=10"</code></pre>
       color: var(--text-color);
       opacity: 0.7;
     }
-    
+
     .breadcrumb a {
       color: var(--accent);
       text-decoration: none;
     }
-    
+
     .breadcrumb a:hover {
       text-decoration: underline;
     }
-    
+
     .breadcrumb span {
       margin: 0 0.5rem;
     }
@@ -1099,4 +1103,5 @@ curl "https://api.oscarrondon.com/v1/content?limit=10&offset=10"</code></pre>
   document.addEventListener('DOMContentLoaded', updateTocOnScroll);
   window.addEventListener('scroll', updateTocOnScroll);
 </script>
+
 </html>

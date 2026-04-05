@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>User Guides - Oscar Rondon</title>
-  <link rel="icon" href="/images/favicon.ico" type="image/x-icon"/>
-  <link rel="stylesheet" href="/style.css"/>
-  <link rel="stylesheet" href="/projects/user_guides/user_guides.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/projects/user_guides/user_guides.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
+
 <body>
-    <div id="header-include"></div>
+  <div id="header-include"></div>
   <div class="guide-hero">
     <h1><i class="fa-solid fa-newspaper"></i> User Guides</h1>
-    <p>A collection of software user guides I’ve created. Select a manual to view the full guide or download the PDF.</p>
+    <p>A collection of software user guides I’ve created. Select a manual to view the full guide or download the PDF.
+    </p>
   </div>
 
   <main class="guides-main">
@@ -43,14 +46,14 @@
         document.getElementById("footer-include").innerHTML = html;
       });
 
-// Load manuals.json and render list
-fetch("/projects/user_guides/manuals.json")
-  .then(res => res.json())
-  .then(manuals => {
-    const listEl = document.getElementById("manuals-list");
-    listEl.innerHTML = manuals.map(m => {
-      const pdfUrl = `/projects/user_guides/${m.slug}/manual.pdf`;
-      return `
+    // Load manuals.json and render list
+    fetch("/projects/user_guides/manuals.json")
+      .then(res => res.json())
+      .then(manuals => {
+        const listEl = document.getElementById("manuals-list");
+        listEl.innerHTML = manuals.map(m => {
+          const pdfUrl = `/projects/user_guides/${m.slug}/manual.pdf`;
+          return `
         <article class="manual-row">
           <a class="thumb-wrap" href="/projects/user_guides/${m.slug}/">
             <img src="${m.cover}" alt="${m.title} cover"/>
@@ -82,10 +85,10 @@ fetch("/projects/user_guides/manuals.json")
           </div>
         </article>
       `;
-    }).join('');
-  });
+        }).join('');
+      });
 
-      // Create one hidden iframe for printing (won't affect layout)
+    // Create one hidden iframe for printing (won't affect layout)
     const printerFrame = document.createElement('iframe');
     printerFrame.style.position = 'fixed';
     printerFrame.style.right = '0';
@@ -126,4 +129,5 @@ fetch("/projects/user_guides/manuals.json")
 
   </script>
 </body>
+
 </html>

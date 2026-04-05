@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,7 +12,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-dark.min.css" media="(prefers-color-scheme: dark)">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-dark.min.css"
+    media="(prefers-color-scheme: dark)">
 </head>
 
 <body>
@@ -25,7 +27,7 @@
           <h2><i class="fas fa-code"></i> API Documentation</h2>
           <p>Version 1.0.0</p>
         </div>
-        
+
         <nav class="api-nav">
           <ul>
             <li class="nav-section">
@@ -76,7 +78,7 @@
             <h3>Content Management</h3>
             <p>Create, read, update, and delete content items</p>
           </div>
-          
+
           <div class="info-card">
             <div class="card-icon">
               <i class="fas fa-users"></i>
@@ -84,7 +86,7 @@
             <h3>User Management</h3>
             <p>Manage user accounts and permissions</p>
           </div>
-          
+
           <div class="info-card">
             <div class="card-icon">
               <i class="fas fa-search"></i>
@@ -111,7 +113,7 @@
             <span class="path">/v1/content</span>
             <span class="description">Retrieve a list of content items</span>
           </div>
-          
+
           <div class="endpoint-details">
             <h4>Query Parameters</h4>
             <table class="params-table">
@@ -128,7 +130,8 @@
                   <td><code>type</code></td>
                   <td>string</td>
                   <td>No</td>
-                  <td>Filter by content type: <code>blog</code>, <code>manual</code>, <code>whitepaper</code>, <code>strategy</code></td>
+                  <td>Filter by content type: <code>blog</code>, <code>manual</code>, <code>whitepaper</code>,
+                    <code>strategy</code></td>
                 </tr>
                 <tr>
                   <td><code>status</code></td>
@@ -150,13 +153,13 @@
                 </tr>
               </tbody>
             </table>
-            
+
             <h4>Example Request</h4>
             <div class="code-example">
               <pre><code class="language-bash">curl -H "Authorization: Bearer YOUR_API_KEY" \
      "https://api.oscarrondon.com/v1/content?type=blog&status=published&limit=5"</code></pre>
             </div>
-            
+
             <h4>Response</h4>
             <div class="code-example">
               <pre><code class="language-json">{
@@ -189,7 +192,7 @@
             <span class="path">/v1/content</span>
             <span class="description">Create a new content item</span>
           </div>
-          
+
           <div class="endpoint-details">
             <h4>Request Body</h4>
             <table class="params-table">
@@ -212,7 +215,8 @@
                   <td><code>type</code></td>
                   <td>string</td>
                   <td>Yes</td>
-                  <td>Content type: <code>blog</code>, <code>manual</code>, <code>whitepaper</code>, <code>strategy</code></td>
+                  <td>Content type: <code>blog</code>, <code>manual</code>, <code>whitepaper</code>,
+                    <code>strategy</code></td>
                 </tr>
                 <tr>
                   <td><code>content</code></td>
@@ -251,7 +255,7 @@
             <span class="path">/v1/content/{id}</span>
             <span class="description">Update an existing content item</span>
           </div>
-          
+
           <div class="endpoint-details">
             <p>Use the same request body format as the POST endpoint. All fields are optional for partial updates.</p>
           </div>
@@ -274,7 +278,7 @@
             <span class="path">/v1/users</span>
             <span class="description">Retrieve a list of users</span>
           </div>
-          
+
           <div class="endpoint-details">
             <h4>Query Parameters</h4>
             <table class="params-table">
@@ -308,7 +312,7 @@
             <span class="path">/v1/users</span>
             <span class="description">Create a new user account</span>
           </div>
-          
+
           <div class="endpoint-details">
             <h4>Required Fields</h4>
             <ul>
@@ -400,7 +404,7 @@
       grid-template-columns: 280px 1fr 250px !important;
       grid-template-areas: "sidebar main toc" !important;
     }
-    
+
     /* Force vertical navigation stacking */
     .api-nav ul,
     .toc-nav ul {
@@ -410,21 +414,21 @@
       display: flex !important;
       flex-direction: column !important;
     }
-    
+
     .nav-section,
     .nav-section li,
     .toc-nav li {
       display: block !important;
       width: 100% !important;
     }
-    
+
     .nav-link,
     .toc-link {
       display: block !important;
       width: 100% !important;
       box-sizing: border-box !important;
     }
-    
+
     /* Active TOC link highlighting */
     .toc-link.active {
       background: var(--accent);
@@ -438,16 +442,16 @@
       color: var(--text-color);
       opacity: 0.7;
     }
-    
+
     .breadcrumb a {
       color: var(--accent);
       text-decoration: none;
     }
-    
+
     .breadcrumb a:hover {
       text-decoration: underline;
     }
-    
+
     .breadcrumb span {
       margin: 0 0.5rem;
     }
@@ -479,4 +483,5 @@
   document.addEventListener('DOMContentLoaded', updateActiveLinks);
   window.addEventListener('scroll', updateActiveLinks);
 </script>
+
 </html>

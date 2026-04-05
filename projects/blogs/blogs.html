@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,7 +11,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     .blog-hero {
-      background: linear-gradient(to right, #1b4eff, #66ccff); /* Your brand gradient */
+      background: linear-gradient(to right, #1b4eff, #66ccff);
+      /* Your brand gradient */
       color: white;
       padding: 4rem 10%;
       text-align: left;
@@ -105,6 +107,7 @@
   </style>
 
 </head>
+
 <body>
   <div id="header-include"></div>
   <div class="blog-hero">
@@ -166,11 +169,12 @@
       document.body.appendChild(script);
     });
 
-      // This is to call the footer
+  // This is to call the footer
   fetch("/partials/footer.html")
     .then(res => res.text())
     .then(html => {
       document.getElementById("footer-include").innerHTML = html;
     });
 </script>
+
 </html>

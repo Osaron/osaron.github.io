@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,7 +12,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-dark.min.css" media="(prefers-color-scheme: dark)">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-dark.min.css"
+    media="(prefers-color-scheme: dark)">
 </head>
 
 <body>
@@ -25,7 +27,7 @@
           <h2><i class="fas fa-code"></i> API Documentation</h2>
           <p>Version 1.0.0</p>
         </div>
-        
+
         <nav class="api-nav">
           <ul>
             <li class="nav-section">
@@ -59,11 +61,12 @@
         </div>
 
         <h2 id="web-application">Web Application Integration</h2>
-        <p>Integrating our API into a web application is straightforward. Here's a complete example using JavaScript and modern web technologies.</p>
+        <p>Integrating our API into a web application is straightforward. Here's a complete example using JavaScript and
+          modern web technologies.</p>
 
         <h3>Setting Up Authentication</h3>
         <p>First, create a secure environment for your API key. Never expose API keys in client-side code.</p>
-        
+
         <div class="code-example">
           <pre><code class="language-javascript">// config.js - Store this securely on your server
 const API_CONFIG = {
@@ -107,10 +110,12 @@ class ApiClient {
         </div>
 
         <h2 id="mobile-integration">Mobile Application Integration</h2>
-        <p>Our API is designed to work seamlessly with mobile applications. Here are best practices for iOS and Android integration.</p>
+        <p>Our API is designed to work seamlessly with mobile applications. Here are best practices for iOS and Android
+          integration.</p>
 
         <h3>Error Handling Strategy</h3>
-        <p>Implement robust error handling to provide a smooth user experience even when network conditions are poor.</p>
+        <p>Implement robust error handling to provide a smooth user experience even when network conditions are poor.
+        </p>
 
         <div class="code-example">
           <pre><code class="language-swift">// iOS Swift Example
@@ -157,7 +162,8 @@ class APIService {
         </div>
 
         <h2 id="server-integration">Server-to-Server Integration</h2>
-        <p>For backend services, implement caching and rate limiting to optimize performance and stay within API limits.</p>
+        <p>For backend services, implement caching and rate limiting to optimize performance and stay within API limits.
+        </p>
 
         <div class="code-example">
           <pre><code class="language-python"># Python Example with caching
@@ -227,7 +233,7 @@ class APIClient:
               </ul>
             </div>
           </div>
-          
+
           <div class="tip-card">
             <div class="tip-icon">
               <i class="fas fa-shield-alt"></i>
@@ -504,20 +510,20 @@ curl -v -H "Authorization: Bearer YOUR_API_KEY" \
             <p>Send detailed error logs and reproduction steps to:</p>
             <a href="mailto:o.rondon@uniandes.edu.co">o.rondon@uniandes.edu.co</a>
           </div>
-          
+
           <div class="resource-item">
             <i class="fab fa-github"></i>
             <h4>GitHub Issues</h4>
             <p>Report bugs or request features:</p>
             <a href="https://github.com/Osaron" target="_blank">GitHub Repository</a>
           </div>
-          
-                      <div class="resource-item">
-              <i class="fas fa-question-circle"></i>
-              <h4>FAQ</h4>
-              <p>Check our frequently asked questions:</p>
-              <a href="resources.html#faq">View FAQ</a>
-            </div>
+
+          <div class="resource-item">
+            <i class="fas fa-question-circle"></i>
+            <h4>FAQ</h4>
+            <p>Check our frequently asked questions:</p>
+            <a href="resources.html#faq">View FAQ</a>
+          </div>
         </div>
       </section>
     </main>
@@ -588,7 +594,7 @@ curl -v -H "Authorization: Bearer YOUR_API_KEY" \
       grid-template-columns: 280px 1fr 250px !important;
       grid-template-areas: "sidebar main toc" !important;
     }
-    
+
     /* Force vertical navigation stacking */
     .api-nav ul,
     .toc-nav ul {
@@ -598,21 +604,22 @@ curl -v -H "Authorization: Bearer YOUR_API_KEY" \
       display: flex !important;
       flex-direction: column !important;
     }
-    
+
     .nav-section,
     .nav-section li,
     .toc-nav li {
       display: block !important;
       width: 100% !important;
     }
-    
+
     .nav-link,
     .toc-link {
       display: block !important;
       width: 100% !important;
       box-sizing: border-box !important;
     }
-        /* Active TOC link highlighting */
+
+    /* Active TOC link highlighting */
     .toc-link.active {
       background: var(--accent);
       color: white;
@@ -625,16 +632,16 @@ curl -v -H "Authorization: Bearer YOUR_API_KEY" \
       color: var(--text-color);
       opacity: 0.7;
     }
-    
+
     .breadcrumb a {
       color: var(--accent);
       text-decoration: none;
     }
-    
+
     .breadcrumb a:hover {
       text-decoration: underline;
     }
-    
+
     .breadcrumb span {
       margin: 0 0.5rem;
     }
@@ -765,4 +772,5 @@ curl -v -H "Authorization: Bearer YOUR_API_KEY" \
     window.addEventListener('scroll', updateActiveLinks);
   </script>
 </body>
+
 </html>
