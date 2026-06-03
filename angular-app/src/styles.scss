@@ -1,1 +1,100 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'styles/variables';
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.3s, color 0.3s;
+}
+
+.container {
+  padding: 10px 10%;
+}
+
+// Dark mode logo swap
+.logo {
+  width: 80px;
+  height: auto;
+}
+
+.logo-dark {
+  display: none;
+}
+
+.dark-mode .logo-dark {
+  display: inline;
+}
+
+.dark-mode .logo-light {
+  display: none;
+}
+
+// Dark mode toggle button
+.toggle-mode {
+  background-color: var(--card-bg);
+  border: 1px solid rgba(20, 20, 20, 0.205);
+  border-radius: 10px;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 999;
+
+  &:hover {
+    background-color: var(--accent);
+    transform: scale(1.05);
+  }
+
+  .icon {
+    font-size: 18px;
+    color: var(--text-color);
+    transition: transform 0.3s, color 0.3s;
+  }
+}
+
+body.dark-mode .toggle-mode .icon {
+  transform: rotate(180deg);
+}
+
+// Hero typing animation
+.typing-line {
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: showAndClear 8s linear infinite;
+  animation-fill-mode: both;
+}
+
+.line1 { animation-delay: 0s; }
+.line2 { animation-delay: 1s; }
+.line3 { animation-delay: 2s; }
+.line4 { animation-delay: 3s; }
+
+@keyframes showAndClear {
+  0%, 10% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  20%, 60% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  80%, 100% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+}

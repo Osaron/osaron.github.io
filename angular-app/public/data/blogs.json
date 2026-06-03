@@ -1,0 +1,77 @@
+[
+  {
+    "title": "Navigating the AI Revolution: The Overlooked Integration Challenges",
+    "summary": "An exploration of the hidden technical and organizational challenges companies face when integrating AI solutions into existing legacy systems.",
+    "date": "April 02, 2026",
+    "readMins": 5,
+    "tags": [
+      "AI",
+      "ENTERPRISE",
+      "INTEGRATION"
+    ],
+    "cover": "/images/blogs/nav_ai_rev.png",
+    "isExternal": true,
+    "link": "https://everense.com/en/navigating-the-ai-revolution-the-overlooked-integration-challenges/"
+  },
+  {
+    "title": "How Large Language Models Understand Your Writing",
+    "summary": "A deep dive into the mechanics of LLMs, exploring tokenization, vector embeddings, and self-attention algorithms used in modern NLP.",
+    "date": "March 15, 2026",
+    "readMins": 6,
+    "tags": [
+      "AI",
+      "NLP",
+      "LLM"
+    ],
+    "cover": "/images/blogs/llm_understanding.png",
+    "isExternal": true,
+    "link": "https://everense.com/en/how-large-language-models-understand-your-writing/",
+    "slug": "everense",
+    "pdfPath": "/projects/blogs/everense/How Large Language Models Understand Your Writing-v1.0.pdf"
+  },
+  {
+    "title": "How to Approach BDD with Conformiq Visualizer",
+    "summary": "A practical guide to implementing Behavior-Driven Development (BDD) methodologies using the Conformiq Visualizer modeling tool.",
+    "date": "February 28, 2026",
+    "readMins": 8,
+    "tags": [
+      "QA",
+      "BDD",
+      "AUTOMATION"
+    ],
+    "cover": "/images/blogs/bdd_conformiq.png",
+    "isExternal": false,
+    "slug": "conformiq",
+    "pdfPath": "/projects/blogs/conformiq/How to Approach BDD with Conformiq Visualizer.pdf"
+  },
+  {
+    "title": "PCBA Cleaning Before Conformal Coating: Increase Reliability",
+    "summary": "Best practices and standards for effectively cleaning Printed Circuit Board Assemblies to enhance reliability and product lifespan.",
+    "date": "January 14, 2026",
+    "readMins": 7,
+    "tags": [
+      "HARDWARE",
+      "ENGINEERING",
+      "MANUFACTURING"
+    ],
+    "cover": "/images/blogs/pcba_cleaning.png",
+    "isExternal": true,
+    "link": "https://www.techspray.com/pcba-cleaning-before-conformal-coating-increase-reliability-functional-life"
+  },
+  {
+    "title": "Tetrachloroethylene (PCE) & Trichloroethylene (TCE): Overview",
+    "summary": "An overview of the health, safety, and environmental impact of using Tetrachloroethylene and Trichloroethylene in industrial applications.",
+    "date": "November 05, 2025",
+    "readMins": 4,
+    "tags": [
+      "SAFETY",
+      "ENVIRONMENT",
+      "CHEMICALS"
+    ],
+    "cover": "/images/blogs/pce_tce_overview.png",
+    "isExternal": true,
+    "link": "https://www.chemtronics.com/health-safety-overview-of-tetrachloroethylene-pce-perc-trichloroethylene-tce",
+    "slug": "techspray",
+    "pdfPath": "/projects/blogs/techspray/Trichloroethylene And Perchloroethylene-v1.0.pdf"
+  }
+]
