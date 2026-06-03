@@ -1,5 +1,6 @@
 import { Component, signal, OnInit, OnDestroy } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ParticleBackground } from '../../shared/particle-background/particle-background';
 
 interface ProjectTab {
   id: string;
@@ -19,7 +20,7 @@ interface CarouselSlide {
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink],
+  imports: [RouterLink, ParticleBackground],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
