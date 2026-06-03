@@ -39,25 +39,9 @@
   text-decoration: none;
   font-size: 1rem;
   font-weight: 400;
-  position: relative;
-  padding-bottom: 4px;
+  transition: color 0.2s ease;
 
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--accent);
-    transition: width 0.25s ease;
-  }
-
-  &:hover::after,
-  &.active::after {
-    width: 100%;
-  }
-
+  &:hover,
   &.active {
     color: var(--accent);
   }
@@ -78,23 +62,11 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  padding-bottom: 4px;
-  position: relative;
+  transition: color 0.2s ease;
+}
 
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--accent);
-    transition: width 0.25s ease;
-  }
-
-  &:hover::after {
-    width: 100%;
-  }
+.dropdown:hover .dropdown-trigger {
+  color: var(--accent);
 }
 
 .arrow {
