@@ -1,1 +1,62 @@
-<p>header works!</p>
+<nav class="navbar" [class.scrolled]="true">
+  <!-- Logo -->
+  <a routerLink="/" class="nav-logo">
+    <img src="/images/Nuevo Logo Black.png" class="logo logo-light" alt="Oscar Rondon logo">
+    <img src="/images/Nuevo Logo White.png" class="logo logo-dark" alt="Oscar Rondon logo">
+  </a>
+
+  <!-- Desktop links -->
+  <ul class="nav-links">
+    <!-- Projects dropdown -->
+    <li class="dropdown" [class.open]="dropdownOpen()">
+      <button class="dropdown-trigger" (click)="toggleDropdown($event)" [attr.aria-expanded]="dropdownOpen()">
+        Projects
+        <span class="arrow" [class.rotated]="dropdownOpen()">&#8250;</span>
+      </button>
+
+      @if (dropdownOpen()) {
+        <ul class="dropdown-menu" (click)="closeDropdown()">
+          @for (link of projectLinks; track link.path) {
+            <li>
+              <a [routerLink]="['/projects', link.path]"
+                 routerLinkActive="active"
+                 class="dropdown-link">
+                <img [src]="link.icon" [alt]="link.label" class="dropdown-icon">
+                {{ link.label }}
+              </a>
+            </li>
+          }
+        </ul>
+      }
+    </li>
+
+    <li>
+      <a routerLink="/about" routerLinkActive="active" class="nav-link">About</a>
+    </li>
+  </ul>
+
+  <!-- Right-side controls -->
+  <div class="nav-controls">
+    <button class="toggle-mode" (click)="darkMode.toggle()" data-testid="dark-mode-toggle" [attr.aria-label]="darkMode.isDark() ? 'Switch to light mode' : 'Switch to dark mode'">
+      <i [class]="darkMode.iconClass()" class="icon"></i>
+    </button>
+
+    <!-- Mobile hamburger -->
+    <button class="hamburger" (click)="toggleMobileMenu()" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+@if (mobileMenuOpen()) {
+  <div class="mobile-menu" (click)="toggleMobileMenu()">
+    <a routerLink="/" class="mobile-link">Home</a>
+    @for (link of projectLinks; track link.path) {
+      <a [routerLink]="['/projects', link.path]" class="mobile-link">{{ link.label }}</a>
+    }
+    <a routerLink="/about" class="mobile-link">About</a>
+  </div>
+}
