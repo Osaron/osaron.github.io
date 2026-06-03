@@ -33,10 +33,37 @@ export const routes: Routes = [
       {
         path: 'white-papers',
         loadComponent: () => import('./pages/projects/white-papers/white-papers').then(m => m.WhitePapers)
+      }
+    ]
+  },
+  {
+    path: 'api-docs',
+    loadComponent: () => import('./pages/api-docs/api-docs').then(m => m.ApiDocs),
+    children: [
+      { path: '', redirectTo: 'getting-started', pathMatch: 'full' },
+      {
+        path: 'getting-started',
+        loadComponent: () => import('./pages/api-docs/getting-started/getting-started').then(m => m.GettingStarted)
       },
       {
-        path: 'api-docs',
-        loadComponent: () => import('./pages/projects/api-docs/api-docs').then(m => m.ApiDocs)
+        path: 'authentication',
+        loadComponent: () => import('./pages/api-docs/authentication/authentication').then(m => m.Authentication)
+      },
+      {
+        path: 'api-reference',
+        loadComponent: () => import('./pages/api-docs/api-reference/api-reference').then(m => m.ApiReference)
+      },
+      {
+        path: 'content-api',
+        loadComponent: () => import('./pages/api-docs/content-api/content-api').then(m => m.ContentApi)
+      },
+      {
+        path: 'guides',
+        loadComponent: () => import('./pages/api-docs/guides/guides').then(m => m.Guides)
+      },
+      {
+        path: 'resources',
+        loadComponent: () => import('./pages/api-docs/resources/resources').then(m => m.Resources)
       }
     ]
   },

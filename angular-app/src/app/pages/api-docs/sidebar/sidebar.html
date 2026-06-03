@@ -1,0 +1,47 @@
+<div class="sidebar-content">
+  <div class="api-title">
+    <h2>
+      <span class="api-logo-badge">API</span>
+      Portfolio API
+    </h2>
+    <p>Documentation for content, projects, and AI-powered portfolio workflows.</p>
+  </div>
+
+  <nav class="api-nav">
+    @for (group of groups; track group.route) {
+      <div class="nav-group" [class.collapsed]="!isExpanded(group.route)">
+        <div class="nav-page-header">
+          <a [routerLink]="['/api-docs', group.route]"
+             routerLinkActive="active"
+             class="nav-page-link"
+             (isActiveChange)="$event && expandOnActivate(group.route)">
+            {{ group.label }}
+          </a>
+          <button class="nav-toggle" (click)="toggle(group.route)" aria-label="Toggle section">
+            <i class="fas fa-chevron-down nav-chevron"></i>
+          </button>
+        </div>
+
+        <ul class="nav-children">
+          @for (child of group.children; track child.fragment) {
+            <li>
+              @if (child.fragment) {
+                <a [routerLink]="['/api-docs', group.route]"
+                   [fragment]="child.fragment"
+                   class="nav-child">
+                  {{ child.label }}
+                </a>
+              } @else {
+                <a [routerLink]="['/api-docs', 'content-api']"
+                   routerLinkActive="active"
+                   class="nav-child">
+                  {{ child.label }}
+                </a>
+              }
+            </li>
+          }
+        </ul>
+      </div>
+    }
+  </nav>
+</div>

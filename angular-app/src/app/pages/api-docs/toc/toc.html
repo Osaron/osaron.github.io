@@ -1,0 +1,34 @@
+@if (tocService.items().length > 0) {
+  <div class="toc-content">
+    <div class="toc-header">
+      <i class="fas fa-list"></i>
+      <span>On this page</span>
+    </div>
+    <nav class="toc-nav">
+      <ul>
+        @for (item of tocService.items(); track item.id) {
+          <li>
+            <a [href]="'#' + item.id"
+               class="toc-link"
+               [class.active]="tocService.activeId() === item.id">
+              {{ item.label }}
+            </a>
+            @if (item.children && item.children.length > 0) {
+              <ul>
+                @for (child of item.children; track child.id) {
+                  <li>
+                    <a [href]="'#' + child.id"
+                       class="toc-link"
+                       [class.active]="tocService.activeId() === child.id">
+                      {{ child.label }}
+                    </a>
+                  </li>
+                }
+              </ul>
+            }
+          </li>
+        }
+      </ul>
+    </nav>
+  </div>
+}

@@ -1,0 +1,187 @@
+<nav class="breadcrumb">
+  <span>API Documentation</span> <span>/</span> <span>Resources</span>
+</nav>
+
+<section id="sdks" class="api-section">
+  <div class="section-header">
+    <h1>SDKs &amp; Libraries</h1>
+    <p class="section-description">Official and community-maintained libraries to accelerate your development.</p>
+  </div>
+
+  <h2 id="official-sdks">Official SDKs</h2>
+  <div class="sdk-grid">
+    <div class="sdk-card">
+      <div class="sdk-header"><i class="fab fa-js-square"></i><h3>JavaScript / TypeScript</h3><span class="version">v2.1.0</span></div>
+      <p>Full-featured SDK with TypeScript support, automatic retries, and built-in caching.</p>
+      <div class="sdk-links">
+        <a href="#" class="sdk-link"><i class="fab fa-npm"></i> npm install</a>
+        <a href="#" class="sdk-link"><i class="fab fa-github"></i> Source</a>
+      </div>
+      <div class="code-example"><pre><code class="language-bash">npm install &#64;oscarrondon/api-client</code></pre></div>
+      <div class="code-example"><pre><code class="language-javascript">import &#123; ApiClient &#125; from '&#64;oscarrondon/api-client';
+const client = new ApiClient(&#123; apiKey: 'your-key' &#125;);
+const content = await client.content.list(&#123; type: 'blog', limit: 10 &#125;);</code></pre></div>
+    </div>
+
+    <div class="sdk-card">
+      <div class="sdk-header"><i class="fab fa-python"></i><h3>Python</h3><span class="version">v1.8.2</span></div>
+      <p>Pythonic SDK with async support, automatic pagination, and comprehensive error handling.</p>
+      <div class="sdk-links">
+        <a href="#" class="sdk-link"><i class="fas fa-cube"></i> PyPI</a>
+        <a href="#" class="sdk-link"><i class="fab fa-github"></i> Source</a>
+      </div>
+      <div class="code-example"><pre><code class="language-bash">pip install oscarrondon-api</code></pre></div>
+      <div class="code-example"><pre><code class="language-python">from oscarrondon_api import ApiClient
+client = ApiClient(api_key="your-api-key")
+content = client.content.list(type="blog", limit=10)</code></pre></div>
+    </div>
+
+    <div class="sdk-card">
+      <div class="sdk-header"><i class="fab fa-java"></i><h3>Java</h3><span class="version">v1.5.0</span></div>
+      <p>Enterprise-ready Java SDK with Spring Boot integration and reactive streams support.</p>
+      <div class="sdk-links">
+        <a href="#" class="sdk-link"><i class="fas fa-cube"></i> Maven</a>
+        <a href="#" class="sdk-link"><i class="fab fa-github"></i> Source</a>
+      </div>
+      <div class="code-example"><pre><code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;com.oscarrondon&lt;/groupId&gt;
+  &lt;artifactId&gt;api-client&lt;/artifactId&gt;
+  &lt;version&gt;1.5.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre></div>
+    </div>
+  </div>
+
+  <h2 id="community-libraries">Community Libraries</h2>
+  <div class="community-libraries">
+    <div class="library-item">
+      <div class="library-header"><i class="fab fa-php"></i><span class="library-name">PHP SDK</span><span class="community-badge">Community</span></div>
+      <a href="#" class="library-link">View on Packagist</a>
+    </div>
+    <div class="library-item">
+      <div class="library-header"><i class="fab fa-rust"></i><span class="library-name">Rust Crate</span><span class="community-badge">Community</span></div>
+      <a href="#" class="library-link">View on crates.io</a>
+    </div>
+  </div>
+</section>
+
+<section id="examples" class="api-section">
+  <div class="section-header">
+    <h1>Code Examples</h1>
+    <p class="section-description">Real-world examples and use cases to help you implement common scenarios.</p>
+  </div>
+
+  <h2 id="basic-examples">Basic Examples</h2>
+  <div class="example-section">
+    <h3>Fetching and Displaying Content</h3>
+    <div class="code-tabs">
+      <button class="tab-btn" [class.active]="activeTab() === 'react-example'"   (click)="setTab('react-example')">React</button>
+      <button class="tab-btn" [class.active]="activeTab() === 'vue-example'"    (click)="setTab('vue-example')">Vue.js</button>
+      <button class="tab-btn" [class.active]="activeTab() === 'vanilla-example'" (click)="setTab('vanilla-example')">Vanilla JS</button>
+    </div>
+    <div [class.active]="activeTab() === 'react-example'" class="code-content">
+      <div class="code-example"><pre><code class="language-javascript">import React, &#123; useState, useEffect &#125; from 'react';
+function ContentList() &#123;
+  const [content, setContent] = useState([]);
+  useEffect(() =&gt; &#123;
+    client.content.list(&#123; type: 'blog', status: 'published', limit: 10 &#125;)
+      .then(r =&gt; setContent(r.data));
+  &#125;, []);
+  return content.map(item =&gt; &lt;article key=&#123;item.id&#125;&gt;&lt;h2&gt;&#123;item.title&#125;&lt;/h2&gt;&lt;/article&gt;);
+&#125;</code></pre></div>
+    </div>
+    <div [class.active]="activeTab() === 'vue-example'" class="code-content">
+      <div class="code-example"><pre><code class="language-javascript">export default &#123;
+  data() &#123; return &#123; content: [] &#125;; &#125;,
+  async mounted() &#123;
+    const r = await client.content.list(&#123; type: 'blog', status: 'published' &#125;);
+    this.content = r.data;
+  &#125;
+&#125;;</code></pre></div>
+    </div>
+    <div [class.active]="activeTab() === 'vanilla-example'" class="code-content">
+      <div class="code-example"><pre><code class="language-javascript">const response = await fetch('/v1/content?type=blog&status=published', &#123;
+  headers: &#123; 'Authorization': `Bearer $&#123;apiKey&#125;` &#125;
+&#125;);
+const &#123; data &#125; = await response.json();
+data.forEach(item =&gt; console.log(item.title));</code></pre></div>
+    </div>
+  </div>
+
+  <h2 id="advanced-examples">Advanced Examples</h2>
+  <div class="example-section">
+    <h3>Real-time Content Updates with WebSockets</h3>
+    <div class="code-example"><pre><code class="language-javascript">class RealTimeManager &#123;
+  constructor(apiKey) &#123;
+    this.ws = new WebSocket(`wss://api.oscarrondon.com/v1/ws?token=$&#123;apiKey&#125;`);
+    this.ws.onmessage = (e) =&gt; this.handleMessage(JSON.parse(e.data));
+  &#125;
+  handleMessage(msg) &#123;
+    if (msg.type === 'content.updated') this.updateUI(msg.data);
+  &#125;
+&#125;</code></pre></div>
+  </div>
+
+  <h2 id="integration-patterns">Integration Patterns</h2>
+  <div class="pattern-examples">
+    <div class="pattern-item"><h4>Repository Pattern</h4><p>Clean architecture for backend services.</p><a href="#" class="pattern-link">View Example</a></div>
+    <div class="pattern-item"><h4>Redux Integration</h4><p>Managing API state with Redux and RTK Query.</p><a href="#" class="pattern-link">View Example</a></div>
+    <div class="pattern-item"><h4>GraphQL Wrapper</h4><p>Exposing REST API through GraphQL layer.</p><a href="#" class="pattern-link">View Example</a></div>
+  </div>
+</section>
+
+<section id="faq" class="api-section">
+  <div class="section-header">
+    <h1>Frequently Asked Questions</h1>
+    <p class="section-description">Common questions and answers about using our API.</p>
+  </div>
+
+  <h2 id="general-questions">General Questions</h2>
+  <div class="faq-list">
+    <div class="faq-item" [class.open]="isFaqOpen(0)">
+      <div class="faq-question" (click)="toggleFaq(0)"><h4>What are the rate limits?</h4><i class="fas fa-chevron-down"></i></div>
+      <div class="faq-answer"><p>Rate limits depend on your plan: <strong>Free</strong> 100 req/hr, <strong>Basic</strong> 1 000 req/hr, <strong>Pro</strong> 10 000 req/hr, <strong>Enterprise</strong> custom limits. Rate limit headers are included in every response.</p></div>
+    </div>
+    <div class="faq-item" [class.open]="isFaqOpen(1)">
+      <div class="faq-question" (click)="toggleFaq(1)"><h4>How do I handle authentication securely?</h4><i class="fas fa-chevron-down"></i></div>
+      <div class="faq-answer"><p>Never expose API keys in client-side code. Use environment variables, rotate keys every 90 days, and implement IP whitelisting. For frontend apps, create a backend proxy that handles API authentication.</p></div>
+    </div>
+    <div class="faq-item" [class.open]="isFaqOpen(2)">
+      <div class="faq-question" (click)="toggleFaq(2)"><h4>What data formats are supported?</h4><i class="fas fa-chevron-down"></i></div>
+      <div class="faq-answer"><p>The API exclusively uses JSON (UTF-8, RFC 7159). All endpoints accept and return <code>application/json</code>.</p></div>
+    </div>
+    <div class="faq-item" [class.open]="isFaqOpen(3)">
+      <div class="faq-question" (click)="toggleFaq(3)"><h4>How do I paginate through large result sets?</h4><i class="fas fa-chevron-down"></i></div>
+      <div class="faq-answer">
+        <div class="code-example"><pre><code class="language-bash"># First page
+curl "https://api.oscarrondon.com/v1/content?limit=10&offset=0"
+# Second page
+curl "https://api.oscarrondon.com/v1/content?limit=10&offset=10"</code></pre></div>
+        <p>The response includes <code>pagination.has_more</code> to detect if more pages exist.</p>
+      </div>
+    </div>
+  </div>
+
+  <h2 id="technical-questions">Technical Questions</h2>
+  <div class="faq-list">
+    <div class="faq-item" [class.open]="isFaqOpen(4)">
+      <div class="faq-question" (click)="toggleFaq(4)"><h4>Can I use webhooks for real-time notifications?</h4><i class="fas fa-chevron-down"></i></div>
+      <div class="faq-answer"><p>Yes! Webhooks are available for Pro and Enterprise plans. Configure them in your dashboard under "API Settings".</p></div>
+    </div>
+    <div class="faq-item" [class.open]="isFaqOpen(5)">
+      <div class="faq-question" (click)="toggleFaq(5)"><h4>Is there API versioning?</h4><i class="fas fa-chevron-down"></i></div>
+      <div class="faq-answer"><p>Yes, URL-based versioning (<code>/v1/</code>). We maintain backwards compatibility for at least 12 months and announce breaking changes in advance.</p></div>
+    </div>
+  </div>
+
+  <h2 id="billing-questions">Billing &amp; Plans</h2>
+  <div class="faq-list">
+    <div class="faq-item" [class.open]="isFaqOpen(6)">
+      <div class="faq-question" (click)="toggleFaq(6)"><h4>How is API usage calculated?</h4><i class="fas fa-chevron-down"></i></div>
+      <div class="faq-answer"><p>Each successful (2xx) request counts toward your quota. Failed requests (4xx/5xx) don't count. Usage resets monthly on your billing cycle date.</p></div>
+    </div>
+    <div class="faq-item" [class.open]="isFaqOpen(7)">
+      <div class="faq-question" (click)="toggleFaq(7)"><h4>Can I upgrade or downgrade my plan?</h4><i class="fas fa-chevron-down"></i></div>
+      <div class="faq-answer"><p>Yes. Upgrades take effect immediately; downgrades take effect at the next billing cycle. No penalties for plan changes.</p></div>
+    </div>
+  </div>
+</section>

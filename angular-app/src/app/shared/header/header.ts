@@ -14,12 +14,11 @@ export class Header {
   mobileMenuOpen = signal(false);
 
   readonly projectLinks = [
-    { path: 'blogs',              label: 'Technical Articles', icon: '/images/drop-down/Blog icon.png' },
-    { path: 'user-guides',        label: 'User Guides',        icon: '/images/drop-down/User Guide icon.png' },
-    { path: 'white-papers',       label: 'White Papers',       icon: '/images/drop-down/White Paper icon.png' },
-    { path: 'workflow-diagrams',  label: 'Workflow Diagrams',  icon: '/images/drop-down/Visuals icon.png' },
-    { path: 'videos',             label: 'Videos',             icon: '/images/drop-down/Content Strategy icon.png' },
-    { path: 'api-docs',           label: 'API Docs',           icon: '/images/drop-down/Blog icon.png' },
+    { path: 'blogs',             label: 'Technical Articles', icon: '/images/drop-down/Blog icon.png' },
+    { path: 'user-guides',       label: 'User Guides',        icon: '/images/drop-down/User Guide icon.png' },
+    { path: 'white-papers',      label: 'White Papers',       icon: '/images/drop-down/White Paper icon.png' },
+    { path: 'workflow-diagrams', label: 'Workflow Diagrams',  icon: '/images/drop-down/Visuals icon.png' },
+    { path: 'videos',            label: 'Videos',             icon: '/images/drop-down/Content Strategy icon.png' },
   ];
 
   @HostListener('document:click', ['$event'])

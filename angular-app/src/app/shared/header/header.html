@@ -1,4 +1,4 @@
-<nav class="navbar" [class.scrolled]="true">
+<nav class="navbar">
   <!-- Logo -->
   <a routerLink="/" class="nav-logo">
     <img src="/images/Nuevo Logo Black.png" class="logo logo-light" alt="Oscar Rondon logo">
@@ -31,21 +31,23 @@
     </li>
 
     <li>
+      <a routerLink="/api-docs" routerLinkActive="active" class="nav-link">API Docs</a>
+    </li>
+
+    <li>
       <a routerLink="/about" routerLinkActive="active" class="nav-link">About</a>
     </li>
   </ul>
 
   <!-- Right-side controls -->
   <div class="nav-controls">
-    <button class="toggle-mode" (click)="darkMode.toggle()" data-testid="dark-mode-toggle" [attr.aria-label]="darkMode.isDark() ? 'Switch to light mode' : 'Switch to dark mode'">
+    <button class="toggle-mode" (click)="darkMode.toggle()" data-testid="dark-mode-toggle"
+      [attr.aria-label]="darkMode.isDark() ? 'Switch to light mode' : 'Switch to dark mode'">
       <i [class]="darkMode.iconClass()" class="icon"></i>
     </button>
 
-    <!-- Mobile hamburger -->
     <button class="hamburger" (click)="toggleMobileMenu()" aria-label="Toggle menu">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
@@ -57,6 +59,7 @@
     @for (link of projectLinks; track link.path) {
       <a [routerLink]="['/projects', link.path]" class="mobile-link">{{ link.label }}</a>
     }
+    <a routerLink="/api-docs" class="mobile-link">API Docs</a>
     <a routerLink="/about" class="mobile-link">About</a>
   </div>
 }

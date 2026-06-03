@@ -1,0 +1,232 @@
+<nav class="breadcrumb">
+  <span>API Documentation</span> <span>/</span> <span>Guides</span>
+</nav>
+
+<section id="integration-guide" class="api-section">
+  <div class="section-header">
+    <h1>Integration Guide</h1>
+    <p class="section-description">Step-by-step guides to help you integrate our API into your applications.</p>
+  </div>
+
+  <h2 id="web-application">Web Application Integration</h2>
+  <p>Integrating our API into a web application is straightforward. Here's a complete example using JavaScript and modern web technologies.</p>
+
+  <h3>Setting Up Authentication</h3>
+  <p>First, create a secure environment for your API key. Never expose API keys in client-side code.</p>
+
+  <div class="code-example">
+    <pre><code class="language-javascript">// config.js - Store this securely on your server
+const API_CONFIG = &#123;
+  baseURL: 'https://api.oscarrondon.com/v1',
+  apiKey: process.env.API_KEY,
+  timeout: 10000
+&#125;;
+
+class ApiClient &#123;
+  constructor(config) &#123;
+    this.baseURL = config.baseURL;
+    this.apiKey = config.apiKey;
+  &#125;
+
+  async request(endpoint, options = &#123;&#125;) &#123;
+    const url = `$&#123;this.baseURL&#125;$&#123;endpoint&#125;`;
+    const config = &#123;
+      headers: &#123; 'Authorization': `Bearer $&#123;this.apiKey&#125;`, 'Content-Type': 'application/json', ...options.headers &#125;,
+      ...options
+    &#125;;
+    const response = await fetch(url, config);
+    if (!response.ok) throw new Error(`HTTP $&#123;response.status&#125;`);
+    return await response.json();
+  &#125;
+&#125;</code></pre>
+  </div>
+
+  <h2 id="mobile-integration">Mobile Application Integration</h2>
+  <p>Our API works seamlessly with mobile applications. Here are best practices for iOS and Android integration.</p>
+
+  <div class="code-example">
+    <pre><code class="language-swift">// iOS Swift Example
+class APIService &#123;
+    private let baseURL = "https://api.oscarrondon.com/v1"
+    private let apiKey: String
+
+    func fetchContent(completion: &#64;escaping (Result&lt;[Content], APIError&gt;) -&gt; Void) &#123;
+        guard let url = URL(string: "\(baseURL)/content") else &#123;
+            completion(.failure(.invalidURL)); return
+        &#125;
+        var request = URLRequest(url: url)
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        URLSession.shared.dataTask(with: request) &#123; data, _, error in
+            // handle response
+        &#125;.resume()
+    &#125;
+&#125;</code></pre>
+  </div>
+
+  <h2 id="server-integration">Server-to-Server Integration</h2>
+  <p>For backend services, implement caching and rate limiting to optimize performance.</p>
+
+  <div class="code-example">
+    <pre><code class="language-python">import requests
+from functools import lru_cache
+
+class APIClient:
+    def __init__(self, api_key: str):
+        self.session = requests.Session()
+        self.session.headers.update(&#123;'Authorization': f'Bearer &#123;api_key&#125;'&#125;)
+        self.base_url = "https://api.oscarrondon.com/v1"
+
+    &#64;lru_cache(maxsize=100)
+    def get_content(self, content_type=None):
+        params = &#123;'type': content_type&#125; if content_type else &#123;&#125;
+        response = self.session.get(f"&#123;self.base_url&#125;/content", params=params)
+        response.raise_for_status()
+        return response.json()['data']</code></pre>
+  </div>
+</section>
+
+<section id="best-practices" class="api-section">
+  <div class="section-header">
+    <h1>Best Practices</h1>
+    <p class="section-description">Follow these recommendations to build robust, scalable applications.</p>
+  </div>
+
+  <h2 id="authentication-security">Authentication &amp; Security</h2>
+  <div class="security-tips">
+    <div class="tip-card">
+      <div class="tip-icon"><i class="fas fa-key"></i></div>
+      <div class="tip-content">
+        <h4>API Key Security</h4>
+        <ul>
+          <li>Never expose API keys in client-side code</li>
+          <li>Use environment variables for server applications</li>
+          <li>Rotate API keys regularly</li>
+          <li>Implement IP whitelisting when possible</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon"><i class="fas fa-shield-alt"></i></div>
+      <div class="tip-content">
+        <h4>Request Security</h4>
+        <ul>
+          <li>Always use HTTPS for API requests</li>
+          <li>Validate and sanitize user inputs</li>
+          <li>Implement proper error handling</li>
+          <li>Log security events for monitoring</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <h2 id="performance-optimization">Performance Optimization</h2>
+  <p>Optimize your API usage for better performance and cost efficiency.</p>
+  <div class="code-example">
+    <pre><code class="language-javascript">// Good: Use pagination for large datasets
+const fetchAllContent = async () =&gt; &#123;
+  let allContent = [];
+  let offset = 0;
+  const limit = 50;
+  while (true) &#123;
+    const response = await apiClient.request(`/content?limit=$&#123;limit&#125;&offset=$&#123;offset&#125;`);
+    allContent.push(...response.data);
+    if (!response.pagination.has_more) break;
+    offset += limit;
+  &#125;
+  return allContent;
+&#125;;</code></pre>
+  </div>
+
+  <h2 id="error-handling-patterns">Error Handling Patterns</h2>
+  <div class="code-example">
+    <pre><code class="language-javascript">class APIError extends Error &#123;
+  constructor(message, status, code) &#123;
+    super(message);
+    this.status = status;
+    this.code = code;
+  &#125;
+&#125;
+
+async function requestWithRetry(endpoint, maxRetries = 3) &#123;
+  for (let attempt = 0; attempt &lt; maxRetries; attempt++) &#123;
+    try &#123;
+      const response = await fetch(endpoint, &#123; headers: getHeaders() &#125;);
+      if (response.status === 429) &#123;
+        const wait = response.headers.get('Retry-After') || Math.pow(2, attempt);
+        await new Promise(r =&gt; setTimeout(r, wait * 1000));
+        continue;
+      &#125;
+      if (!response.ok) throw new APIError('Request failed', response.status, 'ERR');
+      return await response.json();
+    &#125; catch (e) &#123;
+      if (attempt === maxRetries - 1) throw e;
+    &#125;
+  &#125;
+&#125;</code></pre>
+  </div>
+</section>
+
+<section id="troubleshooting" class="api-section">
+  <div class="section-header">
+    <h1>Troubleshooting</h1>
+    <p class="section-description">Common issues and their solutions to help you resolve problems quickly.</p>
+  </div>
+
+  <h2 id="common-errors">Common Errors</h2>
+  <div class="error-solutions">
+    <div class="error-solution">
+      <div class="error-header">
+        <span class="error-code">401 Unauthorized</span>
+        <span class="error-title">Authentication Failed</span>
+      </div>
+      <div class="error-content">
+        <p><strong>Cause:</strong> Invalid or missing API key</p>
+        <ul>
+          <li>Verify your API key is correct and active</li>
+          <li>Check that the Authorization header is properly formatted</li>
+          <li>Ensure your API key has the necessary permissions</li>
+        </ul>
+      </div>
+    </div>
+    <div class="error-solution">
+      <div class="error-header">
+        <span class="error-code">429 Rate Limited</span>
+        <span class="error-title">Too Many Requests</span>
+      </div>
+      <div class="error-content">
+        <p><strong>Cause:</strong> Exceeded rate limits</p>
+        <ul>
+          <li>Implement exponential backoff retry logic</li>
+          <li>Respect the Retry-After header</li>
+          <li>Implement request queuing and batching</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <h2 id="debugging-tips">Debugging Tips</h2>
+  <div class="code-example">
+    <pre><code class="language-bash"># Test basic connectivity
+curl -I https://api.oscarrondon.com/v1/
+
+# Test authentication
+curl -H "Authorization: Bearer YOUR_API_KEY" \
+     https://api.oscarrondon.com/v1/content?limit=1
+
+# Verbose output for debugging
+curl -v -H "Authorization: Bearer YOUR_API_KEY" \
+     https://api.oscarrondon.com/v1/content</code></pre>
+  </div>
+
+  <h2 id="support-resources">Support Resources</h2>
+  <div class="support-resources">
+    <div class="resource-item">
+      <i class="fas fa-envelope"></i>
+      <div><h4>Email Support</h4><p>Send detailed error logs to:</p><a href="mailto:o.rondon@uniandes.edu.co">o.rondon@uniandes.edu.co</a></div>
+    </div>
+    <div class="resource-item">
+      <i class="fab fa-github"></i>
+      <div><h4>GitHub Issues</h4><p>Report bugs or request features:</p><a href="https://github.com/Osaron" target="_blank" rel="noopener">GitHub Repository</a></div>
+    </div>
+  </div>
+</section>

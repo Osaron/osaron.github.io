@@ -1,0 +1,109 @@
+<nav class="breadcrumb">
+  <a routerLink="/">Home</a> <span>&gt;</span>
+  <span>Getting Started</span>
+</nav>
+
+<section id="overview" class="api-section">
+  <span class="page-eyebrow">Start here</span>
+  <h1>Getting Started</h1>
+  <p class="hero-summary">The Portfolio API exposes structured content used across this site. Simple integration, predictable JSON, and docs you can scan in a minute.</p>
+
+  <div class="hero-grid">
+    <div class="hero-card">
+      <h3>What you can do</h3>
+      <p>Read published portfolio content, fetch project details, and build your own client with straightforward REST endpoints and stable response envelopes.</p>
+      <div class="hero-meta">
+        <span class="meta-pill"><i class="fas fa-lock"></i> Bearer auth</span>
+        <span class="meta-pill"><i class="fas fa-bolt"></i> JSON over HTTPS</span>
+        <span class="meta-pill"><i class="fas fa-layer-group"></i> Resource-based routes</span>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>Base URL</h3>
+      <p>All requests go through one versioned origin.</p>
+      <div class="api-overview">
+        <div class="code-block">
+          <code>https://api.oscarrondon.com/v1</code>
+          <button class="copy-btn" (click)="copyUrl('https://api.oscarrondon.com/v1', $any($event.currentTarget))" aria-label="Copy base URL">
+            <i class="fas fa-copy"></i>
+          </button>
+        </div>
+      </div>
+      <p>Use HTTPS only and send an <code>Authorization</code> header on every request.</p>
+    </div>
+  </div>
+
+  <div class="quick-grid">
+    <article class="mini-card"><span class="mini-label">Format</span><strong>REST + JSON</strong><p>Simple endpoints, readable payloads, predictable field names.</p></article>
+    <article class="mini-card"><span class="mini-label">Version</span><strong>v1 stable</strong><p>Versioned URLs keep integrations calm while the portfolio evolves.</p></article>
+    <article class="mini-card"><span class="mini-label">Use case</span><strong>Portfolio surfaces</strong><p>Projects, writing, docs content, and automation-friendly metadata.</p></article>
+  </div>
+</section>
+
+<section id="authentication-summary" class="api-section">
+  <div class="section-intro">
+    <h2>Authentication</h2>
+    <p>Every request includes one bearer token. Keep it server-side and treat it like any other secret.</p>
+  </div>
+  <div class="info-grid">
+    <article class="info-card"><h3>Header</h3><p>Send <code>Authorization: Bearer YOUR_API_KEY</code> with each call. Requests without it return <code>401</code>.</p></article>
+    <article class="info-card"><h3>Environment</h3><p>Store the key in an environment variable or secure secret manager. Never ship it in client-side bundles.</p></article>
+  </div>
+  <div class="code-example">
+    <div class="code-label"><span>Example header</span><div class="code-label-actions"><span class="code-path">HTTP request</span><button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button></div></div>
+    <pre><code class="language-http">GET /v1/content HTTP/1.1
+Host: api.oscarrondon.com
+Authorization: Bearer YOUR_API_KEY
+Accept: application/json</code></pre>
+  </div>
+</section>
+
+<section id="first-request" class="api-section">
+  <div class="section-intro">
+    <h2>Make your first request</h2>
+    <p>Start with the published content collection. It shows the response contract used throughout the API.</p>
+  </div>
+  <div class="section-stack">
+    <div class="step"><div class="step-number">1</div><div class="step-content"><h3>Use your API key</h3><p>Replace <code>YOUR_API_KEY</code> with your token and call the <code>/content</code> endpoint.</p></div></div>
+    <div class="step"><div class="step-number">2</div><div class="step-content"><h3>Filter to one content type</h3><p>Keep the first response focused by requesting only published guides.</p></div></div>
+  </div>
+  <div class="code-example">
+    <div class="code-label"><span>Example request</span><div class="code-label-actions"><span class="code-path">GET /v1/content</span><button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button></div></div>
+    <pre><code class="language-bash">curl "https://api.oscarrondon.com/v1/content?type=guide&status=published&limit=3" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Accept: application/json"</code></pre>
+  </div>
+  <div class="callout-card"><h3>Why start here?</h3><p>This endpoint mirrors the kind of structured portfolio data a frontend actually needs: title, slug, category, publish state, and a few display-friendly fields.</p></div>
+</section>
+
+<section id="response-shape" class="api-section">
+  <div class="section-intro">
+    <h2>Understand the response shape</h2>
+    <p>Responses stay compact. Most list endpoints return a <code>data</code> array plus lightweight pagination and metadata.</p>
+  </div>
+  <div class="code-example">
+    <div class="code-label"><span>Example response</span><div class="code-label-actions"><span class="code-path">application/json</span><button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button></div></div>
+    <pre><code class="language-json">&#123;
+  "data": [&#123; "id": "cnt_1024", "slug": "designing-docs-that-feel-fast", "title": "Designing Docs That Feel Fast", "type": "guide", "status": "published", "updated_at": "2026-03-28T14:20:00Z" &#125;],
+  "pagination": &#123; "limit": 3, "offset": 0, "has_more": false &#125;,
+  "meta": &#123; "request_id": "req_7gk29m", "version": "v1" &#125;
+&#125;</code></pre>
+  </div>
+  <div class="info-grid">
+    <article class="info-card"><h3><code>data</code></h3><p>The main payload. Lists return arrays and single-resource routes return one object.</p></article>
+    <article class="info-card"><h3><code>meta</code></h3><p>Small operational details like request id, version, or timing that help with debugging.</p></article>
+  </div>
+</section>
+
+<section id="next-steps" class="api-section">
+  <div class="section-intro">
+    <h2>Next steps</h2>
+    <p>Once the first request works, move deeper into the reference in this order.</p>
+  </div>
+  <div class="info-grid">
+    <article class="info-card"><h3><a routerLink="/api-docs/authentication">Authentication</a></h3><p>See key formats, request headers, and security guidance.</p></article>
+    <article class="info-card"><h3><a routerLink="/api-docs/api-reference">API Reference</a></h3><p>Review routes, methods, and status codes before building a client.</p></article>
+    <article class="info-card"><h3><a routerLink="/api-docs/content-api">Content API</a></h3><p>Dig into the most useful resource group first, including filters and examples.</p></article>
+    <article class="info-card"><h3><a routerLink="/api-docs/guides">Guides</a></h3><p>Use integration notes and best practices when you are ready to productionize.</p></article>
+  </div>
+</section>
