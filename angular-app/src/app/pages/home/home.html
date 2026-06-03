@@ -1,1 +1,123 @@
-<p>home works!</p>
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="tagline">Senior Technical Writer &amp; Documentation Specialist</p>
+    <h1>Hi, I'm <span class="accent">Oscar</span></h1>
+    <p class="hero-sub">I create impactful documentation for users, developers, and teams.</p>
+  </div>
+  <div class="hero-image">
+    <img src="/images/hero_animation.svg" alt="Hero animation">
+  </div>
+</section>
+
+<!-- Featured Projects -->
+<section class="projects" id="projects">
+  <h2>Featured <span class="accent">Projects</span></h2>
+  <div class="projects-container">
+
+    <!-- Tab list -->
+    <nav class="project-nav">
+      @for (tab of tabs; track tab.id) {
+        <button
+          class="project-tab"
+          [class.active]="activeTab() === tab.id"
+          (click)="activeTab.set(tab.id)">
+          <img [src]="tab.icon" [alt]="tab.label" class="tab-icon">
+          {{ tab.label }}
+        </button>
+      }
+    </nav>
+
+    <!-- Preview panel -->
+    <div class="project-content">
+      <div class="project-preview">
+        <div class="preview-header">
+          <div class="preview-info">
+            <h3>{{ activeTabData.title }}</h3>
+            <p>{{ activeTabData.description }}</p>
+            <div class="preview-tags">{{ activeTabData.tags }}</div>
+          </div>
+          <a [routerLink]="activeTabData.route" class="preview-link">
+            <div class="link-circle"><span class="arrow-symbol">→</span></div>
+          </a>
+        </div>
+        <a [routerLink]="activeTabData.route">
+          <img [src]="activeTabData.preview" [alt]="activeTabData.title + ' preview'" class="preview-image">
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tech Stack -->
+<section class="skills-strip">
+  <h2>Tech Stack</h2>
+  <div class="stack-container">
+    @for (group of stackGroups; track group.heading) {
+      <div class="stack-group">
+        <h3>{{ group.heading }}</h3>
+        <div class="stack-items">
+          @for (item of group.items; track item.label) {
+            <a [href]="item.url" class="stack-item icon-skill" target="_blank" rel="noopener">
+              <div class="icon-wrapper">
+                <img [src]="item.icon" [alt]="item.label + ' logo'">
+              </div>
+              <span>{{ item.label }}</span>
+            </a>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- Why Me -->
+<section class="why-me">
+  <h2>Why Me?</h2>
+  <div class="why-me-wrapper">
+
+    <!-- Left: value list -->
+    <div class="why-me-left">
+      <h3>Added Value</h3>
+      <ul class="why-list">
+        <li>
+          <img src="/images/checkmark-svg.svg" alt="" class="check-icon">
+          Proactively report bugs during documentation updates
+        </li>
+        <li>
+          <img src="/images/checkmark-svg.svg" alt="" class="check-icon">
+          Identify usability gaps through technical analysis
+        </li>
+        <li>
+          <img src="/images/checkmark-svg.svg" alt="" class="check-icon">
+          Improve workflows with agile, cross-team collaboration
+        </li>
+      </ul>
+    </div>
+
+    <!-- Right: carousel -->
+    <div class="why-me-right">
+      <div class="carousel">
+        @for (slide of slides; track slide.heading; let i = $index) {
+          <div class="carousel-slide" [class.active]="activeSlide() === i">
+            <h3>{{ slide.heading }}</h3>
+            <div class="company-icons">
+              @for (item of slide.items; track item.label) {
+                <a [href]="item.url" target="_blank" rel="noopener" class="company-item">
+                  <img [src]="item.img" [alt]="item.label">
+                  <p>{{ item.label }}</p>
+                </a>
+              }
+            </div>
+          </div>
+        }
+      </div>
+      <div class="carousel-dots">
+        @for (slide of slides; track slide.heading; let i = $index) {
+          <span class="dot" [class.active]="activeSlide() === i" (click)="activeSlide.set(i)"></span>
+        }
+      </div>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,40 @@
+.visuals-hero {
+  background: linear-gradient(to right, #1b4eff, #66ccff);
+  color: white;
+  padding: 4rem 10%;
+
+  h1 {
+    font-size: 2.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p { font-size: 1.1rem; }
+}
+
+.visual-section {
+  padding: 3rem 10%;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.visual-item {
+  h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  p {
+    color: var(--text-color);
+    opacity: 0.85;
+    line-height: 1.7;
+    max-width: 700px;
+  }
+}

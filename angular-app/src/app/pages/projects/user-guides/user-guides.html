@@ -1,1 +1,33 @@
-<p>user-guides works!</p>
+<div class="ug-hero">
+  <h1><i class="fa-solid fa-book-open"></i> User Guides</h1>
+  <p>Step-by-step documentation designed for end users navigating complex software systems.</p>
+</div>
+
+<section class="ug-list">
+  @if (guides$ | async; as guides) {
+    @for (guide of guides; track guide.slug) {
+      <article class="ug-row">
+        <img [src]="guide.cover" [alt]="guide.title" class="ug-cover">
+        <div class="ug-body">
+          <div class="ug-tags">
+            @for (tag of guide.tags; track tag) {
+              <span class="tag">{{ tag }}</span>
+            }
+          </div>
+          <h2 class="ug-title">{{ guide.title }}</h2>
+          <p class="ug-summary">{{ guide.summary }}</p>
+          <div class="ug-meta">
+            <span>{{ guide.year }}</span>
+            <span>{{ guide.readMins }} min read</span>
+          </div>
+          <a [href]="'/projects/user-guides/' + guide.slug + '/manual.pdf'"
+             target="_blank" rel="noopener" class="btn btn-primary">
+            <i class="fa-solid fa-file-pdf"></i> Download PDF
+          </a>
+        </div>
+      </article>
+    }
+  } @else {
+    <p class="loading">Loading guides…</p>
+  }
+</section>
