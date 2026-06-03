@@ -1,4 +1,4 @@
-import { Component, inject, signal, HostListener } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { DarkModeService } from '../../core/services/dark-mode.service';
 
@@ -10,7 +10,6 @@ import { DarkModeService } from '../../core/services/dark-mode.service';
 })
 export class Header {
   darkMode = inject(DarkModeService);
-  dropdownOpen = signal(false);
   mobileMenuOpen = signal(false);
 
   readonly projectLinks = [
@@ -20,23 +19,6 @@ export class Header {
     { path: 'workflow-diagrams', label: 'Workflow Diagrams',  icon: '/images/drop-down/Visuals icon.png' },
     { path: 'videos',            label: 'Videos',             icon: '/images/drop-down/Content Strategy icon.png' },
   ];
-
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    if (!target.closest('.dropdown')) {
-      this.dropdownOpen.set(false);
-    }
-  }
-
-  toggleDropdown(event: MouseEvent) {
-    event.stopPropagation();
-    this.dropdownOpen.update(v => !v);
-  }
-
-  closeDropdown() {
-    this.dropdownOpen.set(false);
-  }
 
   toggleMobileMenu() {
     this.mobileMenuOpen.update(v => !v);
