@@ -2,10 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>PortfolioApp</title>
+  <title>Oscar Rondon | Technical Writer</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Senior Technical Writer & Documentation Specialist — portfolio of Oscar Rondon">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script>
+    // Restores the path after the 404.html redirect on GitHub Pages.
+    (function(l) {
+      if (l.search[1] === '/') {
+        var decoded = l.search.slice(1).split('&').map(function(s) {
+          return s.replace(/~and~/g, '&');
+        }).join('?');
+        window.history.replaceState(null, null,
+          l.pathname.slice(0, -1) + decoded + l.hash
+        );
+      }
+    }(window.location));
+  </script>
 </head>
 <body>
   <app-root></app-root>
