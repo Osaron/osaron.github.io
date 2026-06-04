@@ -25,6 +25,20 @@
 .nav-logo {
   display: flex;
   align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.nav-home-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-color);
+  font-family: 'Poppins', sans-serif;
+  transition: color 0.2s ease;
+}
+
+.nav-logo:hover .nav-home-label {
+  color: var(--accent);
 }
 
 .logo {

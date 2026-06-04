@@ -59,7 +59,7 @@ body.api-docs-page {
   max-width: 1480px;
   min-height: calc(100vh - 96px);
   margin: 0 auto;
-  padding: 1.5rem 1.25rem 4rem;
+  padding: 1.5rem 1.25rem 2rem;
   font-family: 'Poppins', sans-serif;
   color: var(--api-text);
 }
@@ -77,12 +77,16 @@ body.dark-mode.api-docs-page .api-grid::before {
 /* ── Left Sidebar ──────────────────────────────────────────────────── */
 .left-sidebar {
   grid-area: sidebar;
-  position: sticky;
+  position: fixed;
   top: calc(var(--navbar-height) + 16px);
+  left: max(1.25rem, calc((100vw - 1480px) / 2 + 1.25rem));
+  width: 280px;
   height: calc(100vh - var(--navbar-height) - 48px);
   overflow-y: auto;
   overflow-x: hidden;
   padding: 1rem 1rem 1rem 0.25rem;
+  background: var(--api-shell-bg);
+  z-index: 10;
 }
 
 .sidebar-content {
@@ -683,12 +687,16 @@ body.dark-mode.api-docs-page .callout-card {
 /* ── Right Sidebar (TOC) ───────────────────────────────────────────── */
 .right-sidebar {
   grid-area: toc;
-  position: sticky;
+  position: fixed;
   top: calc(var(--navbar-height) + 16px);
+  right: max(1.25rem, calc((100vw - 1480px) / 2 + 1.25rem));
+  width: 220px;
   height: calc(100vh - var(--navbar-height) - 48px);
   overflow-y: auto;
   overflow-x: hidden;
   padding: 1rem 0 1rem 1rem;
+  background: var(--api-shell-bg);
+  z-index: 10;
 }
 
 .toc-content {
@@ -747,10 +755,13 @@ body.dark-mode.api-docs-page {
 /* ── Responsive ────────────────────────────────────────────────────── */
 @media (min-width: 1200px) {
   .api-grid { grid-template-columns: 290px minmax(0,1fr) 230px; }
+  .left-sidebar { width: 290px; }
+  .right-sidebar { width: 230px; }
 }
 
 @media (max-width: 1199px) and (min-width: 769px) {
   .api-grid { grid-template-columns: 270px minmax(0,1fr); grid-template-areas: "sidebar main"; }
+  .left-sidebar { width: 270px; }
   .right-sidebar { display: none; }
   .main-content { padding-right: 1.1rem; }
 }
@@ -766,7 +777,13 @@ body.dark-mode.api-docs-page {
     padding: 0.75rem 0.75rem 2rem;
   }
   .api-grid::before { inset: 0.35rem; border-radius: 22px; }
-  .left-sidebar { position: static; height: auto; padding: 0.4rem 0 0; }
+  .left-sidebar {
+    position: static;
+    width: auto;
+    height: auto;
+    background: transparent;
+    padding: 0.4rem 0 0;
+  }
   .main-content { padding: 0.9rem 0.3rem 1.5rem; }
   .sidebar-content, .toc-content { border-radius: 20px; }
   .right-sidebar { display: none; }

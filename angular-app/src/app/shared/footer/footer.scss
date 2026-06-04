@@ -56,5 +56,15 @@
   font-size: 0.75rem;
   color: var(--text-color);
   margin-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.25rem;
+}
+
+.version-tag {
+  text-align: right;
+  font-size: 0.65rem;
+  color: var(--text-color);
+  opacity: 0.35;
+  padding: 0 1rem 0.5rem;
+  font-family: 'Monaco', 'Menlo', monospace;
+  letter-spacing: 0.04em;
 }

@@ -10,20 +10,18 @@ import { TocItem } from '../../../core/services/toc.service';
 })
 export class Guides extends ApiPageBase {
   protected tocItems: TocItem[] = [
-    { id: 'integration-guide', label: 'Integration Guide', children: [
-        { id: 'web-application',    label: 'Web Application' },
-        { id: 'mobile-integration', label: 'Mobile Integration' },
-        { id: 'server-integration', label: 'Server Integration' },
-    ]},
-    { id: 'best-practices', label: 'Best Practices', children: [
-        { id: 'authentication-security',  label: 'Authentication' },
-        { id: 'performance-optimization', label: 'Performance' },
-        { id: 'error-handling-patterns',  label: 'Error Handling' },
-    ]},
-    { id: 'troubleshooting', label: 'Troubleshooting', children: [
-        { id: 'common-errors',    label: 'Common Errors' },
-        { id: 'debugging-tips',   label: 'Debugging Tips' },
-        { id: 'support-resources', label: 'Support Resources' },
+    { id: 'testing-overview', label: 'Overview' },
+    { id: 'load-testing',     label: 'Load & Stress Testing' },
+    { id: 'api-automation',   label: 'API Automation' },
+    { id: 'ui-automation',    label: 'UI & E2E Testing' },
+    { id: 'mobile-testing',   label: 'Mobile Testing' },
+    { id: 'bdd-cucumber',     label: 'BDD & Gherkin' },
+    { id: 'languages',        label: 'Languages' },
+    { id: 'best-practices',   label: 'Best Practices' },
+    { id: 'troubleshooting',  label: 'Troubleshooting', children: [
+      { id: 'common-issues',     label: 'Common Issues' },
+      { id: 'debugging-tips',    label: 'Debugging Tips' },
+      { id: 'support-resources', label: 'Support' },
     ]},
   ];
 }

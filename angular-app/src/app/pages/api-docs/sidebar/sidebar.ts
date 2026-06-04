@@ -18,7 +18,7 @@ export class Sidebar {
     { label: 'Authentication',  route: 'authentication'  },
     { label: 'API Reference',   route: 'api-reference'   },
     { label: 'Content API',     route: 'content-api'     },
-    { label: 'Guides',          route: 'guides'          },
+    { label: 'Testing Guide',   route: 'guides'          },
     { label: 'Resources',       route: 'resources'       },
   ];
 

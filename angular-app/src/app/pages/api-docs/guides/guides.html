@@ -1,232 +1,684 @@
 <nav class="breadcrumb">
-  <span>API Documentation</span> <span>/</span> <span>Guides</span>
+  <a routerLink="/">Home</a> <span>&gt;</span>
+  <a routerLink="/api-docs">API Docs</a> <span>&gt;</span>
+  <span>Testing Guide</span>
 </nav>
 
-<section id="integration-guide" class="api-section">
-  <div class="section-header">
-    <h1>Integration Guide</h1>
-    <p class="section-description">Step-by-step guides to help you integrate our API into your applications.</p>
+<!-- ── Overview ─────────────────────────────────────────────────────── -->
+<section id="testing-overview" class="api-section">
+  <span class="page-eyebrow"><i class="fas fa-robot"></i> QA Engineering</span>
+  <h1>Automation Testing Guide</h1>
+  <p class="hero-summary">A practical reference for API, UI, load, and mobile testing — covering the tools, languages, and patterns used across the full testing spectrum, from exploratory sessions to fully automated CI pipelines.</p>
+
+  <div class="hero-grid">
+    <div class="hero-card">
+      <h3>Testing strategy</h3>
+      <p>Effective QA is layered. Exploratory testing discovers unknown risks early. Automated checks — from contract tests to full E2E flows — then catch regressions on every commit and keep releases safe at speed.</p>
+      <div class="hero-meta">
+        <span class="meta-pill"><i class="fas fa-search"></i> Exploratory</span>
+        <span class="meta-pill"><i class="fas fa-code-branch"></i> Integration</span>
+        <span class="meta-pill"><i class="fas fa-route"></i> End-to-End</span>
+        <span class="meta-pill"><i class="fas fa-bolt"></i> Load</span>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>The testing pyramid</h3>
+      <p>Invest most in fast, isolated unit tests. Build a solid API and integration layer. Keep E2E tests targeted at critical user journeys — they are the most expensive to write and maintain.</p>
+      <div class="hero-meta">
+        <span class="meta-pill">Many unit tests</span>
+        <span class="meta-pill">Some API tests</span>
+        <span class="meta-pill">Few E2E tests</span>
+      </div>
+    </div>
   </div>
 
-  <h2 id="web-application">Web Application Integration</h2>
-  <p>Integrating our API into a web application is straightforward. Here's a complete example using JavaScript and modern web technologies.</p>
-
-  <h3>Setting Up Authentication</h3>
-  <p>First, create a secure environment for your API key. Never expose API keys in client-side code.</p>
-
-  <div class="code-example">
-    <pre><code class="language-javascript">// config.js - Store this securely on your server
-const API_CONFIG = &#123;
-  baseURL: 'https://api.oscarrondon.com/v1',
-  apiKey: process.env.API_KEY,
-  timeout: 10000
-&#125;;
-
-class ApiClient &#123;
-  constructor(config) &#123;
-    this.baseURL = config.baseURL;
-    this.apiKey = config.apiKey;
-  &#125;
-
-  async request(endpoint, options = &#123;&#125;) &#123;
-    const url = `$&#123;this.baseURL&#125;$&#123;endpoint&#125;`;
-    const config = &#123;
-      headers: &#123; 'Authorization': `Bearer $&#123;this.apiKey&#125;`, 'Content-Type': 'application/json', ...options.headers &#125;,
-      ...options
-    &#125;;
-    const response = await fetch(url, config);
-    if (!response.ok) throw new Error(`HTTP $&#123;response.status&#125;`);
-    return await response.json();
-  &#125;
-&#125;</code></pre>
-  </div>
-
-  <h2 id="mobile-integration">Mobile Application Integration</h2>
-  <p>Our API works seamlessly with mobile applications. Here are best practices for iOS and Android integration.</p>
-
-  <div class="code-example">
-    <pre><code class="language-swift">// iOS Swift Example
-class APIService &#123;
-    private let baseURL = "https://api.oscarrondon.com/v1"
-    private let apiKey: String
-
-    func fetchContent(completion: &#64;escaping (Result&lt;[Content], APIError&gt;) -&gt; Void) &#123;
-        guard let url = URL(string: "\(baseURL)/content") else &#123;
-            completion(.failure(.invalidURL)); return
-        &#125;
-        var request = URLRequest(url: url)
-        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-        URLSession.shared.dataTask(with: request) &#123; data, _, error in
-            // handle response
-        &#125;.resume()
-    &#125;
-&#125;</code></pre>
-  </div>
-
-  <h2 id="server-integration">Server-to-Server Integration</h2>
-  <p>For backend services, implement caching and rate limiting to optimize performance.</p>
-
-  <div class="code-example">
-    <pre><code class="language-python">import requests
-from functools import lru_cache
-
-class APIClient:
-    def __init__(self, api_key: str):
-        self.session = requests.Session()
-        self.session.headers.update(&#123;'Authorization': f'Bearer &#123;api_key&#125;'&#125;)
-        self.base_url = "https://api.oscarrondon.com/v1"
-
-    &#64;lru_cache(maxsize=100)
-    def get_content(self, content_type=None):
-        params = &#123;'type': content_type&#125; if content_type else &#123;&#125;
-        response = self.session.get(f"&#123;self.base_url&#125;/content", params=params)
-        response.raise_for_status()
-        return response.json()['data']</code></pre>
+  <div class="quick-grid">
+    <article class="mini-card">
+      <span class="mini-label">Unit / Component</span>
+      <strong>Fast &amp; isolated</strong>
+      <p>Validate individual functions. No external calls. Millisecond feedback in the developer's editor.</p>
+    </article>
+    <article class="mini-card">
+      <span class="mini-label">Integration / API</span>
+      <strong>Contract testing</strong>
+      <p>Verify service interactions, HTTP contracts, and data shapes at the API layer without a browser.</p>
+    </article>
+    <article class="mini-card">
+      <span class="mini-label">End-to-End</span>
+      <strong>Full user journeys</strong>
+      <p>Drive real browsers through critical flows — login, navigation, form submission — across the full stack.</p>
+    </article>
   </div>
 </section>
 
-<section id="best-practices" class="api-section">
-  <div class="section-header">
-    <h1>Best Practices</h1>
-    <p class="section-description">Follow these recommendations to build robust, scalable applications.</p>
+<!-- ── Load & Stress Testing ─────────────────────────────────────────── -->
+<section id="load-testing" class="api-section">
+  <div class="section-intro">
+    <h2>Load &amp; Stress Testing</h2>
+    <p>Load testing verifies behaviour under expected traffic volumes. Stress testing pushes beyond normal limits to find the system's breaking point and measure its recovery. Both are essential before major releases and infrastructure changes.</p>
   </div>
 
-  <h2 id="authentication-security">Authentication &amp; Security</h2>
-  <div class="security-tips">
-    <div class="tip-card">
-      <div class="tip-icon"><i class="fas fa-key"></i></div>
-      <div class="tip-content">
-        <h4>API Key Security</h4>
-        <ul>
-          <li>Never expose API keys in client-side code</li>
-          <li>Use environment variables for server applications</li>
-          <li>Rotate API keys regularly</li>
-          <li>Implement IP whitelisting when possible</li>
-        </ul>
+  <div class="sdk-grid">
+
+    <div class="sdk-card">
+      <div class="sdk-header">
+        <i class="fas fa-bolt"></i>
+        <h3>Apache JMeter</h3>
+        <span class="version">Open Source</span>
+      </div>
+      <div class="hero-meta">
+        <span class="meta-pill">Back end</span>
+        <span class="meta-pill">Java</span>
+        <span class="meta-pill">JavaScript</span>
+        <span class="meta-pill">Groovy</span>
+      </div>
+      <p>The industry standard for load and performance testing. Supports HTTP, HTTPS, FTP, JDBC, SOAP, REST, and more through a rich plugin ecosystem. Test plans are built in a GUI and run headlessly in CI pipelines with HTML dashboard output.</p>
+      <div class="code-example">
+        <div class="code-label"><span>Run JMeter headless via CLI</span></div>
+        <pre><code class="language-bash">jmeter -n -t test_plan.jmx \
+       -l results.jtl \
+       -e -o ./html-report/</code></pre>
       </div>
     </div>
-    <div class="tip-card">
-      <div class="tip-icon"><i class="fas fa-shield-alt"></i></div>
-      <div class="tip-content">
-        <h4>Request Security</h4>
-        <ul>
-          <li>Always use HTTPS for API requests</li>
-          <li>Validate and sanitize user inputs</li>
-          <li>Implement proper error handling</li>
-          <li>Log security events for monitoring</li>
-        </ul>
+
+    <div class="sdk-card">
+      <div class="sdk-header">
+        <i class="fas fa-chart-line"></i>
+        <h3>k6</h3>
+        <span class="version">Open Source · Cloud</span>
+      </div>
+      <div class="hero-meta">
+        <span class="meta-pill">Back end</span>
+        <span class="meta-pill">JavaScript</span>
+      </div>
+      <p>Developer-first load testing with a JavaScript scripting API. Lightweight, version-control friendly, and native to CI/CD. Grafana k6 Cloud adds distributed execution, real-time charts, and threshold alerting.</p>
+      <div class="code-example">
+        <div class="code-label"><span>k6 — basic load script</span></div>
+        <pre><code class="language-javascript">import http from 'k6/http';
+import &#123; check, sleep &#125; from 'k6';
+
+export const options = &#123; vus: 50, duration: '30s' &#125;;
+
+export default function () &#123;
+  const res = http.get('https://api.oscarrondon.com/v1/content', &#123;
+    headers: &#123; Authorization: 'Bearer YOUR_KEY' &#125;,
+  &#125;);
+  check(res, &#123; 'status 200': (r) => r.status === 200 &#125;);
+  sleep(1);
+&#125;</code></pre>
       </div>
     </div>
+
+    <div class="sdk-card">
+      <div class="sdk-header">
+        <i class="fas fa-flask"></i>
+        <h3>Locust</h3>
+        <span class="version">Open Source</span>
+      </div>
+      <div class="hero-meta">
+        <span class="meta-pill">Back end</span>
+        <span class="meta-pill">Python</span>
+      </div>
+      <p>Python-native distributed load testing. User behaviour is defined as Python classes, making complex multi-step workflows easy to script. A built-in real-time web UI provides live stats and user-count controls without extra tooling.</p>
+      <div class="code-example">
+        <div class="code-label"><span>Locust — user class definition</span></div>
+        <pre><code class="language-python">from locust import HttpUser, task, between
+
+class PortfolioUser(HttpUser):
+    wait_time = between(1, 3)
+
+    @task(3)
+    def list_content(self):
+        self.client.get("/v1/content",
+            headers={"Authorization": "Bearer YOUR_KEY"})
+
+    @task(1)
+    def get_single_item(self):
+        self.client.get("/v1/content/cnt_1024",
+            headers={"Authorization": "Bearer YOUR_KEY"})</code></pre>
+      </div>
+    </div>
+
+    <div class="sdk-card">
+      <div class="sdk-header">
+        <i class="fas fa-server"></i>
+        <h3>SoapUI / ReadyAPI</h3>
+        <span class="version">Free · Enterprise</span>
+      </div>
+      <div class="hero-meta">
+        <span class="meta-pill">Back end</span>
+        <span class="meta-pill">JavaScript</span>
+        <span class="meta-pill">Groovy</span>
+      </div>
+      <p>Dual-purpose tool combining functional API testing with a built-in load runner. ReadyAPI (enterprise) adds cloud execution, real-time reporting, and data-driven load scenarios. Groovy scripts handle dynamic tokens, custom assertions, and multi-step workflows.</p>
+    </div>
+
+    <div class="sdk-card">
+      <div class="sdk-header">
+        <i class="fas fa-layer-group"></i>
+        <h3>Karate (Load)</h3>
+        <span class="version">Open Source</span>
+      </div>
+      <div class="hero-meta">
+        <span class="meta-pill">Back end · Front end</span>
+        <span class="meta-pill">Gherkin</span>
+      </div>
+      <p>Unique in that the same BDD <code>.feature</code> files used for functional API testing are executed as load scenarios via <code>karate-gatling</code> — no separate load scripts needed. Eliminates duplication between test types and keeps maintenance low.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── API Automation ─────────────────────────────────────────────────── -->
+<section id="api-automation" class="api-section">
+  <div class="section-intro">
+    <h2>API &amp; Back-end Automation</h2>
+    <p>API tests validate endpoints, contracts, data integrity, and error handling in isolation — faster and more reliable than UI tests because they bypass the browser entirely. These run on every commit and form the backbone of a solid regression suite.</p>
   </div>
 
-  <h2 id="performance-optimization">Performance Optimization</h2>
-  <p>Optimize your API usage for better performance and cost efficiency.</p>
-  <div class="code-example">
-    <pre><code class="language-javascript">// Good: Use pagination for large datasets
-const fetchAllContent = async () =&gt; &#123;
-  let allContent = [];
-  let offset = 0;
-  const limit = 50;
-  while (true) &#123;
-    const response = await apiClient.request(`/content?limit=$&#123;limit&#125;&offset=$&#123;offset&#125;`);
-    allContent.push(...response.data);
-    if (!response.pagination.has_more) break;
-    offset += limit;
-  &#125;
-  return allContent;
-&#125;;</code></pre>
-  </div>
+  <div class="sdk-grid">
 
-  <h2 id="error-handling-patterns">Error Handling Patterns</h2>
-  <div class="code-example">
-    <pre><code class="language-javascript">class APIError extends Error &#123;
-  constructor(message, status, code) &#123;
-    super(message);
-    this.status = status;
-    this.code = code;
-  &#125;
+    <div class="sdk-card">
+      <div class="sdk-header">
+        <i class="fas fa-paper-plane"></i>
+        <h3>Postman / Newman</h3>
+        <span class="version">Free · Pro</span>
+      </div>
+      <div class="hero-meta">
+        <span class="meta-pill">Back end</span>
+        <span class="meta-pill">JavaScript</span>
+        <span class="meta-pill">Python</span>
+      </div>
+      <p>The most widely-used API testing platform. Collections organise requests by resource or workflow; environments inject variables per stage. <strong>Newman CLI</strong> runs Postman collections in CI pipelines without a GUI and outputs JUnit XML for test reporting.</p>
+      <div class="code-example">
+        <div class="code-label"><span>Postman — pm.test assertions</span></div>
+        <pre><code class="language-javascript">pm.test("Status is 200", () => &#123;
+  pm.response.to.have.status(200);
+&#125;);
+
+pm.test("Data array is present and not empty", () => &#123;
+  const json = pm.response.json();
+  pm.expect(json.data).to.be.an('array').that.is.not.empty;
+&#125;);
+
+pm.test("Pagination fields are present", () => &#123;
+  const &#123; pagination &#125; = pm.response.json();
+  pm.expect(pagination).to.have.keys(['limit', 'offset', 'has_more']);
+&#125;);</code></pre>
+      </div>
+    </div>
+
+    <div class="sdk-card">
+      <div class="sdk-header">
+        <i class="fas fa-check-double"></i>
+        <h3>REST Assured</h3>
+        <span class="version">Open Source</span>
+      </div>
+      <div class="hero-meta">
+        <span class="meta-pill">Back end</span>
+        <span class="meta-pill">Java</span>
+      </div>
+      <p>Java DSL that makes REST API validation read like natural language. Pairs with TestNG or JUnit in Maven/Gradle projects. GPath and Hamcrest matchers enable precise JSON and XML assertions on deeply nested responses.</p>
+      <div class="code-example">
+        <div class="code-label"><span>REST Assured — given / when / then</span></div>
+        <pre><code class="language-java">given()
+    .header("Authorization", "Bearer " + API_KEY)
+    .queryParam("type", "blog")
+    .queryParam("status", "published")
+.when()
+    .get("/v1/content")
+.then()
+    .statusCode(200)
+    .body("data",           not(empty()))
+    .body("data[0].type",   equalTo("blog"))
+    .body("pagination.has_more", isA(Boolean.class));</code></pre>
+      </div>
+    </div>
+
+    <div class="sdk-card">
+      <div class="sdk-header">
+        <i class="fas fa-vials"></i>
+        <h3>TestNG</h3>
+        <span class="version">Open Source</span>
+      </div>
+      <div class="hero-meta">
+        <span class="meta-pill">Back end · Front end</span>
+        <span class="meta-pill">Java</span>
+      </div>
+      <p>JVM testing framework with parallel execution, <code>&#64;DataProvider</code> for data-driven scenarios, and XML-based suite configuration. Used as the runner for REST Assured API tests and Selenium UI tests in the same Java project.</p>
+      <div class="code-example">
+        <div class="code-label"><span>TestNG — data-driven test</span></div>
+        <pre><code class="language-java">&#64;DataProvider(name = "contentTypes")
+public Object[][] types() &#123;
+    return new Object[][] &#123;
+        &#123;"blog"&#125;, &#123;"manual"&#125;, &#123;"whitepaper"&#125;
+    &#125;;
 &#125;
 
-async function requestWithRetry(endpoint, maxRetries = 3) &#123;
-  for (let attempt = 0; attempt &lt; maxRetries; attempt++) &#123;
-    try &#123;
-      const response = await fetch(endpoint, &#123; headers: getHeaders() &#125;);
-      if (response.status === 429) &#123;
-        const wait = response.headers.get('Retry-After') || Math.pow(2, attempt);
-        await new Promise(r =&gt; setTimeout(r, wait * 1000));
-        continue;
-      &#125;
-      if (!response.ok) throw new APIError('Request failed', response.status, 'ERR');
-      return await response.json();
-    &#125; catch (e) &#123;
-      if (attempt === maxRetries - 1) throw e;
-    &#125;
-  &#125;
+&#64;Test(dataProvider = "contentTypes")
+public void testListByType(String type) &#123;
+    given()
+        .header("Authorization", "Bearer " + API_KEY)
+        .queryParam("type", type)
+    .when()
+        .get("/v1/content")
+    .then()
+        .statusCode(200)
+        .body("data[0].type", equalTo(type));
 &#125;</code></pre>
+      </div>
+    </div>
+
+    <div class="sdk-card">
+      <div class="sdk-header">
+        <i class="fas fa-layer-group"></i>
+        <h3>Karate (API)</h3>
+        <span class="version">Open Source</span>
+      </div>
+      <div class="hero-meta">
+        <span class="meta-pill">Back end</span>
+        <span class="meta-pill">Gherkin</span>
+      </div>
+      <p>Write API tests in plain Gherkin without Java step definitions. Built-in HTTP client, JSON path assertions, schema validation, and parallel execution. Supports REST, GraphQL, and gRPC — and the same files double as load tests via Gatling.</p>
+      <div class="code-example">
+        <div class="code-label"><span>Karate — feature file</span></div>
+        <pre><code class="language-gherkin">Feature: Content API
+
+  Background:
+    * url 'https://api.oscarrondon.com/v1'
+    * header Authorization = 'Bearer ' + apiKey
+
+  Scenario: List published blog posts
+    Given path 'content'
+    And  param type   = 'blog'
+    And  param status = 'published'
+    When method GET
+    Then status 200
+    And  match response.data[*].type == '#[] blog'
+    And  match response.pagination   == &#123; limit: '#number', offset: '#number', has_more: '#boolean' &#125;</code></pre>
+      </div>
+    </div>
+
+    <div class="sdk-card">
+      <div class="sdk-header">
+        <i class="fas fa-server"></i>
+        <h3>SoapUI (Functional)</h3>
+        <span class="version">Free · ReadyAPI</span>
+      </div>
+      <div class="hero-meta">
+        <span class="meta-pill">Back end</span>
+        <span class="meta-pill">JavaScript</span>
+        <span class="meta-pill">Groovy</span>
+      </div>
+      <p>Industry favourite for SOAP and REST contract testing. Groovy scripts customise assertions, manage dynamic auth tokens, and chain multi-step flows. Mock services simulate dependencies without live infrastructure — essential for isolated early-development testing.</p>
+    </div>
+
   </div>
 </section>
 
-<section id="troubleshooting" class="api-section">
-  <div class="section-header">
-    <h1>Troubleshooting</h1>
-    <p class="section-description">Common issues and their solutions to help you resolve problems quickly.</p>
+<!-- ── UI & E2E Testing ───────────────────────────────────────────────── -->
+<section id="ui-automation" class="api-section">
+  <div class="section-intro">
+    <h2>UI &amp; End-to-End Testing</h2>
+    <p>E2E tests drive real browsers through user-facing flows — login, navigation, form submission, and data display — catching presentation-layer regressions that API tests alone cannot surface.</p>
   </div>
 
-  <h2 id="common-errors">Common Errors</h2>
-  <div class="error-solutions">
-    <div class="error-solution">
-      <div class="error-header">
-        <span class="error-code">401 Unauthorized</span>
-        <span class="error-title">Authentication Failed</span>
+  <div class="sdk-grid">
+
+    <div class="sdk-card">
+      <div class="sdk-header">
+        <i class="fas fa-globe"></i>
+        <h3>Selenium</h3>
+        <span class="version">Open Source</span>
       </div>
-      <div class="error-content">
-        <p><strong>Cause:</strong> Invalid or missing API key</p>
-        <ul>
-          <li>Verify your API key is correct and active</li>
-          <li>Check that the Authorization header is properly formatted</li>
-          <li>Ensure your API key has the necessary permissions</li>
-        </ul>
+      <div class="hero-meta">
+        <span class="meta-pill">Front end</span>
+        <span class="meta-pill">Python · Java · JS · C#</span>
+      </div>
+      <p>The most established browser automation library. WebDriver protocol communicates directly with Chrome, Firefox, Edge, and Safari drivers. Language-agnostic, widely supported in CI, and the foundation for Katalon Studio and other high-level platforms.</p>
+      <div class="code-example">
+        <div class="code-label"><span>Selenium — Python with explicit wait</span></div>
+        <pre><code class="language-python">from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+driver = webdriver.Chrome()
+driver.get("https://oscarrondon.com/api-docs")
+
+wait = WebDriverWait(driver, 10)
+h1 = wait.until(EC.presence_of_element_located((By.TAG_NAME, "h1")))
+assert "Getting Started" in h1.text
+driver.quit()</code></pre>
       </div>
     </div>
-    <div class="error-solution">
-      <div class="error-header">
-        <span class="error-code">429 Rate Limited</span>
-        <span class="error-title">Too Many Requests</span>
+
+    <div class="sdk-card">
+      <div class="sdk-header">
+        <i class="fas fa-rocket"></i>
+        <h3>Cypress</h3>
+        <span class="version">Open Source · Cloud</span>
       </div>
-      <div class="error-content">
-        <p><strong>Cause:</strong> Exceeded rate limits</p>
-        <ul>
-          <li>Implement exponential backoff retry logic</li>
-          <li>Respect the Retry-After header</li>
-          <li>Implement request queuing and batching</li>
-        </ul>
+      <div class="hero-meta">
+        <span class="meta-pill">Front end</span>
+        <span class="meta-pill">JavaScript</span>
       </div>
+      <p>Modern E2E framework running inside the browser for real-time execution. Automatic waiting eliminates most flakiness. Time-travel debugging, built-in screenshot and video capture, and a component testing mode all ship out of the box.</p>
+      <div class="code-example">
+        <div class="code-label"><span>Cypress — E2E spec</span></div>
+        <pre><code class="language-javascript">describe('API Docs', () => &#123;
+  beforeEach(() => cy.visit('/api-docs/getting-started'));
+
+  it('shows the page heading', () => &#123;
+    cy.get('h1').should('contain', 'Getting Started');
+  &#125;);
+
+  it('displays the base URL in the code block', () => &#123;
+    cy.get('.code-block code')
+      .should('contain', 'api.oscarrondon.com/v1');
+  &#125;);
+&#125;);</code></pre>
+      </div>
+    </div>
+
+    <div class="sdk-card">
+      <div class="sdk-header">
+        <i class="fas fa-play-circle"></i>
+        <h3>Playwright</h3>
+        <span class="version">Open Source</span>
+      </div>
+      <div class="hero-meta">
+        <span class="meta-pill">Front end · Back end</span>
+        <span class="meta-pill">Python · JS · Java · .NET</span>
+      </div>
+      <p>Microsoft's cross-browser automation library covering Chromium, Firefox, and WebKit in a single API. Network interception and request mocking make it equally powerful for API testing. Built-in parallel execution and a trace viewer speed up failure diagnosis.</p>
+      <div class="code-example">
+        <div class="code-label"><span>Playwright — Python example</span></div>
+        <pre><code class="language-python">from playwright.sync_api import sync_playwright
+
+with sync_playwright() as p:
+    browser = p.chromium.launch()
+    page = browser.new_page()
+    page.goto("https://oscarrondon.com/api-docs")
+    page.wait_for_selector("h1")
+    assert "Getting Started" in page.inner_text("h1")
+    browser.close()</code></pre>
+      </div>
+    </div>
+
+    <div class="sdk-card">
+      <div class="sdk-header">
+        <i class="fas fa-desktop"></i>
+        <h3>UFT One (Micro Focus)</h3>
+        <span class="version">Enterprise</span>
+      </div>
+      <div class="hero-meta">
+        <span class="meta-pill">Front end</span>
+        <span class="meta-pill">VBScript</span>
+      </div>
+      <p>Enterprise-grade GUI automation for web, Windows desktop (WinForms, WPF), SAP, and Citrix environments. AI-powered object recognition reduces script maintenance when UIs change. Common in large regulated industries — banking, insurance, and healthcare.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Mobile Testing ─────────────────────────────────────────────────── -->
+<section id="mobile-testing" class="api-section">
+  <div class="section-intro">
+    <h2>Mobile Testing</h2>
+    <p>Mobile automation tests run against native, hybrid, and mobile-web apps on simulators, emulators, or real devices connected via a cloud device farm such as BrowserStack or Sauce Labs.</p>
+  </div>
+
+  <div class="sdk-grid">
+
+    <div class="sdk-card">
+      <div class="sdk-header">
+        <i class="fas fa-mobile-alt"></i>
+        <h3>Appium</h3>
+        <span class="version">Open Source</span>
+      </div>
+      <div class="hero-meta">
+        <span class="meta-pill">Back end · Mobile</span>
+        <span class="meta-pill">Java · JS · Python · Groovy</span>
+      </div>
+      <p>The cross-platform standard for mobile app automation. An Appium server bridges the WebDriver protocol to iOS XCUITest and Android UIAutomator2 drivers without requiring app modifications. Supports native, hybrid, and mobile-web apps in a single framework.</p>
+      <div class="code-example">
+        <div class="code-label"><span>Appium — Python setup</span></div>
+        <pre><code class="language-python">from appium import webdriver
+
+desired_caps = &#123;
+    "platformName":   "Android",
+    "deviceName":     "emulator-5554",
+    "appPackage":     "com.example.app",
+    "appActivity":    ".MainActivity",
+    "automationName": "UIAutomator2"
+&#125;
+
+driver = webdriver.Remote("http://localhost:4723/wd/hub", desired_caps)
+driver.find_element("id", "com.example.app:id/login_button").click()</code></pre>
+      </div>
+    </div>
+
+    <div class="sdk-card">
+      <div class="sdk-header">
+        <i class="fas fa-robot"></i>
+        <h3>Katalon Studio</h3>
+        <span class="version">Free · Enterprise</span>
+      </div>
+      <div class="hero-meta">
+        <span class="meta-pill">Back end · Mobile</span>
+        <span class="meta-pill">Java · Groovy</span>
+      </div>
+      <p>All-in-one automation platform built on Selenium and Appium. A no-code recorder lets manual testers get started quickly; full Groovy scripting gives senior engineers complete control. Covers web, API, mobile, and desktop testing in a single project with built-in CI integration.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── BDD & Gherkin ──────────────────────────────────────────────────── -->
+<section id="bdd-cucumber" class="api-section">
+  <div class="section-intro">
+    <h2>BDD with Cucumber &amp; Gherkin</h2>
+    <p>Behaviour-Driven Development shifts the conversation from "what tests cover" to "what the system should do." Scenarios written in Gherkin become living documentation that non-technical stakeholders can read and directly validate.</p>
+  </div>
+
+  <div class="callout-card">
+    <h3>What is Gherkin?</h3>
+    <p>Gherkin is a structured plain-text DSL using five keywords — <strong>Given</strong>, <strong>When</strong>, <strong>Then</strong>, <strong>And</strong>, <strong>But</strong> — to describe observable system behaviour. Files use the <code>.feature</code> extension, are version-controlled alongside application code, and keep requirements and tests permanently in sync.</p>
+  </div>
+
+  <div class="code-example">
+    <div class="code-label">
+      <span>Gherkin — feature file with Scenario Outline</span>
+      <div class="code-label-actions"><span class="code-path">content.feature</span></div>
+    </div>
+    <pre><code class="language-gherkin">Feature: Content list endpoint
+
+  Background:
+    Given the base URL is "https://api.oscarrondon.com/v1"
+    And   I authenticate with a valid API key
+
+  Scenario: Retrieve published blog posts
+    When  I send GET "/content" with params "type=blog&status=published"
+    Then  the response status is 200
+    And   the response includes a non-empty "data" array
+    And   every item in "data" has status "published"
+
+  Scenario Outline: Filter content by type
+    When  I request content with type "&lt;type&gt;"
+    Then  all returned items have type "&lt;type&gt;"
+
+    Examples:
+      | type       |
+      | blog       |
+      | manual     |
+      | whitepaper |</code></pre>
+  </div>
+
+  <div class="info-grid">
+    <article class="info-card">
+      <h3>Cucumber</h3>
+      <p>The most widely-used BDD runner. Available for Java, JavaScript, Ruby, and Python. Step definitions map Gherkin phrases to automation code. Integrates with TestNG, JUnit, Playwright, and Selenium to drive full-stack BDD pipelines from a shared feature file.</p>
+    </article>
+    <article class="info-card">
+      <h3>Karate</h3>
+      <p>Extends Gherkin specifically for API and load testing without requiring separate step definitions. The DSL includes a built-in HTTP client, JSON path assertions, and schema matching — making a single <code>.feature</code> file a fully self-contained runnable test.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ── Languages ─────────────────────────────────────────────────────── -->
+<section id="languages" class="api-section">
+  <div class="section-intro">
+    <h2>Languages &amp; Frameworks</h2>
+    <p>Choosing the right language for your automation stack aligns test code with your team's existing skills, CI tooling, and the application's primary language.</p>
+  </div>
+
+  <div class="quick-grid">
+    <article class="mini-card">
+      <span class="mini-label">Python · (P)</span>
+      <strong>Versatile &amp; concise</strong>
+      <p>Primary for Locust, Playwright, and Selenium. Ecosystem includes <code>pytest</code>, <code>requests</code>, and <code>Behave</code> for BDD.</p>
+    </article>
+    <article class="mini-card">
+      <span class="mini-label">Groovy · (G)</span>
+      <strong>JVM scripting</strong>
+      <p>Default for Katalon and SoapUI scripts. Concise Java-compatible syntax with Spock Framework support for expressive, readable tests.</p>
+    </article>
+    <article class="mini-card">
+      <span class="mini-label">JavaScript · (JS)</span>
+      <strong>Browser-native</strong>
+      <p>Powers Cypress, k6, and Postman scripts. Node.js enables CLI runners — Newman, Jest, Mocha — in any CI pipeline.</p>
+    </article>
+    <article class="mini-card">
+      <span class="mini-label">Java · (J)</span>
+      <strong>Enterprise standard</strong>
+      <p>Used by REST Assured, TestNG, Appium, and JMeter. Maven and Gradle manage dependencies and parallel execution across large suites.</p>
+    </article>
+  </div>
+
+  <div class="info-grid">
+    <article class="info-card">
+      <h3>Gherkin · (Gb)</h3>
+      <p>A structured English dialect — not a programming language. Used by Cucumber and Karate to write executable specifications that product owners, QA engineers, and developers share. Keeps requirements and tests permanently aligned across the team.</p>
+    </article>
+    <article class="info-card">
+      <h3>VBScript · (VBS)</h3>
+      <p>The scripting engine behind UFT One. Used in legacy enterprise environments for Windows desktop, SAP, and Citrix automation. Keyword-driven and action-based test models are the typical patterns in these stacks.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ── Best Practices ─────────────────────────────────────────────────── -->
+<section id="best-practices" class="api-section">
+  <div class="section-intro">
+    <h2>Best Practices</h2>
+    <p>Consistent automation patterns keep test suites fast, reliable, and cost-effective to maintain as systems and teams grow.</p>
+  </div>
+
+  <div class="tip-card">
+    <div class="tip-icon"><i class="fas fa-sitemap"></i></div>
+    <div class="tip-content">
+      <h4>Follow the testing pyramid</h4>
+      <p>Write many fast unit tests, a solid middle layer of API tests, and only as many E2E tests as truly necessary. An inverted pyramid — mostly slow browser tests — creates brittle suites that break CI and burn team confidence in automation.</p>
+    </div>
+  </div>
+
+  <div class="tip-card">
+    <div class="tip-icon"><i class="fas fa-database"></i></div>
+    <div class="tip-content">
+      <h4>Isolate test data</h4>
+      <p>Every test should create, use, and clean up its own data. Never rely on state left by another test — shared data causes intermittent failures that are difficult to reproduce and expensive to diagnose across a team.</p>
+    </div>
+  </div>
+
+  <div class="tip-card">
+    <div class="tip-icon"><i class="fas fa-code-branch"></i></div>
+    <div class="tip-content">
+      <h4>Gate every pull request with tests</h4>
+      <p>Integrate your suite into GitHub Actions, Jenkins, or GitLab CI. Block merges on test failures. Fast pipeline feedback catches regressions before they reach staging or production and keeps the main branch green.</p>
+    </div>
+  </div>
+
+  <div class="tip-card">
+    <div class="tip-icon"><i class="fas fa-tags"></i></div>
+    <div class="tip-content">
+      <h4>Tag and categorise tests</h4>
+      <p>Use tags — <code>&#64;smoke</code>, <code>&#64;regression</code>, <code>&#64;load</code> — to run targeted subsets. Smoke tests on each deploy; full regression on a schedule; load tests against staging environments only.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Troubleshooting ────────────────────────────────────────────────── -->
+<section id="troubleshooting" class="api-section">
+  <div class="section-intro">
+    <h2>Troubleshooting</h2>
+    <p>Common automation failures and the fastest path to resolving them.</p>
+  </div>
+
+  <h2 id="common-issues">Common Issues</h2>
+
+  <div class="error-solution">
+    <div class="error-header">
+      <span class="error-code">Flaky Tests</span>
+      <span class="error-title">Intermittent failures</span>
+    </div>
+    <div>
+      <p><strong>Common causes:</strong> missing waits, timing race conditions, shared mutable test data, or unstable environments.</p>
+      <ul>
+        <li>Use framework-native waits — Cypress auto-waits; add <code>WebDriverWait</code> in Selenium</li>
+        <li>Never share state between tests — each test owns its full data lifecycle</li>
+        <li>Quarantine flaky tests in a separate suite until the root cause is fixed</li>
+        <li>Re-run failing tests once automatically; flag those that only pass on retry</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="error-solution">
+    <div class="error-header">
+      <span class="error-code">401 in CI</span>
+      <span class="error-title">Auth failures in the pipeline</span>
+    </div>
+    <div>
+      <p><strong>Cause:</strong> API keys or tokens not correctly injected into the CI environment.</p>
+      <ul>
+        <li>Store secrets as CI environment variables (GitHub Secrets, Jenkins Credentials, Vault)</li>
+        <li>Confirm the variable name in CI matches exactly what the test script reads</li>
+        <li>Use test-environment keys (<code>sk_test_</code> prefix) to avoid affecting live data</li>
+        <li>Print the first few characters of the resolved key at test startup to verify injection</li>
+      </ul>
     </div>
   </div>
 
   <h2 id="debugging-tips">Debugging Tips</h2>
   <div class="code-example">
-    <pre><code class="language-bash"># Test basic connectivity
-curl -I https://api.oscarrondon.com/v1/
+    <div class="code-label">
+      <span>Useful debugging commands</span>
+      <div class="code-label-actions"><span class="code-path">Bash</span></div>
+    </div>
+    <pre><code class="language-bash"># Verbose curl — inspect full request and response headers
+curl -v -H "Authorization: Bearer YOUR_KEY" \
+     https://api.oscarrondon.com/v1/content
 
-# Test authentication
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-     https://api.oscarrondon.com/v1/content?limit=1
+# k6 — print all HTTP request/response details
+k6 run --http-debug=full script.js
 
-# Verbose output for debugging
-curl -v -H "Authorization: Bearer YOUR_API_KEY" \
-     https://api.oscarrondon.com/v1/content</code></pre>
+# Newman (Postman CLI) — verbose run with all request details
+newman run collection.json -e staging.json --verbose
+
+# Appium — increase server log verbosity
+appium --log-level debug --log appium.log</code></pre>
   </div>
 
   <h2 id="support-resources">Support Resources</h2>
-  <div class="support-resources">
-    <div class="resource-item">
-      <i class="fas fa-envelope"></i>
-      <div><h4>Email Support</h4><p>Send detailed error logs to:</p><a href="mailto:o.rondon@uniandes.edu.co">o.rondon@uniandes.edu.co</a></div>
-    </div>
-    <div class="resource-item">
-      <i class="fab fa-github"></i>
-      <div><h4>GitHub Issues</h4><p>Report bugs or request features:</p><a href="https://github.com/Osaron" target="_blank" rel="noopener">GitHub Repository</a></div>
-    </div>
+  <div class="info-grid">
+    <article class="info-card">
+      <h3>Email Support</h3>
+      <p>Send detailed error logs and reproduction steps to <a href="mailto:o.rondon@uniandes.edu.co">o.rondon@uniandes.edu.co</a></p>
+    </article>
+    <article class="info-card">
+      <h3>GitHub</h3>
+      <p>Report bugs or request features at <a href="https://github.com/Osaron" target="_blank" rel="noopener">github.com/Osaron</a></p>
+    </article>
   </div>
 </section>

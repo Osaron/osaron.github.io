@@ -1,48 +1,35 @@
-<div class="cs-hero">
-  <h1><i class="fa-solid fa-diagram-project"></i> Content Strategy</h1>
-  <p>Best practices for producing different types of technical documentation.</p>
+<div class="vid-hero">
+  <h1><i class="fa-solid fa-video"></i> Videos</h1>
+  <p>Technical walkthroughs and documentation demos — created to support users and teams.</p>
 </div>
 
-<section class="cs-section">
-  <div class="doc-block">
-    <h2>📘 Articles</h2>
-    <p>Articles should be clear, concise, and provide actionable insight. They often focus on trends, tutorials, or
-      industry commentary. Use a conversational yet informative tone.</p>
-    <p class="doc-tools"><strong>Tools:</strong> Markdown, Medium, WordPress, Grammarly, Notion</p>
+<section class="vid-grid">
+
+  <div class="vid-card">
+    @if (!playing()) {
+      <div class="vid-thumbnail" (click)="play()" title="Play video">
+        <img
+          src="https://img.youtube.com/vi/LRfRSGTluTM/maxresdefault.jpg"
+          alt="Geome User Guide walkthrough thumbnail">
+        <div class="vid-play-btn">
+          <i class="fa-solid fa-play"></i>
+        </div>
+      </div>
+    } @else {
+      <div class="vid-embed">
+        <iframe
+          [src]="embedUrl"
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowfullscreen
+          title="Geome User Guide">
+        </iframe>
+      </div>
+    }
+    <div class="vid-meta">
+      <span class="vid-tag">User Guide</span>
+      <h2>Geome User Guide — Walkthrough</h2>
+      <p>A complete walkthrough of the Geome software user guide, covering key workflows, navigation, and documentation structure.</p>
+    </div>
   </div>
 
-  <div class="doc-block">
-    <h2>📕 User Guides</h2>
-    <p>User guides provide step-by-step instructions for software or hardware use. Prioritize structure, numbered
-      steps, annotated visuals, and troubleshooting tips.</p>
-    <p class="doc-tools"><strong>Tools:</strong> Confluence, GitBook, MadCap Flare, Snagit, Docusaurus</p>
-  </div>
-
-  <div class="doc-block">
-    <h2>🧬 API Documentation</h2>
-    <p>API docs must be accurate, complete, and developer-friendly. Include endpoint reference, authentication, code
-      samples, and testing tools.</p>
-    <p class="doc-tools"><strong>Tools:</strong> Swagger / OpenAPI, Redoc, Postman, Stoplight, Docusaurus</p>
-  </div>
-
-  <div class="doc-block">
-    <h2>📰 Newsletters</h2>
-    <p>Newsletters summarize important updates, feature releases, or curated insights. Keep them visually clean and
-      emphasise call-to-action (CTA) links.</p>
-    <p class="doc-tools"><strong>Tools:</strong> Mailchimp, Substack, Canva, Figma</p>
-  </div>
-
-  <div class="doc-block">
-    <h2>📄 Whitepapers</h2>
-    <p>Whitepapers are persuasive documents that dive deep into a product, concept, or methodology. Prioritize
-      technical accuracy, data visuals, and executive summaries.</p>
-    <p class="doc-tools"><strong>Tools:</strong> Google Docs, LaTeX, Adobe InDesign, MS Word, Canva</p>
-  </div>
-
-  <div class="doc-block">
-    <h2>❓ FAQs</h2>
-    <p>FAQs resolve common user questions. Keep answers short and link to deeper resources when needed. Categorize by
-      topic and update based on support feedback.</p>
-    <p class="doc-tools"><strong>Tools:</strong> Zendesk, Intercom, Freshdesk, Markdown, Notion</p>
-  </div>
 </section>

@@ -9,7 +9,7 @@
   padding: 3rem 10%;
   background-color: var(--card-bg);
   flex-wrap: wrap;
-  text-align: left;
+  text-align: center;
 }
 
 .hero-text {
@@ -110,19 +110,51 @@
 }
 
 .link-circle {
+  position: relative;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  border-radius: 20px;
   background: var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s;
-
-  &:hover { transform: scale(1.1); }
+  overflow: hidden;
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.arrow-symbol { color: #fff; font-size: 1.1rem; }
+.preview-link:hover .link-circle { width: 100px; }
+
+.arrow-symbol {
+  color: #fff;
+  font-size: 1.1rem;
+  position: relative;
+  z-index: 1;
+  transition: opacity 0.15s ease, transform 0.2s ease;
+}
+
+.preview-link:hover .link-circle .arrow-symbol {
+  opacity: 0;
+  transform: scale(0.3);
+}
+
+.explore-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease 0.12s;
+  pointer-events: none;
+}
+
+.preview-link:hover .link-circle .explore-text { opacity: 1; }
 
 .preview-image {
   width: 100%;
