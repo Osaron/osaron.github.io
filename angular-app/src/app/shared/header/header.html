@@ -41,8 +41,9 @@
   <!-- Right-side controls -->
   <div class="nav-controls">
     <button class="toggle-lang" (click)="lang.toggle()"
-      [attr.aria-label]="lang.lang() === 'en' ? 'Switch to Spanish' : 'Switch to English'">
-      {{ lang.lang() === 'en' ? 'ES' : 'EN' }}
+      [attr.aria-label]="lang.lang() === 'en' ? 'Cambiar a Español' : 'Switch to English'">
+      <span class="lang-flag">{{ lang.lang() === 'en' ? '🇬🇧' : '🇪🇸' }}</span>
+      <span class="lang-code">{{ lang.lang() === 'en' ? 'EN' : 'ES' }}</span>
     </button>
 
     <button class="toggle-mode" (click)="darkMode.toggle()" data-testid="dark-mode-toggle"
