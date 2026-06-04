@@ -38,38 +38,6 @@ body {
   display: none;
 }
 
-// Dark mode toggle button
-.toggle-mode {
-  background-color: var(--card-bg);
-  border: 1px solid rgba(20, 20, 20, 0.205);
-  border-radius: 10px;
-  width: 35px;
-  height: 35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.3s;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 999;
-
-  &:hover {
-    background-color: var(--accent);
-    transform: scale(1.05);
-  }
-
-  .icon {
-    font-size: 18px;
-    color: var(--text-color);
-    transition: transform 0.3s, color 0.3s;
-  }
-}
-
-body.dark-mode .toggle-mode .icon {
-  transform: rotate(180deg);
-}
 
 // Hero typing animation
 .typing-line {
