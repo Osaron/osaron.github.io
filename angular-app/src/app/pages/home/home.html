@@ -1,7 +1,9 @@
 <app-particle-background />
 
-<!-- Hero -->
-<section class="hero">
+<!-- Hero — [attr.data-lang] reads lang.lang() directly so Angular tracks
+     the signal in this component's reactive context and re-renders the
+     whole template (including the Why Me block) on every language toggle. -->
+<section class="hero" [attr.data-lang]="lang.lang()">
   <div class="hero-text">
     <p class="tagline">{{ lang.t('home.tagline') }}</p>
     <h1>{{ lang.t('home.greeting') }} <span class="accent">Oscar R.</span></h1>
