@@ -8,40 +8,19 @@
   </div>
 
   <nav class="api-nav">
-    @for (group of groups; track group.route) {
-      <div class="nav-group" [class.collapsed]="!isExpanded(group.route)">
-        <div class="nav-page-header">
-          <a [routerLink]="['/api-docs', group.route]"
-             routerLinkActive="active"
-             class="nav-page-link"
-             (isActiveChange)="$event && expandOnActivate(group.route)">
-            {{ group.label }}
-          </a>
-          <button class="nav-toggle" (click)="toggle(group.route)" aria-label="Toggle section">
-            <i class="fas fa-chevron-down nav-chevron"></i>
-          </button>
-        </div>
-
-        <ul class="nav-children">
-          @for (child of group.children; track child.fragment) {
-            <li>
-              @if (child.fragment) {
-                <a [routerLink]="['/api-docs', group.route]"
-                   [fragment]="child.fragment"
-                   class="nav-child">
-                  {{ child.label }}
-                </a>
-              } @else {
-                <a [routerLink]="['/api-docs', 'content-api']"
-                   routerLinkActive="active"
-                   class="nav-child">
-                  {{ child.label }}
-                </a>
-              }
-            </li>
-          }
-        </ul>
-      </div>
+    @for (page of pages; track page.route) {
+      <a [routerLink]="['/api-docs', page.route]"
+         routerLinkActive="active"
+         class="nav-page-link">
+        {{ page.label }}
+      </a>
     }
   </nav>
+
+  <div class="sidebar-footer">
+    <button class="print-btn" (click)="printPage()">
+      <i class="fas fa-download"></i>
+      Download PDF
+    </button>
+  </div>
 </div>
