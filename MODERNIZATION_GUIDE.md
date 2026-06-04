@@ -1067,3 +1067,71 @@ During scaffolding, `ng generate component pages/api-docs/api-docs-shell` was ru
 | API Docs in Projects dropdown | API Docs as standalone nav link |
 | `THREE.Clock` | `performance.now()` |
 | CDN Prism.js links | npm `prismjs` in `angular.json` scripts |
+
+---
+
+## Portfolio v2.0 — Changelog (branch `develop_2026`)
+
+> All changes below were applied after the initial Angular migration was complete. Version tag: **osaron_portfolio_v2.0**
+
+### UX & Navigation
+
+| Change | Details |
+|---|---|
+| **"Homepage" label in navbar** | `<span class="nav-home-label">` added next to the logo. Uses `lang.t('nav.home')` for bilingual support. |
+| **Arrow → "Explore" pill on hover** | `.link-circle` expands from 40 px circle to 100 px pill; arrow fades out, "Explore" / "Ver más" fades in via CSS transitions. |
+| **EN / ES language toggle** | See *Internationalisation* section below. |
+
+### API Documentation
+
+| Change | Details |
+|---|---|
+| **Sidebars switched to `position: fixed`** | Resolves sidebars disappearing when scrolling near the footer. `left` / `right` use `max(1.25rem, calc((100vw - 1480px) / 2 + 1.25rem))` to align with the centred grid. |
+| **Footer overlap fix** | `@HostListener('window:scroll')` in `api-docs.ts` computes `footer.getBoundingClientRect().top` and sets `--sidebar-bottom-offset`. Sidebars use `bottom: var(--sidebar-bottom-offset)` instead of a fixed height — they shrink as the footer enters the viewport. |
+| **TOC anchor links fixed** | `toc.html` links previously used `[href]="'#' + id"` which Angular's router intercepted and redirected to `/`. Fixed by adding `(click)="scrollTo(id, $event)"` that calls `element.scrollIntoView({ behavior: 'smooth' })` and cancels the default event. |
+| **Testing Guide (Guides page rewrite)** | Full content rewrite covering: Load & Stress Testing (JMeter, k6, Locust, SoapUI, Karate), API Automation (Postman, REST Assured, TestNG, Karate, SoapUI), UI & E2E (Selenium, Cypress, Playwright, UFT), Mobile (Appium, Katalon), BDD & Gherkin, Languages (Python, Groovy, JS, Java, Gherkin, VBScript). TOC items updated in `guides.ts`. |
+| **Sidebar label** | "Guides" renamed to "Testing Guide" in `sidebar.ts`. |
+
+### Content & Pages
+
+| Change | Details |
+|---|---|
+| **Home hero text** | Tagline changed to "QA Engineer & Senior Technical Writer". Text centred via `text-align: center` on `.hero`. |
+| **Videos page** | Replaced Content Strategy placeholder with a YouTube embed for the Geome User Guide walkthrough. Uses `DomSanitizer.bypassSecurityTrustResourceUrl` for the iframe `src`. Click-to-play pattern: thumbnail shown first, iframe swapped in on click using an Angular `signal`. |
+| **Footer version tag** | `osaron_portfolio_v2.0` added as `.version-tag` (monospace, right-aligned, 35 % opacity). |
+
+### Internationalisation (EN / ES)
+
+A lightweight runtime translation system was built without external dependencies, using Angular signals for reactivity.
+
+**New files:**
+
+| File | Purpose |
+|---|---|
+| `core/services/language.service.ts` | `LanguageService` — holds `lang = signal<'en' \| 'es'>('en')`, exposes `toggle()` and `t(key)` |
+| `core/translations/translations.ts` | Flat `Record<string, { en: string; es: string }>` dictionary |
+
+**How reactivity works:** `t(key)` reads `this.lang()` (a signal) internally. Angular's template renderer tracks signal reads during rendering — so any component template that calls `lang.t(...)` is automatically marked dirty when `lang.toggle()` is called, without needing `ChangeDetectionStrategy.OnPush` or a `pure: false` pipe.
+
+**Components updated:**
+
+| Component | Translated content |
+|---|---|
+| `header` | Logo label, nav items (Projects, API Docs, About), dropdown labels, mobile menu. Language toggle button (`ES` / `EN`) added next to dark-mode toggle. |
+| `home` | Hero tagline, greeting, sub-text; Featured Projects heading; tab labels, titles, and descriptions; Tech Stack heading and group headings; Why Me? heading, value label, and all three bullet points; carousel slide headings. |
+| `footer` | "Get in touch at" line and copyright notice. |
+| `projects` | All five nav tab labels (User Guides, Technical Articles, Diagrams, Videos, White Papers). |
+| `about` | Profile heading and body; all three skill names and descriptions; all five work-experience entries; all four education entries. |
+
+**Data structure changes in `home.ts`:**
+- `slides` array: `heading` string replaced by `key: string` pointing to a translation key.
+- `stackGroups` array: `heading` string replaced by `key: string`.
+- `tabs` array: `label`, `title`, `description` removed — resolved at render time via `lang.t('tab.' + tab.id + '.label')` etc.
+
+**Extending translations:** Add a new key–value pair to `translations.ts` and call `lang.t('your.key')` in any template. No imports, no pipe, no module registration needed.
+
+### Known issues / next steps
+
+- API Docs pages (Getting Started, Authentication, API Reference, Content API, Resources) are **English only** — technical documentation is intentionally kept in English.
+- User-guide PDFs, blog articles, and white-paper PDFs are static assets and are **not translated**.
+- The language preference is **not persisted** across page reloads (no `localStorage` save). Add `localStorage.setItem('lang', value)` in `toggle()` and read it in the service constructor to persist.
