@@ -3,7 +3,7 @@
   <a routerLink="/" class="nav-logo">
     <img src="/images/Nuevo Logo Black.png" class="logo logo-light" alt="Oscar Rondon logo">
     <img src="/images/Nuevo Logo White.png" class="logo logo-dark" alt="Oscar Rondon logo">
-    <span class="nav-home-label">Homepage</span>
+    <span class="nav-home-label">{{ lang.t('nav.home') }}</span>
   </a>
 
   <!-- Desktop links -->
@@ -11,7 +11,7 @@
     <!-- Projects dropdown — opens on hover via CSS -->
     <li class="dropdown">
       <button class="dropdown-trigger" aria-haspopup="true">
-        Projects
+        {{ lang.t('nav.projects') }}
         <span class="arrow">&#8250;</span>
       </button>
 
@@ -21,8 +21,8 @@
             <a [routerLink]="['/projects', link.path]"
                routerLinkActive="active"
                class="dropdown-link">
-              <img [src]="link.icon" [alt]="link.label" class="dropdown-icon">
-              {{ link.label }}
+              <img [src]="link.icon" [alt]="lang.t(link.labelKey)" class="dropdown-icon">
+              {{ lang.t(link.labelKey) }}
             </a>
           </li>
         }
@@ -30,16 +30,21 @@
     </li>
 
     <li>
-      <a routerLink="/api-docs" routerLinkActive="active" class="nav-link">API Docs</a>
+      <a routerLink="/api-docs" routerLinkActive="active" class="nav-link">{{ lang.t('nav.api-docs') }}</a>
     </li>
 
     <li>
-      <a routerLink="/about" routerLinkActive="active" class="nav-link">About</a>
+      <a routerLink="/about" routerLinkActive="active" class="nav-link">{{ lang.t('nav.about') }}</a>
     </li>
   </ul>
 
   <!-- Right-side controls -->
   <div class="nav-controls">
+    <button class="toggle-lang" (click)="lang.toggle()"
+      [attr.aria-label]="lang.lang() === 'en' ? 'Switch to Spanish' : 'Switch to English'">
+      {{ lang.lang() === 'en' ? 'ES' : 'EN' }}
+    </button>
+
     <button class="toggle-mode" (click)="darkMode.toggle()" data-testid="dark-mode-toggle"
       [attr.aria-label]="darkMode.isDark() ? 'Switch to light mode' : 'Switch to dark mode'">
       <i [class]="darkMode.iconClass()" class="icon"></i>
@@ -54,11 +59,11 @@
 <!-- Mobile menu -->
 @if (mobileMenuOpen()) {
   <div class="mobile-menu" (click)="toggleMobileMenu()">
-    <a routerLink="/" class="mobile-link">Home</a>
+    <a routerLink="/" class="mobile-link">{{ lang.t('nav.home') }}</a>
     @for (link of projectLinks; track link.path) {
-      <a [routerLink]="['/projects', link.path]" class="mobile-link">{{ link.label }}</a>
+      <a [routerLink]="['/projects', link.path]" class="mobile-link">{{ lang.t(link.labelKey) }}</a>
     }
-    <a routerLink="/api-docs" class="mobile-link">API Docs</a>
-    <a routerLink="/about" class="mobile-link">About</a>
+    <a routerLink="/api-docs" class="mobile-link">{{ lang.t('nav.api-docs') }}</a>
+    <a routerLink="/about" class="mobile-link">{{ lang.t('nav.about') }}</a>
   </div>
 }

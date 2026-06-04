@@ -177,6 +177,31 @@
   gap: 12px;
 }
 
+.toggle-lang {
+  background-color: var(--card-bg);
+  border: 1px solid rgba(128, 128, 128, 0.2);
+  border-radius: 7px;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-color);
+  letter-spacing: 0.05em;
+  transition: background 0.3s, color 0.3s, transform 0.2s;
+
+  &:hover {
+    background-color: var(--accent);
+    color: #fff;
+    transform: scale(1.08);
+  }
+}
+
 .toggle-mode {
   background-color: var(--card-bg);
   border: 1px solid rgba(128, 128, 128, 0.2);

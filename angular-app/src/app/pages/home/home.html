@@ -3,9 +3,9 @@
 <!-- Hero -->
 <section class="hero">
   <div class="hero-text">
-    <p class="tagline">QA Engineer &amp; Senior Technical Writer</p>
-    <h1>Hi, I'm <span class="accent">Oscar R.</span></h1>
-    <p class="hero-sub">I create impactful documentation for users, developers, and teams.</p>
+    <p class="tagline">{{ lang.t('home.tagline') }}</p>
+    <h1>{{ lang.t('home.greeting') }} <span class="accent">Oscar R.</span></h1>
+    <p class="hero-sub">{{ lang.t('home.sub') }}</p>
   </div>
   <div class="hero-image">
     <img src="/images/hero_animation.svg" alt="Hero animation">
@@ -14,7 +14,7 @@
 
 <!-- Featured Projects -->
 <section class="projects" id="projects">
-  <h2>Featured <span class="accent">Projects</span></h2>
+  <h2>{{ lang.t('home.projects.heading') }} <span class="accent">{{ lang.t('home.projects.accent') }}</span></h2>
   <div class="projects-container">
 
     <!-- Tab list -->
@@ -24,8 +24,8 @@
           class="project-tab"
           [class.active]="activeTab() === tab.id"
           (click)="activeTab.set(tab.id)">
-          <img [src]="tab.icon" [alt]="tab.label" class="tab-icon">
-          {{ tab.label }}
+          <img [src]="tab.icon" [alt]="lang.t('tab.' + tab.id + '.label')" class="tab-icon">
+          {{ lang.t('tab.' + tab.id + '.label') }}
         </button>
       }
     </nav>
@@ -35,19 +35,19 @@
       <div class="project-preview">
         <div class="preview-header">
           <div class="preview-info">
-            <h3>{{ activeTabData.title }}</h3>
-            <p>{{ activeTabData.description }}</p>
+            <h3>{{ lang.t('tab.' + activeTabData.id + '.title') }}</h3>
+            <p>{{ lang.t('tab.' + activeTabData.id + '.description') }}</p>
             <div class="preview-tags">{{ activeTabData.tags }}</div>
           </div>
           <a [routerLink]="activeTabData.route" class="preview-link">
             <div class="link-circle">
               <span class="arrow-symbol">→</span>
-              <span class="explore-text">Explore</span>
+              <span class="explore-text">{{ lang.t('home.explore') }}</span>
             </div>
           </a>
         </div>
         <a [routerLink]="activeTabData.route">
-          <img [src]="activeTabData.preview" [alt]="activeTabData.title + ' preview'" class="preview-image">
+          <img [src]="activeTabData.preview" [alt]="lang.t('tab.' + activeTabData.id + '.title') + ' preview'" class="preview-image">
         </a>
       </div>
     </div>
@@ -56,11 +56,11 @@
 
 <!-- Tech Stack -->
 <section class="skills-strip">
-  <h2>Tech Stack</h2>
+  <h2>{{ lang.t('home.stack.heading') }}</h2>
   <div class="stack-container">
-    @for (group of stackGroups; track group.heading) {
+    @for (group of stackGroups; track group.key) {
       <div class="stack-group">
-        <h3>{{ group.heading }}</h3>
+        <h3>{{ lang.t(group.key) }}</h3>
         <div class="stack-items">
           @for (item of group.items; track item.label) {
             <a [href]="item.url" class="stack-item icon-skill" target="_blank" rel="noopener">
@@ -78,24 +78,24 @@
 
 <!-- Why Me -->
 <section class="why-me">
-  <h2>Why Me?</h2>
+  <h2>{{ lang.t('home.why.heading') }}</h2>
   <div class="why-me-wrapper">
 
     <!-- Left: value list -->
     <div class="why-me-left">
-      <h3>Added Value</h3>
+      <h3>{{ lang.t('home.why.value') }}</h3>
       <ul class="why-list">
         <li>
           <img src="/images/checkmark-svg.svg" alt="" class="check-icon">
-          Proactively report bugs during documentation updates
+          {{ lang.t('home.why.bullet1') }}
         </li>
         <li>
           <img src="/images/checkmark-svg.svg" alt="" class="check-icon">
-          Identify usability gaps through technical analysis
+          {{ lang.t('home.why.bullet2') }}
         </li>
         <li>
           <img src="/images/checkmark-svg.svg" alt="" class="check-icon">
-          Improve workflows with agile, cross-team collaboration
+          {{ lang.t('home.why.bullet3') }}
         </li>
       </ul>
     </div>
@@ -103,9 +103,9 @@
     <!-- Right: carousel -->
     <div class="why-me-right">
       <div class="carousel">
-        @for (slide of slides; track slide.heading; let i = $index) {
+        @for (slide of slides; track slide.key; let i = $index) {
           <div class="carousel-slide" [class.active]="activeSlide() === i">
-            <h3>{{ slide.heading }}</h3>
+            <h3>{{ lang.t(slide.key) }}</h3>
             <div class="company-icons">
               @for (item of slide.items; track item.label) {
                 <a [href]="item.url" target="_blank" rel="noopener" class="company-item">
@@ -118,7 +118,7 @@
         }
       </div>
       <div class="carousel-dots">
-        @for (slide of slides; track slide.heading; let i = $index) {
+        @for (slide of slides; track slide.key; let i = $index) {
           <span class="dot" [class.active]="activeSlide() === i" (click)="activeSlide.set(i)"></span>
         }
       </div>

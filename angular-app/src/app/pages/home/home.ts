@@ -1,20 +1,18 @@
-import { Component, signal, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ParticleBackground } from '../../shared/particle-background/particle-background';
+import { LanguageService } from '../../core/services/language.service';
 
 interface ProjectTab {
   id: string;
-  label: string;
   icon: string;
-  title: string;
-  description: string;
   tags: string;
   route: string;
   preview: string;
 }
 
 interface CarouselSlide {
-  heading: string;
+  key: string;
   items: { img: string; label: string; url: string }[];
 }
 
@@ -25,66 +23,22 @@ interface CarouselSlide {
   styleUrl: './home.scss',
 })
 export class Home implements OnInit, OnDestroy {
-  activeTab = signal('user-guide');
+  lang       = inject(LanguageService);
+  activeTab  = signal('user-guide');
   activeSlide = signal(0);
   private timer?: ReturnType<typeof setInterval>;
 
   readonly tabs: ProjectTab[] = [
-    {
-      id: 'user-guide',
-      label: 'User Guide',
-      icon: '/images/feature projects/user-guide-icon.png',
-      title: 'User Guide',
-      description: 'Step-by-step documentation designed for end users navigating complex software systems.',
-      tags: 'HTML, CSS, Markdown',
-      route: '/projects/user-guides',
-      preview: '/images/feature projects/preview/user-guide.png',
-    },
-    {
-      id: 'technical-article',
-      label: 'Technical Article',
-      icon: '/images/feature projects/technical-article-icon.png',
-      title: 'Technical Article',
-      description: 'In-depth articles covering industry trends, tool evaluations, and engineering best practices.',
-      tags: 'Markdown, HTML, CSS',
-      route: '/projects/blogs',
-      preview: '/images/feature projects/preview/technical-article.png',
-    },
-    {
-      id: 'workflow-diagrams',
-      label: 'Workflow Diagram',
-      icon: '/images/feature projects/workflow-diagrams-icon.png',
-      title: 'Workflow Diagram',
-      description: 'Visual diagrams that map complex processes clearly for end-users and developers.',
-      tags: 'SVG, Mermaid, Camunda',
-      route: '/projects/workflow-diagrams',
-      preview: '/images/feature projects/preview/workflow-diagrams.png',
-    },
-    {
-      id: 'instructional-videos',
-      label: 'Instructional Video',
-      icon: '/images/feature projects/instructional-videos-icon.png',
-      title: 'Instructional Video',
-      description: 'Concise video content covering onboarding, walkthroughs, and feature demonstrations.',
-      tags: 'YouTube, MP4',
-      route: '/projects/videos',
-      preview: '/images/feature projects/preview/instructional-videos.png',
-    },
-    {
-      id: 'white-papers',
-      label: 'White Paper',
-      icon: '/images/feature projects/white-papers-icon.png',
-      title: 'White Paper',
-      description: 'Strategic documents presenting research insights, methodologies, and technical solutions.',
-      tags: 'PDF, LaTeX',
-      route: '/projects/white-papers',
-      preview: '/images/feature projects/preview/white-papers.png',
-    },
+    { id: 'user-guide',          icon: '/images/feature projects/user-guide-icon.png',           tags: 'HTML, CSS, Markdown', route: '/projects/user-guides',       preview: '/images/feature projects/preview/user-guide.png' },
+    { id: 'technical-article',   icon: '/images/feature projects/technical-article-icon.png',    tags: 'Markdown, HTML, CSS', route: '/projects/blogs',             preview: '/images/feature projects/preview/technical-article.png' },
+    { id: 'workflow-diagrams',   icon: '/images/feature projects/workflow-diagrams-icon.png',    tags: 'SVG, Mermaid, Camunda', route: '/projects/workflow-diagrams', preview: '/images/feature projects/preview/workflow-diagrams.png' },
+    { id: 'instructional-videos',icon: '/images/feature projects/instructional-videos-icon.png', tags: 'YouTube, MP4',         route: '/projects/videos',            preview: '/images/feature projects/preview/instructional-videos.png' },
+    { id: 'white-papers',        icon: '/images/feature projects/white-papers-icon.png',         tags: 'PDF, LaTeX',           route: '/projects/white-papers',      preview: '/images/feature projects/preview/white-papers.png' },
   ];
 
   readonly slides: CarouselSlide[] = [
     {
-      heading: '🏢 Companies',
+      key: 'slide.companies',
       items: [
         { img: '/images/carousel/companies/Carousel_Thales_Group.png',      label: 'Thales Group',        url: 'https://www.thalesgroup.com/en' },
         { img: '/images/carousel/companies/Carousel_Amaris_Consulting.png', label: 'Amaris Consulting',   url: 'https://amaris.com/' },
@@ -94,16 +48,16 @@ export class Home implements OnInit, OnDestroy {
       ],
     },
     {
-      heading: '🎓 Education',
+      key: 'slide.education',
       items: [
-        { img: '/images/carousel/education/Carousel_Datacamp.png',  label: 'Datacamp',  url: 'https://www.datacamp.com/' },
-        { img: '/images/carousel/education/Carousel_Google.png',    label: 'Google',    url: 'https://grow.google/' },
-        { img: '/images/carousel/education/Carousel_UIS.png',       label: 'UIS',       url: 'https://uis.edu.co/' },
-        { img: '/images/carousel/education/Carousel_Uniandes.png',  label: 'Uniandes',  url: 'https://uniandes.edu.co/' },
+        { img: '/images/carousel/education/Carousel_Datacamp.png', label: 'Datacamp', url: 'https://www.datacamp.com/' },
+        { img: '/images/carousel/education/Carousel_Google.png',   label: 'Google',   url: 'https://grow.google/' },
+        { img: '/images/carousel/education/Carousel_UIS.png',      label: 'UIS',      url: 'https://uis.edu.co/' },
+        { img: '/images/carousel/education/Carousel_Uniandes.png', label: 'Uniandes', url: 'https://uniandes.edu.co/' },
       ],
     },
     {
-      heading: '🏅 Awards',
+      key: 'slide.awards',
       items: [
         { img: '/images/carousel/awards/Carousel_100_Job_Success.png', label: '100% Job Success', url: 'https://www.upwork.com/' },
         { img: '/images/carousel/awards/Carousel_Top_Rated.png',       label: 'Top Rated',        url: 'https://www.upwork.com/' },
@@ -113,7 +67,7 @@ export class Home implements OnInit, OnDestroy {
 
   readonly stackGroups = [
     {
-      heading: 'Docs & Writing',
+      key: 'stack.docs-writing',
       items: [
         { label: 'Docusaurus',    icon: '/stack/tools/docusaurus_logo.png',    url: 'https://docusaurus.io' },
         { label: 'Markdown',      icon: '/stack/tools/markdown_logo.png',      url: 'https://www.markdownguide.org/' },
@@ -123,7 +77,7 @@ export class Home implements OnInit, OnDestroy {
       ],
     },
     {
-      heading: 'Dev Tools',
+      key: 'stack.dev-tools',
       items: [
         { label: 'Git',        icon: '/stack/tools/git_logo.png',        url: 'https://git-scm.com/' },
         { label: 'GitHub',     icon: '/stack/tools/github_logo.png',     url: 'https://github.com' },
@@ -133,7 +87,7 @@ export class Home implements OnInit, OnDestroy {
       ],
     },
     {
-      heading: 'Platforms',
+      key: 'stack.platforms',
       items: [
         { label: 'Confluence', icon: '/stack/tools/confluence_logo.png', url: 'https://www.atlassian.com/software/confluence' },
         { label: 'Jira',       icon: '/stack/tools/jira_logo.png',       url: 'https://www.atlassian.com/software/jira' },
