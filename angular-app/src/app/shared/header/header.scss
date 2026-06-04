@@ -147,6 +147,12 @@
   width: 22px;
   height: 22px;
   object-fit: contain;
+  opacity: 0.45;
+  transition: opacity 0.2s;
+}
+
+.dropdown-link:hover .dropdown-icon {
+  opacity: 0.75;
 }
 
 // Right controls
