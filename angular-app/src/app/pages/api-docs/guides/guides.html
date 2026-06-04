@@ -130,12 +130,12 @@ class PortfolioUser(HttpUser):
     @task(3)
     def list_content(self):
         self.client.get("/v1/content",
-            headers={"Authorization": "Bearer YOUR_KEY"})
+            headers=&#123;"Authorization": "Bearer YOUR_KEY"&#125;)
 
     @task(1)
     def get_single_item(self):
         self.client.get("/v1/content/cnt_1024",
-            headers={"Authorization": "Bearer YOUR_KEY"})</code></pre>
+            headers=&#123;"Authorization": "Bearer YOUR_KEY"&#125;)</code></pre>
       </div>
     </div>
 
