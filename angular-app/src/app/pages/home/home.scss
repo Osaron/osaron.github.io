@@ -239,7 +239,7 @@
   }
 }
 
-body.dark-mode .why-me-wrapper::before {
+:host-context(body.dark-mode) .why-me-wrapper::before {
   background-color: rgba(255, 255, 255, 0.15);
 }
 
@@ -247,6 +247,7 @@ body.dark-mode .why-me-wrapper::before {
   flex: 1 1 50%;
   max-width: 500px;
   background: #fff;
+  color: #222;
   border-radius: 10px;
   padding: 1.2rem 2rem;
   display: flex;
@@ -257,7 +258,7 @@ body.dark-mode .why-me-wrapper::before {
   h3 { font-size: 1.3rem; font-weight: 600; margin-bottom: 1.1rem; color: var(--accent); }
 }
 
-body.dark-mode .why-me-left {
+:host-context(body.dark-mode) .why-me-left {
   background: #1e1e1e;
   color: #f5f5f5;
   border: 1px solid #333;
@@ -272,9 +273,10 @@ body.dark-mode .why-me-left {
     display: flex;
     align-items: center;
     padding: 0.5rem 0;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.2);
     font-size: 0.85rem;
     line-height: 1.8;
+    color: inherit;
   }
 
   li:last-child { border-bottom: none; }
