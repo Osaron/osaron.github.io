@@ -6,7 +6,7 @@
   padding: 0 10%;
   overflow-x: auto;
   position: sticky;
-  top: 57px; // sits just below the main navbar
+  top: var(--navbar-height);
   z-index: 100;
 
   a {

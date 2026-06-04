@@ -88,8 +88,8 @@ body.dark-mode.api-docs-page .api-grid::before {
 .left-sidebar {
   grid-area: sidebar;
   position: sticky;
-  top: 92px;
-  height: calc(100vh - 112px);
+  top: calc(var(--navbar-height) + 16px);
+  height: calc(100vh - var(--navbar-height) - 48px);
   overflow-y: auto;
   overflow-x: hidden;
   padding: 1rem 1rem 1rem 0.25rem;
@@ -237,7 +237,7 @@ body.dark-mode.api-docs-page .nav-toggle:hover { background: rgba(255,255,255,0.
   a { color: var(--api-text-soft); text-decoration: none; &:hover { color: var(--api-accent-strong); } }
 }
 
-.api-section { margin-bottom: 2.8rem; scroll-margin-top: 112px; }
+.api-section { margin-bottom: 2.8rem; scroll-margin-top: calc(var(--navbar-height) + 48px); }
 
 .main-content h1 { margin: 0 0 0.9rem; font-size: clamp(2.4rem,5vw,3.5rem); line-height: 1.04; letter-spacing: -0.04em; color: var(--api-text); }
 .main-content h2 { margin: 0 0 0.8rem; font-size: 1.55rem; line-height: 1.2; letter-spacing: -0.03em; color: var(--api-text); }
@@ -663,8 +663,8 @@ body.dark-mode.api-docs-page .callout-card {
 .right-sidebar {
   grid-area: toc;
   position: sticky;
-  top: 92px;
-  height: calc(100vh - 112px);
+  top: calc(var(--navbar-height) + 16px);
+  height: calc(100vh - var(--navbar-height) - 48px);
   overflow-y: auto;
   overflow-x: hidden;
   padding: 1rem 0 1rem 1rem;

@@ -6,5 +6,5 @@
 
 main {
   flex: 1;
-  padding-top: 57px; // height of the fixed navbar
+  padding-top: var(--navbar-height);
 }
