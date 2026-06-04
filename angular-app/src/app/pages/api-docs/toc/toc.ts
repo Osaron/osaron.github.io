@@ -9,4 +9,9 @@ import { TocService } from '../../../core/services/toc.service';
 })
 export class Toc {
   tocService = inject(TocService);
+
+  scrollTo(id: string, event: MouseEvent): void {
+    event.preventDefault();
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }

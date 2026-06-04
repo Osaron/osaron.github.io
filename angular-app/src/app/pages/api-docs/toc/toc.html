@@ -9,6 +9,7 @@
         @for (item of tocService.items(); track item.id) {
           <li>
             <a [href]="'#' + item.id"
+               (click)="scrollTo(item.id, $event)"
                class="toc-link"
                [class.active]="tocService.activeId() === item.id">
               {{ item.label }}
@@ -18,6 +19,7 @@
                 @for (child of item.children; track child.id) {
                   <li>
                     <a [href]="'#' + child.id"
+                       (click)="scrollTo(child.id, $event)"
                        class="toc-link"
                        [class.active]="tocService.activeId() === child.id">
                       {{ child.label }}
