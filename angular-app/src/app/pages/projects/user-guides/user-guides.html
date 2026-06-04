@@ -6,7 +6,7 @@
 <section class="ug-list">
   @if (guides$ | async; as guides) {
     @for (guide of guides; track guide.slug) {
-      <article class="ug-row">
+      <article class="ug-row" (click)="openPdf(guide)">
         <img [src]="guide.cover" [alt]="guide.title" class="ug-cover">
         <div class="ug-body">
           <div class="ug-tags">

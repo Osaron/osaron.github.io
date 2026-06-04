@@ -27,6 +27,16 @@
   align-items: flex-start;
   border-bottom: 1px solid rgba(128, 128, 128, 0.2);
   padding-bottom: 2.5rem;
+  cursor: pointer;
+  border-radius: 12px;
+  padding: 1.2rem;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+
+  &:hover {
+    background: var(--card-bg);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
 
   &:last-child { border-bottom: none; }
 }
