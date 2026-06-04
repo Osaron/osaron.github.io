@@ -79,9 +79,9 @@ body.dark-mode.api-docs-page .api-grid::before {
   grid-area: sidebar;
   position: fixed;
   top: calc(var(--navbar-height) + 16px);
+  bottom: var(--sidebar-bottom-offset, 0px);
   left: max(1.25rem, calc((100vw - 1480px) / 2 + 1.25rem));
   width: 280px;
-  height: calc(100vh - var(--navbar-height) - 48px);
   overflow-y: auto;
   overflow-x: hidden;
   padding: 1rem 1rem 1rem 0.25rem;
@@ -689,9 +689,9 @@ body.dark-mode.api-docs-page .callout-card {
   grid-area: toc;
   position: fixed;
   top: calc(var(--navbar-height) + 16px);
+  bottom: var(--sidebar-bottom-offset, 0px);
   right: max(1.25rem, calc((100vw - 1480px) / 2 + 1.25rem));
   width: 220px;
-  height: calc(100vh - var(--navbar-height) - 48px);
   overflow-y: auto;
   overflow-x: hidden;
   padding: 1rem 0 1rem 1rem;
@@ -781,6 +781,7 @@ body.dark-mode.api-docs-page {
     position: static;
     width: auto;
     height: auto;
+    bottom: auto;
     background: transparent;
     padding: 0.4rem 0 0;
   }
