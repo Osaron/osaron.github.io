@@ -177,45 +177,65 @@
   gap: 12px;
 }
 
+// ── Language toggle ───────────────────────────────────────────────────
 .toggle-lang {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 3px 10px 3px 3px;
+  width: 68px;
   height: 34px;
   border-radius: 50px;
   background: rgba(128, 128, 128, 0.18);
   border: 1px solid rgba(128, 128, 128, 0.22);
   cursor: pointer;
-  transition: background 0.2s, box-shadow 0.2s;
+  padding: 0;
+  transition: background 0.25s;
 
-  &:hover {
-    background: rgba(128, 128, 128, 0.32);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-  }
+  &:hover { background: rgba(128, 128, 128, 0.3); }
 }
 
-.lang-flag {
+// Sliding circle with flag image
+.lang-thumb {
+  position: absolute;
+  left: 3px;
   width: 28px;
   height: 28px;
   border-radius: 50%;
   background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.05rem;
-  line-height: 1;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
-  flex-shrink: 0;
   overflow: hidden;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 }
 
+// Thumb slides to the right in ES mode
+.toggle-lang.is-es .lang-thumb {
+  left: calc(100% - 31px);
+}
+
+// Language code — right side in EN, left side in ES
 .lang-code {
+  position: absolute;
+  right: 9px;
   font-family: 'Poppins', sans-serif;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   color: var(--text-color);
+  pointer-events: none;
+  user-select: none;
+}
+
+.toggle-lang.is-es .lang-code {
+  right: auto;
+  left: 9px;
 }
 
 .toggle-mode {
