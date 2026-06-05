@@ -1,0 +1,39 @@
+[
+  {
+    "title": "TravelHub — Software Architecture Design",
+    "summary": "Distributed microservices architecture for a Latin American hotel booking platform operating across 6 countries. Covers real-time PMS inventory sync via webhooks, event-driven payment processing with PCI-DSS tokenization, geographic database sharding by country, and multi-region active-active redundancy (RTO ≤ 15 min, RPO ≤ 5 min).",
+    "slug": "travelhub-architecture",
+    "date": "June 2026",
+    "tags": ["ARCHITECTURE", "MICROSERVICES", "CLOUD", "draw.io", "Visual Paradigm"],
+    "cover": "/images/diagrams/travel-hub-architecture.png",
+    "tool": "draw.io",
+    "isExternal": false,
+    "problem": "TravelHub operates a hotel booking platform across 6 Latin American countries (Colombia, Peru, Ecuador, Mexico, Chile, and Argentina), serving ~450,000 active travelers and ~1,200 partner hotels. Its legacy monolithic architecture—built 5 years ago for 50 bookings per minute—could no longer sustain 150–200 average bookings per minute with peak loads reaching 400 TPM.\n\nCritical failures included: 3–5 second search latency causing 25–30% cart abandonment ($300,000 in lost annual revenue), batch inventory sync every 2–3 hours causing overbooking and strained hotel relationships, a tightly coupled payment service where any provider failure took down the entire platform, PCI-DSS 3.2.1 non-compliance with credit card data exposed in plaintext, a single AWS region (us-east-1) with RTO exceeding 4 hours, and a fragile codebase with less than 40% test coverage where isolated changes routinely broke unrelated features.",
+    "steps": [
+      {
+        "title": "Stakeholder Analysis",
+        "description": "Conducted structured interviews with product, DevOps, security, and hotel partner teams to map each pain point to a measurable quality requirement. Translated business concerns into concrete SLAs: search ≤ 800 ms (p95), payment ≤ 3 s (p95), availability ≥ 99.95%, RTO ≤ 15 min, RPO ≤ 5 min, and PCI-DSS 3.2.1 compliance within 12 months."
+      },
+      {
+        "title": "Domain Decomposition",
+        "description": "Applied Domain-Driven Design to partition the monolith into six bounded contexts: Inventory Management, Search & Availability, Reservation & Cart, Payments, Customer Operations, and Hotel/Agency Portal. Each context maps to an independent deployable service with its own data store."
+      },
+      {
+        "title": "Service Boundary & API Contracts",
+        "description": "Defined OpenAPI/Swagger contracts for each microservice before writing any code, ensuring loose coupling and independent deployability. A key design target was reducing the time to integrate a new payment provider from 6–8 weeks to ≤ 40 engineer-hours by isolating the payment adapter."
+      },
+      {
+        "title": "Data Strategy",
+        "description": "Designed geographic sharding by country to eliminate cross-region query contention. Introduced Redis for search result caching to hit sub-800 ms targets, added read replicas to separate read-heavy search from write-heavy reservation writes, and planned a 15-minute provisional cart hold using optimistic locking to prevent overbooking."
+      },
+      {
+        "title": "Integration Patterns",
+        "description": "Selected webhooks for real-time PMS inventory sync (≤ 2-minute updates, replacing 2–3 hour batches). Adopted an event bus for async payment processing so provider outages no longer affect search or reservations. Added circuit breakers with fallback strategies (similar-room offers, client notifications) for resilience under partial failures."
+      },
+      {
+        "title": "Infrastructure & Availability Design",
+        "description": "Planned a multi-region active-active topology across two AWS regions with automatic traffic rerouting on regional failure. Defined blue-green deployment for zero-downtime releases, per-service auto-scaling groups to handle seasonal peaks, and health checks every 10 seconds—bringing projected uptime from 98.5% to ≥ 99.95%."
+      }
+    ]
+  }
+]

@@ -3,6 +3,43 @@
   <p>Visual tools used to enhance clarity and engagement in documentation.</p>
 </div>
 
+<section class="diagram-list">
+  @if (diagrams$ | async; as diagrams) {
+    @for (diagram of diagrams; track diagram.title) {
+      <article class="diagram-card" (click)="open(diagram)">
+        <img [src]="diagram.cover" [alt]="diagram.title" class="diagram-cover">
+        <div class="diagram-body">
+          <div class="diagram-tags">
+            @for (tag of diagram.tags; track tag) {
+              <span class="tag">{{ tag }}</span>
+            }
+          </div>
+          <h2 class="diagram-title">{{ diagram.title }}</h2>
+          <p class="diagram-summary">{{ diagram.summary }}</p>
+          <div class="diagram-meta">
+            <span>{{ diagram.date }}</span>
+            <span><i class="fa-solid fa-pen-ruler"></i> {{ diagram.tool }}</span>
+          </div>
+          <div class="diagram-actions">
+            @if (diagram.isExternal && diagram.link) {
+              <a [href]="diagram.link" target="_blank" rel="noopener" class="btn btn-primary" (click)="$event.stopPropagation()">
+                View Diagram
+              </a>
+            }
+            @if (diagram.pdfPath) {
+              <a [href]="diagram.pdfPath" target="_blank" rel="noopener" class="btn btn-outline" (click)="$event.stopPropagation()">
+                <i class="fa-solid fa-file-pdf"></i> Download PDF
+              </a>
+            }
+          </div>
+        </div>
+      </article>
+    }
+  } @else {
+    <p class="loading">Loading diagrams…</p>
+  }
+</section>
+
 <section class="visual-section">
   <div class="visual-item">
     <h3><i class="fa-solid fa-diagram-project"></i> BPMN Diagrams</h3>

@@ -1135,3 +1135,72 @@ A lightweight runtime translation system was built without external dependencies
 - API Docs pages (Getting Started, Authentication, API Reference, Content API, Resources) are **English only** — technical documentation is intentionally kept in English.
 - User-guide PDFs, blog articles, and white-paper PDFs are static assets and are **not translated**.
 - The language preference is **not persisted** across page reloads (no `localStorage` save). Add `localStorage.setItem('lang', value)` in `toggle()` and read it in the service constructor to persist.
+
+---
+
+## Portfolio v2.1 — Changelog (branch `develop_2026`)
+
+> Changes applied in session dated **2026-06-04**.
+
+### Videos section — multi-video refactor
+
+| Change | Details |
+|---|---|
+| **Array-based video list** | `Videos` component refactored from a single hardcoded video to a `VideoCard[]` array. Each entry holds its own `WritableSignal<boolean>` for play state and a `SafeResourceUrl` for the embed, so cards are fully independent. |
+| **New video added** | "Deck Family Farm — Account Setup" (YouTube ID `4JE0QlHdyR0`) added as a second card with tag `Tutorial`. |
+| **Local thumbnail support** | `VideoCard` interface gained an optional `thumbnail?: string` field. When present, the card uses the local image; otherwise it falls back to `https://img.youtube.com/vi/{id}/maxresdefault.jpg`. The Deck Family Farm thumbnail (`Deck Family Thumbnails.png`) was copied to `public/images/videos/deck-family-farm-thumbnail.png`. |
+
+**New / changed files:**
+
+| File | Change |
+|---|---|
+| `src/app/pages/projects/videos/videos.ts` | `VideoCard` interface + `videos[]` array replacing single-video props |
+| `src/app/pages/projects/videos/videos.html` | `@for` loop over `videos`; `[src]` uses nullish-coalescing fallback |
+| `public/images/videos/deck-family-farm-thumbnail.png` | New local thumbnail asset |
+
+---
+
+### Workflow Diagrams — data-driven card system
+
+The static info list was replaced with a fully data-driven card pattern matching the Blogs section.
+
+| Change | Details |
+|---|---|
+| **`Diagram` model** | New interface at `core/models/diagram.model.ts` with fields: `title`, `summary`, `slug`, `date`, `tags`, `cover`, `tool`, `isExternal`, `link?`, `pdfPath?`, `problem?`, `steps?` (array of `DiagramStep`). |
+| **`DiagramService`** | New service at `core/services/diagram.service.ts` — loads `/data/diagrams.json` via `HttpClient`. |
+| **`diagrams.json`** | New data file at `public/data/diagrams.json`. First entry: TravelHub Software Architecture Design. |
+| **`WorkflowDiagrams` component** | Now injects `DiagramService` and `Router`; renders cards via `@for`; clicking a card navigates to `/projects/workflow-diagrams/:slug`. The old static `.visual-section` tool list is preserved below the cards, separated by a border. |
+| **New route** | `workflow-diagrams/:slug` added as a sibling child route under `projects` in `app.routes.ts`, lazy-loading `DiagramDetail`. |
+
+**New / changed files:**
+
+| File | Change |
+|---|---|
+| `src/app/core/models/diagram.model.ts` | New — `Diagram` + `DiagramStep` interfaces |
+| `src/app/core/services/diagram.service.ts` | New — `DiagramService` |
+| `public/data/diagrams.json` | New — TravelHub entry with full problem + 6 development steps |
+| `public/images/diagrams/travel-hub-architecture.png` | New — architecture diagram image (copied from local Uniandes coursework) |
+| `src/app/pages/projects/workflow-diagrams/workflow-diagrams.ts` | Refactored to use service + Router navigation |
+| `src/app/pages/projects/workflow-diagrams/workflow-diagrams.html` | Card list via `@for` + preserved tools section |
+| `src/app/pages/projects/workflow-diagrams/workflow-diagrams.scss` | Card styles added; tools section given a top border separator |
+| `src/app/app.routes.ts` | Added `workflow-diagrams/:slug` route |
+
+---
+
+### Diagram Detail page — new routed page
+
+A new standalone detail page renders at `/projects/workflow-diagrams/:slug` inside the existing Projects shell (sidebar stays visible, "Diagrams" tab stays active).
+
+**Layout:**
+1. **Hero** — gradient banner with title + "Back to Diagrams" button on the same row (`space-between`); meta row below title shows date + all tags, each with an icon (`fa-calendar-days` for date, `fa-pen-ruler` for `draw.io`, `fa-diagram-project` for `Visual Paradigm`, `fa-hashtag` for all others).
+2. **The Problem** — `problem` field from JSON split on `\n\n` and rendered as paragraphs.
+3. **Development Process** — `steps[]` rendered as a CSS-counter ordered list; each item has a numbered circle (accent colour) + title + description.
+4. **Architecture Diagram** — full-width image with a rounded container and subtle shadow.
+
+**New files:**
+
+| File | Purpose |
+|---|---|
+| `src/app/pages/projects/workflow-diagrams/diagram-detail/diagram-detail.ts` | Component — reads `:slug` from `ActivatedRoute`, finds matching diagram via service, exposes `problemParagraphs` getter and `tagIcon(tag)` method |
+| `src/app/pages/projects/workflow-diagrams/diagram-detail/diagram-detail.html` | Template — hero, problem, steps, full image |
+| `src/app/pages/projects/workflow-diagrams/diagram-detail/diagram-detail.scss` | Scoped styles — hero, step counter, full-width diagram wrapper |

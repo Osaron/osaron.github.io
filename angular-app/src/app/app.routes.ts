@@ -27,6 +27,10 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/projects/workflow-diagrams/workflow-diagrams').then(m => m.WorkflowDiagrams)
       },
       {
+        path: 'workflow-diagrams/:slug',
+        loadComponent: () => import('./pages/projects/workflow-diagrams/diagram-detail/diagram-detail').then(m => m.DiagramDetail)
+      },
+      {
         path: 'videos',
         loadComponent: () => import('./pages/projects/videos/videos').then(m => m.Videos)
       },
