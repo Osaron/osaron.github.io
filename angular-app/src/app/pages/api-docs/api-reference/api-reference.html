@@ -2,15 +2,21 @@
   <span>{{ lang.t('api.bc.api-docs') }}</span> <span>/</span> <span>{{ lang.t('api.bc.api-reference') }}</span>
 </nav>
 
+<div class="portfolio-note">
+  <i class="fas fa-circle-info"></i>
+  <p>{{ lang.t('api.gs.portfolio-note') }}</p>
+</div>
+
+<!-- ── Overview ── -->
 <section id="overview" class="api-section">
   <h1>{{ lang.t('api.ref.title') }}</h1>
-  <p>{{ lang.t('api.ref.pre') }} <code>Authorization</code> {{ lang.t('api.ref.mid') }} <a href="/api-docs/authentication">{{ lang.t('api.bc.authentication') }}</a> {{ lang.t('api.ref.post') }}</p>
+  <p>{{ lang.t('api.ref.desc') }}</p>
 
   <h2 id="base-url">{{ lang.t('api.ref.base-url.title') }}</h2>
   <div class="api-overview">
     <div class="code-block">
-      <code>https://api.oscarrondon.com/v1</code>
-      <button class="copy-btn" (click)="copyUrl('https://api.oscarrondon.com/v1', $any($event.currentTarget))">
+      <code>https://api.quotable.io</code>
+      <button class="copy-btn" (click)="copyUrl('https://api.quotable.io', $any($event.currentTarget))" aria-label="Copy base URL">
         <i class="fas fa-copy"></i>
       </button>
     </div>
@@ -18,30 +24,285 @@
 
   <h2 id="endpoint-overview">{{ lang.t('api.ref.endpoints.title') }}</h2>
   <table class="params-table">
-    <thead><tr><th>{{ lang.t('api.table.method') }}</th><th>{{ lang.t('api.table.path') }}</th><th>{{ lang.t('api.table.description') }}</th></tr></thead>
+    <thead>
+      <tr>
+        <th>{{ lang.t('api.table.method') }}</th>
+        <th>{{ lang.t('api.table.path') }}</th>
+        <th>{{ lang.t('api.table.description') }}</th>
+      </tr>
+    </thead>
     <tbody>
-      <tr><td><span class="method get">GET</span></td><td><code>/v1/content</code></td><td>{{ lang.t('api.ref.ep.list-content') }}</td></tr>
-      <tr><td><span class="method post">POST</span></td><td><code>/v1/content</code></td><td>{{ lang.t('api.ref.ep.create-content') }}</td></tr>
-      <tr><td><span class="method put">PUT</span></td><td><code>/v1/content/&#123;id&#125;</code></td><td>{{ lang.t('api.ref.ep.update-content') }}</td></tr>
-      <tr><td><span class="method delete">DELETE</span></td><td><code>/v1/content/&#123;id&#125;</code></td><td>{{ lang.t('api.ref.ep.delete-content') }}</td></tr>
-      <tr><td><span class="method get">GET</span></td><td><code>/v1/users</code></td><td>{{ lang.t('api.ref.ep.list-users') }}</td></tr>
-      <tr><td><span class="method post">POST</span></td><td><code>/v1/users</code></td><td>{{ lang.t('api.ref.ep.create-user') }}</td></tr>
-      <tr><td><span class="method put">PUT</span></td><td><code>/v1/users/&#123;id&#125;</code></td><td>{{ lang.t('api.ref.ep.update-user') }}</td></tr>
-      <tr><td><span class="method delete">DELETE</span></td><td><code>/v1/users/&#123;id&#125;</code></td><td>{{ lang.t('api.ref.ep.delete-user') }}</td></tr>
+      <tr><td><span class="method get">GET</span></td><td><code>/quotes/random</code></td><td>{{ lang.t('api.ref.ep.random') }}</td></tr>
+      <tr><td><span class="method get">GET</span></td><td><code>/quotes</code></td><td>{{ lang.t('api.ref.ep.list-quotes') }}</td></tr>
+      <tr><td><span class="method get">GET</span></td><td><code>/quotes/:id</code></td><td>{{ lang.t('api.ref.ep.get-quote') }}</td></tr>
+      <tr><td><span class="method get">GET</span></td><td><code>/authors</code></td><td>{{ lang.t('api.ref.ep.list-authors') }}</td></tr>
+      <tr><td><span class="method get">GET</span></td><td><code>/authors/:slug</code></td><td>{{ lang.t('api.ref.ep.get-author') }}</td></tr>
+      <tr><td><span class="method get">GET</span></td><td><code>/tags</code></td><td>{{ lang.t('api.ref.ep.tags') }}</td></tr>
+      <tr><td><span class="method get">GET</span></td><td><code>/search/quotes</code></td><td>{{ lang.t('api.ref.ep.search-quotes') }}</td></tr>
     </tbody>
   </table>
 </section>
 
+<!-- ── Quotes ── -->
+<section id="quotes-endpoints" class="api-section">
+  <h2>{{ lang.t('api.ref.quotes.title') }}</h2>
+  <p>{{ lang.t('api.ref.quotes.desc') }}</p>
+
+  <!-- GET /quotes/random -->
+  <div class="endpoint-block">
+    <div class="endpoint-signature">
+      <span class="method get">GET</span>
+      <code>/quotes/random</code>
+    </div>
+    <p>{{ lang.t('api.ref.random.desc') }}</p>
+    <table class="params-table">
+      <thead><tr><th>{{ lang.t('api.table.parameter') }}</th><th>{{ lang.t('api.table.type') }}</th><th>{{ lang.t('api.table.description') }}</th></tr></thead>
+      <tbody>
+        <tr><td><code>limit</code></td><td>integer</td><td>{{ lang.t('api.ref.random.p.limit') }}</td></tr>
+        <tr><td><code>tags</code></td><td>string</td><td>{{ lang.t('api.ref.random.p.tags') }}</td></tr>
+        <tr><td><code>author</code></td><td>string</td><td>{{ lang.t('api.ref.random.p.author') }}</td></tr>
+        <tr><td><code>minLength</code></td><td>integer</td><td>{{ lang.t('api.ref.random.p.minLength') }}</td></tr>
+        <tr><td><code>maxLength</code></td><td>integer</td><td>{{ lang.t('api.ref.random.p.maxLength') }}</td></tr>
+      </tbody>
+    </table>
+    <div class="code-example">
+      <div class="code-label">
+        <span>{{ lang.t('api.ref.example-label') }}</span>
+        <div class="code-label-actions">
+          <span class="code-path">GET /quotes/random</span>
+          <button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button>
+        </div>
+      </div>
+      <pre><code class="language-bash"># 3 random inspirational quotes, max 100 characters each
+curl "https://api.quotable.io/quotes/random?limit=3&tags=inspirational&maxLength=100"</code></pre>
+    </div>
+  </div>
+
+  <!-- GET /quotes -->
+  <div class="endpoint-block">
+    <div class="endpoint-signature">
+      <span class="method get">GET</span>
+      <code>/quotes</code>
+    </div>
+    <p>{{ lang.t('api.ref.list-quotes.desc') }}</p>
+    <table class="params-table">
+      <thead><tr><th>{{ lang.t('api.table.parameter') }}</th><th>{{ lang.t('api.table.type') }}</th><th>{{ lang.t('api.table.description') }}</th></tr></thead>
+      <tbody>
+        <tr><td><code>page</code></td><td>integer</td><td>{{ lang.t('api.ref.list-quotes.p.page') }}</td></tr>
+        <tr><td><code>limit</code></td><td>integer</td><td>{{ lang.t('api.ref.list-quotes.p.limit') }}</td></tr>
+        <tr><td><code>tags</code></td><td>string</td><td>{{ lang.t('api.ref.list-quotes.p.tags') }}</td></tr>
+        <tr><td><code>author</code></td><td>string</td><td>{{ lang.t('api.ref.list-quotes.p.author') }}</td></tr>
+        <tr><td><code>sortBy</code></td><td>string</td><td>{{ lang.t('api.ref.list-quotes.p.sortBy') }}</td></tr>
+        <tr><td><code>order</code></td><td>string</td><td>{{ lang.t('api.ref.list-quotes.p.order') }}</td></tr>
+        <tr><td><code>minLength</code></td><td>integer</td><td>{{ lang.t('api.ref.random.p.minLength') }}</td></tr>
+        <tr><td><code>maxLength</code></td><td>integer</td><td>{{ lang.t('api.ref.random.p.maxLength') }}</td></tr>
+      </tbody>
+    </table>
+    <div class="code-example">
+      <div class="code-label">
+        <span>{{ lang.t('api.ref.example-label') }}</span>
+        <div class="code-label-actions">
+          <span class="code-path">GET /quotes</span>
+          <button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button>
+        </div>
+      </div>
+      <pre><code class="language-bash"># Page 2 of wisdom quotes, sorted alphabetically by author
+curl "https://api.quotable.io/quotes?tags=wisdom&page=2&limit=20&sortBy=author&order=asc"</code></pre>
+    </div>
+    <div class="code-example" style="margin-top: 1rem;">
+      <div class="code-label">
+        <span>{{ lang.t('api.ref.response-label') }}</span>
+        <div class="code-label-actions">
+          <span class="code-path">200 OK</span>
+          <button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button>
+        </div>
+      </div>
+      <pre><code class="language-json">&#123;
+  "count": 20,
+  "totalCount": 143,
+  "page": 2,
+  "totalPages": 8,
+  "lastItemIndex": 40,
+  "results": [
+    &#123;
+      "_id": "h3ifEoGiCBQH",
+      "content": "Knowing yourself is the beginning of all wisdom.",
+      "author": "Aristotle",
+      "authorSlug": "aristotle",
+      "length": 48,
+      "tags": ["wisdom"]
+    &#125;
+  ]
+&#125;</code></pre>
+    </div>
+  </div>
+
+  <!-- GET /quotes/:id -->
+  <div class="endpoint-block">
+    <div class="endpoint-signature">
+      <span class="method get">GET</span>
+      <code>/quotes/:id</code>
+    </div>
+    <p>{{ lang.t('api.ref.get-quote.desc') }}</p>
+    <table class="params-table">
+      <thead><tr><th>{{ lang.t('api.table.parameter') }}</th><th>{{ lang.t('api.table.type') }}</th><th>{{ lang.t('api.table.description') }}</th></tr></thead>
+      <tbody>
+        <tr><td><code>:id</code></td><td>string</td><td>{{ lang.t('api.ref.get-quote.p.id') }}</td></tr>
+      </tbody>
+    </table>
+    <div class="code-example">
+      <div class="code-label">
+        <span>{{ lang.t('api.ref.example-label') }}</span>
+        <div class="code-label-actions">
+          <span class="code-path">GET /quotes/:id</span>
+          <button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button>
+        </div>
+      </div>
+      <pre><code class="language-bash">curl "https://api.quotable.io/quotes/h3ifEoGiCBQH"</code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- ── Authors ── -->
+<section id="authors-endpoints" class="api-section">
+  <h2>{{ lang.t('api.ref.authors.title') }}</h2>
+  <p>{{ lang.t('api.ref.authors.desc') }}</p>
+
+  <!-- GET /authors -->
+  <div class="endpoint-block">
+    <div class="endpoint-signature">
+      <span class="method get">GET</span>
+      <code>/authors</code>
+    </div>
+    <p>{{ lang.t('api.ref.list-authors.desc') }}</p>
+    <table class="params-table">
+      <thead><tr><th>{{ lang.t('api.table.parameter') }}</th><th>{{ lang.t('api.table.type') }}</th><th>{{ lang.t('api.table.description') }}</th></tr></thead>
+      <tbody>
+        <tr><td><code>page</code></td><td>integer</td><td>{{ lang.t('api.ref.list-quotes.p.page') }}</td></tr>
+        <tr><td><code>limit</code></td><td>integer</td><td>{{ lang.t('api.ref.list-authors.p.limit') }}</td></tr>
+        <tr><td><code>slug</code></td><td>string</td><td>{{ lang.t('api.ref.list-authors.p.slug') }}</td></tr>
+        <tr><td><code>sortBy</code></td><td>string</td><td>{{ lang.t('api.ref.list-authors.p.sortBy') }}</td></tr>
+        <tr><td><code>order</code></td><td>string</td><td>{{ lang.t('api.ref.list-quotes.p.order') }}</td></tr>
+      </tbody>
+    </table>
+    <div class="code-example">
+      <div class="code-label">
+        <span>{{ lang.t('api.ref.example-label') }}</span>
+        <div class="code-label-actions">
+          <span class="code-path">GET /authors</span>
+          <button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button>
+        </div>
+      </div>
+      <pre><code class="language-bash"># Top 10 authors by quote count
+curl "https://api.quotable.io/authors?sortBy=quoteCount&order=desc&limit=10"</code></pre>
+    </div>
+  </div>
+
+  <!-- GET /authors/:slug -->
+  <div class="endpoint-block">
+    <div class="endpoint-signature">
+      <span class="method get">GET</span>
+      <code>/authors/:slug</code>
+    </div>
+    <p>{{ lang.t('api.ref.get-author.desc') }}</p>
+    <table class="params-table">
+      <thead><tr><th>{{ lang.t('api.table.parameter') }}</th><th>{{ lang.t('api.table.type') }}</th><th>{{ lang.t('api.table.description') }}</th></tr></thead>
+      <tbody>
+        <tr><td><code>:slug</code></td><td>string</td><td>{{ lang.t('api.ref.get-author.p.slug') }}</td></tr>
+      </tbody>
+    </table>
+    <div class="code-example">
+      <div class="code-label">
+        <span>{{ lang.t('api.ref.example-label') }}</span>
+        <div class="code-label-actions">
+          <span class="code-path">GET /authors/:slug</span>
+          <button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button>
+        </div>
+      </div>
+      <pre><code class="language-bash">curl "https://api.quotable.io/authors/albert-einstein"</code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- ── Tags & Search ── -->
+<section id="tags-search" class="api-section">
+  <h2>{{ lang.t('api.ref.tags-search.title') }}</h2>
+  <p>{{ lang.t('api.ref.tags-search.desc') }}</p>
+
+  <!-- GET /tags -->
+  <div class="endpoint-block">
+    <div class="endpoint-signature">
+      <span class="method get">GET</span>
+      <code>/tags</code>
+    </div>
+    <p>{{ lang.t('api.ref.tags.desc') }}</p>
+    <table class="params-table">
+      <thead><tr><th>{{ lang.t('api.table.parameter') }}</th><th>{{ lang.t('api.table.type') }}</th><th>{{ lang.t('api.table.description') }}</th></tr></thead>
+      <tbody>
+        <tr><td><code>sortBy</code></td><td>string</td><td>{{ lang.t('api.ref.tags.p.sortBy') }}</td></tr>
+        <tr><td><code>order</code></td><td>string</td><td>{{ lang.t('api.ref.list-quotes.p.order') }}</td></tr>
+      </tbody>
+    </table>
+    <div class="code-example">
+      <div class="code-label">
+        <span>{{ lang.t('api.ref.example-label') }}</span>
+        <div class="code-label-actions">
+          <span class="code-path">GET /tags</span>
+          <button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button>
+        </div>
+      </div>
+      <pre><code class="language-bash"># All tags sorted by number of quotes
+curl "https://api.quotable.io/tags?sortBy=quoteCount&order=desc"</code></pre>
+    </div>
+  </div>
+
+  <!-- GET /search/quotes -->
+  <div class="endpoint-block">
+    <div class="endpoint-signature">
+      <span class="method get">GET</span>
+      <code>/search/quotes</code>
+    </div>
+    <p>{{ lang.t('api.ref.search-quotes.desc') }}</p>
+    <table class="params-table">
+      <thead><tr><th>{{ lang.t('api.table.parameter') }}</th><th>{{ lang.t('api.table.type') }}</th><th>{{ lang.t('api.table.description') }}</th></tr></thead>
+      <tbody>
+        <tr><td><code>query</code></td><td>string</td><td>{{ lang.t('api.ref.search.p.query') }}</td></tr>
+        <tr><td><code>fields</code></td><td>string</td><td>{{ lang.t('api.ref.search.p.fields') }}</td></tr>
+        <tr><td><code>fuzzyMaxEdits</code></td><td>integer</td><td>{{ lang.t('api.ref.search.p.fuzzy') }}</td></tr>
+        <tr><td><code>page</code></td><td>integer</td><td>{{ lang.t('api.ref.list-quotes.p.page') }}</td></tr>
+        <tr><td><code>limit</code></td><td>integer</td><td>{{ lang.t('api.ref.search.p.limit') }}</td></tr>
+      </tbody>
+    </table>
+    <div class="code-example">
+      <div class="code-label">
+        <span>{{ lang.t('api.ref.example-label') }}</span>
+        <div class="code-label-actions">
+          <span class="code-path">GET /search/quotes</span>
+          <button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button>
+        </div>
+      </div>
+      <pre><code class="language-bash"># Full-text search with 1-character fuzzy tolerance
+curl "https://api.quotable.io/search/quotes?query=imagination&fuzzyMaxEdits=1"</code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- ── Error Codes ── -->
 <section id="error-codes" class="api-section">
   <h2>{{ lang.t('api.ref.errors.title') }}</h2>
-  <p>{{ lang.t('api.ref.errors.pre') }} <code>message</code> {{ lang.t('api.ref.errors.post') }}</p>
+  <p>{{ lang.t('api.ref.errors.desc') }}</p>
   <table class="params-table">
-    <thead><tr><th>{{ lang.t('api.table.code') }}</th><th>{{ lang.t('api.table.name') }}</th><th>{{ lang.t('api.table.description') }}</th></tr></thead>
+    <thead>
+      <tr>
+        <th>{{ lang.t('api.table.code') }}</th>
+        <th>{{ lang.t('api.table.name') }}</th>
+        <th>{{ lang.t('api.table.description') }}</th>
+      </tr>
+    </thead>
     <tbody>
+      <tr><td><code>200</code></td><td>{{ lang.t('api.ref.err.200.name') }}</td><td>{{ lang.t('api.ref.err.200') }}</td></tr>
       <tr><td><code>400</code></td><td>{{ lang.t('api.ref.err.400.name') }}</td><td>{{ lang.t('api.ref.err.400') }}</td></tr>
-      <tr><td><code>401</code></td><td>{{ lang.t('api.ref.err.401.name') }}</td><td>{{ lang.t('api.ref.err.401') }}</td></tr>
       <tr><td><code>404</code></td><td>{{ lang.t('api.ref.err.404.name') }}</td><td>{{ lang.t('api.ref.err.404') }}</td></tr>
-      <tr><td><code>422</code></td><td>{{ lang.t('api.ref.err.422.name') }}</td><td>{{ lang.t('api.ref.err.422.pre') }} <code>errors</code> {{ lang.t('api.ref.err.422.post') }}</td></tr>
       <tr><td><code>429</code></td><td>{{ lang.t('api.ref.err.429.name') }}</td><td>{{ lang.t('api.ref.err.429.pre') }} <code>Retry-After</code> {{ lang.t('api.ref.err.429.post') }}</td></tr>
       <tr><td><code>500</code></td><td>{{ lang.t('api.ref.err.500.name') }}</td><td>{{ lang.t('api.ref.err.500') }}</td></tr>
     </tbody>

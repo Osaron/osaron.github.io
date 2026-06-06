@@ -3,6 +3,11 @@
   <span>{{ lang.t('api.bc.getting-started') }}</span>
 </nav>
 
+<div class="portfolio-note">
+  <i class="fas fa-circle-info"></i>
+  <p>{{ lang.t('api.gs.portfolio-note') }}</p>
+</div>
+
 <section id="overview" class="api-section">
   <span class="page-eyebrow">{{ lang.t('api.gs.eyebrow') }}</span>
   <h1>{{ lang.t('api.gs.title') }}</h1>
@@ -13,9 +18,9 @@
       <h3>{{ lang.t('api.gs.card1.title') }}</h3>
       <p>{{ lang.t('api.gs.card1.desc') }}</p>
       <div class="hero-meta">
-        <span class="meta-pill"><i class="fas fa-lock"></i> {{ lang.t('api.gs.pill.bearer') }}</span>
+        <span class="meta-pill"><i class="fas fa-unlock"></i> {{ lang.t('api.gs.pill.noauth') }}</span>
         <span class="meta-pill"><i class="fas fa-bolt"></i> {{ lang.t('api.gs.pill.json') }}</span>
-        <span class="meta-pill"><i class="fas fa-layer-group"></i> {{ lang.t('api.gs.pill.routes') }}</span>
+        <span class="meta-pill"><i class="fas fa-layer-group"></i> {{ lang.t('api.gs.pill.endpoints') }}</span>
       </div>
     </div>
     <div class="hero-card">
@@ -23,13 +28,13 @@
       <p>{{ lang.t('api.gs.card2.desc') }}</p>
       <div class="api-overview">
         <div class="code-block">
-          <code>https://api.oscarrondon.com/v1</code>
-          <button class="copy-btn" (click)="copyUrl('https://api.oscarrondon.com/v1', $any($event.currentTarget))" aria-label="Copy base URL">
+          <code>https://api.quotable.io</code>
+          <button class="copy-btn" (click)="copyUrl('https://api.quotable.io', $any($event.currentTarget))" aria-label="Copy base URL">
             <i class="fas fa-copy"></i>
           </button>
         </div>
       </div>
-      <p>{{ lang.t('api.gs.card2.note') }} <code>Authorization</code> {{ lang.t('api.gs.card2.note2') }}</p>
+      <p>{{ lang.t('api.gs.card2.note') }}</p>
     </div>
   </div>
 
@@ -52,27 +57,30 @@
   </div>
 </section>
 
-<section id="authentication-summary" class="api-section">
+<section id="rate-limits" class="api-section">
   <div class="section-intro">
-    <h2>{{ lang.t('api.gs.auth-sum.title') }}</h2>
-    <p>{{ lang.t('api.gs.auth-sum.desc') }}</p>
+    <h2>{{ lang.t('api.gs.rate.title') }}</h2>
+    <p>{{ lang.t('api.gs.rate.desc') }}</p>
   </div>
   <div class="info-grid">
     <article class="info-card">
-      <h3>{{ lang.t('api.gs.auth-sum.header.title') }}</h3>
-      <p>{{ lang.t('api.gs.auth-sum.header.pre') }} <code>Authorization: Bearer YOUR_API_KEY</code> {{ lang.t('api.gs.auth-sum.header.post') }} <code>401</code>.</p>
+      <h3>{{ lang.t('api.gs.rate.limit.title') }}</h3>
+      <p>{{ lang.t('api.gs.rate.limit.desc') }} <code>429 Too Many Requests</code>.</p>
     </article>
     <article class="info-card">
-      <h3>{{ lang.t('api.gs.auth-sum.env.title') }}</h3>
-      <p>{{ lang.t('api.gs.auth-sum.env.desc') }}</p>
+      <h3>{{ lang.t('api.gs.rate.open.title') }}</h3>
+      <p>{{ lang.t('api.gs.rate.open.desc') }}</p>
     </article>
   </div>
   <div class="code-example">
-    <div class="code-label"><span>{{ lang.t('api.gs.auth-sum.code-label') }}</span><div class="code-label-actions"><span class="code-path">HTTP request</span><button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button></div></div>
-    <pre><code class="language-http">GET /v1/content HTTP/1.1
-Host: api.oscarrondon.com
-Authorization: Bearer YOUR_API_KEY
-Accept: application/json</code></pre>
+    <div class="code-label">
+      <span>{{ lang.t('api.gs.rate.code-label') }}</span>
+      <div class="code-label-actions">
+        <span class="code-path">No headers required</span>
+        <button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button>
+      </div>
+    </div>
+    <pre><code class="language-bash">curl "https://api.quotable.io/quotes/random"</code></pre>
   </div>
 </section>
 
@@ -82,34 +90,66 @@ Accept: application/json</code></pre>
     <p>{{ lang.t('api.gs.first-req.desc') }}</p>
   </div>
   <div class="section-stack">
-    <div class="step"><div class="step-number">1</div><div class="step-content"><h3>{{ lang.t('api.gs.step1.title') }}</h3><p>{{ lang.t('api.gs.step1.pre') }} <code>YOUR_API_KEY</code> {{ lang.t('api.gs.step1.post') }} <code>/content</code> {{ lang.t('api.gs.step1.post2') }}</p></div></div>
-    <div class="step"><div class="step-number">2</div><div class="step-content"><h3>{{ lang.t('api.gs.step2.title') }}</h3><p>{{ lang.t('api.gs.step2.desc') }}</p></div></div>
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h3>{{ lang.t('api.gs.step1.title') }}</h3>
+        <p>{{ lang.t('api.gs.step1.desc') }}</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h3>{{ lang.t('api.gs.step2.title') }}</h3>
+        <p>{{ lang.t('api.gs.step2.desc') }}</p>
+      </div>
+    </div>
   </div>
   <div class="code-example">
-    <div class="code-label"><span>{{ lang.t('api.gs.first-req.code-label') }}</span><div class="code-label-actions"><span class="code-path">GET /v1/content</span><button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button></div></div>
-    <pre><code class="language-bash">curl "https://api.oscarrondon.com/v1/content?type=guide&status=published&limit=3" \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Accept: application/json"</code></pre>
+    <div class="code-label">
+      <span>{{ lang.t('api.gs.first-req.code-label') }}</span>
+      <div class="code-label-actions">
+        <span class="code-path">GET /quotes/random</span>
+        <button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button>
+      </div>
+    </div>
+    <pre><code class="language-bash">curl "https://api.quotable.io/quotes/random"</code></pre>
   </div>
-  <div class="callout-card"><h3>{{ lang.t('api.gs.callout.title') }}</h3><p>{{ lang.t('api.gs.callout.desc') }}</p></div>
+  <div class="callout-card">
+    <h3>{{ lang.t('api.gs.callout.title') }}</h3>
+    <p>{{ lang.t('api.gs.callout.desc') }}</p>
+  </div>
 </section>
 
 <section id="response-shape" class="api-section">
   <div class="section-intro">
     <h2>{{ lang.t('api.gs.response.title') }}</h2>
-    <p>{{ lang.t('api.gs.response.pre') }} <code>data</code> {{ lang.t('api.gs.response.post') }}</p>
+    <p>{{ lang.t('api.gs.response.desc') }}</p>
   </div>
   <div class="code-example">
-    <div class="code-label"><span>{{ lang.t('api.gs.response.code-label') }}</span><div class="code-label-actions"><span class="code-path">application/json</span><button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button></div></div>
-    <pre><code class="language-json">&#123;
-  "data": [&#123; "id": "cnt_1024", "slug": "designing-docs-that-feel-fast", "title": "Designing Docs That Feel Fast", "type": "guide", "status": "published", "updated_at": "2026-03-28T14:20:00Z" &#125;],
-  "pagination": &#123; "limit": 3, "offset": 0, "has_more": false &#125;,
-  "meta": &#123; "request_id": "req_7gk29m", "version": "v1" &#125;
-&#125;</code></pre>
+    <div class="code-label">
+      <span>{{ lang.t('api.gs.response.code-label') }}</span>
+      <div class="code-label-actions">
+        <span class="code-path">application/json</span>
+        <button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button>
+      </div>
+    </div>
+    <pre><code class="language-json">[&#123;
+  "_id": "h3ifEoGiCBQH",
+  "content": "Life is what happens when you're busy making other plans.",
+  "author": "John Lennon",
+  "authorSlug": "john-lennon",
+  "length": 54,
+  "tags": ["life", "inspirational"]
+&#125;]</code></pre>
   </div>
   <div class="info-grid">
-    <article class="info-card"><h3><code>data</code></h3><p>{{ lang.t('api.gs.response.data.desc') }}</p></article>
-    <article class="info-card"><h3><code>meta</code></h3><p>{{ lang.t('api.gs.response.meta.desc') }}</p></article>
+    <article class="info-card"><h3><code>_id</code></h3><p>{{ lang.t('api.gs.response.id.desc') }}</p></article>
+    <article class="info-card"><h3><code>content</code></h3><p>{{ lang.t('api.gs.response.content.desc') }}</p></article>
+    <article class="info-card"><h3><code>author</code></h3><p>{{ lang.t('api.gs.response.author.desc') }}</p></article>
+    <article class="info-card"><h3><code>authorSlug</code></h3><p>{{ lang.t('api.gs.response.authorSlug.desc') }}</p></article>
+    <article class="info-card"><h3><code>length</code></h3><p>{{ lang.t('api.gs.response.length.desc') }}</p></article>
+    <article class="info-card"><h3><code>tags</code></h3><p>{{ lang.t('api.gs.response.tags.desc') }}</p></article>
   </div>
 </section>
 

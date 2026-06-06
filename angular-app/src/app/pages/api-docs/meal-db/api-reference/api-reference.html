@@ -1,0 +1,172 @@
+<nav class="breadcrumb">
+  <a routerLink="/">{{ lang.t('api.bc.home') }}</a> <span>&gt;</span>
+  <a routerLink="/api-docs/meal-db/introduction">{{ lang.t('api.bc.meal-db') }}</a> <span>&gt;</span>
+  <span>{{ lang.t('api.mdb.ref.title') }}</span>
+</nav>
+
+<section class="api-section">
+  <span class="page-eyebrow">{{ lang.t('api.mdb.ref.eyebrow') }}</span>
+  <h1>{{ lang.t('api.mdb.ref.title') }}</h1>
+  <p class="hero-summary">{{ lang.t('api.mdb.ref.hero-summary') }}</p>
+
+  <h2>Base URL</h2>
+  <div class="api-overview">
+    <div class="code-block">
+      <code>https://www.themealdb.com/api/json/v1/1/</code>
+      <button class="copy-btn" (click)="copyUrl(BASE_URL, $any($event.currentTarget))" aria-label="Copy base URL">
+        <i class="fas fa-copy"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Search Endpoints -->
+<section id="search-endpoints" class="api-section">
+  <h2>{{ lang.t('api.mdb.ref.search-title') }}</h2>
+
+  <div class="endpoint-block">
+    <div class="endpoint-signature">
+      <span class="method get">GET</span>
+      <code>search.php?s=&#123;name&#125;</code>
+    </div>
+    <p>Search meals by full or partial name. Returns an array of matching full meal objects, or <code>null</code> if none found.</p>
+    <table class="params-table">
+      <thead><tr><th>{{ lang.t('api.mdb.ref.param-name') }}</th><th>{{ lang.t('api.mdb.ref.param-type') }}</th><th>{{ lang.t('api.mdb.ref.param-req') }}</th><th>{{ lang.t('api.mdb.ref.param-desc') }}</th></tr></thead>
+      <tbody>
+        <tr><td><code>s</code></td><td>string</td><td>Yes</td><td>Full or partial meal name. Case-insensitive. Example: <code>chicken</code>, <code>pasta</code></td></tr>
+      </tbody>
+    </table>
+    <div class="code-example">
+      <div class="code-header"><span>curl</span><button class="copy-btn" (click)="copyCode($any($event.target))"><i class="fas fa-copy"></i></button></div>
+      <pre><code class="language-bash">curl "https://www.themealdb.com/api/json/v1/1/search.php?s=chicken"</code></pre>
+    </div>
+  </div>
+
+  <div class="endpoint-block">
+    <div class="endpoint-signature">
+      <span class="method get">GET</span>
+      <code>search.php?f=&#123;letter&#125;</code>
+    </div>
+    <p>List all meals that start with a given letter. Useful for building alphabetical browse views.</p>
+    <table class="params-table">
+      <thead><tr><th>{{ lang.t('api.mdb.ref.param-name') }}</th><th>{{ lang.t('api.mdb.ref.param-type') }}</th><th>{{ lang.t('api.mdb.ref.param-req') }}</th><th>{{ lang.t('api.mdb.ref.param-desc') }}</th></tr></thead>
+      <tbody>
+        <tr><td><code>f</code></td><td>string</td><td>Yes</td><td>Single letter (a–z). Example: <code>a</code> returns Arrabiata, Ayam Bakar…</td></tr>
+      </tbody>
+    </table>
+    <div class="code-example">
+      <div class="code-header"><span>curl</span><button class="copy-btn" (click)="copyCode($any($event.target))"><i class="fas fa-copy"></i></button></div>
+      <pre><code class="language-bash">curl "https://www.themealdb.com/api/json/v1/1/search.php?f=a"</code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- Lookup & Random -->
+<section id="lookup-random" class="api-section">
+  <h2>{{ lang.t('api.mdb.ref.lookup-title') }}</h2>
+
+  <div class="endpoint-block">
+    <div class="endpoint-signature">
+      <span class="method get">GET</span>
+      <code>lookup.php?i=&#123;id&#125;</code>
+    </div>
+    <p>Fetch the complete meal object by its numeric ID. Use this to get full details after a filter call returns only IDs.</p>
+    <table class="params-table">
+      <thead><tr><th>{{ lang.t('api.mdb.ref.param-name') }}</th><th>{{ lang.t('api.mdb.ref.param-type') }}</th><th>{{ lang.t('api.mdb.ref.param-req') }}</th><th>{{ lang.t('api.mdb.ref.param-desc') }}</th></tr></thead>
+      <tbody>
+        <tr><td><code>i</code></td><td>integer</td><td>Yes</td><td>Numeric meal ID from a previous search or filter call. Example: <code>52772</code></td></tr>
+      </tbody>
+    </table>
+    <div class="code-example">
+      <div class="code-header"><span>curl</span><button class="copy-btn" (click)="copyCode($any($event.target))"><i class="fas fa-copy"></i></button></div>
+      <pre><code class="language-bash">curl "https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772"</code></pre>
+    </div>
+  </div>
+
+  <div class="endpoint-block">
+    <div class="endpoint-signature">
+      <span class="method get">GET</span>
+      <code>random.php</code>
+    </div>
+    <p>Returns a single random meal object. No parameters required. Each call returns a different meal.</p>
+    <div class="code-example">
+      <div class="code-header"><span>JavaScript</span><button class="copy-btn" (click)="copyCode($any($event.target))"><i class="fas fa-copy"></i></button></div>
+      <pre><code class="language-javascript">const res  = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
+const data = await res.json();
+const meal = data.meals[0];</code></pre>
+    </div>
+  </div>
+
+  <div class="endpoint-block">
+    <div class="endpoint-signature">
+      <span class="method get">GET</span>
+      <code>categories.php</code>
+    </div>
+    <p>Returns all meal categories with their IDs, thumbnails, and descriptions. Useful for populating a category selector.</p>
+    <div class="code-example">
+      <div class="code-header"><span>curl</span><button class="copy-btn" (click)="copyCode($any($event.target))"><i class="fas fa-copy"></i></button></div>
+      <pre><code class="language-bash">curl "https://www.themealdb.com/api/json/v1/1/categories.php"</code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- Filter Endpoints -->
+<section id="filter-endpoints" class="api-section">
+  <h2>{{ lang.t('api.mdb.ref.filter-title') }}</h2>
+  <p>Filter endpoints return lightweight objects with only <code>idMeal</code>, <code>strMeal</code>, and <code>strMealThumb</code>. Follow up with <code>lookup.php</code> to get full details.</p>
+
+  <div class="endpoint-block">
+    <div class="endpoint-signature">
+      <span class="method get">GET</span>
+      <code>filter.php?c=&#123;category&#125;</code>
+    </div>
+    <table class="params-table">
+      <thead><tr><th>{{ lang.t('api.mdb.ref.param-name') }}</th><th>{{ lang.t('api.mdb.ref.param-type') }}</th><th>{{ lang.t('api.mdb.ref.param-desc') }}</th></tr></thead>
+      <tbody>
+        <tr><td><code>c</code></td><td>string</td><td>Category name. Options: Beef, Breakfast, Chicken, Dessert, Goat, Lamb, Pasta, Pork, Seafood, Side, Starter, Vegan, Vegetarian</td></tr>
+        <tr><td><code>a</code></td><td>string</td><td>Area/cuisine name. Options: American, British, Canadian, Chinese, French, Greek, Indian, Italian, Japanese, Mexican, Thai…</td></tr>
+        <tr><td><code>i</code></td><td>string</td><td>Main ingredient name. Example: <code>chicken_breast</code>, <code>salmon</code></td></tr>
+      </tbody>
+    </table>
+    <div class="code-example">
+      <div class="code-header"><span>curl — filter by category</span><button class="copy-btn" (click)="copyCode($any($event.target))"><i class="fas fa-copy"></i></button></div>
+      <pre><code class="language-bash">curl "https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood"
+curl "https://www.themealdb.com/api/json/v1/1/filter.php?a=Japanese"
+curl "https://www.themealdb.com/api/json/v1/1/filter.php?i=salmon"</code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- List Endpoints -->
+<section id="list-endpoints" class="api-section">
+  <h2>{{ lang.t('api.mdb.ref.list-title') }}</h2>
+  <p>Returns a plain list of all valid values for a given dimension — useful for populating dropdowns.</p>
+
+  <table class="params-table">
+    <thead><tr><th>Endpoint</th><th>Returns</th></tr></thead>
+    <tbody>
+      <tr><td><code>list.php?c=list</code></td><td>All category names</td></tr>
+      <tr><td><code>list.php?a=list</code></td><td>All area/cuisine names</td></tr>
+      <tr><td><code>list.php?i=list</code></td><td>All ingredient names</td></tr>
+    </tbody>
+  </table>
+
+  <div class="code-example" style="margin-top:1rem">
+    <div class="code-header"><span>curl</span><button class="copy-btn" (click)="copyCode($any($event.target))"><i class="fas fa-copy"></i></button></div>
+    <pre><code class="language-bash">curl "https://www.themealdb.com/api/json/v1/1/list.php?a=list"</code></pre>
+  </div>
+</section>
+
+<!-- Response Codes -->
+<section id="response-codes" class="api-section">
+  <h2>{{ lang.t('api.mdb.ref.errors-title') }}</h2>
+  <table class="params-table">
+    <thead><tr><th>Code</th><th>Meaning</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td><code class="status-ok">200</code></td><td>Success</td><td>Check that <code>meals</code> is not null before use</td></tr>
+      <tr><td><code class="status-ok">200</code> + <code>null</code></td><td>No results</td><td>Show "no results found" — this is NOT a 404</td></tr>
+      <tr><td><code class="status-warn">429</code></td><td>Too Many Requests</td><td>Back off, wait, and retry</td></tr>
+      <tr><td><code class="status-err">5xx</code></td><td>Server Error</td><td>Retry with exponential back-off</td></tr>
+    </tbody>
+  </table>
+</section>

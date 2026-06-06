@@ -12,11 +12,11 @@ import { TocItem } from '../../../core/services/toc.service';
 export class GettingStarted extends ApiPageBase {
   protected getTocItems(): TocItem[] {
     return [
-      { id: 'overview',               label: this.lang.t('api.toc.overview')       },
-      { id: 'authentication-summary', label: this.lang.t('api.toc.authentication') },
-      { id: 'first-request',          label: this.lang.t('api.toc.first-request')  },
-      { id: 'response-shape',         label: this.lang.t('api.toc.response-shape') },
-      { id: 'next-steps',             label: this.lang.t('api.toc.next-steps')     },
+      { id: 'overview',       label: this.lang.t('api.toc.overview')      },
+      { id: 'rate-limits',    label: this.lang.t('api.toc.rate-limits')   },
+      { id: 'first-request',  label: this.lang.t('api.toc.first-request') },
+      { id: 'response-shape', label: this.lang.t('api.toc.response-shape')},
+      { id: 'next-steps',     label: this.lang.t('api.toc.next-steps')    },
     ];
   }
 

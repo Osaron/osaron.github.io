@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { ApiPageBase } from '../../../core/services/api-page-base';
 import { TocItem } from '../../../core/services/toc.service';
 
@@ -11,33 +11,63 @@ import { TocItem } from '../../../core/services/toc.service';
 export class Resources extends ApiPageBase {
   protected getTocItems(): TocItem[] {
     return [
-      { id: 'sdks', label: this.lang.t('api.toc.sdks'), children: [
-          { id: 'official-sdks',       label: this.lang.t('api.toc.official-sdks')    },
-          { id: 'community-libraries', label: this.lang.t('api.toc.community-libs')   },
-      ]},
-      { id: 'examples', label: this.lang.t('api.toc.code-examples'), children: [
-          { id: 'basic-examples',       label: this.lang.t('api.toc.basic-examples')       },
-          { id: 'advanced-examples',    label: this.lang.t('api.toc.advanced-examples')    },
-          { id: 'integration-patterns', label: this.lang.t('api.toc.integration-patterns') },
-      ]},
-      { id: 'faq', label: this.lang.t('api.toc.faq'), children: [
-          { id: 'general-questions',   label: this.lang.t('api.toc.general-questions')  },
-          { id: 'technical-questions', label: this.lang.t('api.toc.technical-questions') },
-          { id: 'billing-questions',   label: this.lang.t('api.toc.billing-questions')  },
-      ]},
+      { id: 'live-demo',      label: this.lang.t('api.toc.live-demo')      },
+      { id: 'quick-start',    label: this.lang.t('api.toc.quick-start')    },
+      { id: 'external-links', label: this.lang.t('api.toc.external-links') },
     ];
   }
 
-  activeTab = signal('react-example');
-  openFaqs = signal<Set<number>>(new Set());
+  tagInput       = signal('');
+  maxLengthInput = signal('');
+  quote          = signal<any>(null);
+  loading        = signal(false);
+  error          = signal<string | null>(null);
+  activeTab      = signal('js-demo');
 
-  setTab(id: string) { this.activeTab.set(id); }
+  generatedUrl = computed(() => {
+    const params = new URLSearchParams();
+    if (this.tagInput())       params.set('tags',      this.tagInput());
+    if (this.maxLengthInput()) params.set('maxLength', this.maxLengthInput());
+    const qs = params.toString();
+    return `https://api.quotable.io/quotes/random${qs ? '?' + qs : ''}`;
+  });
 
-  toggleFaq(index: number) {
-    const s = new Set(this.openFaqs());
-    s.has(index) ? s.delete(index) : s.add(index);
-    this.openFaqs.set(s);
+  quoteJson = computed(() => {
+    const q = this.quote();
+    return q ? JSON.stringify([q], null, 2) : '';
+  });
+
+  async getQuote(): Promise<void> {
+    this.loading.set(true);
+    this.error.set(null);
+    this.quote.set(null);
+    try {
+      const res = await fetch(this.generatedUrl());
+      if (res.status === 429) { this.error.set(this.lang.t('api.demo.error.rate-limit')); return; }
+      if (!res.ok)            { this.error.set(this.lang.t('api.demo.error.generic'));    return; }
+      const [data] = await res.json();
+      this.quote.set(data);
+    } catch (e: unknown) {
+      const isOnline = navigator.onLine;
+      this.error.set(isOnline
+        ? this.lang.t('api.demo.error.unreachable')
+        : this.lang.t('api.demo.error.network'));
+    } finally {
+      this.loading.set(false);
+    }
   }
 
-  isFaqOpen(index: number): boolean { return this.openFaqs().has(index); }
+  copyCode(btn: HTMLButtonElement) {
+    const code = btn.closest('.code-example')?.querySelector('pre code');
+    if (code) this.copyText(code.textContent ?? '', btn);
+  }
+
+  copyText(text: string, btn: HTMLElement) {
+    navigator.clipboard.writeText(text).then(() => {
+      const icon = btn.querySelector('i') ?? btn;
+      const prev = (icon as HTMLElement).className;
+      (icon as HTMLElement).className = 'fas fa-check';
+      setTimeout(() => { (icon as HTMLElement).className = prev; }, 1800);
+    });
+  }
 }

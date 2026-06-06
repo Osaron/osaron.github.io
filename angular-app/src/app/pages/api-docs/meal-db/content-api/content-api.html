@@ -1,0 +1,141 @@
+<nav class="breadcrumb">
+  <a routerLink="/">{{ lang.t('api.bc.home') }}</a> <span>&gt;</span>
+  <a routerLink="/api-docs/meal-db/introduction">{{ lang.t('api.bc.meal-db') }}</a> <span>&gt;</span>
+  <span>{{ lang.t('api.mdb.content.title') }}</span>
+</nav>
+
+<section id="content-api" class="api-section">
+  <span class="page-eyebrow">{{ lang.t('api.mdb.content.eyebrow') }}</span>
+  <h1>{{ lang.t('api.mdb.content.title') }}</h1>
+  <p class="hero-summary">{{ lang.t('api.mdb.content.hero-summary') }}</p>
+
+  <h3>{{ lang.t('api.mdb.content.meal-obj-title') }}</h3>
+  <p>{{ lang.t('api.mdb.content.meal-obj-desc') }}</p>
+
+  <table class="params-table">
+    <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>idMeal</code></td><td>string</td><td>Unique numeric ID (as string)</td></tr>
+      <tr><td><code>strMeal</code></td><td>string</td><td>Meal name</td></tr>
+      <tr><td><code>strCategory</code></td><td>string</td><td>Category (Chicken, Dessert, Seafood…)</td></tr>
+      <tr><td><code>strArea</code></td><td>string</td><td>Cuisine origin (Italian, Japanese, Mexican…)</td></tr>
+      <tr><td><code>strInstructions</code></td><td>string</td><td>Full cooking instructions (plain text, line-break delimited)</td></tr>
+      <tr><td><code>strMealThumb</code></td><td>string (URL)</td><td>Full-size image URL. Append <code>/preview</code> for 228×228.</td></tr>
+      <tr><td><code>strTags</code></td><td>string | null</td><td>Comma-separated tags, or null</td></tr>
+      <tr><td><code>strYoutube</code></td><td>string | null</td><td>YouTube tutorial URL, or null</td></tr>
+      <tr><td><code>strIngredient1–20</code></td><td>string</td><td>Up to 20 ingredient names. Empty string when unused.</td></tr>
+      <tr><td><code>strMeasure1–20</code></td><td>string</td><td>Matching measures for each ingredient. Empty string when unused.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="ingredients" class="api-section">
+  <h2>{{ lang.t('api.mdb.content.ing-title') }}</h2>
+  <p>{{ lang.t('api.mdb.content.ing-desc') }}</p>
+
+  <div class="code-example">
+    <div class="code-header"><span>JSON — ingredient fields (truncated)</span></div>
+    <pre><code class="language-json">&#123;
+  "strIngredient1": "soy sauce",   "strMeasure1": "3/4 cup",
+  "strIngredient2": "water",       "strMeasure2": "1/2 cup",
+  "strIngredient3": "sugar",       "strMeasure3": "1/4 cup",
+  "strIngredient4": "sesame oil",  "strMeasure4": "1/2 teaspoon",
+  "strIngredient5": "garlic",      "strMeasure5": "2 cloves",
+  ...
+  "strIngredient9": "",            "strMeasure9": ""
+&#125;</code></pre>
+  </div>
+
+  <div class="info-card" style="margin-top:1rem">
+    <div class="info-card-icon"><i class="fas fa-lightbulb"></i></div>
+    <div><p>{{ lang.t('api.mdb.content.ing-tip') }}</p></div>
+  </div>
+
+  <div class="code-example" style="margin-top:1rem">
+    <div class="code-header"><span>JavaScript — extract ingredients</span><button class="copy-btn" (click)="copyCode($any($event.target))"><i class="fas fa-copy"></i></button></div>
+    <pre><code class="language-javascript">function getIngredients(meal) &#123;
+  return Array.from(&#123; length: 20 &#125;, (_, i) => i + 1)
+    .map(n => (&#123;
+      ingredient: meal[`strIngredient$&#123;n&#125;`],
+      measure:    meal[`strMeasure$&#123;n&#125;`],
+    &#125;))
+    .filter(item => item.ingredient?.trim());
+&#125;</code></pre>
+  </div>
+</section>
+
+<section id="filter-lookup" class="api-section">
+  <h2>{{ lang.t('api.mdb.content.filter-title') }}</h2>
+  <p>{{ lang.t('api.mdb.content.filter-desc') }}</p>
+
+  <div class="code-example">
+    <div class="code-header"><span>JavaScript — filter then lookup</span><button class="copy-btn" (click)="copyCode($any($event.target))"><i class="fas fa-copy"></i></button></div>
+    <pre><code class="language-javascript">const BASE = 'https://www.themealdb.com/api/json/v1/1/';
+
+// Step 1 — filter returns lightweight list
+const filterRes = await fetch(`$&#123;BASE&#125;filter.php?c=Seafood`);
+const &#123; meals: list &#125; = await filterRes.json();
+// list[0] = &#123; idMeal, strMeal, strMealThumb &#125;
+
+// Step 2 — lookup returns full meal object
+const lookupRes = await fetch(`$&#123;BASE&#125;lookup.php?i=$&#123;list[0].idMeal&#125;`);
+const &#123; meals &#125; = await lookupRes.json();
+const fullMeal = meals[0]; // strInstructions, ingredients, etc.</code></pre>
+  </div>
+
+  <div class="code-example" style="margin-top:0.75rem">
+    <div class="code-header"><span>Python</span><button class="copy-btn" (click)="copyCode($any($event.target))"><i class="fas fa-copy"></i></button></div>
+    <pre><code class="language-python">import requests
+
+BASE = "https://www.themealdb.com/api/json/v1/1/"
+
+# Step 1 — get filtered list
+meals_list = requests.get(f"&#123;BASE&#125;filter.php?a=Japanese").json()["meals"]
+
+# Step 2 — lookup the first result
+meal_id = meals_list[0]["idMeal"]
+full = requests.get(f"&#123;BASE&#125;lookup.php?i=&#123;meal_id&#125;").json()["meals"][0]
+print(full["strMeal"], full["strInstructions"][:100])</code></pre>
+  </div>
+</section>
+
+<section id="images" class="api-section">
+  <h2>{{ lang.t('api.mdb.content.img-title') }}</h2>
+  <p>{{ lang.t('api.mdb.content.img-desc') }}</p>
+
+  <div class="code-example">
+    <div class="code-header"><span>JavaScript</span><button class="copy-btn" (click)="copyCode($any($event.target))"><i class="fas fa-copy"></i></button></div>
+    <pre><code class="language-javascript">const meal = data.meals[0];
+
+// Full-size image
+const fullSrc = meal.strMealThumb;
+// → "https://www.themealdb.com/images/media/meals/wvpsxx1468256321.jpg"
+
+// Compact 228×228 thumbnail
+const thumbSrc = `$&#123;meal.strMealThumb&#125;/preview`;
+// → "https://www.themealdb.com/images/media/meals/wvpsxx1468256321.jpg/preview"</code></pre>
+  </div>
+
+  <div class="filtering-recipes" style="margin-top:1.5rem">
+    <div class="recipe-card">
+      <h4><i class="fas fa-film"></i> YouTube Link</h4>
+      <p>Many meals include <code>strYoutube</code>. Embed it as an iframe or link directly. Check for null before rendering.</p>
+      <div class="code-example" style="margin-top:0.5rem">
+        <div class="code-header"><span>HTML</span></div>
+        <pre><code class="language-html">&lt;!-- Convert watch URL to embed URL --&gt;
+&lt;iframe
+  src="https://www.youtube.com/embed/4aZr5hZXP_s"
+  frameborder="0" allowfullscreen&gt;
+&lt;/iframe&gt;</code></pre>
+      </div>
+    </div>
+    <div class="recipe-card">
+      <h4><i class="fas fa-tags"></i> Tags</h4>
+      <p><code>strTags</code> is a comma-separated string or null. Split it to build tag pills.</p>
+      <div class="code-example" style="margin-top:0.5rem">
+        <div class="code-header"><span>JavaScript</span></div>
+        <pre><code class="language-javascript">const tags = meal.strTags?.split(',').map(t => t.trim()) ?? [];</code></pre>
+      </div>
+    </div>
+  </div>
+</section>

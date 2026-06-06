@@ -1,0 +1,182 @@
+<nav class="breadcrumb">
+  <a routerLink="/">{{ lang.t('api.bc.home') }}</a> <span>&gt;</span>
+  <a routerLink="/api-docs/meal-db/introduction">{{ lang.t('api.bc.meal-db') }}</a> <span>&gt;</span>
+  <span>{{ lang.t('api.nav.resources') }}</span>
+</nav>
+
+<!-- Live Demo Widget -->
+<section id="live-meal-demo" class="api-section">
+  <span class="page-eyebrow">{{ lang.t('api.mdb.demo.widget-title') }}</span>
+  <h1>Meal DB — {{ lang.t('api.nav.resources') }}</h1>
+  <p class="hero-summary">{{ lang.t('api.mdb.demo.widget-desc') }}</p>
+
+  <div class="demo-widget meal-demo-widget">
+    <!-- Controls -->
+    <div class="demo-controls meal-demo-controls">
+      <div class="demo-field meal-search-field">
+        <input
+          type="text"
+          class="meal-search-input"
+          [value]="searchInput()"
+          (input)="searchInput.set($any($event.target).value)"
+          (keydown.enter)="searchMeal()"
+          [placeholder]="lang.t('api.mdb.demo.search-ph')" />
+        <button class="get-quote-btn meal-search-btn" (click)="searchMeal()" [disabled]="loading()">
+          @if (loading()) {
+            <span class="spinner"></span>
+          } @else {
+            <i class="fas fa-magnifying-glass"></i>
+          }
+          {{ lang.t('api.mdb.demo.search-btn') }}
+        </button>
+      </div>
+      <button class="get-quote-btn meal-random-btn" (click)="randomMeal()" [disabled]="loading()">
+        @if (loading()) {
+          <span class="spinner"></span>
+        } @else {
+          <i class="fas fa-shuffle"></i>
+        }
+        {{ lang.t('api.mdb.demo.random-btn') }}
+      </button>
+    </div>
+
+    <!-- Request URL bar -->
+    @if (lastUrl()) {
+      <div class="demo-url-bar">
+        <span class="url-label">{{ lang.t('api.mdb.demo.url-label') }}</span>
+        <span class="url-text">{{ lastUrl() }}</span>
+        <button class="copy-url-inline" (click)="copyText(lastUrl(), $any($event.target))">
+          <i class="fas fa-copy"></i>
+        </button>
+      </div>
+    }
+
+    <!-- Error -->
+    @if (error()) {
+      <div class="demo-error">
+        <i class="fas fa-triangle-exclamation"></i> {{ error() }}
+      </div>
+    }
+
+    <!-- Placeholder -->
+    @if (!loading() && !error() && !meal()) {
+      <div class="demo-placeholder">
+        <i class="fas fa-utensils"></i>
+        <p>{{ lang.t('api.mdb.demo.placeholder') }}</p>
+      </div>
+    }
+
+    <!-- Meal result card -->
+    @if (meal(); as m) {
+      <div class="demo-meal-card">
+        <div class="meal-card-image">
+          <img [src]="m.strMealThumb + '/preview'" [alt]="m.strMeal" loading="lazy" />
+        </div>
+        <div class="meal-card-body">
+          <h3 class="meal-card-title">{{ m.strMeal }}</h3>
+          <div class="meal-card-meta">
+            @if (m.strCategory) {
+              <span class="demo-tag meal-tag-category"><i class="fas fa-tag"></i> {{ m.strCategory }}</span>
+            }
+            @if (m.strArea) {
+              <span class="demo-tag meal-tag-area"><i class="fas fa-globe"></i> {{ m.strArea }}</span>
+            }
+            @for (tag of tags(); track tag) {
+              <span class="demo-tag">{{ tag }}</span>
+            }
+          </div>
+
+          @if (ingredients().length) {
+            <div class="meal-ingredients">
+              <h4>{{ lang.t('api.mdb.demo.ingredients-label') }}</h4>
+              <ul class="ingredient-list">
+                @for (ing of ingredients(); track ing.name) {
+                  <li><span class="ing-measure">{{ ing.measure }}</span> {{ ing.name }}</li>
+                }
+              </ul>
+            </div>
+          }
+
+          @if (m.strYoutube) {
+            <a [href]="m.strYoutube" target="_blank" rel="noopener" class="meal-youtube-link">
+              <i class="fab fa-youtube"></i> Watch on YouTube
+            </a>
+          }
+        </div>
+      </div>
+
+      <!-- Live JSON -->
+      <div class="demo-response-block">
+        <div class="demo-response-header">
+          <span class="url-label">{{ lang.t('api.mdb.demo.response-label') }}</span>
+          <button class="copy-url-inline" (click)="copyText(mealJson(), $any($event.target))">
+            <i class="fas fa-copy"></i>
+          </button>
+        </div>
+        <pre class="demo-json"><code>{{ mealJson() }}</code></pre>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- Quick Start Snippets -->
+<section id="quick-start" class="api-section">
+  <h2>{{ lang.t('api.mdb.demo.qs.title') }}</h2>
+  <p>{{ lang.t('api.mdb.demo.qs.desc') }}</p>
+
+  <div class="code-example">
+    <div class="code-header">
+      <div class="tab-buttons tab-buttons--inline">
+        <button [class.active]="activeTab() === 'js-demo'"     (click)="activeTab.set('js-demo')">JavaScript</button>
+        <button [class.active]="activeTab() === 'python-demo'" (click)="activeTab.set('python-demo')">Python</button>
+        <button [class.active]="activeTab() === 'curl-demo'"   (click)="activeTab.set('curl-demo')">curl</button>
+      </div>
+      <button class="copy-btn" (click)="copyCode($any($event.target))"><i class="fas fa-copy"></i></button>
+    </div>
+
+    @if (activeTab() === 'js-demo') {
+      <pre><code class="language-javascript">const res  = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
+const data = await res.json();
+const meal = data.meals?.[0];
+
+if (meal) &#123;
+  console.log(meal.strMeal);      // "Teriyaki Chicken Casserole"
+  console.log(meal.strCategory);  // "Chicken"
+  console.log(meal.strArea);      // "Japanese"
+&#125;</code></pre>
+    }
+
+    @if (activeTab() === 'python-demo') {
+      <pre><code class="language-python">import requests
+
+url  = "https://www.themealdb.com/api/json/v1/1/random.php"
+data = requests.get(url).json()
+meal = data["meals"][0]
+
+print(meal["strMeal"])     # Teriyaki Chicken Casserole
+print(meal["strCategory"]) # Chicken
+print(meal["strArea"])     # Japanese</code></pre>
+    }
+
+    @if (activeTab() === 'curl-demo') {
+      <pre><code class="language-bash">curl "https://www.themealdb.com/api/json/v1/1/random.php" | jq '.meals[0].strMeal'</code></pre>
+    }
+  </div>
+</section>
+
+<!-- External Resources -->
+<section id="external-links" class="api-section">
+  <h2>{{ lang.t('api.mdb.demo.ext-title') }}</h2>
+  <div class="external-links-grid">
+    <a href="https://github.com/Ash-Bash/themealdb" target="_blank" rel="noopener" class="external-link-card">
+      <i class="fab fa-github"></i>
+      <h4>{{ lang.t('api.mdb.demo.ext.github') }}</h4>
+      <p>{{ lang.t('api.mdb.demo.ext.github-desc') }}</p>
+    </a>
+    <a href="https://www.themealdb.com/api/json/v1/1/random.php" target="_blank" rel="noopener" class="external-link-card">
+      <i class="fas fa-arrow-up-right-from-square"></i>
+      <h4>{{ lang.t('api.mdb.demo.ext.api') }}</h4>
+      <p>{{ lang.t('api.mdb.demo.ext.api-desc') }}</p>
+    </a>
+  </div>
+</section>

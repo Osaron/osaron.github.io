@@ -1,108 +1,316 @@
 <nav class="breadcrumb">
   <span>{{ lang.t('api.bc.api-docs') }}</span> <span>/</span>
-  <a routerLink="/api-docs/api-reference">{{ lang.t('api.bc.api-reference') }}</a> <span>/</span>
   <span>{{ lang.t('api.bc.content-api') }}</span>
 </nav>
 
+<div class="portfolio-note">
+  <i class="fas fa-circle-info"></i>
+  <p>{{ lang.t('api.gs.portfolio-note') }}</p>
+</div>
+
+<!-- ── Overview ── -->
 <section id="content-api" class="api-section">
+  <span class="page-eyebrow">{{ lang.t('api.content.eyebrow') }}</span>
   <h1>{{ lang.t('api.content.title') }}</h1>
-  <p>{{ lang.t('api.content.desc') }}</p>
+  <p class="hero-summary">{{ lang.t('api.content.desc') }}</p>
+
+  <div class="quick-grid">
+    <article class="mini-card">
+      <span class="mini-label">{{ lang.t('api.content.mc1.label') }}</span>
+      <strong>{{ lang.t('api.content.mc1.title') }}</strong>
+      <p>{{ lang.t('api.content.mc1.desc') }}</p>
+    </article>
+    <article class="mini-card">
+      <span class="mini-label">{{ lang.t('api.content.mc2.label') }}</span>
+      <strong>{{ lang.t('api.content.mc2.title') }}</strong>
+      <p>{{ lang.t('api.content.mc2.desc') }}</p>
+    </article>
+    <article class="mini-card">
+      <span class="mini-label">{{ lang.t('api.content.mc3.label') }}</span>
+      <strong>{{ lang.t('api.content.mc3.title') }}</strong>
+      <p>{{ lang.t('api.content.mc3.desc') }}</p>
+    </article>
+  </div>
 </section>
 
-<section id="list-content" class="api-section">
+<!-- ── /quotes/random deep dive ── -->
+<section id="quotes-random" class="api-section">
+  <div class="endpoint-signature">
+    <span class="method get">GET</span>
+    <code>/quotes/random</code>
+  </div>
+  <h2>{{ lang.t('api.content.random.title') }}</h2>
+  <p>{{ lang.t('api.content.random.desc') }}</p>
+
+  <div class="code-example">
+    <div class="code-tabs">
+      <button class="tab-btn" [class.active]="activeTab() === 'random-js'"     (click)="activeTab.set('random-js')">JavaScript</button>
+      <button class="tab-btn" [class.active]="activeTab() === 'random-python'" (click)="activeTab.set('random-python')">Python</button>
+      <button class="tab-btn" [class.active]="activeTab() === 'random-curl'"   (click)="activeTab.set('random-curl')">cURL</button>
+    </div>
+
+    <div [class.active]="activeTab() === 'random-js'" class="code-content">
+      <div class="code-label">
+        <span>{{ lang.t('api.content.random.code-label') }}</span>
+        <div class="code-label-actions">
+          <span class="code-path">fetch API</span>
+          <button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button>
+        </div>
+      </div>
+      <pre><code class="language-javascript">// Fetch 3 random wisdom quotes, max 120 chars
+const res = await fetch(
+  'https://api.quotable.io/quotes/random?limit=3&tags=wisdom&maxLength=120'
+);
+const quotes = await res.json();
+
+quotes.forEach(q => &#123;
+  console.log(`"$&#123;q.content&#125;" — $&#123;q.author&#125;`);
+&#125;);</code></pre>
+    </div>
+
+    <div [class.active]="activeTab() === 'random-python'" class="code-content">
+      <div class="code-label">
+        <span>{{ lang.t('api.content.random.code-label') }}</span>
+        <div class="code-label-actions">
+          <span class="code-path">requests</span>
+          <button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button>
+        </div>
+      </div>
+      <pre><code class="language-python">import requests
+
+r = requests.get(
+    "https://api.quotable.io/quotes/random",
+    params=&#123;"limit": 3, "tags": "wisdom", "maxLength": 120&#125;
+)
+r.raise_for_status()
+
+for q in r.json():
+    print(f'"&#123;q["content"]&#125;" — &#123;q["author"]&#125;')</code></pre>
+    </div>
+
+    <div [class.active]="activeTab() === 'random-curl'" class="code-content">
+      <div class="code-label">
+        <span>{{ lang.t('api.content.random.code-label') }}</span>
+        <div class="code-label-actions">
+          <span class="code-path">cURL</span>
+          <button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button>
+        </div>
+      </div>
+      <pre><code class="language-bash">curl "https://api.quotable.io/quotes/random?limit=3&tags=wisdom&maxLength=120"</code></pre>
+    </div>
+  </div>
+
+  <p>{{ lang.t('api.content.random.filter-intro') }}</p>
+  <table class="params-table">
+    <thead>
+      <tr>
+        <th>{{ lang.t('api.content.filter.goal') }}</th>
+        <th>{{ lang.t('api.content.filter.param') }}</th>
+        <th>{{ lang.t('api.content.filter.example') }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>{{ lang.t('api.content.filter.by-tag') }}</td><td><code>tags</code></td><td><code>?tags=inspirational</code></td></tr>
+      <tr><td>{{ lang.t('api.content.filter.by-author') }}</td><td><code>author</code></td><td><code>?author=maya-angelou</code></td></tr>
+      <tr><td>{{ lang.t('api.content.filter.by-length') }}</td><td><code>minLength + maxLength</code></td><td><code>?minLength=60&maxLength=140</code></td></tr>
+      <tr><td>{{ lang.t('api.content.filter.multi') }}</td><td>{{ lang.t('api.content.filter.multi-param') }}</td><td><code>?limit=5&tags=life&maxLength=100</code></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ── /quotes deep dive ── -->
+<section id="quotes-list" class="api-section">
+  <div class="endpoint-signature">
+    <span class="method get">GET</span>
+    <code>/quotes</code>
+  </div>
   <h2>{{ lang.t('api.content.list.title') }}</h2>
-  <div class="endpoint">
-    <div class="endpoint-header">
-      <span class="method get">GET</span>
-      <span class="path">/v1/content</span>
-      <span class="description">{{ lang.t('api.content.list.ep-desc') }}</span>
-    </div>
-    <div class="endpoint-details">
-      <h4>{{ lang.t('api.content.list.params-title') }}</h4>
-      <table class="params-table">
-        <thead><tr><th>{{ lang.t('api.table.parameter') }}</th><th>{{ lang.t('api.table.type') }}</th><th>{{ lang.t('api.table.required') }}</th><th>{{ lang.t('api.table.description') }}</th></tr></thead>
-        <tbody>
-          <tr><td><code>type</code></td><td>string</td><td>{{ lang.t('api.table.no') }}</td><td>{{ lang.t('api.content.param.type') }}</td></tr>
-          <tr><td><code>status</code></td><td>string</td><td>{{ lang.t('api.table.no') }}</td><td>{{ lang.t('api.content.param.status') }}</td></tr>
-          <tr><td><code>limit</code></td><td>integer</td><td>{{ lang.t('api.table.no') }}</td><td>{{ lang.t('api.content.param.limit') }}</td></tr>
-          <tr><td><code>offset</code></td><td>integer</td><td>{{ lang.t('api.table.no') }}</td><td>{{ lang.t('api.content.param.offset') }}</td></tr>
-        </tbody>
-      </table>
-      <h4>{{ lang.t('api.content.example-req') }}</h4>
-      <div class="code-example">
-        <pre><code class="language-bash">curl -H "Authorization: Bearer YOUR_API_KEY" \
-     "https://api.oscarrondon.com/v1/content?type=blog&status=published&limit=5"</code></pre>
+  <p>{{ lang.t('api.content.list.desc') }}</p>
+
+  <h3>{{ lang.t('api.content.list.envelope.title') }}</h3>
+  <p>{{ lang.t('api.content.list.envelope.desc') }}</p>
+  <table class="params-table">
+    <thead><tr><th>{{ lang.t('api.table.field') }}</th><th>{{ lang.t('api.table.type') }}</th><th>{{ lang.t('api.table.description') }}</th></tr></thead>
+    <tbody>
+      <tr><td><code>count</code></td><td>integer</td><td>{{ lang.t('api.content.list.f.count') }}</td></tr>
+      <tr><td><code>totalCount</code></td><td>integer</td><td>{{ lang.t('api.content.list.f.totalCount') }}</td></tr>
+      <tr><td><code>page</code></td><td>integer</td><td>{{ lang.t('api.content.list.f.page') }}</td></tr>
+      <tr><td><code>totalPages</code></td><td>integer</td><td>{{ lang.t('api.content.list.f.totalPages') }}</td></tr>
+      <tr><td><code>lastItemIndex</code></td><td>integer</td><td>{{ lang.t('api.content.list.f.lastItemIndex') }}</td></tr>
+      <tr><td><code>results</code></td><td>array</td><td>{{ lang.t('api.content.list.f.results') }}</td></tr>
+    </tbody>
+  </table>
+
+  <div class="code-example">
+    <div class="code-label">
+      <span>{{ lang.t('api.content.list.code-label') }}</span>
+      <div class="code-label-actions">
+        <span class="code-path">paginate all results</span>
+        <button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button>
       </div>
-      <h4>{{ lang.t('api.content.response') }}</h4>
-      <div class="code-example">
-        <pre><code class="language-json">&#123;
-  "data": [&#123; "id": "content_abc123", "title": "API Documentation Best Practices", "type": "blog", "status": "published", "author": "Oscar Rondon", "created_at": "2024-01-15T10:30:00Z" &#125;],
-  "pagination": &#123; "total": 42, "limit": 5, "offset": 0, "has_more": true &#125;
+    </div>
+    <pre><code class="language-javascript">async function fetchAllQuotes(tag) &#123;
+  const quotes = [];
+  let page = 1;
+  let totalPages = 1;
+
+  while (page &lt;= totalPages) &#123;
+    const res = await fetch(
+      `https://api.quotable.io/quotes?tags=$&#123;tag&#125;&page=$&#123;page&#125;&limit=150`
+    );
+    const data = await res.json();
+
+    quotes.push(...data.results);
+    totalPages = data.totalPages;
+    page++;
+  &#125;
+
+  return quotes; // full dataset, de-paginated
 &#125;</code></pre>
+  </div>
+
+  <div class="code-example" style="margin-top: 1rem;">
+    <div class="code-label">
+      <span>{{ lang.t('api.content.list.sort-label') }}</span>
+      <div class="code-label-actions">
+        <span class="code-path">sortBy + order</span>
+        <button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button>
       </div>
     </div>
+    <pre><code class="language-bash"># Shortest quotes first, filtered by author
+curl "https://api.quotable.io/quotes?author=albert-einstein&sortBy=content&order=asc&limit=10"
+
+# Most recently added, any tag
+curl "https://api.quotable.io/quotes?sortBy=dateAdded&order=desc&limit=20"</code></pre>
   </div>
 </section>
 
-<section id="create-content" class="api-section">
-  <h2>{{ lang.t('api.content.create.title') }}</h2>
-  <div class="endpoint">
-    <div class="endpoint-header">
-      <span class="method post">POST</span>
-      <span class="path">/v1/content</span>
-      <span class="description">{{ lang.t('api.content.create.ep-desc') }}</span>
-    </div>
-    <div class="endpoint-details">
-      <h4>{{ lang.t('api.content.create.body') }}</h4>
-      <table class="params-table">
-        <thead><tr><th>{{ lang.t('api.table.field') }}</th><th>{{ lang.t('api.table.type') }}</th><th>{{ lang.t('api.table.required') }}</th><th>{{ lang.t('api.table.description') }}</th></tr></thead>
-        <tbody>
-          <tr><td><code>title</code></td><td>string</td><td>{{ lang.t('api.table.yes') }}</td><td>{{ lang.t('api.content.create.f.title') }}</td></tr>
-          <tr><td><code>type</code></td><td>string</td><td>{{ lang.t('api.table.yes') }}</td><td>{{ lang.t('api.content.create.f.type') }}</td></tr>
-          <tr><td><code>content</code></td><td>string</td><td>{{ lang.t('api.table.yes') }}</td><td>{{ lang.t('api.content.create.f.body') }}</td></tr>
-          <tr><td><code>status</code></td><td>string</td><td>{{ lang.t('api.table.no') }}</td><td>{{ lang.t('api.content.create.f.status') }}</td></tr>
-        </tbody>
-      </table>
-      <h4>{{ lang.t('api.content.example-req') }}</h4>
-      <div class="code-example">
-        <pre><code class="language-bash">curl -X POST "https://api.oscarrondon.com/v1/content" \
-     -H "Authorization: Bearer YOUR_API_KEY" \
-     -H "Content-Type: application/json" \
-     -d '&#123;"title": "New Technical Guide", "type": "manual", "content": "# Guide\n\n...", "status": "draft"&#125;'</code></pre>
+<!-- ── Authors deep dive ── -->
+<section id="authors-deep" class="api-section">
+  <h2>{{ lang.t('api.content.authors.title') }}</h2>
+  <p>{{ lang.t('api.content.authors.desc') }}</p>
+
+  <h3>{{ lang.t('api.content.authors.fields.title') }}</h3>
+  <p>{{ lang.t('api.content.authors.fields.desc') }}</p>
+  <table class="params-table">
+    <thead><tr><th>{{ lang.t('api.table.field') }}</th><th>{{ lang.t('api.table.type') }}</th><th>{{ lang.t('api.table.description') }}</th></tr></thead>
+    <tbody>
+      <tr><td><code>name</code></td><td>string</td><td>{{ lang.t('api.content.authors.f.name') }}</td></tr>
+      <tr><td><code>slug</code></td><td>string</td><td>{{ lang.t('api.content.authors.f.slug') }}</td></tr>
+      <tr><td><code>bio</code></td><td>string</td><td>{{ lang.t('api.content.authors.f.bio') }}</td></tr>
+      <tr><td><code>description</code></td><td>string</td><td>{{ lang.t('api.content.authors.f.description') }}</td></tr>
+      <tr><td><code>quoteCount</code></td><td>integer</td><td>{{ lang.t('api.content.authors.f.quoteCount') }}</td></tr>
+      <tr><td><code>link</code></td><td>string</td><td>{{ lang.t('api.content.authors.f.link') }}</td></tr>
+    </tbody>
+  </table>
+
+  <div class="code-example">
+    <div class="code-label">
+      <span>{{ lang.t('api.content.authors.code-label') }}</span>
+      <div class="code-label-actions">
+        <span class="code-path">quote → author profile</span>
+        <button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button>
       </div>
     </div>
+    <pre><code class="language-javascript">// Step 1: get a random quote
+const [quote] = await fetch('https://api.quotable.io/quotes/random')
+  .then(r => r.json());
+
+// Step 2: use authorSlug to fetch the full author profile
+const author = await fetch(
+  `https://api.quotable.io/authors/$&#123;quote.authorSlug&#125;`
+).then(r => r.json());
+
+console.log(author.name, '—', author.bio);</code></pre>
+  </div>
+
+  <div class="code-example" style="margin-top: 1rem;">
+    <div class="code-label">
+      <span>{{ lang.t('api.content.authors.top-label') }}</span>
+      <div class="code-label-actions">
+        <span class="code-path">GET /authors</span>
+        <button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button>
+      </div>
+    </div>
+    <pre><code class="language-bash"># Top 5 most-quoted authors
+curl "https://api.quotable.io/authors?sortBy=quoteCount&order=desc&limit=5"</code></pre>
   </div>
 </section>
 
-<section id="update-content" class="api-section">
-  <h2>{{ lang.t('api.content.update.title') }}</h2>
-  <div class="endpoint">
-    <div class="endpoint-header">
-      <span class="method put">PUT</span>
-      <span class="path">/v1/content/&#123;id&#125;</span>
-      <span class="description">{{ lang.t('api.content.update.ep-desc') }}</span>
-    </div>
-    <div class="endpoint-details">
-      <p>{{ lang.t('api.content.update.desc.pre') }} <code>id</code> {{ lang.t('api.content.update.desc.post') }}</p>
-    </div>
-  </div>
-</section>
+<!-- ── Filtering recipes ── -->
+<section id="filtering-recipes" class="api-section">
+  <h2>{{ lang.t('api.content.recipes.title') }}</h2>
+  <p>{{ lang.t('api.content.recipes.desc') }}</p>
 
-<section id="delete-content" class="api-section">
-  <h2>{{ lang.t('api.content.delete.title') }}</h2>
-  <div class="endpoint">
-    <div class="endpoint-header">
-      <span class="method delete">DELETE</span>
-      <span class="path">/v1/content/&#123;id&#125;</span>
-      <span class="description">{{ lang.t('api.content.delete.ep-desc') }}</span>
-    </div>
-    <div class="endpoint-details">
-      <p>{{ lang.t('api.content.delete.pre') }} <code>204 No Content</code> {{ lang.t('api.content.delete.post') }}</p>
-      <h4>{{ lang.t('api.content.example-req') }}</h4>
-      <div class="code-example">
-        <pre><code class="language-bash">curl -X DELETE "https://api.oscarrondon.com/v1/content/content_abc123" \
-     -H "Authorization: Bearer YOUR_API_KEY"</code></pre>
+  <div class="info-grid">
+    <article class="info-card">
+      <h3>{{ lang.t('api.content.recipes.or.title') }}</h3>
+      <p>{{ lang.t('api.content.recipes.or.desc') }}</p>
+      <div class="code-example" style="margin-top: 0.75rem;">
+        <div class="code-label">
+          <span>OR tags</span>
+          <div class="code-label-actions">
+            <button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button>
+          </div>
+        </div>
+        <pre><code class="language-bash">?tags=wisdom|life|happiness</code></pre>
+      </div>
+    </article>
+    <article class="info-card">
+      <h3>{{ lang.t('api.content.recipes.and.title') }}</h3>
+      <p>{{ lang.t('api.content.recipes.and.desc') }}</p>
+      <div class="code-example" style="margin-top: 0.75rem;">
+        <div class="code-label">
+          <span>AND tags</span>
+          <div class="code-label-actions">
+            <button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button>
+          </div>
+        </div>
+        <pre><code class="language-bash">?tags=wisdom,inspirational</code></pre>
+      </div>
+    </article>
+    <article class="info-card">
+      <h3>{{ lang.t('api.content.recipes.author.title') }}</h3>
+      <p>{{ lang.t('api.content.recipes.author.desc') }}</p>
+      <div class="code-example" style="margin-top: 0.75rem;">
+        <div class="code-label">
+          <span>{{ lang.t('api.content.recipes.multi-author') }}</span>
+          <div class="code-label-actions">
+            <button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button>
+          </div>
+        </div>
+        <pre><code class="language-bash">?author=albert-einstein|maya-angelou</code></pre>
+      </div>
+    </article>
+    <article class="info-card">
+      <h3>{{ lang.t('api.content.recipes.length.title') }}</h3>
+      <p>{{ lang.t('api.content.recipes.length.desc') }}</p>
+      <div class="code-example" style="margin-top: 0.75rem;">
+        <div class="code-label">
+          <span>{{ lang.t('api.content.recipes.tweet-size') }}</span>
+          <div class="code-label-actions">
+            <button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button>
+          </div>
+        </div>
+        <pre><code class="language-bash">?minLength=60&maxLength=280</code></pre>
+      </div>
+    </article>
+  </div>
+
+  <div class="code-example" style="margin-top: 1.5rem;">
+    <div class="code-label">
+      <span>{{ lang.t('api.content.recipes.combined-label') }}</span>
+      <div class="code-label-actions">
+        <span class="code-path">combined filters</span>
+        <button class="code-copy-btn" (click)="copyCode($any($event.currentTarget))"><i class="fas fa-copy"></i></button>
       </div>
     </div>
+    <pre><code class="language-bash"># 5 random short quotes (60-140 chars) about wisdom OR life by Einstein OR Twain
+curl "https://api.quotable.io/quotes/random\
+?limit=5\
+&tags=wisdom|life\
+&author=albert-einstein|mark-twain\
+&minLength=60\
+&maxLength=140"</code></pre>
   </div>
 </section>

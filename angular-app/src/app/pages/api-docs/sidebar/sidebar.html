@@ -8,13 +8,83 @@
   </div>
 
   <nav class="api-nav">
-    @for (page of pages(); track page.route) {
-      <a [routerLink]="['/api-docs', page.route]"
-         routerLinkActive="active"
-         class="nav-page-link">
-        {{ page.label }}
-      </a>
-    }
+
+    <!-- Quick Start (top-level link) -->
+    <a [routerLink]="['/api-docs']"
+       routerLinkActive="active"
+       [routerLinkActiveOptions]="{exact: true}"
+       class="nav-page-link nav-top-link">
+      <i class="fas fa-bolt"></i>
+      {{ lang.t('api.nav.quick-start') }}
+    </a>
+
+    <!-- API Docs (expandable section) -->
+    <div class="nav-section" [class.open]="apiDocsOpen()">
+      <button class="nav-section-toggle" (click)="toggleApiDocs()">
+        <span class="nav-section-label">
+          <i class="fas fa-book-open"></i>
+          {{ lang.t('api.nav.api-docs') }}
+        </span>
+        <i class="fas fa-chevron-right nav-chevron"></i>
+      </button>
+
+      <div class="nav-section-body">
+
+        <!-- Quote API (expandable group) -->
+        <div class="nav-group-item" [class.open]="quoteApiOpen()">
+          <button class="nav-group-toggle" (click)="toggleQuoteApi()">
+            <span class="nav-group-label">
+              <i class="fas fa-quote-left"></i>
+              {{ lang.t('api.nav.quote-api') }}
+            </span>
+            <i class="fas fa-chevron-right nav-chevron-sm"></i>
+          </button>
+          <div class="nav-group-body">
+            <a [routerLink]="['/api-docs/quote-api/introduction']" routerLinkActive="active" class="nav-leaf-link">{{ lang.t('api.nav.introduction') }}</a>
+            <a [routerLink]="['/api-docs/quote-api/authentication']" routerLinkActive="active" class="nav-leaf-link">{{ lang.t('api.nav.authentication') }}</a>
+            <a [routerLink]="['/api-docs/quote-api/api-reference']" routerLinkActive="active" class="nav-leaf-link">{{ lang.t('api.nav.api-reference') }}</a>
+            <a [routerLink]="['/api-docs/quote-api/content-api']" routerLinkActive="active" class="nav-leaf-link">{{ lang.t('api.nav.content-api') }}</a>
+            <a [routerLink]="['/api-docs/quote-api/demo']" routerLinkActive="active" class="nav-leaf-link">{{ lang.t('api.nav.resources') }}</a>
+          </div>
+        </div>
+
+        <!-- Meal DB (expandable group) -->
+        <div class="nav-group-item" [class.open]="mealDbOpen()">
+          <button class="nav-group-toggle" (click)="toggleMealDb()">
+            <span class="nav-group-label">
+              <i class="fas fa-utensils"></i>
+              {{ lang.t('api.nav.meal-db') }}
+            </span>
+            <i class="fas fa-chevron-right nav-chevron-sm"></i>
+          </button>
+          <div class="nav-group-body">
+            <a [routerLink]="['/api-docs/meal-db/introduction']" routerLinkActive="active" class="nav-leaf-link">{{ lang.t('api.nav.introduction') }}</a>
+            <a [routerLink]="['/api-docs/meal-db/authentication']" routerLinkActive="active" class="nav-leaf-link">{{ lang.t('api.nav.authentication') }}</a>
+            <a [routerLink]="['/api-docs/meal-db/api-reference']" routerLinkActive="active" class="nav-leaf-link">{{ lang.t('api.nav.api-reference') }}</a>
+            <a [routerLink]="['/api-docs/meal-db/content-api']" routerLinkActive="active" class="nav-leaf-link">{{ lang.t('api.nav.content-api') }}</a>
+            <a [routerLink]="['/api-docs/meal-db/demo']" routerLinkActive="active" class="nav-leaf-link">{{ lang.t('api.nav.resources') }}</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Testing Guide (top-level link) -->
+    <a [routerLink]="['/api-docs', 'guides']"
+       routerLinkActive="active"
+       class="nav-page-link nav-top-link">
+      <i class="fas fa-vial"></i>
+      {{ lang.t('api.nav.guides') }}
+    </a>
+
+    <!-- FAQ (top-level link) -->
+    <a [routerLink]="['/api-docs', 'faq']"
+       routerLinkActive="active"
+       class="nav-page-link nav-top-link">
+      <i class="fas fa-circle-question"></i>
+      {{ lang.t('api.nav.faq') }}
+    </a>
+
   </nav>
 
   <div class="sidebar-footer">
