@@ -5,7 +5,7 @@ test.describe('Portfolio', () => {
   test('home page renders hero with name', async ({ page }) => {
     await page.goto('/');
     const heroName = page.locator('.hero h1 .accent');
-    await expect(heroName).toHaveText('Oscar');
+    await expect(heroName).toHaveText('Oscar R.');
   });
 
   test('particle background canvas is present', async ({ page }) => {
