@@ -89,8 +89,8 @@ export const TRANSLATIONS: Record<string, { en: string; es: string }> = {
     es: 'Contáctame en',
   },
   'footer.copyright': {
-    en: '© 2025 Oscar Rondon. All rights reserved.',
-    es: '© 2025 Oscar Rondon. Todos los derechos reservados.',
+    en: '© 2026 Oscar Rondon. All rights reserved.',
+    es: '© 2026 Oscar Rondon. Todos los derechos reservados.',
   },
 
   // ── Projects nav ──────────────────────────────────────────────────────
