@@ -1,0 +1,126 @@
+<nav class="breadcrumb">
+  <a routerLink="/">{{ lang.t('api.bc.home') }}</a> <span>&gt;</span>
+  <a routerLink="/api-docs">{{ lang.t('api.bc.quick-start') }}</a> <span>&gt;</span>
+  <span>{{ lang.t('api.bc.meal-db') }}</span>
+</nav>
+
+<div class="portfolio-note">
+  <i class="fas fa-circle-info"></i>
+  <p>{{ lang.t('api.mdb.gs.portfolio-note') }}</p>
+</div>
+
+<section id="overview" class="api-section">
+  <span class="page-eyebrow">{{ lang.t('api.mdb.gs.eyebrow') }}</span>
+  <h1>{{ lang.t('api.mdb.gs.title') }}</h1>
+  <p class="hero-summary">{{ lang.t('api.mdb.gs.hero-summary') }}</p>
+
+  <div class="hero-grid">
+    <div class="hero-card">
+      <h3>{{ lang.t('api.mdb.gs.card1.title') }}</h3>
+      <p>{{ lang.t('api.mdb.gs.card1.desc') }}</p>
+      <div class="hero-meta">
+        <span class="meta-pill"><i class="fas fa-utensils"></i> 300+ meals</span>
+        <span class="meta-pill"><i class="fas fa-image"></i> Images</span>
+        <span class="meta-pill"><i class="fab fa-youtube"></i> YouTube links</span>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>{{ lang.t('api.mdb.gs.card2.title') }}</h3>
+      <p>{{ lang.t('api.mdb.gs.card2.desc') }}</p>
+      <div class="hero-meta">
+        <span class="meta-pill"><i class="fas fa-magnifying-glass"></i> By name</span>
+        <span class="meta-pill"><i class="fas fa-tag"></i> By category</span>
+        <span class="meta-pill"><i class="fas fa-globe"></i> By area</span>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>{{ lang.t('api.mdb.gs.card3.title') }}</h3>
+      <p>{{ lang.t('api.mdb.gs.card3.desc') }}</p>
+      <div class="hero-meta">
+        <span class="meta-pill"><i class="fas fa-unlock"></i> No auth</span>
+        <span class="meta-pill"><i class="fas fa-bolt"></i> JSON</span>
+        <span class="meta-pill"><i class="fas fa-infinity"></i> Free forever</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="endpoints-glance" class="api-section">
+  <h2>{{ lang.t('api.mdb.gs.endpoints-title') }}</h2>
+  <table class="params-table">
+    <thead>
+      <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="method-badge method-get">GET</span></td><td><code>search.php?s=&#123;name&#125;</code></td><td>{{ lang.t('api.mdb.gs.ep1') }}</td></tr>
+      <tr><td><span class="method-badge method-get">GET</span></td><td><code>search.php?f=&#123;letter&#125;</code></td><td>{{ lang.t('api.mdb.gs.ep2') }}</td></tr>
+      <tr><td><span class="method-badge method-get">GET</span></td><td><code>lookup.php?i=&#123;id&#125;</code></td><td>{{ lang.t('api.mdb.gs.ep3') }}</td></tr>
+      <tr><td><span class="method-badge method-get">GET</span></td><td><code>random.php</code></td><td>{{ lang.t('api.mdb.gs.ep4') }}</td></tr>
+      <tr><td><span class="method-badge method-get">GET</span></td><td><code>categories.php</code></td><td>{{ lang.t('api.mdb.gs.ep5') }}</td></tr>
+      <tr><td><span class="method-badge method-get">GET</span></td><td><code>filter.php?c=&#123;cat&#125;</code></td><td>{{ lang.t('api.mdb.gs.ep6') }}</td></tr>
+      <tr><td><span class="method-badge method-get">GET</span></td><td><code>list.php?c=list</code></td><td>{{ lang.t('api.mdb.gs.ep7') }}</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="base-url" class="api-section">
+  <h2>{{ lang.t('api.mdb.gs.base-url-title') }}</h2>
+  <div class="endpoint-signature">
+    <span class="ep-base">https://www.themealdb.com/api/json/v1/1/</span>
+  </div>
+  <p>The <code>v1</code> segment is the API version and <code>1</code> is the public demo key. All requests use this prefix.</p>
+
+  <div class="code-example">
+    <div class="code-header"><span>curl</span></div>
+    <pre><code class="language-bash">curl "https://www.themealdb.com/api/json/v1/1/random.php"</code></pre>
+  </div>
+
+  <div class="code-example" style="margin-top:0.75rem">
+    <div class="code-header"><span>JavaScript</span></div>
+    <pre><code class="language-javascript">const res = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
+const &#123; meals &#125; = await res.json();
+const meal = meals?.[0]; // always null-check!</code></pre>
+  </div>
+</section>
+
+<section id="typical-response" class="api-section">
+  <h2>{{ lang.t('api.mdb.gs.response-title') }}</h2>
+  <p>{{ lang.t('api.mdb.gs.response-note') }}</p>
+
+  <div class="code-example">
+    <div class="code-header"><span>JSON — random.php response (truncated)</span></div>
+    <pre><code class="language-json">&#123;
+  "meals": [
+    &#123;
+      "idMeal": "52772",
+      "strMeal": "Teriyaki Chicken Casserole",
+      "strCategory": "Chicken",
+      "strArea": "Japanese",
+      "strInstructions": "Preheat oven to 350°F...",
+      "strMealThumb": "https://www.themealdb.com/images/media/meals/wvpsxx1468256321.jpg",
+      "strTags": "Meat,Casserole",
+      "strYoutube": "https://www.youtube.com/watch?v=4aZr5hZXP_s",
+      "strIngredient1": "soy sauce",
+      "strMeasure1": "3/4 cup",
+      "strIngredient2": "water",
+      "strMeasure2": "1/2 cup",
+      "strIngredient3": "sugar",
+      "strMeasure3": "1/4 cup",
+      "strIngredient4": "sesame oil",
+      "strMeasure4": "1/2 teaspoon",
+      "strIngredient5": "garlic",
+      "strMeasure5": "2 cloves",
+      "strIngredient6": "ginger",
+      "strMeasure6": "1/2 teaspoon",
+      "strIngredient7": "corn starch",
+      "strMeasure7": "4 Tablespoons",
+      "strIngredient8": "chicken thighs",
+      "strMeasure8": "2",
+      "strIngredient9": "",
+      "strMeasure9": "",
+      ...
+    &#125;
+  ]
+&#125;</code></pre>
+  </div>
+</section>

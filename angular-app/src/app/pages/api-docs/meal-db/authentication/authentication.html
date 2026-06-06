@@ -1,0 +1,95 @@
+<nav class="breadcrumb">
+  <a routerLink="/">{{ lang.t('api.bc.home') }}</a> <span>&gt;</span>
+  <a routerLink="/api-docs/meal-db/introduction">{{ lang.t('api.bc.meal-db') }}</a> <span>&gt;</span>
+  <span>{{ lang.t('api.mdb.auth.eyebrow') }}</span>
+</nav>
+
+<section id="authentication" class="api-section">
+  <span class="page-eyebrow">{{ lang.t('api.mdb.auth.eyebrow') }}</span>
+  <h1>{{ lang.t('api.mdb.auth.title') }}</h1>
+  <p class="hero-summary">{{ lang.t('api.mdb.auth.hero-summary') }}</p>
+
+  <h3>{{ lang.t('api.mdb.auth.overview-title') }}</h3>
+  <p>{{ lang.t('api.mdb.auth.overview-desc') }}</p>
+
+  <div class="endpoint-signature">
+    <span class="ep-base">https://www.themealdb.com/api/json/</span><span class="ep-version">v1</span><span class="ep-base">/</span><span class="ep-key">1</span><span class="ep-base">/random.php</span>
+  </div>
+
+  <div class="info-card">
+    <div class="info-card-icon"><i class="fas fa-circle-check"></i></div>
+    <div>
+      <strong>No headers, no Bearer tokens, no OAuth flow.</strong>
+      <p>The public tier API key is the literal digit <code>1</code> in the URL path. Nothing else is needed. The key never changes for the free tier.</p>
+    </div>
+  </div>
+</section>
+
+<section id="rate-limits" class="api-section">
+  <h2>{{ lang.t('api.mdb.auth.limits-title') }}</h2>
+  <p>{{ lang.t('api.mdb.auth.limits-intro') }}</p>
+
+  <table class="params-table">
+    <thead><tr><th>Tier</th><th>Key</th><th>Access</th><th>Published Limit</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Public (free)</td>
+        <td><code>1</code></td>
+        <td>Read-only, all endpoints</td>
+        <td>No hard limit published — use responsibly</td>
+      </tr>
+      <tr>
+        <td>Patreon / Premium</td>
+        <td>Personal key</td>
+        <td>Full access + image uploads</td>
+        <td>Higher, unlisted</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ul class="feature-list" style="margin-top:1.25rem">
+    <li>{{ lang.t('api.mdb.auth.limit1') }}</li>
+    <li>{{ lang.t('api.mdb.auth.limit2') }}</li>
+    <li>{{ lang.t('api.mdb.auth.limit3') }}</li>
+  </ul>
+</section>
+
+<section id="error-handling" class="api-section">
+  <h2>{{ lang.t('api.mdb.auth.errors-title') }}</h2>
+  <p>{{ lang.t('api.mdb.auth.errors-desc') }}</p>
+
+  <div class="code-example" style="margin-bottom:1.25rem">
+    <div class="code-header">
+      <span>JavaScript — null-safe meal access</span>
+      <button class="copy-btn" (click)="copyCode($any($event.target))"><i class="fas fa-copy"></i></button>
+    </div>
+    <pre><code class="language-javascript">const res = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=xyz123');
+const &#123; meals &#125; = await res.json();
+
+if (!meals) &#123;
+  console.log('No meals found');
+&#125; else &#123;
+  console.log(meals[0].strMeal);
+&#125;</code></pre>
+  </div>
+
+  <table class="params-table">
+    <thead><tr><th>Code</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td><code>200</code></td><td>Success — but check that <code>meals</code> is not null</td></tr>
+      <tr><td><code>200 + null</code></td><td>No results found for the query</td></tr>
+      <tr><td><code>429</code></td><td>Too many requests — back off and retry</td></tr>
+      <tr><td><code>5xx</code></td><td>Server error — retry with exponential back-off</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="best-practices" class="api-section">
+  <h2>{{ lang.t('api.mdb.auth.best-title') }}</h2>
+  <ul class="feature-list">
+    <li><i class="fas fa-circle-check"></i> {{ lang.t('api.mdb.auth.bp1') }}</li>
+    <li><i class="fas fa-circle-check"></i> {{ lang.t('api.mdb.auth.bp2') }}</li>
+    <li><i class="fas fa-circle-check"></i> {{ lang.t('api.mdb.auth.bp3') }}</li>
+    <li><i class="fas fa-circle-check"></i> {{ lang.t('api.mdb.auth.bp4') }}</li>
+  </ul>
+</section>

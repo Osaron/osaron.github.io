@@ -1,0 +1,232 @@
+<nav class="breadcrumb">
+  <a routerLink="/">{{ lang.t('api.bc.home') }}</a> <span>&gt;</span>
+  <span>{{ lang.t('api.bc.faq') }}</span>
+</nav>
+
+<section class="api-section" style="margin-bottom: 1.5rem;">
+  <h1>{{ lang.t('api.faq.title') }}</h1>
+  <p class="hero-summary">{{ lang.t('api.faq.desc') }}</p>
+</section>
+
+<!-- ── General ── -->
+<section id="general" class="api-section">
+  <h2>{{ lang.t('api.toc.general-questions') }}</h2>
+  <div class="faq-list">
+
+    <div class="faq-item" [class.open]="isOpen(0)">
+      <div class="faq-question" (click)="toggle(0)">
+        <h4>{{ lang.t('api.faq.q1.q') }}</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer"><p>{{ lang.t('api.faq.q1.a') }}</p></div>
+    </div>
+
+    <div class="faq-item" [class.open]="isOpen(1)">
+      <div class="faq-question" (click)="toggle(1)">
+        <h4>{{ lang.t('api.faq.q2.q') }}</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer"><p>{{ lang.t('api.faq.q2.a') }}</p></div>
+    </div>
+
+    <div class="faq-item" [class.open]="isOpen(2)">
+      <div class="faq-question" (click)="toggle(2)">
+        <h4>{{ lang.t('api.faq.q3.q') }}</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer"><p>{{ lang.t('api.faq.q3.a') }}</p></div>
+    </div>
+
+    <div class="faq-item" [class.open]="isOpen(3)">
+      <div class="faq-question" (click)="toggle(3)">
+        <h4>{{ lang.t('api.faq.q4.q') }}</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer"><p>{{ lang.t('api.faq.q4.a') }}</p></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Quotable API ── -->
+<section id="quotable" class="api-section">
+  <h2>{{ lang.t('api.toc.quotable-questions') }}</h2>
+  <div class="faq-list">
+
+    <div class="faq-item" [class.open]="isOpen(4)">
+      <div class="faq-question" (click)="toggle(4)">
+        <h4>{{ lang.t('api.faq.q5.q') }}</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer"><p>{{ lang.t('api.faq.q5.a') }}</p></div>
+    </div>
+
+    <div class="faq-item" [class.open]="isOpen(5)">
+      <div class="faq-question" (click)="toggle(5)">
+        <h4>{{ lang.t('api.faq.q6.q') }}</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        <p>{{ lang.t('api.faq.q6.a') }}</p>
+        <div class="code-example" style="margin-top: 0.75rem;">
+          <div class="code-label"><span>{{ lang.t('api.faq.q6.code-label') }}</span></div>
+          <pre><code class="language-bash"># OR — quotes tagged "wisdom" OR "life"
+?tags=wisdom|life
+
+# AND — quotes tagged "wisdom" AND "inspirational"
+?tags=wisdom,inspirational</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item" [class.open]="isOpen(6)">
+      <div class="faq-question" (click)="toggle(6)">
+        <h4>{{ lang.t('api.faq.q7.q') }}</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        <p>{{ lang.t('api.faq.q7.a') }}</p>
+        <div class="code-example" style="margin-top: 0.75rem;">
+          <div class="code-label"><span>{{ lang.t('api.faq.q7.code-label') }}</span></div>
+          <pre><code class="language-javascript">async function fetchAll(tag) &#123;
+  const quotes = [];
+  let page = 1, totalPages = 1;
+  while (page &lt;= totalPages) &#123;
+    const data = await fetch(
+      `https://api.quotable.io/quotes?tags=$&#123;tag&#125;&page=$&#123;page&#125;&limit=150`
+    ).then(r => r.json());
+    quotes.push(...data.results);
+    totalPages = data.totalPages;
+    page++;
+  &#125;
+  return quotes;
+&#125;</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item" [class.open]="isOpen(7)">
+      <div class="faq-question" (click)="toggle(7)">
+        <h4>{{ lang.t('api.faq.q8.q') }}</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        <p>{{ lang.t('api.faq.q8.a') }}</p>
+        <div class="code-example" style="margin-top: 0.75rem;">
+          <div class="code-label"><span>{{ lang.t('api.faq.q8.code-label') }}</span></div>
+          <pre><code class="language-bash">curl "https://api.quotable.io/search/quotes?query=imagination&fuzzyMaxEdits=1"</code></pre>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── TheMealDB ── -->
+<section id="mealdb" class="api-section">
+  <h2>{{ lang.t('api.toc.mealdb-questions') }}</h2>
+  <div class="faq-list">
+
+    <div class="faq-item" [class.open]="isOpen(8)">
+      <div class="faq-question" (click)="toggle(8)">
+        <h4>{{ lang.t('api.faq.q9.q') }}</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        <p>{{ lang.t('api.faq.q9.a') }}</p>
+        <div class="code-example" style="margin-top: 0.75rem;">
+          <div class="code-label"><span>Always null-check first</span></div>
+          <pre><code class="language-javascript">const &#123; meals &#125; = await res.json();
+if (!meals) &#123; /* no results */ &#125; else &#123; meals[0].strMeal; &#125;</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item" [class.open]="isOpen(9)">
+      <div class="faq-question" (click)="toggle(9)">
+        <h4>{{ lang.t('api.faq.q10.q') }}</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        <p>{{ lang.t('api.faq.q10.a') }}</p>
+        <div class="code-example" style="margin-top: 0.75rem;">
+          <div class="code-label"><span>Filter → Lookup</span></div>
+          <pre><code class="language-javascript">const BASE = 'https://www.themealdb.com/api/json/v1/1/';
+const list = (await (await fetch(`$&#123;BASE&#125;filter.php?c=Seafood`)).json()).meals;
+const full = (await (await fetch(`$&#123;BASE&#125;lookup.php?i=$&#123;list[0].idMeal&#125;`)).json()).meals[0];</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item" [class.open]="isOpen(10)">
+      <div class="faq-question" (click)="toggle(10)">
+        <h4>{{ lang.t('api.faq.q11.q') }}</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        <p>{{ lang.t('api.faq.q11.a') }}</p>
+        <div class="code-example" style="margin-top: 0.75rem;">
+          <div class="code-label"><span>Extract ingredients</span></div>
+          <pre><code class="language-javascript">const ingredients = Array.from(&#123; length: 20 &#125;, (_, i) => i + 1)
+  .map(n => (&#123; name: meal[`strIngredient$&#123;n&#125;`], measure: meal[`strMeasure$&#123;n&#125;`] &#125;))
+  .filter(item => item.name?.trim());</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item" [class.open]="isOpen(11)">
+      <div class="faq-question" (click)="toggle(11)">
+        <h4>{{ lang.t('api.faq.q12.q') }}</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        <p>{{ lang.t('api.faq.q12.a') }}</p>
+        <div class="code-example" style="margin-top: 0.75rem;">
+          <div class="code-label"><span>Thumbnail URL</span></div>
+          <pre><code class="language-javascript">const thumb = `$&#123;meal.strMealThumb&#125;/preview`; // 228×228</code></pre>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── About this documentation ── -->
+<section id="about" class="api-section">
+  <h2>{{ lang.t('api.toc.about-docs') }}</h2>
+  <div class="faq-list">
+
+    <div class="faq-item" [class.open]="isOpen(12)">
+      <div class="faq-question" (click)="toggle(12)">
+        <h4>{{ lang.t('api.faq.q13.q') }}</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer"><p>{{ lang.t('api.faq.q13.a') }}</p></div>
+    </div>
+
+    <div class="faq-item" [class.open]="isOpen(13)">
+      <div class="faq-question" (click)="toggle(13)">
+        <h4>{{ lang.t('api.faq.q14.q') }}</h4>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">
+        <p>{{ lang.t('api.faq.q14.a') }}</p>
+        <ul style="margin-top: 0.5rem; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.4rem;">
+          <li>
+            <strong>Quotable:</strong>
+            <a href="https://github.com/lukePeavey/quotable" target="_blank" rel="noopener">
+              github.com/lukePeavey/quotable <i class="fas fa-arrow-up-right-from-square" style="font-size: 0.72rem;"></i>
+            </a>
+          </li>
+          <li>
+            <strong>TheMealDB:</strong>
+            <a href="https://www.themealdb.com" target="_blank" rel="noopener">
+              themealdb.com <i class="fas fa-arrow-up-right-from-square" style="font-size: 0.72rem;"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>

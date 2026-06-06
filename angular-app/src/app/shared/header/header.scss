@@ -169,6 +169,8 @@
   opacity: 0.75;
 }
 
+:host-context(body.dark-mode) .dropdown-icon { filter: invert(1); }
+
 // Right controls
 .nav-controls {
   display: flex;
