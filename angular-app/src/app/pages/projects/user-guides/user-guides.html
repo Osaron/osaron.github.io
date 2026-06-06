@@ -1,0 +1,33 @@
+<div class="ug-hero">
+  <h1><i class="fa-solid fa-book-open"></i> {{ lang.t('guides.hero.title') }}</h1>
+  <p>{{ lang.t('guides.hero.sub') }}</p>
+</div>
+
+<section class="ug-list">
+  @if (guides$ | async; as guides) {
+    @for (guide of guides; track guide.slug) {
+      <article class="ug-row" (click)="openPdf(guide)">
+        <img [src]="guide.cover" [alt]="guide.title" class="ug-cover">
+        <div class="ug-body">
+          <div class="ug-tags">
+            @for (tag of guide.tags; track tag) {
+              <span class="tag">{{ tag }}</span>
+            }
+          </div>
+          <h2 class="ug-title">{{ guide.title }}</h2>
+          <p class="ug-summary">{{ guide.summary }}</p>
+          <div class="ug-meta">
+            <span>{{ guide.year }}</span>
+            <span>{{ guide.readMins }} {{ lang.t('common.min-read') }}</span>
+          </div>
+          <a [href]="'/projects/user-guides/' + guide.slug + '/manual.pdf'"
+             target="_blank" rel="noopener" class="btn btn-primary">
+            <i class="fa-solid fa-file-pdf"></i> {{ lang.t('common.btn.pdf') }}
+          </a>
+        </div>
+      </article>
+    }
+  } @else {
+    <p class="loading">{{ lang.t('guides.loading') }}</p>
+  }
+</section>

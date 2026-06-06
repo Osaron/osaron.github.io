@@ -1,0 +1,63 @@
+<div class="visuals-hero">
+  <h1><i class="fa-solid fa-image"></i> {{ lang.t('diagrams.hero.title') }}</h1>
+  <p>{{ lang.t('diagrams.hero.sub') }}</p>
+</div>
+
+<section class="diagram-list">
+  @if (diagrams$ | async; as diagrams) {
+    @for (diagram of diagrams; track diagram.title) {
+      <article class="diagram-card" (click)="open(diagram)">
+        <img [src]="diagram.cover" [alt]="diagram.title" class="diagram-cover">
+        <div class="diagram-body">
+          <div class="diagram-tags">
+            @for (tag of diagram.tags; track tag) {
+              <span class="tag">{{ tag }}</span>
+            }
+          </div>
+          <h2 class="diagram-title">{{ diagram.title }}</h2>
+          <p class="diagram-summary">{{ diagram.summary }}</p>
+          <div class="diagram-meta">
+            <span>{{ diagram.date }}</span>
+            <span><i class="fa-solid fa-pen-ruler"></i> {{ diagram.tool }}</span>
+          </div>
+          <div class="diagram-actions">
+            @if (diagram.isExternal && diagram.link) {
+              <a [href]="diagram.link" target="_blank" rel="noopener" class="btn btn-primary" (click)="$event.stopPropagation()">
+                {{ lang.t('diagrams.btn.view') }}
+              </a>
+            }
+            @if (diagram.pdfPath) {
+              <a [href]="diagram.pdfPath" target="_blank" rel="noopener" class="btn btn-outline" (click)="$event.stopPropagation()">
+                <i class="fa-solid fa-file-pdf"></i> {{ lang.t('common.btn.pdf') }}
+              </a>
+            }
+          </div>
+        </div>
+      </article>
+    }
+  } @else {
+    <p class="loading">{{ lang.t('diagrams.loading') }}</p>
+  }
+</section>
+
+<section class="visual-section">
+  <div class="visual-item">
+    <h3><i class="fa-solid fa-diagram-project"></i> {{ lang.t('diagrams.bpmn.title') }}</h3>
+    <p>{{ lang.t('diagrams.bpmn.desc') }}</p>
+  </div>
+
+  <div class="visual-item">
+    <h3><i class="fa-solid fa-sitemap"></i> {{ lang.t('diagrams.visio.title') }}</h3>
+    <p>{{ lang.t('diagrams.visio.desc') }}</p>
+  </div>
+
+  <div class="visual-item">
+    <h3><i class="fa-regular fa-file-powerpoint"></i> {{ lang.t('diagrams.ppt.title') }}</h3>
+    <p>{{ lang.t('diagrams.ppt.desc') }}</p>
+  </div>
+
+  <div class="visual-item">
+    <h3><i class="fa-solid fa-pen-nib"></i> {{ lang.t('diagrams.canva.title') }}</h3>
+    <p>{{ lang.t('diagrams.canva.desc') }}</p>
+  </div>
+</section>

@@ -1,0 +1,74 @@
+<nav class="breadcrumb">
+  <span>{{ lang.t('api.bc.api-docs') }}</span> <span>/</span> <span>{{ lang.t('api.bc.authentication') }}</span>
+</nav>
+
+<section id="authentication" class="api-section">
+  <h1>{{ lang.t('api.auth.title') }}</h1>
+  <p>{{ lang.t('api.auth.pre') }} <code>Authorization</code> {{ lang.t('api.auth.post') }} <code>401 Unauthorized</code> {{ lang.t('api.auth.post2') }}</p>
+</section>
+
+<section id="api-keys" class="api-section">
+  <h2>{{ lang.t('api.auth.keys.title') }}</h2>
+  <p>{{ lang.t('api.auth.keys.desc') }}</p>
+  <ol>
+    <li>{{ lang.t('api.auth.keys.li1') }}</li>
+    <li>{{ lang.t('api.auth.keys.li2.pre') }} <strong>API Keys</strong> {{ lang.t('api.auth.keys.li2.post') }}</li>
+    <li>{{ lang.t('api.auth.keys.li3.pre') }} <strong>Generate New Key</strong>.</li>
+    <li>{{ lang.t('api.auth.keys.li4') }}</li>
+  </ol>
+  <div class="code-example">
+    <pre><code class="language-bash">sk_live_4eC39HqLyjWDarjtT1zdp7dc</code></pre>
+  </div>
+  <p>{{ lang.t('api.auth.keys.note.pre') }} <code>sk_live_</code> {{ lang.t('api.auth.keys.note.mid') }} <code>sk_test_</code> {{ lang.t('api.auth.keys.note.post') }}</p>
+</section>
+
+<section id="request-headers" class="api-section">
+  <h2>{{ lang.t('api.auth.headers.title') }}</h2>
+  <p>{{ lang.t('api.auth.headers.pre') }} <code>Authorization</code> {{ lang.t('api.auth.headers.mid') }} <code>Bearer</code> {{ lang.t('api.auth.headers.mid2') }} <code>Content-Type: application/json</code> {{ lang.t('api.auth.headers.post') }}</p>
+
+  <div class="code-example">
+    <div class="code-tabs">
+      <button class="tab-btn" [class.active]="activeTab() === 'curl-auth'"   (click)="activeTab.set('curl-auth')">cURL</button>
+      <button class="tab-btn" [class.active]="activeTab() === 'js-auth'"     (click)="activeTab.set('js-auth')">JavaScript</button>
+      <button class="tab-btn" [class.active]="activeTab() === 'python-auth'" (click)="activeTab.set('python-auth')">Python</button>
+    </div>
+
+    <div [class.active]="activeTab() === 'curl-auth'" class="code-content">
+      <pre><code class="language-bash">curl -H "Authorization: Bearer sk_live_4eC39HqLyjWDarjtT1zdp7dc" \
+     -H "Content-Type: application/json" \
+     https://api.oscarrondon.com/v1/content</code></pre>
+    </div>
+    <div [class.active]="activeTab() === 'js-auth'" class="code-content">
+      <pre><code class="language-javascript">const response = await fetch('https://api.oscarrondon.com/v1/content', &#123;
+  headers: &#123;
+    'Authorization': 'Bearer sk_live_4eC39HqLyjWDarjtT1zdp7dc',
+    'Content-Type': 'application/json'
+  &#125;
+&#125;);
+const data = await response.json();</code></pre>
+    </div>
+    <div [class.active]="activeTab() === 'python-auth'" class="code-content">
+      <pre><code class="language-python">import requests
+
+headers = &#123;
+    'Authorization': 'Bearer sk_live_4eC39HqLyjWDarjtT1zdp7dc',
+    'Content-Type': 'application/json'
+&#125;
+
+response = requests.get('https://api.oscarrondon.com/v1/content', headers=headers)
+data = response.json()</code></pre>
+    </div>
+  </div>
+</section>
+
+<section id="security" class="api-section">
+  <h2>{{ lang.t('api.auth.security.title') }}</h2>
+  <p>{{ lang.t('api.auth.security.desc') }}</p>
+  <ul>
+    <li>{{ lang.t('api.auth.security.li1') }}</li>
+    <li>{{ lang.t('api.auth.security.li2') }}</li>
+    <li>{{ lang.t('api.auth.security.li3') }}</li>
+    <li>{{ lang.t('api.auth.security.li4') }}</li>
+    <li>{{ lang.t('api.auth.security.li5') }}</li>
+  </ul>
+</section>

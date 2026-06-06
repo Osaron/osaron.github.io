@@ -1,0 +1,37 @@
+<div class="vid-hero">
+  <h1><i class="fa-solid fa-video"></i> {{ lang.t('videos.hero.title') }}</h1>
+  <p>{{ lang.t('videos.hero.sub') }}</p>
+</div>
+
+<section class="vid-grid">
+
+  @for (video of videos; track video.id) {
+    <div class="vid-card">
+      @if (!video.playing()) {
+        <div class="vid-thumbnail" (click)="video.playing.set(true)" title="Play video">
+          <img
+            [src]="video.thumbnail ?? 'https://img.youtube.com/vi/' + video.id + '/maxresdefault.jpg'"
+            [alt]="video.title + ' thumbnail'">
+          <div class="vid-play-btn">
+            <i class="fa-solid fa-play"></i>
+          </div>
+        </div>
+      } @else {
+        <div class="vid-embed">
+          <iframe
+            [src]="video.embedUrl"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowfullscreen
+            [title]="video.title">
+          </iframe>
+        </div>
+      }
+      <div class="vid-meta">
+        <span class="vid-tag">{{ video.tag }}</span>
+        <h2>{{ video.title }}</h2>
+        <p>{{ video.description }}</p>
+      </div>
+    </div>
+  }
+
+</section>

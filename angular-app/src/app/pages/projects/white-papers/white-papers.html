@@ -1,0 +1,63 @@
+<div class="wp-hero">
+  <h1><i class="fa-solid fa-file-lines"></i> {{ lang.t('wp.hero.title') }}</h1>
+  <p>{{ lang.t('wp.hero.sub') }}</p>
+</div>
+
+<section class="wp-list">
+  @if (papers$ | async; as papers) {
+    @for (paper of papers; track paper.title) {
+      <article class="wp-card">
+
+        <div class="wp-cover">
+          @if (paper.cover) {
+            <img [src]="paper.cover" [alt]="paper.title">
+          } @else {
+            <i class="fa-solid fa-file-lines wp-icon"></i>
+          }
+        </div>
+
+        <div class="wp-body">
+          <div class="wp-tags">
+            @for (tag of paper.tags; track tag) {
+              <span class="tag">{{ tag }}</span>
+            }
+          </div>
+
+          <h2 class="wp-title">{{ paper.title }}</h2>
+          <p class="wp-summary">{{ paper.summary }}</p>
+
+          @if (paper.highlights && paper.highlights.length) {
+            <ul class="wp-highlights">
+              @for (point of paper.highlights.slice(0, 1); track point) {
+                <li><i class="fa-solid fa-circle-check"></i> {{ point }}</li>
+              }
+            </ul>
+          }
+
+          <div class="wp-meta">
+            @if (paper.client) {
+              <span><i class="fa-solid fa-building"></i> {{ paper.client }}</span>
+            }
+            <span><i class="fa-solid fa-calendar-days"></i> {{ paper.date }}</span>
+          </div>
+
+          <div class="wp-actions">
+            @if (paper.pdfPath) {
+              <a [href]="paper.pdfPath" target="_blank" rel="noopener" class="btn btn-primary">
+                <i class="fa-solid fa-file-pdf"></i> {{ lang.t('common.btn.pdf') }}
+              </a>
+            }
+            @if (paper.link) {
+              <a [href]="paper.link" target="_blank" rel="noopener" class="btn btn-outline">
+                {{ lang.t('common.btn.read-online') }}
+              </a>
+            }
+          </div>
+        </div>
+
+      </article>
+    }
+  } @else {
+    <p class="loading">{{ lang.t('wp.loading') }}</p>
+  }
+</section>

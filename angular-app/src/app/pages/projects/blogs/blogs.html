@@ -1,0 +1,41 @@
+<div class="blog-hero">
+  <h1><i class="fa-solid fa-pen-nib"></i> {{ lang.t('blogs.hero.title') }}</h1>
+  <p>{{ lang.t('blogs.hero.sub') }}</p>
+</div>
+
+<section class="blog-list">
+  @if (blogs$ | async; as blogs) {
+    @for (blog of blogs; track blog.title) {
+      <article class="blog-card" (click)="openLink(blog)">
+        <img [src]="blog.cover" [alt]="blog.title" class="blog-cover">
+        <div class="blog-body">
+          <div class="blog-tags">
+            @for (tag of blog.tags; track tag) {
+              <span class="tag">{{ tag }}</span>
+            }
+          </div>
+          <h2 class="blog-title">{{ blog.title }}</h2>
+          <p class="blog-summary">{{ blog.summary }}</p>
+          <div class="blog-meta">
+            <span>{{ blog.date }}</span>
+            <span>{{ blog.readMins }} {{ lang.t('common.min-read') }}</span>
+          </div>
+          <div class="blog-actions">
+            @if (blog.isExternal && blog.link) {
+              <a [href]="blog.link" target="_blank" rel="noopener" class="btn btn-primary" (click)="$event.stopPropagation()">
+                {{ lang.t('blogs.btn.read') }}
+              </a>
+            }
+            @if (blog.pdfPath) {
+              <a [href]="blog.pdfPath" target="_blank" rel="noopener" class="btn btn-outline" (click)="$event.stopPropagation()">
+                <i class="fa-solid fa-file-pdf"></i> {{ lang.t('common.btn.pdf') }}
+              </a>
+            }
+          </div>
+        </div>
+      </article>
+    }
+  } @else {
+    <p class="loading">{{ lang.t('blogs.loading') }}</p>
+  }
+</section>

@@ -1,0 +1,13 @@
+<div class="projects-shell">
+  <nav class="projects-nav">
+    <a routerLink="user-guides"       routerLinkActive="active">{{ lang.t('projects.user-guides') }}</a>
+    <a routerLink="blogs"             routerLinkActive="active">{{ lang.t('projects.articles') }}</a>
+    <a routerLink="workflow-diagrams" routerLinkActive="active">{{ lang.t('projects.diagrams') }}</a>
+    <a routerLink="videos"            routerLinkActive="active">{{ lang.t('projects.videos') }}</a>
+    <a routerLink="white-papers"      routerLinkActive="active">{{ lang.t('projects.white-papers') }}</a>
+  </nav>
+
+  <div class="projects-content">
+    <router-outlet />
+  </div>
+</div>

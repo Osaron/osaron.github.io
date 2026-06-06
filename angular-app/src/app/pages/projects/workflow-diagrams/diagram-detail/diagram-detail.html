@@ -1,0 +1,58 @@
+@if (diagram(); as d) {
+
+  <div class="detail-hero">
+    <div class="hero-title-row">
+      <h1>{{ d.title }}</h1>
+      <a routerLink="/projects/workflow-diagrams" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i> {{ lang.t('detail.back') }}
+      </a>
+    </div>
+    <div class="detail-meta">
+      <span><i class="fa-solid fa-calendar-days"></i> {{ d.date }}</span>
+      @for (tag of d.tags; track tag) {
+        <span><i [class]="tagIcon(tag)"></i> {{ tag }}</span>
+      }
+    </div>
+  </div>
+
+  @if (d.problem) {
+    <section class="detail-section">
+      <h2><i class="fa-solid fa-circle-exclamation"></i> {{ lang.t('detail.problem') }}</h2>
+      @for (para of problemParagraphs; track $index) {
+        <p>{{ para }}</p>
+      }
+    </section>
+  }
+
+  @if (d.steps && d.steps.length) {
+    <section class="detail-section">
+      <h2><i class="fa-solid fa-list-check"></i> {{ lang.t('detail.process') }}</h2>
+      <ol class="steps-list">
+        @for (step of d.steps; track step.title) {
+          <li class="step-item">
+            <div class="step-title">{{ step.title }}</div>
+            <p class="step-desc">{{ step.description }}</p>
+          </li>
+        }
+      </ol>
+    </section>
+  }
+
+  <section class="detail-section diagram-section">
+    <h2><i class="fa-solid fa-diagram-project"></i> {{ lang.t('detail.diagram') }}</h2>
+    <div class="diagram-wrapper">
+      <img [src]="d.cover" [alt]="d.title + ' architecture diagram'" class="diagram-full">
+    </div>
+    @if (d.pdfPath) {
+      <a [href]="d.pdfPath" target="_blank" rel="noopener" class="btn btn-outline">
+        <i class="fa-solid fa-file-pdf"></i> {{ lang.t('common.btn.pdf') }}
+      </a>
+    }
+  </section>
+
+} @else {
+  <div class="not-found">
+    <p>{{ lang.t('detail.not-found') }}</p>
+    <a routerLink="/projects/workflow-diagrams" class="btn btn-primary">{{ lang.t('detail.back') }}</a>
+  </div>
+}

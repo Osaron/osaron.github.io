@@ -1,4 +1,4 @@
-name: E2E Tests & Auto-Deploy
+name: Build, Test & Deploy
 
 on:
   push:
@@ -10,38 +10,64 @@ permissions:
   contents: write
 
 jobs:
-  test-and-deploy:
+  # ── Legacy static site tests (main branch only) ────────────────────
+  legacy-tests:
+    name: Legacy E2E Tests
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Setup Node.js
+      - name: Setup Node 20
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Install Dependencies
+      - name: Install root dependencies
         run: npm install
 
-      - name: Install Playwright Browsers
+      - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
 
-      - name: Run E2E Playwright Tests
+      - name: Run legacy E2E tests
         run: npx playwright test
 
-      - name: Conditional Auto-Deploy to Main
+  # ── Angular app build + tests ──────────────────────────────────────
+  angular-build:
+    name: Angular Build & E2E
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: angular-app
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Angular dependencies
+        run: npm ci
+
+      - name: Build Angular app
+        run: npm run build
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Angular E2E tests
+        run: npm run e2e
+
+      # Deploy to gh-pages when commit message contains MAIN keyword
+      - name: Deploy to GitHub Pages
         if: |
-          github.event_name == 'push' && 
-          github.ref != 'refs/heads/main' && 
+          github.event_name == 'push' &&
           contains(github.event.head_commit.message, 'MAIN')
-        run: |
-          echo "Trigger keyword 'MAIN' detected and tests passed. Executing automatic deployment to main."
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          
-          git checkout -B main origin/main
-          git merge origin/${{ github.ref_name }} --no-edit
-          git push origin main
+        run: npx ng deploy --no-build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
