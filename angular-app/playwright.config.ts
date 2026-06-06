@@ -13,7 +13,11 @@ export default defineConfig({
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
   ],
   webServer: {
-    command: 'ng serve',
+    // In CI the app is already built — serve the dist folder directly (fast).
+    // Locally, ng serve gives hot-reload for development.
+    command: process.env['CI']
+      ? 'npx serve -s dist/portfolio-app/browser -l tcp://localhost:4200'
+      : 'ng serve',
     url: 'http://localhost:4200',
     reuseExistingServer: !process.env['CI'],
     timeout: 120000,
