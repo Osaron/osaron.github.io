@@ -1,0 +1,43 @@
+[
+  {
+    "title": "How to Approach BDD with Conformiq Visualizer",
+    "summary": "A practical guide to implementing Behavior-Driven Development (BDD) using Conformiq Visualizer. Introduces the '3 Amigos' collaboration model — uniting business, development, and QA — and walks through writing Gherkin scenarios, building BPMN models, generating automated test cases, and integrating with ALM tools like Jira, GitHub, and Azure DevOps.",
+    "date": "2024",
+    "client": "Conformiq",
+    "tags": ["QA", "BDD", "TEST AUTOMATION"],
+    "pdfPath": "/projects/blogs/conformiq/How to Approach BDD with Conformiq Visualizer.pdf",
+    "highlights": [
+      "'3 Amigos' framework: aligning business, development, and QA through shared Given-When-Then scenarios",
+      "6-step workflow: Define behavior → Model in Conformiq → Export test cases → Insert datasets → Automate → Collaborate",
+      "Solves miscommunication, unstable requirements, and regression gaps — all in one model-based approach"
+    ]
+  },
+  {
+    "title": "Motion Design — A Production Guideline",
+    "summary": "A comprehensive guide to understanding and producing motion design video animations. Covers the end-to-end production workflow — from creative briefs and storyboarding to animation, sound design, and file export — with practical advice on brand consistency, target audience alignment, and visual language definition.",
+    "date": "April 2024",
+    "client": "Everense",
+    "tags": ["MOTION DESIGN", "ANIMATION", "CONTENT STRATEGY"],
+    "pdfPath": "/projects/white-papers/motion-design/motion-design-v1.0.pdf",
+    "highlights": [
+      "8-phase production workflow: Brief → Script → Storyboard → Layout → Animation → Sound → Subtitles → Export",
+      "Brand identity alignment guidelines for motion design consistency across projects",
+      "Storyboarding best practices: screen sequencing, transition notes, and 10-word rule for on-screen text",
+      "Sound design strategy: music, voice-over, and sound effects for social media consumption"
+    ]
+  },
+  {
+    "title": "Venture Capital Annual Review 2023 — The Global Funding Decline",
+    "summary": "An in-depth analysis of the global venture capital market in 2023, a year marked by significant contraction following record-breaking funding in prior years. Examines how rising interest rates, declining equity markets, and geopolitical uncertainty drove investors toward safer assets — resulting in a 37% year-over-year drop in US investment and the lowest quarterly deal volume in three years.",
+    "date": "January 2024",
+    "client": "Niko Ludwig",
+    "tags": ["VENTURE CAPITAL", "FINANCE", "MARKET ANALYSIS"],
+    "pdfPath": "/projects/white-papers/venture-capital-2023/venture-capital-2023-review.pdf",
+    "highlights": [
+      "US total VC investments reached $144.3B in 2023 — a 37% decline from the previous year",
+      "Q4 2023 seed-through-growth rounds hit $29.3B, the lowest quarterly total in three years",
+      "Deal volume fell 16% from Q3 and 31% year-over-year, with late-stage rounds hardest hit",
+      "Generative AI, cleantech, and biotech remained bright spots amid broad sector contractions"
+    ]
+  }
+]
