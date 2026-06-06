@@ -1,12 +1,12 @@
 <nav class="breadcrumb">
-  <span>API Documentation</span> <span>/</span> <span>API Reference</span>
+  <span>{{ lang.t('api.bc.api-docs') }}</span> <span>/</span> <span>{{ lang.t('api.bc.api-reference') }}</span>
 </nav>
 
 <section id="overview" class="api-section">
-  <h1>API Reference</h1>
-  <p>All endpoints use HTTPS and require a valid API key in the <code>Authorization</code> header. See <a href="/api-docs/authentication">Authentication</a> for details.</p>
+  <h1>{{ lang.t('api.ref.title') }}</h1>
+  <p>{{ lang.t('api.ref.pre') }} <code>Authorization</code> {{ lang.t('api.ref.mid') }} <a href="/api-docs/authentication">{{ lang.t('api.bc.authentication') }}</a> {{ lang.t('api.ref.post') }}</p>
 
-  <h2 id="base-url">Base URL</h2>
+  <h2 id="base-url">{{ lang.t('api.ref.base-url.title') }}</h2>
   <div class="api-overview">
     <div class="code-block">
       <code>https://api.oscarrondon.com/v1</code>
@@ -16,34 +16,34 @@
     </div>
   </div>
 
-  <h2 id="endpoint-overview">Endpoint Overview</h2>
+  <h2 id="endpoint-overview">{{ lang.t('api.ref.endpoints.title') }}</h2>
   <table class="params-table">
-    <thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead>
+    <thead><tr><th>{{ lang.t('api.table.method') }}</th><th>{{ lang.t('api.table.path') }}</th><th>{{ lang.t('api.table.description') }}</th></tr></thead>
     <tbody>
-      <tr><td><span class="method get">GET</span></td><td><code>/v1/content</code></td><td>List content items</td></tr>
-      <tr><td><span class="method post">POST</span></td><td><code>/v1/content</code></td><td>Create content</td></tr>
-      <tr><td><span class="method put">PUT</span></td><td><code>/v1/content/&#123;id&#125;</code></td><td>Update content</td></tr>
-      <tr><td><span class="method delete">DELETE</span></td><td><code>/v1/content/&#123;id&#125;</code></td><td>Delete content</td></tr>
-      <tr><td><span class="method get">GET</span></td><td><code>/v1/users</code></td><td>List users</td></tr>
-      <tr><td><span class="method post">POST</span></td><td><code>/v1/users</code></td><td>Create user</td></tr>
-      <tr><td><span class="method put">PUT</span></td><td><code>/v1/users/&#123;id&#125;</code></td><td>Update user</td></tr>
-      <tr><td><span class="method delete">DELETE</span></td><td><code>/v1/users/&#123;id&#125;</code></td><td>Delete user</td></tr>
+      <tr><td><span class="method get">GET</span></td><td><code>/v1/content</code></td><td>{{ lang.t('api.ref.ep.list-content') }}</td></tr>
+      <tr><td><span class="method post">POST</span></td><td><code>/v1/content</code></td><td>{{ lang.t('api.ref.ep.create-content') }}</td></tr>
+      <tr><td><span class="method put">PUT</span></td><td><code>/v1/content/&#123;id&#125;</code></td><td>{{ lang.t('api.ref.ep.update-content') }}</td></tr>
+      <tr><td><span class="method delete">DELETE</span></td><td><code>/v1/content/&#123;id&#125;</code></td><td>{{ lang.t('api.ref.ep.delete-content') }}</td></tr>
+      <tr><td><span class="method get">GET</span></td><td><code>/v1/users</code></td><td>{{ lang.t('api.ref.ep.list-users') }}</td></tr>
+      <tr><td><span class="method post">POST</span></td><td><code>/v1/users</code></td><td>{{ lang.t('api.ref.ep.create-user') }}</td></tr>
+      <tr><td><span class="method put">PUT</span></td><td><code>/v1/users/&#123;id&#125;</code></td><td>{{ lang.t('api.ref.ep.update-user') }}</td></tr>
+      <tr><td><span class="method delete">DELETE</span></td><td><code>/v1/users/&#123;id&#125;</code></td><td>{{ lang.t('api.ref.ep.delete-user') }}</td></tr>
     </tbody>
   </table>
 </section>
 
 <section id="error-codes" class="api-section">
-  <h2>Error Codes</h2>
-  <p>The API uses standard HTTP status codes. Error responses include a <code>message</code> field with a human-readable description.</p>
+  <h2>{{ lang.t('api.ref.errors.title') }}</h2>
+  <p>{{ lang.t('api.ref.errors.pre') }} <code>message</code> {{ lang.t('api.ref.errors.post') }}</p>
   <table class="params-table">
-    <thead><tr><th>Code</th><th>Name</th><th>Description</th></tr></thead>
+    <thead><tr><th>{{ lang.t('api.table.code') }}</th><th>{{ lang.t('api.table.name') }}</th><th>{{ lang.t('api.table.description') }}</th></tr></thead>
     <tbody>
-      <tr><td><code>400</code></td><td>Bad Request</td><td>Invalid or malformed request parameters.</td></tr>
-      <tr><td><code>401</code></td><td>Unauthorized</td><td>Missing or invalid API key.</td></tr>
-      <tr><td><code>404</code></td><td>Not Found</td><td>The requested resource does not exist.</td></tr>
-      <tr><td><code>422</code></td><td>Unprocessable</td><td>Request body failed validation. Check the <code>errors</code> field for details.</td></tr>
-      <tr><td><code>429</code></td><td>Rate Limited</td><td>Too many requests. Respect the <code>Retry-After</code> response header.</td></tr>
-      <tr><td><code>500</code></td><td>Server Error</td><td>Internal server error. If the issue persists, contact support.</td></tr>
+      <tr><td><code>400</code></td><td>{{ lang.t('api.ref.err.400.name') }}</td><td>{{ lang.t('api.ref.err.400') }}</td></tr>
+      <tr><td><code>401</code></td><td>{{ lang.t('api.ref.err.401.name') }}</td><td>{{ lang.t('api.ref.err.401') }}</td></tr>
+      <tr><td><code>404</code></td><td>{{ lang.t('api.ref.err.404.name') }}</td><td>{{ lang.t('api.ref.err.404') }}</td></tr>
+      <tr><td><code>422</code></td><td>{{ lang.t('api.ref.err.422.name') }}</td><td>{{ lang.t('api.ref.err.422.pre') }} <code>errors</code> {{ lang.t('api.ref.err.422.post') }}</td></tr>
+      <tr><td><code>429</code></td><td>{{ lang.t('api.ref.err.429.name') }}</td><td>{{ lang.t('api.ref.err.429.pre') }} <code>Retry-After</code> {{ lang.t('api.ref.err.429.post') }}</td></tr>
+      <tr><td><code>500</code></td><td>{{ lang.t('api.ref.err.500.name') }}</td><td>{{ lang.t('api.ref.err.500') }}</td></tr>
     </tbody>
   </table>
 </section>

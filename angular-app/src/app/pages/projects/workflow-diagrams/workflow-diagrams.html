@@ -1,6 +1,6 @@
 <div class="visuals-hero">
-  <h1><i class="fa-solid fa-image"></i> Workflow Diagrams &amp; Visuals</h1>
-  <p>Visual tools used to enhance clarity and engagement in documentation.</p>
+  <h1><i class="fa-solid fa-image"></i> {{ lang.t('diagrams.hero.title') }}</h1>
+  <p>{{ lang.t('diagrams.hero.sub') }}</p>
 </div>
 
 <section class="diagram-list">
@@ -23,12 +23,12 @@
           <div class="diagram-actions">
             @if (diagram.isExternal && diagram.link) {
               <a [href]="diagram.link" target="_blank" rel="noopener" class="btn btn-primary" (click)="$event.stopPropagation()">
-                View Diagram
+                {{ lang.t('diagrams.btn.view') }}
               </a>
             }
             @if (diagram.pdfPath) {
               <a [href]="diagram.pdfPath" target="_blank" rel="noopener" class="btn btn-outline" (click)="$event.stopPropagation()">
-                <i class="fa-solid fa-file-pdf"></i> Download PDF
+                <i class="fa-solid fa-file-pdf"></i> {{ lang.t('common.btn.pdf') }}
               </a>
             }
           </div>
@@ -36,28 +36,28 @@
       </article>
     }
   } @else {
-    <p class="loading">Loading diagrams…</p>
+    <p class="loading">{{ lang.t('diagrams.loading') }}</p>
   }
 </section>
 
 <section class="visual-section">
   <div class="visual-item">
-    <h3><i class="fa-solid fa-diagram-project"></i> BPMN Diagrams</h3>
-    <p>Used to map complex workflows clearly for end-users or developers. Created using Camunda Modeler, Bizagi, or Lucidchart.</p>
+    <h3><i class="fa-solid fa-diagram-project"></i> {{ lang.t('diagrams.bpmn.title') }}</h3>
+    <p>{{ lang.t('diagrams.bpmn.desc') }}</p>
   </div>
 
   <div class="visual-item">
-    <h3><i class="fa-solid fa-sitemap"></i> Microsoft Visio Diagrams</h3>
-    <p>Ideal for flowcharts, network maps, and system architecture. Common in corporate documentation.</p>
+    <h3><i class="fa-solid fa-sitemap"></i> {{ lang.t('diagrams.visio.title') }}</h3>
+    <p>{{ lang.t('diagrams.visio.desc') }}</p>
   </div>
 
   <div class="visual-item">
-    <h3><i class="fa-regular fa-file-powerpoint"></i> PowerPoint Presentations</h3>
-    <p>Quickly share visual summaries of procedures, policies, or roadmap planning.</p>
+    <h3><i class="fa-regular fa-file-powerpoint"></i> {{ lang.t('diagrams.ppt.title') }}</h3>
+    <p>{{ lang.t('diagrams.ppt.desc') }}</p>
   </div>
 
   <div class="visual-item">
-    <h3><i class="fa-solid fa-pen-nib"></i> Canva &amp; Photoshop</h3>
-    <p>Custom-designed banners, thumbnails, infographics, and illustrations to increase visual engagement in user-facing content.</p>
+    <h3><i class="fa-solid fa-pen-nib"></i> {{ lang.t('diagrams.canva.title') }}</h3>
+    <p>{{ lang.t('diagrams.canva.desc') }}</p>
   </div>
 </section>

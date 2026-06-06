@@ -10,10 +10,12 @@ import { TocItem } from '../../../core/services/toc.service';
   templateUrl: './content-api.html',
 })
 export class ContentApi extends ApiPageBase {
-  protected tocItems: TocItem[] = [
-    { id: 'list-content',   label: 'List Content' },
-    { id: 'create-content', label: 'Create Content' },
-    { id: 'update-content', label: 'Update Content' },
-    { id: 'delete-content', label: 'Delete Content' },
-  ];
+  protected getTocItems(): TocItem[] {
+    return [
+      { id: 'list-content',   label: this.lang.t('api.toc.list-content')   },
+      { id: 'create-content', label: this.lang.t('api.toc.create-content') },
+      { id: 'update-content', label: this.lang.t('api.toc.update-content') },
+      { id: 'delete-content', label: this.lang.t('api.toc.delete-content') },
+    ];
+  }
 }

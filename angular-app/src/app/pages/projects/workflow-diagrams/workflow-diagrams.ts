@@ -3,6 +3,7 @@ import { AsyncPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { DiagramService } from '../../../core/services/diagram.service';
 import { Diagram } from '../../../core/models/diagram.model';
+import { LanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-workflow-diagrams',
@@ -11,6 +12,7 @@ import { Diagram } from '../../../core/models/diagram.model';
   styleUrl: './workflow-diagrams.scss',
 })
 export class WorkflowDiagrams {
+  lang = inject(LanguageService);
   private diagramService = inject(DiagramService);
   private router = inject(Router);
   diagrams$ = this.diagramService.getAll();

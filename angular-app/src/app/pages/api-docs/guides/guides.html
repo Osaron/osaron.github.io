@@ -1,19 +1,19 @@
 <nav class="breadcrumb">
-  <a routerLink="/">Home</a> <span>&gt;</span>
-  <a routerLink="/api-docs">API Docs</a> <span>&gt;</span>
-  <span>Testing Guide</span>
+  <a routerLink="/">{{ lang.t('api.bc.home') }}</a> <span>&gt;</span>
+  <a routerLink="/api-docs">{{ lang.t('api.bc.api-docs') }}</a> <span>&gt;</span>
+  <span>{{ lang.t('api.bc.guides') }}</span>
 </nav>
 
 <!-- ── Overview ─────────────────────────────────────────────────────── -->
 <section id="testing-overview" class="api-section">
-  <span class="page-eyebrow"><i class="fas fa-robot"></i> QA Engineering</span>
-  <h1>Automation Testing Guide</h1>
-  <p class="hero-summary">A practical reference for API, UI, load, and mobile testing — covering the tools, languages, and patterns used across the full testing spectrum, from exploratory sessions to fully automated CI pipelines.</p>
+  <span class="page-eyebrow"><i class="fas fa-robot"></i> {{ lang.t('api.guide.eyebrow') }}</span>
+  <h1>{{ lang.t('api.guide.title') }}</h1>
+  <p class="hero-summary">{{ lang.t('api.guide.hero-summary') }}</p>
 
   <div class="hero-grid">
     <div class="hero-card">
-      <h3>Testing strategy</h3>
-      <p>Effective QA is layered. Exploratory testing discovers unknown risks early. Automated checks — from contract tests to full E2E flows — then catch regressions on every commit and keep releases safe at speed.</p>
+      <h3>{{ lang.t('api.guide.card1.title') }}</h3>
+      <p>{{ lang.t('api.guide.card1.desc') }}</p>
       <div class="hero-meta">
         <span class="meta-pill"><i class="fas fa-search"></i> Exploratory</span>
         <span class="meta-pill"><i class="fas fa-code-branch"></i> Integration</span>
@@ -22,31 +22,31 @@
       </div>
     </div>
     <div class="hero-card">
-      <h3>The testing pyramid</h3>
-      <p>Invest most in fast, isolated unit tests. Build a solid API and integration layer. Keep E2E tests targeted at critical user journeys — they are the most expensive to write and maintain.</p>
+      <h3>{{ lang.t('api.guide.card2.title') }}</h3>
+      <p>{{ lang.t('api.guide.card2.desc') }}</p>
       <div class="hero-meta">
-        <span class="meta-pill">Many unit tests</span>
-        <span class="meta-pill">Some API tests</span>
-        <span class="meta-pill">Few E2E tests</span>
+        <span class="meta-pill">{{ lang.t('api.guide.pill.many-unit') }}</span>
+        <span class="meta-pill">{{ lang.t('api.guide.pill.some-api') }}</span>
+        <span class="meta-pill">{{ lang.t('api.guide.pill.few-e2e') }}</span>
       </div>
     </div>
   </div>
 
   <div class="quick-grid">
     <article class="mini-card">
-      <span class="mini-label">Unit / Component</span>
-      <strong>Fast &amp; isolated</strong>
-      <p>Validate individual functions. No external calls. Millisecond feedback in the developer's editor.</p>
+      <span class="mini-label">{{ lang.t('api.guide.mc1.label') }}</span>
+      <strong>{{ lang.t('api.guide.mc1.title') }}</strong>
+      <p>{{ lang.t('api.guide.mc1.desc') }}</p>
     </article>
     <article class="mini-card">
-      <span class="mini-label">Integration / API</span>
-      <strong>Contract testing</strong>
-      <p>Verify service interactions, HTTP contracts, and data shapes at the API layer without a browser.</p>
+      <span class="mini-label">{{ lang.t('api.guide.mc2.label') }}</span>
+      <strong>{{ lang.t('api.guide.mc2.title') }}</strong>
+      <p>{{ lang.t('api.guide.mc2.desc') }}</p>
     </article>
     <article class="mini-card">
-      <span class="mini-label">End-to-End</span>
-      <strong>Full user journeys</strong>
-      <p>Drive real browsers through critical flows — login, navigation, form submission — across the full stack.</p>
+      <span class="mini-label">{{ lang.t('api.guide.mc3.label') }}</span>
+      <strong>{{ lang.t('api.guide.mc3.title') }}</strong>
+      <p>{{ lang.t('api.guide.mc3.desc') }}</p>
     </article>
   </div>
 </section>
@@ -54,8 +54,8 @@
 <!-- ── Load & Stress Testing ─────────────────────────────────────────── -->
 <section id="load-testing" class="api-section">
   <div class="section-intro">
-    <h2>Load &amp; Stress Testing</h2>
-    <p>Load testing verifies behaviour under expected traffic volumes. Stress testing pushes beyond normal limits to find the system's breaking point and measure its recovery. Both are essential before major releases and infrastructure changes.</p>
+    <h2>{{ lang.t('api.guide.load.title') }}</h2>
+    <p>{{ lang.t('api.guide.load.desc') }}</p>
   </div>
 
   <div class="sdk-grid">
@@ -72,9 +72,9 @@
         <span class="meta-pill">JavaScript</span>
         <span class="meta-pill">Groovy</span>
       </div>
-      <p>The industry standard for load and performance testing. Supports HTTP, HTTPS, FTP, JDBC, SOAP, REST, and more through a rich plugin ecosystem. Test plans are built in a GUI and run headlessly in CI pipelines with HTML dashboard output.</p>
+      <p>{{ lang.t('api.guide.jmeter.desc') }}</p>
       <div class="code-example">
-        <div class="code-label"><span>Run JMeter headless via CLI</span></div>
+        <div class="code-label"><span>{{ lang.t('api.guide.jmeter.code-label') }}</span></div>
         <pre><code class="language-bash">jmeter -n -t test_plan.jmx \
        -l results.jtl \
        -e -o ./html-report/</code></pre>
@@ -91,9 +91,9 @@
         <span class="meta-pill">Back end</span>
         <span class="meta-pill">JavaScript</span>
       </div>
-      <p>Developer-first load testing with a JavaScript scripting API. Lightweight, version-control friendly, and native to CI/CD. Grafana k6 Cloud adds distributed execution, real-time charts, and threshold alerting.</p>
+      <p>{{ lang.t('api.guide.k6.desc') }}</p>
       <div class="code-example">
-        <div class="code-label"><span>k6 — basic load script</span></div>
+        <div class="code-label"><span>{{ lang.t('api.guide.k6.code-label') }}</span></div>
         <pre><code class="language-javascript">import http from 'k6/http';
 import &#123; check, sleep &#125; from 'k6';
 
@@ -119,9 +119,9 @@ export default function () &#123;
         <span class="meta-pill">Back end</span>
         <span class="meta-pill">Python</span>
       </div>
-      <p>Python-native distributed load testing. User behaviour is defined as Python classes, making complex multi-step workflows easy to script. A built-in real-time web UI provides live stats and user-count controls without extra tooling.</p>
+      <p>{{ lang.t('api.guide.locust.desc') }}</p>
       <div class="code-example">
-        <div class="code-label"><span>Locust — user class definition</span></div>
+        <div class="code-label"><span>{{ lang.t('api.guide.locust.code-label') }}</span></div>
         <pre><code class="language-python">from locust import HttpUser, task, between
 
 class PortfolioUser(HttpUser):
@@ -150,7 +150,7 @@ class PortfolioUser(HttpUser):
         <span class="meta-pill">JavaScript</span>
         <span class="meta-pill">Groovy</span>
       </div>
-      <p>Dual-purpose tool combining functional API testing with a built-in load runner. ReadyAPI (enterprise) adds cloud execution, real-time reporting, and data-driven load scenarios. Groovy scripts handle dynamic tokens, custom assertions, and multi-step workflows.</p>
+      <p>{{ lang.t('api.guide.soapui-load.desc') }}</p>
     </div>
 
     <div class="sdk-card">
@@ -163,7 +163,7 @@ class PortfolioUser(HttpUser):
         <span class="meta-pill">Back end · Front end</span>
         <span class="meta-pill">Gherkin</span>
       </div>
-      <p>Unique in that the same BDD <code>.feature</code> files used for functional API testing are executed as load scenarios via <code>karate-gatling</code> — no separate load scripts needed. Eliminates duplication between test types and keeps maintenance low.</p>
+      <p>{{ lang.t('api.guide.karate-load.pre') }} <code>.feature</code> {{ lang.t('api.guide.karate-load.mid') }} <code>karate-gatling</code> {{ lang.t('api.guide.karate-load.post') }}</p>
     </div>
 
   </div>
@@ -172,8 +172,8 @@ class PortfolioUser(HttpUser):
 <!-- ── API Automation ─────────────────────────────────────────────────── -->
 <section id="api-automation" class="api-section">
   <div class="section-intro">
-    <h2>API &amp; Back-end Automation</h2>
-    <p>API tests validate endpoints, contracts, data integrity, and error handling in isolation — faster and more reliable than UI tests because they bypass the browser entirely. These run on every commit and form the backbone of a solid regression suite.</p>
+    <h2>{{ lang.t('api.guide.api-auto.title') }}</h2>
+    <p>{{ lang.t('api.guide.api-auto.desc') }}</p>
   </div>
 
   <div class="sdk-grid">
@@ -189,9 +189,9 @@ class PortfolioUser(HttpUser):
         <span class="meta-pill">JavaScript</span>
         <span class="meta-pill">Python</span>
       </div>
-      <p>The most widely-used API testing platform. Collections organise requests by resource or workflow; environments inject variables per stage. <strong>Newman CLI</strong> runs Postman collections in CI pipelines without a GUI and outputs JUnit XML for test reporting.</p>
+      <p>{{ lang.t('api.guide.postman.pre') }} <strong>Newman CLI</strong> {{ lang.t('api.guide.postman.post') }}</p>
       <div class="code-example">
-        <div class="code-label"><span>Postman — pm.test assertions</span></div>
+        <div class="code-label"><span>{{ lang.t('api.guide.postman.code-label') }}</span></div>
         <pre><code class="language-javascript">pm.test("Status is 200", () => &#123;
   pm.response.to.have.status(200);
 &#125;);
@@ -218,9 +218,9 @@ pm.test("Pagination fields are present", () => &#123;
         <span class="meta-pill">Back end</span>
         <span class="meta-pill">Java</span>
       </div>
-      <p>Java DSL that makes REST API validation read like natural language. Pairs with TestNG or JUnit in Maven/Gradle projects. GPath and Hamcrest matchers enable precise JSON and XML assertions on deeply nested responses.</p>
+      <p>{{ lang.t('api.guide.rest-assured.desc') }}</p>
       <div class="code-example">
-        <div class="code-label"><span>REST Assured — given / when / then</span></div>
+        <div class="code-label"><span>{{ lang.t('api.guide.rest-assured.code-label') }}</span></div>
         <pre><code class="language-java">given()
     .header("Authorization", "Bearer " + API_KEY)
     .queryParam("type", "blog")
@@ -245,9 +245,9 @@ pm.test("Pagination fields are present", () => &#123;
         <span class="meta-pill">Back end · Front end</span>
         <span class="meta-pill">Java</span>
       </div>
-      <p>JVM testing framework with parallel execution, <code>&#64;DataProvider</code> for data-driven scenarios, and XML-based suite configuration. Used as the runner for REST Assured API tests and Selenium UI tests in the same Java project.</p>
+      <p>{{ lang.t('api.guide.testng.pre') }} <code>&#64;DataProvider</code> {{ lang.t('api.guide.testng.post') }}</p>
       <div class="code-example">
-        <div class="code-label"><span>TestNG — data-driven test</span></div>
+        <div class="code-label"><span>{{ lang.t('api.guide.testng.code-label') }}</span></div>
         <pre><code class="language-java">&#64;DataProvider(name = "contentTypes")
 public Object[][] types() &#123;
     return new Object[][] &#123;
@@ -279,9 +279,9 @@ public void testListByType(String type) &#123;
         <span class="meta-pill">Back end</span>
         <span class="meta-pill">Gherkin</span>
       </div>
-      <p>Write API tests in plain Gherkin without Java step definitions. Built-in HTTP client, JSON path assertions, schema validation, and parallel execution. Supports REST, GraphQL, and gRPC — and the same files double as load tests via Gatling.</p>
+      <p>{{ lang.t('api.guide.karate-api.desc') }}</p>
       <div class="code-example">
-        <div class="code-label"><span>Karate — feature file</span></div>
+        <div class="code-label"><span>{{ lang.t('api.guide.karate-api.code-label') }}</span></div>
         <pre><code class="language-gherkin">Feature: Content API
 
   Background:
@@ -310,7 +310,7 @@ public void testListByType(String type) &#123;
         <span class="meta-pill">JavaScript</span>
         <span class="meta-pill">Groovy</span>
       </div>
-      <p>Industry favourite for SOAP and REST contract testing. Groovy scripts customise assertions, manage dynamic auth tokens, and chain multi-step flows. Mock services simulate dependencies without live infrastructure — essential for isolated early-development testing.</p>
+      <p>{{ lang.t('api.guide.soapui-func.desc') }}</p>
     </div>
 
   </div>
@@ -319,8 +319,8 @@ public void testListByType(String type) &#123;
 <!-- ── UI & E2E Testing ───────────────────────────────────────────────── -->
 <section id="ui-automation" class="api-section">
   <div class="section-intro">
-    <h2>UI &amp; End-to-End Testing</h2>
-    <p>E2E tests drive real browsers through user-facing flows — login, navigation, form submission, and data display — catching presentation-layer regressions that API tests alone cannot surface.</p>
+    <h2>{{ lang.t('api.guide.ui-auto.title') }}</h2>
+    <p>{{ lang.t('api.guide.ui-auto.desc') }}</p>
   </div>
 
   <div class="sdk-grid">
@@ -335,9 +335,9 @@ public void testListByType(String type) &#123;
         <span class="meta-pill">Front end</span>
         <span class="meta-pill">Python · Java · JS · C#</span>
       </div>
-      <p>The most established browser automation library. WebDriver protocol communicates directly with Chrome, Firefox, Edge, and Safari drivers. Language-agnostic, widely supported in CI, and the foundation for Katalon Studio and other high-level platforms.</p>
+      <p>{{ lang.t('api.guide.selenium.desc') }}</p>
       <div class="code-example">
-        <div class="code-label"><span>Selenium — Python with explicit wait</span></div>
+        <div class="code-label"><span>{{ lang.t('api.guide.selenium.code-label') }}</span></div>
         <pre><code class="language-python">from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -363,9 +363,9 @@ driver.quit()</code></pre>
         <span class="meta-pill">Front end</span>
         <span class="meta-pill">JavaScript</span>
       </div>
-      <p>Modern E2E framework running inside the browser for real-time execution. Automatic waiting eliminates most flakiness. Time-travel debugging, built-in screenshot and video capture, and a component testing mode all ship out of the box.</p>
+      <p>{{ lang.t('api.guide.cypress.desc') }}</p>
       <div class="code-example">
-        <div class="code-label"><span>Cypress — E2E spec</span></div>
+        <div class="code-label"><span>{{ lang.t('api.guide.cypress.code-label') }}</span></div>
         <pre><code class="language-javascript">describe('API Docs', () => &#123;
   beforeEach(() => cy.visit('/api-docs/getting-started'));
 
@@ -391,9 +391,9 @@ driver.quit()</code></pre>
         <span class="meta-pill">Front end · Back end</span>
         <span class="meta-pill">Python · JS · Java · .NET</span>
       </div>
-      <p>Microsoft's cross-browser automation library covering Chromium, Firefox, and WebKit in a single API. Network interception and request mocking make it equally powerful for API testing. Built-in parallel execution and a trace viewer speed up failure diagnosis.</p>
+      <p>{{ lang.t('api.guide.playwright.desc') }}</p>
       <div class="code-example">
-        <div class="code-label"><span>Playwright — Python example</span></div>
+        <div class="code-label"><span>{{ lang.t('api.guide.playwright.code-label') }}</span></div>
         <pre><code class="language-python">from playwright.sync_api import sync_playwright
 
 with sync_playwright() as p:
@@ -416,7 +416,7 @@ with sync_playwright() as p:
         <span class="meta-pill">Front end</span>
         <span class="meta-pill">VBScript</span>
       </div>
-      <p>Enterprise-grade GUI automation for web, Windows desktop (WinForms, WPF), SAP, and Citrix environments. AI-powered object recognition reduces script maintenance when UIs change. Common in large regulated industries — banking, insurance, and healthcare.</p>
+      <p>{{ lang.t('api.guide.uft.desc') }}</p>
     </div>
 
   </div>
@@ -425,8 +425,8 @@ with sync_playwright() as p:
 <!-- ── Mobile Testing ─────────────────────────────────────────────────── -->
 <section id="mobile-testing" class="api-section">
   <div class="section-intro">
-    <h2>Mobile Testing</h2>
-    <p>Mobile automation tests run against native, hybrid, and mobile-web apps on simulators, emulators, or real devices connected via a cloud device farm such as BrowserStack or Sauce Labs.</p>
+    <h2>{{ lang.t('api.guide.mobile.title') }}</h2>
+    <p>{{ lang.t('api.guide.mobile.desc') }}</p>
   </div>
 
   <div class="sdk-grid">
@@ -441,9 +441,9 @@ with sync_playwright() as p:
         <span class="meta-pill">Back end · Mobile</span>
         <span class="meta-pill">Java · JS · Python · Groovy</span>
       </div>
-      <p>The cross-platform standard for mobile app automation. An Appium server bridges the WebDriver protocol to iOS XCUITest and Android UIAutomator2 drivers without requiring app modifications. Supports native, hybrid, and mobile-web apps in a single framework.</p>
+      <p>{{ lang.t('api.guide.appium.desc') }}</p>
       <div class="code-example">
-        <div class="code-label"><span>Appium — Python setup</span></div>
+        <div class="code-label"><span>{{ lang.t('api.guide.appium.code-label') }}</span></div>
         <pre><code class="language-python">from appium import webdriver
 
 desired_caps = &#123;
@@ -469,7 +469,7 @@ driver.find_element("id", "com.example.app:id/login_button").click()</code></pre
         <span class="meta-pill">Back end · Mobile</span>
         <span class="meta-pill">Java · Groovy</span>
       </div>
-      <p>All-in-one automation platform built on Selenium and Appium. A no-code recorder lets manual testers get started quickly; full Groovy scripting gives senior engineers complete control. Covers web, API, mobile, and desktop testing in a single project with built-in CI integration.</p>
+      <p>{{ lang.t('api.guide.katalon.desc') }}</p>
     </div>
 
   </div>
@@ -478,18 +478,18 @@ driver.find_element("id", "com.example.app:id/login_button").click()</code></pre
 <!-- ── BDD & Gherkin ──────────────────────────────────────────────────── -->
 <section id="bdd-cucumber" class="api-section">
   <div class="section-intro">
-    <h2>BDD with Cucumber &amp; Gherkin</h2>
-    <p>Behaviour-Driven Development shifts the conversation from "what tests cover" to "what the system should do." Scenarios written in Gherkin become living documentation that non-technical stakeholders can read and directly validate.</p>
+    <h2>{{ lang.t('api.guide.bdd.title') }}</h2>
+    <p>{{ lang.t('api.guide.bdd.desc') }}</p>
   </div>
 
   <div class="callout-card">
-    <h3>What is Gherkin?</h3>
-    <p>Gherkin is a structured plain-text DSL using five keywords — <strong>Given</strong>, <strong>When</strong>, <strong>Then</strong>, <strong>And</strong>, <strong>But</strong> — to describe observable system behaviour. Files use the <code>.feature</code> extension, are version-controlled alongside application code, and keep requirements and tests permanently in sync.</p>
+    <h3>{{ lang.t('api.guide.bdd.callout.title') }}</h3>
+    <p>{{ lang.t('api.guide.bdd.callout.pre') }} <strong>Given</strong>, <strong>When</strong>, <strong>Then</strong>, <strong>And</strong>, <strong>But</strong> {{ lang.t('api.guide.bdd.callout.mid') }} <code>.feature</code> {{ lang.t('api.guide.bdd.callout.post') }}</p>
   </div>
 
   <div class="code-example">
     <div class="code-label">
-      <span>Gherkin — feature file with Scenario Outline</span>
+      <span>{{ lang.t('api.guide.bdd.code-label') }}</span>
       <div class="code-label-actions"><span class="code-path">content.feature</span></div>
     </div>
     <pre><code class="language-gherkin">Feature: Content list endpoint
@@ -517,12 +517,12 @@ driver.find_element("id", "com.example.app:id/login_button").click()</code></pre
 
   <div class="info-grid">
     <article class="info-card">
-      <h3>Cucumber</h3>
-      <p>The most widely-used BDD runner. Available for Java, JavaScript, Ruby, and Python. Step definitions map Gherkin phrases to automation code. Integrates with TestNG, JUnit, Playwright, and Selenium to drive full-stack BDD pipelines from a shared feature file.</p>
+      <h3>{{ lang.t('api.guide.cucumber.title') }}</h3>
+      <p>{{ lang.t('api.guide.cucumber.desc') }}</p>
     </article>
     <article class="info-card">
-      <h3>Karate</h3>
-      <p>Extends Gherkin specifically for API and load testing without requiring separate step definitions. The DSL includes a built-in HTTP client, JSON path assertions, and schema matching — making a single <code>.feature</code> file a fully self-contained runnable test.</p>
+      <h3>{{ lang.t('api.guide.karate-bdd.title') }}</h3>
+      <p>{{ lang.t('api.guide.karate-bdd.pre') }} <code>.feature</code> {{ lang.t('api.guide.karate-bdd.post') }}</p>
     </article>
   </div>
 </section>
@@ -530,41 +530,41 @@ driver.find_element("id", "com.example.app:id/login_button").click()</code></pre
 <!-- ── Languages ─────────────────────────────────────────────────────── -->
 <section id="languages" class="api-section">
   <div class="section-intro">
-    <h2>Languages &amp; Frameworks</h2>
-    <p>Choosing the right language for your automation stack aligns test code with your team's existing skills, CI tooling, and the application's primary language.</p>
+    <h2>{{ lang.t('api.guide.langs.title') }}</h2>
+    <p>{{ lang.t('api.guide.langs.desc') }}</p>
   </div>
 
   <div class="quick-grid">
     <article class="mini-card">
       <span class="mini-label">Python · (P)</span>
-      <strong>Versatile &amp; concise</strong>
-      <p>Primary for Locust, Playwright, and Selenium. Ecosystem includes <code>pytest</code>, <code>requests</code>, and <code>Behave</code> for BDD.</p>
+      <strong>{{ lang.t('api.guide.py.title') }}</strong>
+      <p>{{ lang.t('api.guide.py.desc') }}</p>
     </article>
     <article class="mini-card">
       <span class="mini-label">Groovy · (G)</span>
-      <strong>JVM scripting</strong>
-      <p>Default for Katalon and SoapUI scripts. Concise Java-compatible syntax with Spock Framework support for expressive, readable tests.</p>
+      <strong>{{ lang.t('api.guide.groovy.title') }}</strong>
+      <p>{{ lang.t('api.guide.groovy.desc') }}</p>
     </article>
     <article class="mini-card">
       <span class="mini-label">JavaScript · (JS)</span>
-      <strong>Browser-native</strong>
-      <p>Powers Cypress, k6, and Postman scripts. Node.js enables CLI runners — Newman, Jest, Mocha — in any CI pipeline.</p>
+      <strong>{{ lang.t('api.guide.js.title') }}</strong>
+      <p>{{ lang.t('api.guide.js.desc') }}</p>
     </article>
     <article class="mini-card">
       <span class="mini-label">Java · (J)</span>
-      <strong>Enterprise standard</strong>
-      <p>Used by REST Assured, TestNG, Appium, and JMeter. Maven and Gradle manage dependencies and parallel execution across large suites.</p>
+      <strong>{{ lang.t('api.guide.java.title') }}</strong>
+      <p>{{ lang.t('api.guide.java.desc') }}</p>
     </article>
   </div>
 
   <div class="info-grid">
     <article class="info-card">
       <h3>Gherkin · (Gb)</h3>
-      <p>A structured English dialect — not a programming language. Used by Cucumber and Karate to write executable specifications that product owners, QA engineers, and developers share. Keeps requirements and tests permanently aligned across the team.</p>
+      <p>{{ lang.t('api.guide.gherkin.desc') }}</p>
     </article>
     <article class="info-card">
       <h3>VBScript · (VBS)</h3>
-      <p>The scripting engine behind UFT One. Used in legacy enterprise environments for Windows desktop, SAP, and Citrix automation. Keyword-driven and action-based test models are the typical patterns in these stacks.</p>
+      <p>{{ lang.t('api.guide.vbs.desc') }}</p>
     </article>
   </div>
 </section>
@@ -572,39 +572,39 @@ driver.find_element("id", "com.example.app:id/login_button").click()</code></pre
 <!-- ── Best Practices ─────────────────────────────────────────────────── -->
 <section id="best-practices" class="api-section">
   <div class="section-intro">
-    <h2>Best Practices</h2>
-    <p>Consistent automation patterns keep test suites fast, reliable, and cost-effective to maintain as systems and teams grow.</p>
+    <h2>{{ lang.t('api.guide.bp.title') }}</h2>
+    <p>{{ lang.t('api.guide.bp.desc') }}</p>
   </div>
 
   <div class="tip-card">
     <div class="tip-icon"><i class="fas fa-sitemap"></i></div>
     <div class="tip-content">
-      <h4>Follow the testing pyramid</h4>
-      <p>Write many fast unit tests, a solid middle layer of API tests, and only as many E2E tests as truly necessary. An inverted pyramid — mostly slow browser tests — creates brittle suites that break CI and burn team confidence in automation.</p>
+      <h4>{{ lang.t('api.guide.bp1.title') }}</h4>
+      <p>{{ lang.t('api.guide.bp1.desc') }}</p>
     </div>
   </div>
 
   <div class="tip-card">
     <div class="tip-icon"><i class="fas fa-database"></i></div>
     <div class="tip-content">
-      <h4>Isolate test data</h4>
-      <p>Every test should create, use, and clean up its own data. Never rely on state left by another test — shared data causes intermittent failures that are difficult to reproduce and expensive to diagnose across a team.</p>
+      <h4>{{ lang.t('api.guide.bp2.title') }}</h4>
+      <p>{{ lang.t('api.guide.bp2.desc') }}</p>
     </div>
   </div>
 
   <div class="tip-card">
     <div class="tip-icon"><i class="fas fa-code-branch"></i></div>
     <div class="tip-content">
-      <h4>Gate every pull request with tests</h4>
-      <p>Integrate your suite into GitHub Actions, Jenkins, or GitLab CI. Block merges on test failures. Fast pipeline feedback catches regressions before they reach staging or production and keeps the main branch green.</p>
+      <h4>{{ lang.t('api.guide.bp3.title') }}</h4>
+      <p>{{ lang.t('api.guide.bp3.desc') }}</p>
     </div>
   </div>
 
   <div class="tip-card">
     <div class="tip-icon"><i class="fas fa-tags"></i></div>
     <div class="tip-content">
-      <h4>Tag and categorise tests</h4>
-      <p>Use tags — <code>&#64;smoke</code>, <code>&#64;regression</code>, <code>&#64;load</code> — to run targeted subsets. Smoke tests on each deploy; full regression on a schedule; load tests against staging environments only.</p>
+      <h4>{{ lang.t('api.guide.bp4.title') }}</h4>
+      <p>{{ lang.t('api.guide.bp4.pre') }} <code>&#64;smoke</code>, <code>&#64;regression</code>, <code>&#64;load</code> {{ lang.t('api.guide.bp4.post') }}</p>
     </div>
   </div>
 </section>
@@ -612,24 +612,24 @@ driver.find_element("id", "com.example.app:id/login_button").click()</code></pre
 <!-- ── Troubleshooting ────────────────────────────────────────────────── -->
 <section id="troubleshooting" class="api-section">
   <div class="section-intro">
-    <h2>Troubleshooting</h2>
-    <p>Common automation failures and the fastest path to resolving them.</p>
+    <h2>{{ lang.t('api.guide.trouble.title') }}</h2>
+    <p>{{ lang.t('api.guide.trouble.desc') }}</p>
   </div>
 
-  <h2 id="common-issues">Common Issues</h2>
+  <h2 id="common-issues">{{ lang.t('api.guide.issues.title') }}</h2>
 
   <div class="error-solution">
     <div class="error-header">
-      <span class="error-code">Flaky Tests</span>
-      <span class="error-title">Intermittent failures</span>
+      <span class="error-code">{{ lang.t('api.guide.flaky.code') }}</span>
+      <span class="error-title">{{ lang.t('api.guide.flaky.title') }}</span>
     </div>
     <div>
-      <p><strong>Common causes:</strong> missing waits, timing race conditions, shared mutable test data, or unstable environments.</p>
+      <p><strong>{{ lang.t('api.guide.flaky.cause') }}</strong> {{ lang.t('api.guide.flaky.desc') }}</p>
       <ul>
-        <li>Use framework-native waits — Cypress auto-waits; add <code>WebDriverWait</code> in Selenium</li>
-        <li>Never share state between tests — each test owns its full data lifecycle</li>
-        <li>Quarantine flaky tests in a separate suite until the root cause is fixed</li>
-        <li>Re-run failing tests once automatically; flag those that only pass on retry</li>
+        <li>{{ lang.t('api.guide.flaky.li1.pre') }} <code>WebDriverWait</code> {{ lang.t('api.guide.flaky.li1.post') }}</li>
+        <li>{{ lang.t('api.guide.flaky.li2') }}</li>
+        <li>{{ lang.t('api.guide.flaky.li3') }}</li>
+        <li>{{ lang.t('api.guide.flaky.li4') }}</li>
       </ul>
     </div>
   </div>
@@ -637,23 +637,23 @@ driver.find_element("id", "com.example.app:id/login_button").click()</code></pre
   <div class="error-solution">
     <div class="error-header">
       <span class="error-code">401 in CI</span>
-      <span class="error-title">Auth failures in the pipeline</span>
+      <span class="error-title">{{ lang.t('api.guide.ci401.title') }}</span>
     </div>
     <div>
-      <p><strong>Cause:</strong> API keys or tokens not correctly injected into the CI environment.</p>
+      <p><strong>{{ lang.t('api.guide.ci401.cause') }}</strong> {{ lang.t('api.guide.ci401.desc') }}</p>
       <ul>
-        <li>Store secrets as CI environment variables (GitHub Secrets, Jenkins Credentials, Vault)</li>
-        <li>Confirm the variable name in CI matches exactly what the test script reads</li>
-        <li>Use test-environment keys (<code>sk_test_</code> prefix) to avoid affecting live data</li>
-        <li>Print the first few characters of the resolved key at test startup to verify injection</li>
+        <li>{{ lang.t('api.guide.ci401.li1') }}</li>
+        <li>{{ lang.t('api.guide.ci401.li2') }}</li>
+        <li>{{ lang.t('api.guide.ci401.li3') }} <code>sk_test_</code></li>
+        <li>{{ lang.t('api.guide.ci401.li4') }}</li>
       </ul>
     </div>
   </div>
 
-  <h2 id="debugging-tips">Debugging Tips</h2>
+  <h2 id="debugging-tips">{{ lang.t('api.guide.debug.title') }}</h2>
   <div class="code-example">
     <div class="code-label">
-      <span>Useful debugging commands</span>
+      <span>{{ lang.t('api.guide.debug.code-label') }}</span>
       <div class="code-label-actions"><span class="code-path">Bash</span></div>
     </div>
     <pre><code class="language-bash"># Verbose curl — inspect full request and response headers
@@ -670,15 +670,15 @@ newman run collection.json -e staging.json --verbose
 appium --log-level debug --log appium.log</code></pre>
   </div>
 
-  <h2 id="support-resources">Support Resources</h2>
+  <h2 id="support-resources">{{ lang.t('api.guide.support.title') }}</h2>
   <div class="info-grid">
     <article class="info-card">
-      <h3>Email Support</h3>
-      <p>Send detailed error logs and reproduction steps to <a href="mailto:o.rondon@uniandes.edu.co">o.rondon@uniandes.edu.co</a></p>
+      <h3>{{ lang.t('api.guide.email.title') }}</h3>
+      <p>{{ lang.t('api.guide.email.desc') }} <a href="mailto:o.rondon@uniandes.edu.co">o.rondon@uniandes.edu.co</a></p>
     </article>
     <article class="info-card">
-      <h3>GitHub</h3>
-      <p>Report bugs or request features at <a href="https://github.com/Osaron" target="_blank" rel="noopener">github.com/Osaron</a></p>
+      <h3>{{ lang.t('api.guide.github.title') }}</h3>
+      <p>{{ lang.t('api.guide.github.desc') }} <a href="https://github.com/Osaron" target="_blank" rel="noopener">github.com/Osaron</a></p>
     </article>
   </div>
 </section>

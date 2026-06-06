@@ -9,10 +9,15 @@ import { TocItem } from '../../../core/services/toc.service';
   templateUrl: './api-reference.html',
 })
 export class ApiReference extends ApiPageBase {
-  protected tocItems: TocItem[] = [
-    { id: 'overview',    label: 'Overview', children: [{ id: 'base-url', label: 'Base URL' }, { id: 'endpoint-overview', label: 'Endpoint Overview' }] },
-    { id: 'error-codes', label: 'Error Codes' },
-  ];
+  protected getTocItems(): TocItem[] {
+    return [
+      { id: 'overview', label: this.lang.t('api.toc.overview'), children: [
+        { id: 'base-url',          label: this.lang.t('api.toc.base-url')          },
+        { id: 'endpoint-overview', label: this.lang.t('api.toc.endpoint-overview') },
+      ]},
+      { id: 'error-codes', label: this.lang.t('api.toc.error-codes') },
+    ];
+  }
 
   copyUrl(text: string, btn: HTMLButtonElement) {
     navigator.clipboard.writeText(text).then(() => {

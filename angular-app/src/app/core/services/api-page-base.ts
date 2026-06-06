@@ -1,15 +1,23 @@
-import { Directive, OnInit, OnDestroy, inject, AfterViewInit, HostListener } from '@angular/core';
+import { Directive, OnInit, OnDestroy, inject, AfterViewInit, HostListener, effect } from '@angular/core';
 import { TocService, TocItem } from './toc.service';
+import { LanguageService } from './language.service';
 
 declare const Prism: { highlightAll(): void };
 
 @Directive()
 export abstract class ApiPageBase implements OnInit, AfterViewInit, OnDestroy {
   protected tocService = inject(TocService);
-  protected abstract tocItems: TocItem[];
+  lang = inject(LanguageService);
+  protected abstract getTocItems(): TocItem[];
+
+  constructor() {
+    effect(() => {
+      this.tocService.set(this.getTocItems());
+    });
+  }
 
   ngOnInit() {
-    this.tocService.set(this.tocItems);
+    this.tocService.set(this.getTocItems());
   }
 
   ngAfterViewInit() {

@@ -1,6 +1,6 @@
 <div class="ug-hero">
-  <h1><i class="fa-solid fa-book-open"></i> User Guides</h1>
-  <p>Step-by-step documentation designed for end users navigating complex software systems.</p>
+  <h1><i class="fa-solid fa-book-open"></i> {{ lang.t('guides.hero.title') }}</h1>
+  <p>{{ lang.t('guides.hero.sub') }}</p>
 </div>
 
 <section class="ug-list">
@@ -18,16 +18,16 @@
           <p class="ug-summary">{{ guide.summary }}</p>
           <div class="ug-meta">
             <span>{{ guide.year }}</span>
-            <span>{{ guide.readMins }} min read</span>
+            <span>{{ guide.readMins }} {{ lang.t('common.min-read') }}</span>
           </div>
           <a [href]="'/projects/user-guides/' + guide.slug + '/manual.pdf'"
              target="_blank" rel="noopener" class="btn btn-primary">
-            <i class="fa-solid fa-file-pdf"></i> Download PDF
+            <i class="fa-solid fa-file-pdf"></i> {{ lang.t('common.btn.pdf') }}
           </a>
         </div>
       </article>
     }
   } @else {
-    <p class="loading">Loading guides…</p>
+    <p class="loading">{{ lang.t('guides.loading') }}</p>
   }
 </section>

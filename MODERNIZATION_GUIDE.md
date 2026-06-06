@@ -1132,7 +1132,7 @@ A lightweight runtime translation system was built without external dependencies
 
 ### Known issues / next steps
 
-- API Docs pages (Getting Started, Authentication, API Reference, Content API, Resources) are **English only** — technical documentation is intentionally kept in English.
+- ~~API Docs pages are **English only**~~ — **Resolved in v2.2**: all six API docs pages are now fully bilingual (EN/ES). Code blocks inside `<pre><code>` are intentionally left in English.
 - User-guide PDFs, blog articles, and white-paper PDFs are static assets and are **not translated**.
 - The language preference is **not persisted** across page reloads (no `localStorage` save). Add `localStorage.setItem('lang', value)` in `toggle()` and read it in the service constructor to persist.
 
@@ -1204,3 +1204,106 @@ A new standalone detail page renders at `/projects/workflow-diagrams/:slug` insi
 | `src/app/pages/projects/workflow-diagrams/diagram-detail/diagram-detail.ts` | Component — reads `:slug` from `ActivatedRoute`, finds matching diagram via service, exposes `problemParagraphs` getter and `tagIcon(tag)` method |
 | `src/app/pages/projects/workflow-diagrams/diagram-detail/diagram-detail.html` | Template — hero, problem, steps, full image |
 | `src/app/pages/projects/workflow-diagrams/diagram-detail/diagram-detail.scss` | Scoped styles — hero, step counter, full-width diagram wrapper |
+
+---
+
+## Portfolio v2.2 — Changelog (branch `develop_2026`)
+
+> Changes applied in session dated **2026-06-05**.
+
+### Internationalisation — project pages fully translated
+
+All project-type page components now use `lang.t()` for every user-visible string.
+
+| Component | Content translated |
+|---|---|
+| `blogs` | Page title, subtitle, card labels, tag filters, "Read more" links |
+| `user-guides` | Page title, subtitle, card labels, "View guide" links |
+| `videos` | Page title, subtitle, card titles, descriptions, tags, play-button labels |
+| `workflow-diagrams` | Page title, subtitle, card titles, descriptions, tags, tool labels, section headings |
+| `white-papers` | Page title, subtitle, card titles, descriptions, download links |
+| `diagram-detail` | Hero title, "Back" button, meta labels, "The Problem" heading, "Development Process" heading, step content |
+
+### Internationalisation — API docs fully bilingual
+
+All six API documentation pages are now bilingual (EN/ES). The implementation required a reactive architecture refactor to keep the right-sidebar TOC labels in sync with the active language.
+
+**New file:**
+
+| File | Purpose |
+|---|---|
+| `src/app/core/translations/api-translations.ts` | ~200 translation keys for all API docs UI strings. Exported as `API_TRANSLATIONS` and spread into the main `TRANSLATIONS` object. Key namespaces: `api.nav.*`, `api.toc.*`, `api.table.*`, `api.bc.*`, `api.gs.*`, `api.auth.*`, `api.ref.*`, `api.content.*`, `api.guide.*`, `api.res.*`, `api.sidebar.*`. |
+
+**`ApiPageBase` refactor (`core/services/api-page-base.ts`):**
+
+| Before | After |
+|---|---|
+| `protected abstract tocItems: TocItem[]` (static property) | `protected abstract getTocItems(): TocItem[]` (abstract method) |
+| `lang` not injected in base class | `lang = inject(LanguageService)` — public, accessible from subclass templates |
+| TOC set once in `ngOnInit` with hardcoded English labels | `effect(() => this.tocService.set(this.getTocItems()))` in constructor — re-fires whenever `lang.lang()` signal changes |
+
+The `effect()` call in the base constructor tracks the `lang.lang()` signal. When the user toggles language, Angular re-runs the effect, which calls `getTocItems()` with the new language context — the TOC labels update without any additional wiring in subclasses.
+
+**API docs sidebar (`pages/api-docs/sidebar/sidebar.ts`):**
+
+The `pages` array was converted from a plain class field to a `computed()` signal:
+
+```typescript
+readonly pages = computed<NavPage[]>(() => [
+  { label: this.lang.t('api.nav.getting-started'), route: 'getting-started' },
+  // ...
+]);
+```
+
+Templates use `pages()` (with call parentheses). Nav labels update live on language toggle.
+
+**TOC header (`pages/api-docs/toc/toc.html`):**
+
+`<span>On this page</span>` → `<span>{{ lang.t('api.toc.on-this-page') }}</span>`.
+
+**Pages updated (TS + HTML):**
+
+| Page | Key changes |
+|---|---|
+| `getting-started` | `getTocItems()` returns 5 labelled items via `lang.t()`; all prose uses `lang.t()` |
+| `authentication` | Same pattern; `activeTab = signal('curl-auth')` preserved |
+| `api-reference` | Same pattern; `copyUrl()` method preserved |
+| `content-api` | Same pattern |
+| `guides` (Testing Guide) | Same pattern; largest translation block (~80 keys) |
+| `resources` | Same pattern; `activeTab`, `openFaqs`, `setTab`, `toggleFaq`, `isFaqOpen` preserved |
+
+Code blocks inside `<pre><code>` are intentionally left in English across all pages.
+
+### API docs layout — content column widened
+
+| Property | Before | After |
+|---|---|---|
+| Outer container `max-width` | `1480px` | `1700px` |
+| Fixed sidebar offset calculation | `calc((100vw - 1480px) / 2 + 1.25rem)` | `calc((100vw - 1700px) / 2 + 1.25rem)` (applied to both left and right sidebars) |
+| Content section cap (`.main-content > .api-section`) | `max-width: 860px` | `max-width: 1060px` |
+
+The sidebar offset formula was updated in both the left-sidebar and right-sidebar `position: fixed` rules to keep them aligned with the new centred grid.
+
+### API docs — SDK card width
+
+The `sdk-grid` and `pattern-examples` card grids had a minimum column width that was too narrow, causing code blocks inside cards to overflow horizontally. Increased the `minmax` floor:
+
+| Property | Before | After |
+|---|---|---|
+| `.sdk-grid, .pattern-examples` grid `minmax` | `240px` | `320px` |
+
+At the new content width (~1060px), this forces 3-wide columns (~342px each), giving inline code room to display without a scrollbar.
+
+### API docs — code block corner radius
+
+`.code-example` border-radius reduced for a less pill-like appearance:
+
+| Property | Before | After |
+|---|---|---|
+| `.code-example border-radius` | `22px` | `10px` |
+
+### Home page — "Why Me?" section flex layout fix
+
+The `.why-me-left` and `.why-me-right` columns were collapsing to `min-content` width on smaller viewports. Fixed by replacing the width/flex shorthand with an explicit `flex: 1 1 calc(50% - 1rem)` on both columns so they share the row evenly and wrap correctly.
+
+**File changed:** `src/app/pages/home/home.scss`

@@ -1,6 +1,6 @@
 <div class="blog-hero">
-  <h1><i class="fa-solid fa-pen-nib"></i> Technical Articles</h1>
-  <p>In-depth articles on AI, engineering, documentation, and industry best practices.</p>
+  <h1><i class="fa-solid fa-pen-nib"></i> {{ lang.t('blogs.hero.title') }}</h1>
+  <p>{{ lang.t('blogs.hero.sub') }}</p>
 </div>
 
 <section class="blog-list">
@@ -18,17 +18,17 @@
           <p class="blog-summary">{{ blog.summary }}</p>
           <div class="blog-meta">
             <span>{{ blog.date }}</span>
-            <span>{{ blog.readMins }} min read</span>
+            <span>{{ blog.readMins }} {{ lang.t('common.min-read') }}</span>
           </div>
           <div class="blog-actions">
             @if (blog.isExternal && blog.link) {
               <a [href]="blog.link" target="_blank" rel="noopener" class="btn btn-primary" (click)="$event.stopPropagation()">
-                Read Article
+                {{ lang.t('blogs.btn.read') }}
               </a>
             }
             @if (blog.pdfPath) {
               <a [href]="blog.pdfPath" target="_blank" rel="noopener" class="btn btn-outline" (click)="$event.stopPropagation()">
-                <i class="fa-solid fa-file-pdf"></i> Download PDF
+                <i class="fa-solid fa-file-pdf"></i> {{ lang.t('common.btn.pdf') }}
               </a>
             }
           </div>
@@ -36,6 +36,6 @@
       </article>
     }
   } @else {
-    <p class="loading">Loading articles…</p>
+    <p class="loading">{{ lang.t('blogs.loading') }}</p>
   }
 </section>

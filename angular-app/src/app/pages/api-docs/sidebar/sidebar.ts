@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { LanguageService } from '../../../core/services/language.service';
 
 interface NavPage {
   label: string;
@@ -13,14 +14,16 @@ interface NavPage {
   styleUrl: './sidebar.scss',
 })
 export class Sidebar {
-  readonly pages: NavPage[] = [
-    { label: 'Getting Started', route: 'getting-started' },
-    { label: 'Authentication',  route: 'authentication'  },
-    { label: 'API Reference',   route: 'api-reference'   },
-    { label: 'Content API',     route: 'content-api'     },
-    { label: 'Testing Guide',   route: 'guides'          },
-    { label: 'Resources',       route: 'resources'       },
-  ];
+  lang = inject(LanguageService);
+
+  readonly pages = computed<NavPage[]>(() => [
+    { label: this.lang.t('api.nav.getting-started'), route: 'getting-started' },
+    { label: this.lang.t('api.nav.authentication'),  route: 'authentication'  },
+    { label: this.lang.t('api.nav.api-reference'),   route: 'api-reference'   },
+    { label: this.lang.t('api.nav.content-api'),     route: 'content-api'     },
+    { label: this.lang.t('api.nav.guides'),          route: 'guides'          },
+    { label: this.lang.t('api.nav.resources'),       route: 'resources'       },
+  ]);
 
   printPage() {
     window.print();

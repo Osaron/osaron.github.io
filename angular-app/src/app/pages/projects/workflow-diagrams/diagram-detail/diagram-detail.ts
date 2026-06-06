@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DiagramService } from '../../../../core/services/diagram.service';
 import { Diagram } from '../../../../core/models/diagram.model';
+import { LanguageService } from '../../../../core/services/language.service';
 
 @Component({
   selector: 'app-diagram-detail',
@@ -10,6 +11,7 @@ import { Diagram } from '../../../../core/models/diagram.model';
   styleUrl: './diagram-detail.scss',
 })
 export class DiagramDetail implements OnInit {
+  lang = inject(LanguageService);
   private route = inject(ActivatedRoute);
   private diagramService = inject(DiagramService);
 

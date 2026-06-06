@@ -1,39 +1,39 @@
 <nav class="breadcrumb">
-  <span>API Documentation</span> <span>/</span>
-  <a routerLink="/api-docs/api-reference">API Reference</a> <span>/</span>
-  <span>Content API</span>
+  <span>{{ lang.t('api.bc.api-docs') }}</span> <span>/</span>
+  <a routerLink="/api-docs/api-reference">{{ lang.t('api.bc.api-reference') }}</a> <span>/</span>
+  <span>{{ lang.t('api.bc.content-api') }}</span>
 </nav>
 
 <section id="content-api" class="api-section">
-  <h1>Content API</h1>
-  <p>Endpoints for creating, reading, updating, and deleting content items — blog posts, user manuals, white papers, and strategy documents.</p>
+  <h1>{{ lang.t('api.content.title') }}</h1>
+  <p>{{ lang.t('api.content.desc') }}</p>
 </section>
 
 <section id="list-content" class="api-section">
-  <h2>List Content</h2>
+  <h2>{{ lang.t('api.content.list.title') }}</h2>
   <div class="endpoint">
     <div class="endpoint-header">
       <span class="method get">GET</span>
       <span class="path">/v1/content</span>
-      <span class="description">Retrieve a paginated list of content items</span>
+      <span class="description">{{ lang.t('api.content.list.ep-desc') }}</span>
     </div>
     <div class="endpoint-details">
-      <h4>Query Parameters</h4>
+      <h4>{{ lang.t('api.content.list.params-title') }}</h4>
       <table class="params-table">
-        <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+        <thead><tr><th>{{ lang.t('api.table.parameter') }}</th><th>{{ lang.t('api.table.type') }}</th><th>{{ lang.t('api.table.required') }}</th><th>{{ lang.t('api.table.description') }}</th></tr></thead>
         <tbody>
-          <tr><td><code>type</code></td><td>string</td><td>No</td><td>Filter by type: <code>blog</code>, <code>manual</code>, <code>whitepaper</code>, <code>strategy</code></td></tr>
-          <tr><td><code>status</code></td><td>string</td><td>No</td><td>Filter by status: <code>draft</code>, <code>published</code>, <code>archived</code></td></tr>
-          <tr><td><code>limit</code></td><td>integer</td><td>No</td><td>Items to return. Default: <code>10</code>, max: <code>100</code></td></tr>
-          <tr><td><code>offset</code></td><td>integer</td><td>No</td><td>Number of items to skip. Default: <code>0</code></td></tr>
+          <tr><td><code>type</code></td><td>string</td><td>{{ lang.t('api.table.no') }}</td><td>{{ lang.t('api.content.param.type') }}</td></tr>
+          <tr><td><code>status</code></td><td>string</td><td>{{ lang.t('api.table.no') }}</td><td>{{ lang.t('api.content.param.status') }}</td></tr>
+          <tr><td><code>limit</code></td><td>integer</td><td>{{ lang.t('api.table.no') }}</td><td>{{ lang.t('api.content.param.limit') }}</td></tr>
+          <tr><td><code>offset</code></td><td>integer</td><td>{{ lang.t('api.table.no') }}</td><td>{{ lang.t('api.content.param.offset') }}</td></tr>
         </tbody>
       </table>
-      <h4>Example Request</h4>
+      <h4>{{ lang.t('api.content.example-req') }}</h4>
       <div class="code-example">
         <pre><code class="language-bash">curl -H "Authorization: Bearer YOUR_API_KEY" \
      "https://api.oscarrondon.com/v1/content?type=blog&status=published&limit=5"</code></pre>
       </div>
-      <h4>Response</h4>
+      <h4>{{ lang.t('api.content.response') }}</h4>
       <div class="code-example">
         <pre><code class="language-json">&#123;
   "data": [&#123; "id": "content_abc123", "title": "API Documentation Best Practices", "type": "blog", "status": "published", "author": "Oscar Rondon", "created_at": "2024-01-15T10:30:00Z" &#125;],
@@ -45,25 +45,25 @@
 </section>
 
 <section id="create-content" class="api-section">
-  <h2>Create Content</h2>
+  <h2>{{ lang.t('api.content.create.title') }}</h2>
   <div class="endpoint">
     <div class="endpoint-header">
       <span class="method post">POST</span>
       <span class="path">/v1/content</span>
-      <span class="description">Create a new content item</span>
+      <span class="description">{{ lang.t('api.content.create.ep-desc') }}</span>
     </div>
     <div class="endpoint-details">
-      <h4>Request Body</h4>
+      <h4>{{ lang.t('api.content.create.body') }}</h4>
       <table class="params-table">
-        <thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+        <thead><tr><th>{{ lang.t('api.table.field') }}</th><th>{{ lang.t('api.table.type') }}</th><th>{{ lang.t('api.table.required') }}</th><th>{{ lang.t('api.table.description') }}</th></tr></thead>
         <tbody>
-          <tr><td><code>title</code></td><td>string</td><td>Yes</td><td>Content title. Maximum 200 characters.</td></tr>
-          <tr><td><code>type</code></td><td>string</td><td>Yes</td><td>Content type: <code>blog</code>, <code>manual</code>, <code>whitepaper</code>, <code>strategy</code></td></tr>
-          <tr><td><code>content</code></td><td>string</td><td>Yes</td><td>Content body. Markdown is supported.</td></tr>
-          <tr><td><code>status</code></td><td>string</td><td>No</td><td>Publication status: <code>draft</code> (default) or <code>published</code></td></tr>
+          <tr><td><code>title</code></td><td>string</td><td>{{ lang.t('api.table.yes') }}</td><td>{{ lang.t('api.content.create.f.title') }}</td></tr>
+          <tr><td><code>type</code></td><td>string</td><td>{{ lang.t('api.table.yes') }}</td><td>{{ lang.t('api.content.create.f.type') }}</td></tr>
+          <tr><td><code>content</code></td><td>string</td><td>{{ lang.t('api.table.yes') }}</td><td>{{ lang.t('api.content.create.f.body') }}</td></tr>
+          <tr><td><code>status</code></td><td>string</td><td>{{ lang.t('api.table.no') }}</td><td>{{ lang.t('api.content.create.f.status') }}</td></tr>
         </tbody>
       </table>
-      <h4>Example Request</h4>
+      <h4>{{ lang.t('api.content.example-req') }}</h4>
       <div class="code-example">
         <pre><code class="language-bash">curl -X POST "https://api.oscarrondon.com/v1/content" \
      -H "Authorization: Bearer YOUR_API_KEY" \
@@ -75,30 +75,30 @@
 </section>
 
 <section id="update-content" class="api-section">
-  <h2>Update Content</h2>
+  <h2>{{ lang.t('api.content.update.title') }}</h2>
   <div class="endpoint">
     <div class="endpoint-header">
       <span class="method put">PUT</span>
       <span class="path">/v1/content/&#123;id&#125;</span>
-      <span class="description">Update an existing content item</span>
+      <span class="description">{{ lang.t('api.content.update.ep-desc') }}</span>
     </div>
     <div class="endpoint-details">
-      <p>Use the same request body fields as POST. All fields are optional — only included fields are updated (partial update). The <code>id</code> path parameter must match an existing content item.</p>
+      <p>{{ lang.t('api.content.update.desc.pre') }} <code>id</code> {{ lang.t('api.content.update.desc.post') }}</p>
     </div>
   </div>
 </section>
 
 <section id="delete-content" class="api-section">
-  <h2>Delete Content</h2>
+  <h2>{{ lang.t('api.content.delete.title') }}</h2>
   <div class="endpoint">
     <div class="endpoint-header">
       <span class="method delete">DELETE</span>
       <span class="path">/v1/content/&#123;id&#125;</span>
-      <span class="description">Permanently delete a content item</span>
+      <span class="description">{{ lang.t('api.content.delete.ep-desc') }}</span>
     </div>
     <div class="endpoint-details">
-      <p>Returns <code>204 No Content</code> on success. The operation is irreversible.</p>
-      <h4>Example Request</h4>
+      <p>{{ lang.t('api.content.delete.pre') }} <code>204 No Content</code> {{ lang.t('api.content.delete.post') }}</p>
+      <h4>{{ lang.t('api.content.example-req') }}</h4>
       <div class="code-example">
         <pre><code class="language-bash">curl -X DELETE "https://api.oscarrondon.com/v1/content/content_abc123" \
      -H "Authorization: Bearer YOUR_API_KEY"</code></pre>

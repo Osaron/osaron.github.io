@@ -1,3 +1,5 @@
+import { API_TRANSLATIONS } from './api-translations';
+
 export const TRANSLATIONS: Record<string, { en: string; es: string }> = {
 
   // ── Header ────────────────────────────────────────────────────────────
@@ -161,4 +163,79 @@ export const TRANSLATIONS: Record<string, { en: string; es: string }> = {
     es: 'Cursos combinados de Google / Udemy / Datacamp',
   },
   'about.edu.bsc': { en: 'B.Sc. in Chemical Engineering', es: 'Ing. Química (Pregrado)' },
+
+  // ── Common ────────────────────────────────────────────────────────────
+  'common.btn.pdf':       { en: 'Download PDF', es: 'Descargar PDF' },
+  'common.btn.read-online': { en: 'Read Online', es: 'Leer en Línea' },
+  'common.min-read':      { en: 'min read',     es: 'min de lectura' },
+
+  // ── Technical Articles (Blogs) ────────────────────────────────────────
+  'blogs.hero.title': { en: 'Technical Articles', es: 'Artículos Técnicos' },
+  'blogs.hero.sub': {
+    en: 'In-depth articles on AI, engineering, documentation, and industry best practices.',
+    es: 'Artículos detallados sobre IA, ingeniería, documentación y buenas prácticas del sector.',
+  },
+  'blogs.btn.read': { en: 'Read Article', es: 'Leer Artículo' },
+  'blogs.loading':  { en: 'Loading articles…', es: 'Cargando artículos…' },
+
+  // ── User Guides ───────────────────────────────────────────────────────
+  'guides.hero.title': { en: 'User Guides', es: 'Manuales de Usuario' },
+  'guides.hero.sub': {
+    en: 'Step-by-step documentation designed for end users navigating complex software systems.',
+    es: 'Documentación paso a paso diseñada para usuarios finales de sistemas de software complejos.',
+  },
+  'guides.loading': { en: 'Loading guides…', es: 'Cargando manuales…' },
+
+  // ── Videos ────────────────────────────────────────────────────────────
+  'videos.hero.title': { en: 'Videos', es: 'Videos' },
+  'videos.hero.sub': {
+    en: 'Technical walkthroughs and documentation demos — created to support users and teams.',
+    es: 'Recorridos técnicos y demos de documentación — creados para apoyar a usuarios y equipos.',
+  },
+
+  // ── Workflow Diagrams ─────────────────────────────────────────────────
+  'diagrams.hero.title': { en: 'Workflow Diagrams & Visuals', es: 'Diagramas de Flujo y Visuales' },
+  'diagrams.hero.sub': {
+    en: 'Visual tools used to enhance clarity and engagement in documentation.',
+    es: 'Herramientas visuales para mejorar la claridad y el impacto de la documentación.',
+  },
+  'diagrams.btn.view': { en: 'View Diagram',    es: 'Ver Diagrama'     },
+  'diagrams.loading':  { en: 'Loading diagrams…', es: 'Cargando diagramas…' },
+  'diagrams.bpmn.title': { en: 'BPMN Diagrams', es: 'Diagramas BPMN' },
+  'diagrams.bpmn.desc': {
+    en: 'Used to map complex workflows clearly for end-users or developers. Created using Camunda Modeler, Bizagi, or Lucidchart.',
+    es: 'Mapean flujos de trabajo complejos para usuarios o desarrolladores. Creados con Camunda Modeler, Bizagi o Lucidchart.',
+  },
+  'diagrams.visio.title': { en: 'Microsoft Visio Diagrams', es: 'Diagramas de Microsoft Visio' },
+  'diagrams.visio.desc': {
+    en: 'Ideal for flowcharts, network maps, and system architecture. Common in corporate documentation.',
+    es: 'Ideal para diagramas de flujo, mapas de red y arquitectura de sistemas. Común en documentación corporativa.',
+  },
+  'diagrams.ppt.title': { en: 'PowerPoint Presentations', es: 'Presentaciones de PowerPoint' },
+  'diagrams.ppt.desc': {
+    en: 'Quickly share visual summaries of procedures, policies, or roadmap planning.',
+    es: 'Comparte resúmenes visuales de procedimientos, políticas o planificación de roadmap.',
+  },
+  'diagrams.canva.title': { en: 'Canva & Photoshop', es: 'Canva & Photoshop' },
+  'diagrams.canva.desc': {
+    en: 'Custom-designed banners, thumbnails, infographics, and illustrations to increase visual engagement in user-facing content.',
+    es: 'Banners, miniaturas, infografías e ilustraciones personalizadas para aumentar el impacto visual del contenido.',
+  },
+
+  // ── White Papers ──────────────────────────────────────────────────────
+  'wp.hero.title': { en: 'White Papers', es: 'White Papers' },
+  'wp.hero.sub': {
+    en: 'Strategic documents outlining methodologies, technical solutions, and research insights.',
+    es: 'Documentos estratégicos sobre metodologías, soluciones técnicas e insights de investigación.',
+  },
+  'wp.loading': { en: 'Loading white papers…', es: 'Cargando white papers…' },
+
+  // ── Diagram Detail ────────────────────────────────────────────────────
+  'detail.back':        { en: 'Back to Diagrams',    es: 'Volver a Diagramas'    },
+  'detail.problem':     { en: 'The Problem',         es: 'El Problema'           },
+  'detail.process':     { en: 'Development Process', es: 'Proceso de Desarrollo' },
+  'detail.diagram':     { en: 'Architecture Diagram',es: 'Diagrama de Arquitectura' },
+  'detail.not-found':   { en: 'Diagram not found.',  es: 'Diagrama no encontrado.' },
+
+  ...API_TRANSLATIONS,
 };

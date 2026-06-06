@@ -10,13 +10,15 @@ import { TocItem } from '../../../core/services/toc.service';
   templateUrl: './getting-started.html',
 })
 export class GettingStarted extends ApiPageBase {
-  protected tocItems: TocItem[] = [
-    { id: 'overview',               label: 'Overview' },
-    { id: 'authentication-summary', label: 'Authentication' },
-    { id: 'first-request',          label: 'First request' },
-    { id: 'response-shape',         label: 'Response shape' },
-    { id: 'next-steps',             label: 'Next steps' },
-  ];
+  protected getTocItems(): TocItem[] {
+    return [
+      { id: 'overview',               label: this.lang.t('api.toc.overview')       },
+      { id: 'authentication-summary', label: this.lang.t('api.toc.authentication') },
+      { id: 'first-request',          label: this.lang.t('api.toc.first-request')  },
+      { id: 'response-shape',         label: this.lang.t('api.toc.response-shape') },
+      { id: 'next-steps',             label: this.lang.t('api.toc.next-steps')     },
+    ];
+  }
 
   copyUrl(text: string, btn: HTMLButtonElement) {
     navigator.clipboard.writeText(text).then(() => {

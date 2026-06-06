@@ -1,18 +1,18 @@
 <nav class="breadcrumb">
-  <span>API Documentation</span> <span>/</span> <span>Resources</span>
+  <span>{{ lang.t('api.bc.api-docs') }}</span> <span>/</span> <span>{{ lang.t('api.bc.resources') }}</span>
 </nav>
 
 <section id="sdks" class="api-section">
   <div class="section-header">
-    <h1>SDKs &amp; Libraries</h1>
-    <p class="section-description">Official and community-maintained libraries to accelerate your development.</p>
+    <h1>{{ lang.t('api.res.sdks.title') }}</h1>
+    <p class="section-description">{{ lang.t('api.res.sdks.desc') }}</p>
   </div>
 
-  <h2 id="official-sdks">Official SDKs</h2>
+  <h2 id="official-sdks">{{ lang.t('api.res.official-sdks') }}</h2>
   <div class="sdk-grid">
     <div class="sdk-card">
       <div class="sdk-header"><i class="fab fa-js-square"></i><h3>JavaScript / TypeScript</h3><span class="version">v2.1.0</span></div>
-      <p>Full-featured SDK with TypeScript support, automatic retries, and built-in caching.</p>
+      <p>{{ lang.t('api.res.js.desc') }}</p>
       <div class="sdk-links">
         <a href="#" class="sdk-link"><i class="fab fa-npm"></i> npm install</a>
         <a href="#" class="sdk-link"><i class="fab fa-github"></i> Source</a>
@@ -25,7 +25,7 @@ const content = await client.content.list(&#123; type: 'blog', limit: 10 &#125;)
 
     <div class="sdk-card">
       <div class="sdk-header"><i class="fab fa-python"></i><h3>Python</h3><span class="version">v1.8.2</span></div>
-      <p>Pythonic SDK with async support, automatic pagination, and comprehensive error handling.</p>
+      <p>{{ lang.t('api.res.py.desc') }}</p>
       <div class="sdk-links">
         <a href="#" class="sdk-link"><i class="fas fa-cube"></i> PyPI</a>
         <a href="#" class="sdk-link"><i class="fab fa-github"></i> Source</a>
@@ -38,7 +38,7 @@ content = client.content.list(type="blog", limit=10)</code></pre></div>
 
     <div class="sdk-card">
       <div class="sdk-header"><i class="fab fa-java"></i><h3>Java</h3><span class="version">v1.5.0</span></div>
-      <p>Enterprise-ready Java SDK with Spring Boot integration and reactive streams support.</p>
+      <p>{{ lang.t('api.res.java.desc') }}</p>
       <div class="sdk-links">
         <a href="#" class="sdk-link"><i class="fas fa-cube"></i> Maven</a>
         <a href="#" class="sdk-link"><i class="fab fa-github"></i> Source</a>
@@ -51,7 +51,7 @@ content = client.content.list(type="blog", limit=10)</code></pre></div>
     </div>
   </div>
 
-  <h2 id="community-libraries">Community Libraries</h2>
+  <h2 id="community-libraries">{{ lang.t('api.res.community-libs') }}</h2>
   <div class="community-libraries">
     <div class="library-item">
       <div class="library-header"><i class="fab fa-php"></i><span class="library-name">PHP SDK</span><span class="community-badge">Community</span></div>
@@ -66,13 +66,13 @@ content = client.content.list(type="blog", limit=10)</code></pre></div>
 
 <section id="examples" class="api-section">
   <div class="section-header">
-    <h1>Code Examples</h1>
-    <p class="section-description">Real-world examples and use cases to help you implement common scenarios.</p>
+    <h1>{{ lang.t('api.res.examples.title') }}</h1>
+    <p class="section-description">{{ lang.t('api.res.examples.desc') }}</p>
   </div>
 
-  <h2 id="basic-examples">Basic Examples</h2>
+  <h2 id="basic-examples">{{ lang.t('api.res.basic-examples') }}</h2>
   <div class="example-section">
-    <h3>Fetching and Displaying Content</h3>
+    <h3>{{ lang.t('api.res.fetch-display') }}</h3>
     <div class="code-tabs">
       <button class="tab-btn" [class.active]="activeTab() === 'react-example'"   (click)="setTab('react-example')">React</button>
       <button class="tab-btn" [class.active]="activeTab() === 'vue-example'"    (click)="setTab('vue-example')">Vue.js</button>
@@ -107,9 +107,9 @@ data.forEach(item =&gt; console.log(item.title));</code></pre></div>
     </div>
   </div>
 
-  <h2 id="advanced-examples">Advanced Examples</h2>
+  <h2 id="advanced-examples">{{ lang.t('api.res.advanced-examples') }}</h2>
   <div class="example-section">
-    <h3>Real-time Content Updates with WebSockets</h3>
+    <h3>{{ lang.t('api.res.realtime') }}</h3>
     <div class="code-example"><pre><code class="language-javascript">class RealTimeManager &#123;
   constructor(apiKey) &#123;
     this.ws = new WebSocket(`wss://api.oscarrondon.com/v1/ws?token=$&#123;apiKey&#125;`);
@@ -121,67 +121,67 @@ data.forEach(item =&gt; console.log(item.title));</code></pre></div>
 &#125;</code></pre></div>
   </div>
 
-  <h2 id="integration-patterns">Integration Patterns</h2>
+  <h2 id="integration-patterns">{{ lang.t('api.res.integration-patterns') }}</h2>
   <div class="pattern-examples">
-    <div class="pattern-item"><h4>Repository Pattern</h4><p>Clean architecture for backend services.</p><a href="#" class="pattern-link">View Example</a></div>
-    <div class="pattern-item"><h4>Redux Integration</h4><p>Managing API state with Redux and RTK Query.</p><a href="#" class="pattern-link">View Example</a></div>
-    <div class="pattern-item"><h4>GraphQL Wrapper</h4><p>Exposing REST API through GraphQL layer.</p><a href="#" class="pattern-link">View Example</a></div>
+    <div class="pattern-item"><h4>{{ lang.t('api.res.pattern.repo') }}</h4><p>{{ lang.t('api.res.pattern.repo.desc') }}</p><a href="#" class="pattern-link">{{ lang.t('api.res.pattern.view') }}</a></div>
+    <div class="pattern-item"><h4>{{ lang.t('api.res.pattern.redux') }}</h4><p>{{ lang.t('api.res.pattern.redux.desc') }}</p><a href="#" class="pattern-link">{{ lang.t('api.res.pattern.view') }}</a></div>
+    <div class="pattern-item"><h4>{{ lang.t('api.res.pattern.graphql') }}</h4><p>{{ lang.t('api.res.pattern.graphql.desc') }}</p><a href="#" class="pattern-link">{{ lang.t('api.res.pattern.view') }}</a></div>
   </div>
 </section>
 
 <section id="faq" class="api-section">
   <div class="section-header">
-    <h1>Frequently Asked Questions</h1>
-    <p class="section-description">Common questions and answers about using our API.</p>
+    <h1>{{ lang.t('api.res.faq.title') }}</h1>
+    <p class="section-description">{{ lang.t('api.res.faq.desc') }}</p>
   </div>
 
-  <h2 id="general-questions">General Questions</h2>
+  <h2 id="general-questions">{{ lang.t('api.res.general') }}</h2>
   <div class="faq-list">
     <div class="faq-item" [class.open]="isFaqOpen(0)">
-      <div class="faq-question" (click)="toggleFaq(0)"><h4>What are the rate limits?</h4><i class="fas fa-chevron-down"></i></div>
-      <div class="faq-answer"><p>Rate limits depend on your plan: <strong>Free</strong> 100 req/hr, <strong>Basic</strong> 1 000 req/hr, <strong>Pro</strong> 10 000 req/hr, <strong>Enterprise</strong> custom limits. Rate limit headers are included in every response.</p></div>
+      <div class="faq-question" (click)="toggleFaq(0)"><h4>{{ lang.t('api.res.faq.rate-limits.q') }}</h4><i class="fas fa-chevron-down"></i></div>
+      <div class="faq-answer"><p>{{ lang.t('api.res.faq.rate-limits.a') }}</p></div>
     </div>
     <div class="faq-item" [class.open]="isFaqOpen(1)">
-      <div class="faq-question" (click)="toggleFaq(1)"><h4>How do I handle authentication securely?</h4><i class="fas fa-chevron-down"></i></div>
-      <div class="faq-answer"><p>Never expose API keys in client-side code. Use environment variables, rotate keys every 90 days, and implement IP whitelisting. For frontend apps, create a backend proxy that handles API authentication.</p></div>
+      <div class="faq-question" (click)="toggleFaq(1)"><h4>{{ lang.t('api.res.faq.auth.q') }}</h4><i class="fas fa-chevron-down"></i></div>
+      <div class="faq-answer"><p>{{ lang.t('api.res.faq.auth.a') }}</p></div>
     </div>
     <div class="faq-item" [class.open]="isFaqOpen(2)">
-      <div class="faq-question" (click)="toggleFaq(2)"><h4>What data formats are supported?</h4><i class="fas fa-chevron-down"></i></div>
-      <div class="faq-answer"><p>The API exclusively uses JSON (UTF-8, RFC 7159). All endpoints accept and return <code>application/json</code>.</p></div>
+      <div class="faq-question" (click)="toggleFaq(2)"><h4>{{ lang.t('api.res.faq.formats.q') }}</h4><i class="fas fa-chevron-down"></i></div>
+      <div class="faq-answer"><p>{{ lang.t('api.res.faq.formats.a') }} <code>application/json</code>.</p></div>
     </div>
     <div class="faq-item" [class.open]="isFaqOpen(3)">
-      <div class="faq-question" (click)="toggleFaq(3)"><h4>How do I paginate through large result sets?</h4><i class="fas fa-chevron-down"></i></div>
+      <div class="faq-question" (click)="toggleFaq(3)"><h4>{{ lang.t('api.res.faq.pagination.q') }}</h4><i class="fas fa-chevron-down"></i></div>
       <div class="faq-answer">
         <div class="code-example"><pre><code class="language-bash"># First page
 curl "https://api.oscarrondon.com/v1/content?limit=10&offset=0"
 # Second page
 curl "https://api.oscarrondon.com/v1/content?limit=10&offset=10"</code></pre></div>
-        <p>The response includes <code>pagination.has_more</code> to detect if more pages exist.</p>
+        <p>{{ lang.t('api.res.faq.pagination.a') }}</p>
       </div>
     </div>
   </div>
 
-  <h2 id="technical-questions">Technical Questions</h2>
+  <h2 id="technical-questions">{{ lang.t('api.res.technical') }}</h2>
   <div class="faq-list">
     <div class="faq-item" [class.open]="isFaqOpen(4)">
-      <div class="faq-question" (click)="toggleFaq(4)"><h4>Can I use webhooks for real-time notifications?</h4><i class="fas fa-chevron-down"></i></div>
-      <div class="faq-answer"><p>Yes! Webhooks are available for Pro and Enterprise plans. Configure them in your dashboard under "API Settings".</p></div>
+      <div class="faq-question" (click)="toggleFaq(4)"><h4>{{ lang.t('api.res.faq.webhooks.q') }}</h4><i class="fas fa-chevron-down"></i></div>
+      <div class="faq-answer"><p>{{ lang.t('api.res.faq.webhooks.a') }}</p></div>
     </div>
     <div class="faq-item" [class.open]="isFaqOpen(5)">
-      <div class="faq-question" (click)="toggleFaq(5)"><h4>Is there API versioning?</h4><i class="fas fa-chevron-down"></i></div>
-      <div class="faq-answer"><p>Yes, URL-based versioning (<code>/v1/</code>). We maintain backwards compatibility for at least 12 months and announce breaking changes in advance.</p></div>
+      <div class="faq-question" (click)="toggleFaq(5)"><h4>{{ lang.t('api.res.faq.versioning.q') }}</h4><i class="fas fa-chevron-down"></i></div>
+      <div class="faq-answer"><p>{{ lang.t('api.res.faq.versioning.a') }}</p></div>
     </div>
   </div>
 
-  <h2 id="billing-questions">Billing &amp; Plans</h2>
+  <h2 id="billing-questions">{{ lang.t('api.res.billing') }}</h2>
   <div class="faq-list">
     <div class="faq-item" [class.open]="isFaqOpen(6)">
-      <div class="faq-question" (click)="toggleFaq(6)"><h4>How is API usage calculated?</h4><i class="fas fa-chevron-down"></i></div>
-      <div class="faq-answer"><p>Each successful (2xx) request counts toward your quota. Failed requests (4xx/5xx) don't count. Usage resets monthly on your billing cycle date.</p></div>
+      <div class="faq-question" (click)="toggleFaq(6)"><h4>{{ lang.t('api.res.faq.usage.q') }}</h4><i class="fas fa-chevron-down"></i></div>
+      <div class="faq-answer"><p>{{ lang.t('api.res.faq.usage.a') }}</p></div>
     </div>
     <div class="faq-item" [class.open]="isFaqOpen(7)">
-      <div class="faq-question" (click)="toggleFaq(7)"><h4>Can I upgrade or downgrade my plan?</h4><i class="fas fa-chevron-down"></i></div>
-      <div class="faq-answer"><p>Yes. Upgrades take effect immediately; downgrades take effect at the next billing cycle. No penalties for plan changes.</p></div>
+      <div class="faq-question" (click)="toggleFaq(7)"><h4>{{ lang.t('api.res.faq.plans.q') }}</h4><i class="fas fa-chevron-down"></i></div>
+      <div class="faq-answer"><p>{{ lang.t('api.res.faq.plans.a') }}</p></div>
     </div>
   </div>
 </section>

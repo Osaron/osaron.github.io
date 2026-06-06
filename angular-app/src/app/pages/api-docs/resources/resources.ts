@@ -9,22 +9,24 @@ import { TocItem } from '../../../core/services/toc.service';
   templateUrl: './resources.html',
 })
 export class Resources extends ApiPageBase {
-  protected tocItems: TocItem[] = [
-    { id: 'sdks', label: 'SDKs & Libraries', children: [
-        { id: 'official-sdks',       label: 'Official SDKs' },
-        { id: 'community-libraries', label: 'Community Libraries' },
-    ]},
-    { id: 'examples', label: 'Code Examples', children: [
-        { id: 'basic-examples',       label: 'Basic Examples' },
-        { id: 'advanced-examples',    label: 'Advanced Examples' },
-        { id: 'integration-patterns', label: 'Integration Patterns' },
-    ]},
-    { id: 'faq', label: 'FAQ', children: [
-        { id: 'general-questions',  label: 'General Questions' },
-        { id: 'technical-questions', label: 'Technical Questions' },
-        { id: 'billing-questions',  label: 'Billing & Plans' },
-    ]},
-  ];
+  protected getTocItems(): TocItem[] {
+    return [
+      { id: 'sdks', label: this.lang.t('api.toc.sdks'), children: [
+          { id: 'official-sdks',       label: this.lang.t('api.toc.official-sdks')    },
+          { id: 'community-libraries', label: this.lang.t('api.toc.community-libs')   },
+      ]},
+      { id: 'examples', label: this.lang.t('api.toc.code-examples'), children: [
+          { id: 'basic-examples',       label: this.lang.t('api.toc.basic-examples')       },
+          { id: 'advanced-examples',    label: this.lang.t('api.toc.advanced-examples')    },
+          { id: 'integration-patterns', label: this.lang.t('api.toc.integration-patterns') },
+      ]},
+      { id: 'faq', label: this.lang.t('api.toc.faq'), children: [
+          { id: 'general-questions',   label: this.lang.t('api.toc.general-questions')  },
+          { id: 'technical-questions', label: this.lang.t('api.toc.technical-questions') },
+          { id: 'billing-questions',   label: this.lang.t('api.toc.billing-questions')  },
+      ]},
+    ];
+  }
 
   activeTab = signal('react-example');
   openFaqs = signal<Set<number>>(new Set());

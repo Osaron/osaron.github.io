@@ -9,19 +9,21 @@ import { TocItem } from '../../../core/services/toc.service';
   templateUrl: './guides.html',
 })
 export class Guides extends ApiPageBase {
-  protected tocItems: TocItem[] = [
-    { id: 'testing-overview', label: 'Overview' },
-    { id: 'load-testing',     label: 'Load & Stress Testing' },
-    { id: 'api-automation',   label: 'API Automation' },
-    { id: 'ui-automation',    label: 'UI & E2E Testing' },
-    { id: 'mobile-testing',   label: 'Mobile Testing' },
-    { id: 'bdd-cucumber',     label: 'BDD & Gherkin' },
-    { id: 'languages',        label: 'Languages' },
-    { id: 'best-practices',   label: 'Best Practices' },
-    { id: 'troubleshooting',  label: 'Troubleshooting', children: [
-      { id: 'common-issues',     label: 'Common Issues' },
-      { id: 'debugging-tips',    label: 'Debugging Tips' },
-      { id: 'support-resources', label: 'Support' },
-    ]},
-  ];
+  protected getTocItems(): TocItem[] {
+    return [
+      { id: 'testing-overview', label: this.lang.t('api.toc.overview')       },
+      { id: 'load-testing',     label: this.lang.t('api.toc.load-testing')   },
+      { id: 'api-automation',   label: this.lang.t('api.toc.api-automation') },
+      { id: 'ui-automation',    label: this.lang.t('api.toc.ui-automation')  },
+      { id: 'mobile-testing',   label: this.lang.t('api.toc.mobile-testing') },
+      { id: 'bdd-cucumber',     label: this.lang.t('api.toc.bdd-cucumber')   },
+      { id: 'languages',        label: this.lang.t('api.toc.languages')      },
+      { id: 'best-practices',   label: this.lang.t('api.toc.best-practices') },
+      { id: 'troubleshooting',  label: this.lang.t('api.toc.troubleshooting'), children: [
+        { id: 'common-issues',     label: this.lang.t('api.toc.common-issues')   },
+        { id: 'debugging-tips',    label: this.lang.t('api.toc.debugging-tips')  },
+        { id: 'support-resources', label: this.lang.t('api.toc.support')         },
+      ]},
+    ];
+  }
 }

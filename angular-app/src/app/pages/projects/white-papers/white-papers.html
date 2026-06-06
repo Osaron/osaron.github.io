@@ -1,6 +1,6 @@
 <div class="wp-hero">
-  <h1><i class="fa-solid fa-file-lines"></i> White Papers</h1>
-  <p>Strategic documents outlining methodologies, technical solutions, and research insights.</p>
+  <h1><i class="fa-solid fa-file-lines"></i> {{ lang.t('wp.hero.title') }}</h1>
+  <p>{{ lang.t('wp.hero.sub') }}</p>
 </div>
 
 <section class="wp-list">
@@ -44,12 +44,12 @@
           <div class="wp-actions">
             @if (paper.pdfPath) {
               <a [href]="paper.pdfPath" target="_blank" rel="noopener" class="btn btn-primary">
-                <i class="fa-solid fa-file-pdf"></i> Download PDF
+                <i class="fa-solid fa-file-pdf"></i> {{ lang.t('common.btn.pdf') }}
               </a>
             }
             @if (paper.link) {
               <a [href]="paper.link" target="_blank" rel="noopener" class="btn btn-outline">
-                Read Online
+                {{ lang.t('common.btn.read-online') }}
               </a>
             }
           </div>
@@ -58,6 +58,6 @@
       </article>
     }
   } @else {
-    <p class="loading">Loading white papers…</p>
+    <p class="loading">{{ lang.t('wp.loading') }}</p>
   }
 </section>

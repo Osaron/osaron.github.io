@@ -276,8 +276,7 @@
 }
 
 .why-me-left {
-  flex: 1 1 50%;
-  max-width: 500px;
+  flex: 1 1 calc(50% - 1rem);
   background: #fff;
   color: #222;
   border-radius: 10px;
@@ -303,21 +302,21 @@
 
   li {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     padding: 0.5rem 0;
     border-bottom: 1px solid rgba(128, 128, 128, 0.2);
-    font-size: 0.85rem;
-    line-height: 1.8;
+    font-size: 0.83rem;
+    line-height: 1.5;
     color: inherit;
   }
 
   li:last-child { border-bottom: none; }
 }
 
-.check-icon { width: 20px; height: 20px; flex-shrink: 0; margin-right: 0.5rem; }
+.check-icon { width: 20px; height: 20px; flex-shrink: 0; margin-right: 0.5rem; margin-top: 0.1rem; }
 
 .why-me-right {
-  flex: 1 1 50%;
+  flex: 1 1 calc(50% - 1rem);
   min-width: 200px;
   padding-left: 2rem;
   display: flex;

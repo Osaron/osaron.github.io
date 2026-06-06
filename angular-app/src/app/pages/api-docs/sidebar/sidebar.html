@@ -4,11 +4,11 @@
       <span class="api-logo-badge">API</span>
       Portfolio API
     </h2>
-    <p>Documentation for content, projects, and AI-powered portfolio workflows.</p>
+    <p>{{ lang.t('api.sidebar.desc') }}</p>
   </div>
 
   <nav class="api-nav">
-    @for (page of pages; track page.route) {
+    @for (page of pages(); track page.route) {
       <a [routerLink]="['/api-docs', page.route]"
          routerLinkActive="active"
          class="nav-page-link">
@@ -20,7 +20,7 @@
   <div class="sidebar-footer">
     <button class="print-btn" (click)="printPage()">
       <i class="fas fa-download"></i>
-      Download PDF
+      {{ lang.t('api.sidebar.download') }}
     </button>
   </div>
 </div>

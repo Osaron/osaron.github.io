@@ -1,30 +1,30 @@
 <nav class="breadcrumb">
-  <span>API Documentation</span> <span>/</span> <span>Authentication</span>
+  <span>{{ lang.t('api.bc.api-docs') }}</span> <span>/</span> <span>{{ lang.t('api.bc.authentication') }}</span>
 </nav>
 
 <section id="authentication" class="api-section">
-  <h1>Authentication</h1>
-  <p>All API requests require a valid API key passed via the <code>Authorization</code> header. Requests without a valid key will receive a <code>401 Unauthorized</code> response.</p>
+  <h1>{{ lang.t('api.auth.title') }}</h1>
+  <p>{{ lang.t('api.auth.pre') }} <code>Authorization</code> {{ lang.t('api.auth.post') }} <code>401 Unauthorized</code> {{ lang.t('api.auth.post2') }}</p>
 </section>
 
 <section id="api-keys" class="api-section">
-  <h2>API Keys</h2>
-  <p>API keys are associated with your account and provide access to your data. To obtain a key:</p>
+  <h2>{{ lang.t('api.auth.keys.title') }}</h2>
+  <p>{{ lang.t('api.auth.keys.desc') }}</p>
   <ol>
-    <li>Sign in to your account dashboard.</li>
-    <li>Navigate to the <strong>API Keys</strong> section.</li>
-    <li>Click <strong>Generate New Key</strong>.</li>
-    <li>Copy and store your key securely — it will not be shown again.</li>
+    <li>{{ lang.t('api.auth.keys.li1') }}</li>
+    <li>{{ lang.t('api.auth.keys.li2.pre') }} <strong>API Keys</strong> {{ lang.t('api.auth.keys.li2.post') }}</li>
+    <li>{{ lang.t('api.auth.keys.li3.pre') }} <strong>Generate New Key</strong>.</li>
+    <li>{{ lang.t('api.auth.keys.li4') }}</li>
   </ol>
   <div class="code-example">
     <pre><code class="language-bash">sk_live_4eC39HqLyjWDarjtT1zdp7dc</code></pre>
   </div>
-  <p>Keys are prefixed with <code>sk_live_</code> for production and <code>sk_test_</code> for test environments. Test keys do not affect live data.</p>
+  <p>{{ lang.t('api.auth.keys.note.pre') }} <code>sk_live_</code> {{ lang.t('api.auth.keys.note.mid') }} <code>sk_test_</code> {{ lang.t('api.auth.keys.note.post') }}</p>
 </section>
 
 <section id="request-headers" class="api-section">
-  <h2>Request Headers</h2>
-  <p>Pass your API key in the <code>Authorization</code> header using the <code>Bearer</code> scheme. Include <code>Content-Type: application/json</code> on requests with a body.</p>
+  <h2>{{ lang.t('api.auth.headers.title') }}</h2>
+  <p>{{ lang.t('api.auth.headers.pre') }} <code>Authorization</code> {{ lang.t('api.auth.headers.mid') }} <code>Bearer</code> {{ lang.t('api.auth.headers.mid2') }} <code>Content-Type: application/json</code> {{ lang.t('api.auth.headers.post') }}</p>
 
   <div class="code-example">
     <div class="code-tabs">
@@ -62,13 +62,13 @@ data = response.json()</code></pre>
 </section>
 
 <section id="security" class="api-section">
-  <h2>Security Best Practices</h2>
-  <p>Follow these guidelines to keep your API key secure:</p>
+  <h2>{{ lang.t('api.auth.security.title') }}</h2>
+  <p>{{ lang.t('api.auth.security.desc') }}</p>
   <ul>
-    <li>Never include API keys in client-side code or public repositories.</li>
-    <li>Store keys in environment variables or a secrets manager, not in source files.</li>
-    <li>Rotate keys regularly. If a key is compromised, revoke it immediately from the dashboard.</li>
-    <li>Use HTTPS for all requests — the API does not accept plain HTTP connections.</li>
-    <li>Restrict key permissions to only the operations your application requires.</li>
+    <li>{{ lang.t('api.auth.security.li1') }}</li>
+    <li>{{ lang.t('api.auth.security.li2') }}</li>
+    <li>{{ lang.t('api.auth.security.li3') }}</li>
+    <li>{{ lang.t('api.auth.security.li4') }}</li>
+    <li>{{ lang.t('api.auth.security.li5') }}</li>
   </ul>
 </section>

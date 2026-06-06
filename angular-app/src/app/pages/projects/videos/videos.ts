@@ -1,5 +1,6 @@
 import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { LanguageService } from '../../../core/services/language.service';
 
 interface VideoCard {
   id: string;
@@ -18,6 +19,7 @@ interface VideoCard {
   styleUrl: './videos.scss',
 })
 export class Videos {
+  lang = inject(LanguageService);
   private sanitizer = inject(DomSanitizer);
 
   videos: VideoCard[] = [

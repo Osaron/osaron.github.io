@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { BlogService } from '../../../core/services/blog.service';
 import { Blog } from '../../../core/models/blog.model';
+import { LanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-blogs',
@@ -10,6 +11,7 @@ import { Blog } from '../../../core/models/blog.model';
   styleUrl: './blogs.scss',
 })
 export class Blogs {
+  lang = inject(LanguageService);
   private blogService = inject(BlogService);
   blogs$ = this.blogService.getAll();
 
