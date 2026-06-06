@@ -1,0 +1,1 @@
+import{j as e}from"./chunk-UUJ3Q2RN.js";import{G as r,K as a}from"./chunk-RW673TXT.js";var i=class t{http=a(e);getAll(){return this.http.get("/data/diagrams.json")}static \u0275fac=function(o){return new(o||t)};static \u0275prov=r({token:t,factory:t.\u0275fac,providedIn:"root"})};export{i as a};

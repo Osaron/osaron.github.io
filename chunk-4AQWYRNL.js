@@ -1,0 +1,1 @@
+import{G as s,_ as i}from"./chunk-RW673TXT.js";var a=class e{items=i([]);activeId=i("");set(t){this.items.set(t),this.activeId.set(t[0]?.id??"")}setActive(t){this.activeId.set(t)}static \u0275fac=function(n){return new(n||e)};static \u0275prov=s({token:e,factory:e.\u0275fac,providedIn:"root"})};export{a};
